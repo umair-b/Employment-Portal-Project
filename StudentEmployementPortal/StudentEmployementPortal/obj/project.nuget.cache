@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "kMp9t+7d72TnmM5CInln8+0KeHTxfzcb8Uz8wbEWBfrTfkzgxQ4LzP4Imq990Hdcjp7u8ZRZE8VWDvyuEVPJTw==",
+  "dgSpecHash": "N8yZRvFifnXlXQt9C6Z5zvU7t1CG2lhZuU6qqt/vs94izm4vna/lA6Ie3MNm75K1ZUt32NbIMLx8rQzJZXlgNg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bhamu\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\StudentEmployementPortal.csproj",
+  "projectFilePath": "C:\\Users\\lesli\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\StudentEmployementPortal.csproj",
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\lesli\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
