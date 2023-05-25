@@ -2,15 +2,16 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Log In";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
+<h1 class="row justify-content-md-center">@ViewData["Title"]</h1>
+<hr/>
+<div class="row justify-content-md-center">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h2 class="row justify-content-md-center">Enter Your Login Details</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger m-2"></div>
                 <div class="form-floating">
@@ -32,18 +33,20 @@
                     </div>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log In</button>
                 </div>
                 <div>
+                    <br />
                     <p>
                         <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
+                    <br />
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
-                    <p>
+                    @*<p>
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
+                    </p>*@
                 </div>
             </form>
         </section>
@@ -77,8 +80,8 @@
                 }
             }
         </section>
-    </div>
-</div>*@
+    </div>*@
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

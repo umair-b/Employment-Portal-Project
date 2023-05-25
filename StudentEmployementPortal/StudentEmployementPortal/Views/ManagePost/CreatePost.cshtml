@@ -1,4 +1,6 @@
-﻿@model JobPost
+﻿@using static StudentEmployementPortal.Models.JobPost;
+
+@model JobPost
 
 <form method="post">
     <div class="=border pt-2 mt-2">
@@ -55,14 +57,14 @@
         <div class="mb-2">
             <label asp-for="StartDate" ></label>
             <div>
-                <input asp-for="StartDate" class="form-control" type="datetime"/>
+                <input asp-for="StartDate" class="form-control" type="date"/>
             </div>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
         <div class="mb-2">
             <label asp-for="EndDate"></label>
             <div>
-                <input type="datetime" asp-for="EndDate" class="form-control" />
+                <input type="date" asp-for="EndDate" class="form-control" />
             </div>
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
@@ -91,14 +93,25 @@
         <div class="mb-2">
             <label asp-for="LimitedTo"></label>
             <input asp-for="LimitedTo" class="form-control" />
-            <span asp-validation-for="LimitedTo" class="text-danger"></span>
+            <input type="checkbox" asp-for="LimitedTo" value="true" class="m-2" />
+            @*<div class="checkbox">
+                <label class="form-label">
+                    <input class="form-check-input" />
+                    @Html.CheckBoxFor
+                </label>
+            </div>*@
+           @*@Html.DropDownListFor(m => m.LimitedTo,
+            new MultiSelectList(Enum.GetValues(typeof(Level))))*@
+            @*<span asp-validation-for="LimitedTo" class="text-danger"></span>*@
+            
+
         </div>
         <div>
             <label asp-for="CitizensOnly" class="mb-2"></label>
-            <div>
+            
                 <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
                 <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
-            </div>
+            
             <span asp-validation-for="CitizensOnly" class="text-danger"></span>
         </div>
         <div class="mb-2">

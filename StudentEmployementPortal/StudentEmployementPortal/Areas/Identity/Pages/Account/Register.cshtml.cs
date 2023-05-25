@@ -102,17 +102,21 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirm Password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
             [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
             [Required]
+            [Display(Name = "Cellphone Number")]
             public string CellNumber { get; set; }
 
+            [Display(Name = "Telephone Number")]
             public string? TelNumber { get; set; }
 
             [Required]

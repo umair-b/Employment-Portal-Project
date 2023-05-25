@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,7 +31,7 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
         [Required]
-        [Column(TypeName ="Date")]
+        [Column(TypeName ="DateTime")]
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
         [Required]
@@ -39,8 +40,11 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Hourly Rate")]
         public string HourlyRate { get; set; }
-        
-        public string LimitedTo { get; set;}
+
+        [DisplayName("Limited to: ")]
+        //public string LimitedTo { get; set; }
+        public Level LimitedTo { get; set;}
+
         [Required]
         [DisplayName("Limited to Citizens")]
         public bool CitizensOnly { get; set; }
@@ -60,13 +64,14 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Contact Number")]
         public string ContactNumber { get; set; }
         [Required]
-        [DisplayName("ContactEmail")]
+        [DisplayName("Contact Email")]
         public string ContactEmail { get; set; }
 
-        public string PostStatus { get; set; } = "PENDING";
+        public Status PostStatus { get; set; } = Status.Pending;
 
-        public string ApproverNote { get; set; } = string.Empty;
+        public string? ApproverNote { get; set; }
 
+        
         public enum Status
         {
             
@@ -74,6 +79,37 @@ namespace StudentEmployementPortal.Models
             Rejected,
             Pending,
             Withdraw
+        }
+
+        public enum Level
+        {
+            [Display(Name = "1st Year")]
+            First,
+
+            [Display(Name = "2nd Year")]
+            Second,
+
+            [Display(Name = "3rd Year")]
+            Third,
+
+            [Display(Name = "Honours")]
+            Honours,
+
+            [Display(Name = "Masters")]
+            Masters,
+
+            [Display(Name = "PhD")]
+            PhD,
+
+            [Display(Name = "PostDoc")]
+            Postdoc,
+
+            [Display(Name = "Faculty")]
+            Faculty,
+
+            [Display(Name = "Department")]
+            Department
+
         }
     }
 
