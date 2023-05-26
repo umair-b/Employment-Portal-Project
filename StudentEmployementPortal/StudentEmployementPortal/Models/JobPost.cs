@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,9 +42,10 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Hourly Rate")]
         public string HourlyRate { get; set; }
 
+        
         [DisplayName("Limited to: ")]
         //public string LimitedTo { get; set; }
-        public Level LimitedTo { get; set;}
+        public Level LimitedTo { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]
@@ -83,33 +85,15 @@ namespace StudentEmployementPortal.Models
 
         public enum Level
         {
-            [Display(Name = "1st Year")]
-            First,
-
-            [Display(Name = "2nd Year")]
-            Second,
-
-            [Display(Name = "3rd Year")]
-            Third,
-
-            [Display(Name = "Honours")]
+            FirstYear,
+            SecondYear,
+            ThirdYear,
             Honours,
-
-            [Display(Name = "Masters")]
             Masters,
-
-            [Display(Name = "PhD")]
             PhD,
-
-            [Display(Name = "PostDoc")]
             Postdoc,
-
-            [Display(Name = "Faculty")]
-            Faculty,
-
-            [Display(Name = "Department")]
-            Department
-
+            /*Faculty,
+            Department*/
         }
     }
 
