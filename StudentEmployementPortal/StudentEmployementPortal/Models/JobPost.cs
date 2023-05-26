@@ -76,7 +76,6 @@ namespace StudentEmployementPortal.Models
         
         public enum Status
         {
-            
             Approved,
             Rejected,
             Pending,
