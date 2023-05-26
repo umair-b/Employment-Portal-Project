@@ -1,6 +1,8 @@
-﻿@model JobPost
+﻿@namespace StudentEmployementPortal.ViewModels
+@model UpdateJobPostViewModel
 
-<form method="post">
+
+<form method="post" asp-action="Edit">
     <div class="=border pt-2 mt-2">
         <div class="row pb-2">
             <h2 class="text-primary">Update Post</h2>
@@ -50,14 +52,14 @@
         <div class="mb-2">
             <label asp-for="StartDate"></label>
             <div>
-                <input asp-for="StartDate" class="form-control" type="datetime" />
+                <input asp-for="StartDate" class="form-control" type="date" />
             </div>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
         <div class="mb-2">
             <label asp-for="EndDate"></label>
             <div>
-                <input type="datetime" asp-for="EndDate" class="form-control" />
+                <input type="date" asp-for="EndDate" class="form-control" />
             </div>
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
@@ -74,7 +76,7 @@
         <div class="mb-2">
             <label asp-for="ClosingDate"></label>
             <div>
-                <input asp-for="ClosingDate" class="form-control" type="datetime" />
+                <input asp-for="ClosingDate" class="form-control" type="date" />
             </div>
             <span asp-validation-for="ClosingDate" class="text-danger"></span>
         </div>
@@ -116,26 +118,12 @@
             <input asp-for="Department" class="form-control"/>
             <span asp-validation-for="Department" class="text-danger"></span>
         </div>
-        <div class="mb-2" hidden>
-            <label asp-for="ApproverNote"></label>
-            <input asp-for="ApproverNote" class="form-control" />
-            <span asp-validation-for="ApproverNote" class="text-danger"></span>
-        </div>
-        <div class="mb-2" hidden>
-            <label asp-for="PostStatus"></label>
-            <input asp-for="PostStatus" class="form-control" />
-            <span asp-validation-for="PostStatus" class="text-danger"></span>
-        </div>
-        <div class="mb-2" hidden>
-            <label asp-for="EmployerId"></label>
-            <input asp-for="EmployerId" class="form-control" />
-            <span asp-validation-for="EmployerId" class="text-danger"></span>
-        </div>
-        <div class="mb-2" hidden>
+        @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
+        @*<div class="mb-2" hidden>
             <label asp-for="PostId"></label>
             <input asp-for="PostId" class="form-control" />
             <span asp-validation-for="PostId" class="text-danger"></span>
-        </div>
+        </div>*@
     </div>
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ManagePost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
