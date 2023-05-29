@@ -28,7 +28,14 @@
                 <tr>
                     <td>@obj.JobTitle</td>
                     <td>@obj.Department</td>
-                    <td>@obj.FullTime</td>
+                    @if (obj.FullTime)
+                    {
+                        <td>Yes</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
                     <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                     <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
                     <td>@obj.PostStatus</td>
