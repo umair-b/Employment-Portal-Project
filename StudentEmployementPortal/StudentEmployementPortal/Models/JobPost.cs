@@ -42,10 +42,24 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Hourly Rate")]
         public string HourlyRate { get; set; }
 
-        
-        [DisplayName("Limited to: ")]
-        //public string LimitedTo { get; set; }
-        public Level LimitedTo { get; set; }
+        [DisplayName("1st Years")]
+        public bool limitedToFirst { get; set; }
+        [DisplayName("2nd Years")]
+        public bool limitedToSecond { get; set; }
+        [DisplayName("3rd Years")]
+        public bool limitedToThird { get; set; }
+        [DisplayName("Honours")]
+        public bool limitedToHonours { get; set; }
+        [DisplayName("Masters")]
+        public bool limitedToMasters { get; set; }
+        [DisplayName("PhD")]
+        public bool limitedToPhD { get; set; }
+        [DisplayName("PostDoc")]
+        public bool limitedToPostDoc { get; set; }
+        [DisplayName("Department")]
+        public bool limitedToDepartment { get; set; }
+        [DisplayName("Faculty")]
+        public bool limitedToFaculty { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]
@@ -82,19 +96,5 @@ namespace StudentEmployementPortal.Models
             Withdraw
         }
 
-        public enum Level
-        {
-            FirstYear,
-            SecondYear,
-            ThirdYear,
-            Honours,
-            Masters,
-            PhD,
-            Postdoc,
-            /*Faculty,
-            Department*/
-        }
     }
-
-
 }

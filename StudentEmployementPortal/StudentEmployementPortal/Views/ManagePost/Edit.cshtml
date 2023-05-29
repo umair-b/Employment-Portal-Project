@@ -86,20 +86,43 @@
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
         <div class="mb-2">
-            @*<label asp-for="LimitedTo"></label>
-            <input asp-for="LimitedTo" class="form-control" />
-            <span asp-validation-for="LimitedTo" class="text-danger"></span>*@
-            <label> Limited To: </label><br />
-            @foreach (Level level in Enum.GetValues(typeof(Level)))
-            {
-                <div>
-                    <label>
-                        @*<input type="checkbox" name="LimitedTo" value="@level" />*@
-                        @Html.RadioButtonFor(m => m.LimitedTo, level)
-                        @level
-                    </label>
-                </div>
-            }
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToFirst)
+                <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToSecond)
+                <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToThird)
+                <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToHonours)
+                <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToMasters)
+                <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToPhD)
+                <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToPostDoc)
+                <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToDepartment)
+                <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+            </div>
+            <div>
+                    @Html.CheckBoxFor(m => m.limitedToFaculty)
+                <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+            </div>bel> Limited To: </><br />
+            
         </div>
         <div>
             <label asp-for="CitizensOnly" class="mb-2"></label>

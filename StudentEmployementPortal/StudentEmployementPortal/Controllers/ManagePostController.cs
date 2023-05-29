@@ -34,7 +34,6 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreatePost(JobPost obj)
         {
-
             if (ModelState.IsValid)
             {
                 _db.JobPosts.Add(obj);
