@@ -86,6 +86,7 @@
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
         <div class="mb-2">
+            <label> Limited To: </label>
             <div>
                     @Html.CheckBoxFor(m => m.limitedToFirst)
                 <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
@@ -121,8 +122,7 @@
             <div>
                     @Html.CheckBoxFor(m => m.limitedToFaculty)
                 <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
-            </div>bel> Limited To: </><br />
-            
+            </div>
         </div>
         <div>
             <label asp-for="CitizensOnly" class="mb-2"></label>

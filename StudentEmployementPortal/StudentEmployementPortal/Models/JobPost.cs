@@ -14,8 +14,9 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
-        public string? Faculty { get; set; } = string.Empty;
-        public string? Department { get; set; } = string.Empty;
+        public int FacultyId { get; set; }
+        public int DepartmentId { get; set; }
+
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -62,7 +63,7 @@ namespace StudentEmployementPortal.Models
         public bool limitedToFaculty { get; set; }
 
         [Required]
-        [DisplayName("Limited to Citizens")]
+        [DisplayName("Limited to Citizens:")]
         public bool CitizensOnly { get; set; }
         [Required]
         [DisplayName("Minimum Requirements")]

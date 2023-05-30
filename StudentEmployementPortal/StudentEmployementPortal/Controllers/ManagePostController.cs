@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
@@ -26,7 +27,6 @@ namespace StudentEmployementPortal.Controllers
 
        public IActionResult CreatePost()
         {
-
             return View();
         }
 

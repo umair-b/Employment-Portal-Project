@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEmployementPortal.Data;
 
@@ -11,9 +12,11 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230530093057_migration12")]
+    partial class migration12
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -268,213 +271,9 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments");
+                    b.HasIndex("FacultyId");
 
-                    b.HasData(
-                        new
-                        {
-                            DepartmentId = 1,
-                            DepartmentName = "Accountancy",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 2,
-                            DepartmentName = "Business Sciences",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 3,
-                            DepartmentName = "Economics and Finance",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 4,
-                            DepartmentName = "Law",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 5,
-                            DepartmentName = "Wits Business School",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 6,
-                            DepartmentName = "Wits School of Governance",
-                            FacultyId = 1
-                        },
-                        new
-                        {
-                            DepartmentId = 7,
-                            DepartmentName = "Architecture and Planning",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 8,
-                            DepartmentName = "Civil & Environmental Engineering",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 9,
-                            DepartmentName = "Chemical & Metallurgical Engineering",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 10,
-                            DepartmentName = "Construction Economics & Management",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 11,
-                            DepartmentName = "Electrical & Information Engineeringg",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 12,
-                            DepartmentName = "Mechanical, Industrial & Aeronautical Engineering",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 13,
-                            DepartmentName = "Mining Engineering",
-                            FacultyId = 2
-                        },
-                        new
-                        {
-                            DepartmentId = 14,
-                            DepartmentName = "Anatomical Sciences",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 15,
-                            DepartmentName = "Clinical Medicine",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 16,
-                            DepartmentName = "Oral Health Sciences",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 17,
-                            DepartmentName = "Pathology",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 18,
-                            DepartmentName = "Physiology",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 19,
-                            DepartmentName = "Public Health",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 20,
-                            DepartmentName = "Therapeutic Sciences",
-                            FacultyId = 3
-                        },
-                        new
-                        {
-                            DepartmentId = 21,
-                            DepartmentName = "Wits School of Arts",
-                            FacultyId = 4
-                        },
-                        new
-                        {
-                            DepartmentId = 22,
-                            DepartmentName = "Wits School of Education",
-                            FacultyId = 4
-                        },
-                        new
-                        {
-                            DepartmentId = 23,
-                            DepartmentName = "Human and Community Development",
-                            FacultyId = 4
-                        },
-                        new
-                        {
-                            DepartmentId = 24,
-                            DepartmentName = "Literature, Language and Media",
-                            FacultyId = 4
-                        },
-                        new
-                        {
-                            DepartmentId = 25,
-                            DepartmentName = "Social Sciences",
-                            FacultyId = 4
-                        },
-                        new
-                        {
-                            DepartmentId = 26,
-                            DepartmentName = "Animal, Plant and Environmental Sciences",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 27,
-                            DepartmentName = "Chemistry",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 28,
-                            DepartmentName = "Computer Science and Applied Mathematics",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 29,
-                            DepartmentName = "Geography, Archaeology and Environmental Sciences",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 30,
-                            DepartmentName = "Geosciences",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 31,
-                            DepartmentName = "Mathematics",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 32,
-                            DepartmentName = "Molecular and Cell Biology",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 33,
-                            DepartmentName = "Physics",
-                            FacultyId = 5
-                        },
-                        new
-                        {
-                            DepartmentId = 34,
-                            DepartmentName = "Statistics and Actuarial Science",
-                            FacultyId = 5
-                        });
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Document", b =>
@@ -516,33 +315,6 @@ namespace StudentEmployementPortal.Migrations
                     b.HasKey("FacultyId");
 
                     b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            FacultyId = 1,
-                            FacultyName = "Faculty of Commerce, Law and Management"
-                        },
-                        new
-                        {
-                            FacultyId = 2,
-                            FacultyName = "Faculty of Engineering and the Built Environment"
-                        },
-                        new
-                        {
-                            FacultyId = 3,
-                            FacultyName = "Faculty of Health Sciences"
-                        },
-                        new
-                        {
-                            FacultyId = 4,
-                            FacultyName = "Faculty of Humanities"
-                        },
-                        new
-                        {
-                            FacultyId = 5,
-                            FacultyName = "Faculty of Science"
-                        });
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
@@ -833,6 +605,22 @@ namespace StudentEmployementPortal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>
+                {
+                    b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
+                        .WithMany("Departments")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.Faculty", b =>
+                {
+                    b.Navigation("Departments");
                 });
 #pragma warning restore 612, 618
         }
