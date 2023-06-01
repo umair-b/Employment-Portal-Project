@@ -1,4 +1,5 @@
-﻿@model JobPost
+﻿@namespace StudentEmployementPortal.ViewModels
+@model CreateJobPostViewModel
 
 <form method="post">
     <div class="=border pt-2 mt-2">
@@ -9,20 +10,40 @@
         <div>
             <label asp-for="Internal" class="mb-2"></label>
             <div>
-                <input type="radio" asp-for="Internal" value="true" class="m-2"/>Yes
-                <input type="radio" asp-for="Internal" value="false" class="m-2"/>No
+                <input type="radio" asp-for="Internal" value="true" class="m-2" />Yes
+                <input type="radio" asp-for="Internal" value="false" class="m-2" />No
             </div>
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        <div class="mb-2">
-            <label asp-for="Faculty"></label>
-            <input asp-for="Faculty" class="form-control" />
-            <span asp-validation-for="Faculty" class="text-danger"></span>
+        @*<div class="mb-2">
+        <label asp-for="Faculty"></label>
+        <input asp-for="Faculty" class="form-control" />
+        <span asp-validation-for="Faculty" class="text-danger"></span>
         </div>
         <div class="mb-2">
-            <label asp-for="Department"></label>
-            <input asp-for="Department" class="form-control" />
-            <span asp-validation-for="Department" class="text-danger"></span>
+        <label asp-for="Department"></label>
+        <input asp-for="Department" class="form-control" />
+        <span asp-validation-for="Department" class="text-danger"></span>
+        </div>*@
+       @* <div class="form-group">
+            @Html.LabelFor(model => model.FacultyId, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.FacultyId, new SelectList(Model.FacultyList, "FacultyId", "FacultyName"), "Select Faculty", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FacultyId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.DepartmentId, new SelectList(Model.DepartmentList, "DepartmentId", "DepartmentName"), "Select Department", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+        </div>*@
+        <div class="form-group">
+            <label for="FacultyId">Faculty:</label>
+            @Html.DropDownListFor(model => model.FacultyId, new SelectList(Model.FacultyList, "FacultyId", "Name"), "Select Faculty", new { @class = "form-control", id = "facultyDropdown" })
+        </div>
+
+        <div class="form-group">
+            <label for="DepartmentId">Department:</label>
+            @Html.DropDownListFor(model => model.DepartmentId, Enumerable.Empty<SelectListItem>(), "Select Department", new { @class = "form-control", id = "departmentDropdown" })
         </div>
         <div class="mb-2">
             <label asp-for="JobTitle"></label>
@@ -53,9 +74,9 @@
             <span asp-validation-for="FullTime" class="text-danger"></span>
         </div>
         <div class="mb-2">
-            <label asp-for="StartDate" ></label>
+            <label asp-for="StartDate"></label>
             <div>
-                <input asp-for="StartDate" class="form-control" type="date"/>
+                <input asp-for="StartDate" class="form-control" type="date" />
             </div>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
@@ -89,16 +110,51 @@
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
         <div class="mb-2">
-            <label asp-for="LimitedTo"></label>
-            <input asp-for="LimitedTo" class="form-control" />
-            <span asp-validation-for="LimitedTo" class="text-danger"></span>
+
+            <label> Limited To: </label><br />
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToFirst)
+                <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToSecond)
+                <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToThird)
+                <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToHonours)
+                <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToMasters)
+                <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToPhD)
+                <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToPostDoc)
+                <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToDepartment)
+                <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.limitedToFaculty)
+                <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+            </div>
         </div>
         <div>
             <label asp-for="CitizensOnly" class="mb-2"></label>
-            <div>
-                <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
-            </div>
+
+            <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
+            <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
+
             <span asp-validation-for="CitizensOnly" class="text-danger"></span>
         </div>
         <div class="mb-2">
@@ -123,6 +179,44 @@
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+        $(function () {
+            // Set initial state of department dropdown
+            var initialDepartments = @Html.Raw(Json.Serialize(Model.DepartmentList));
+            var initialDepartmentOptions = getDepartmentOptions(initialDepartments);
+            $('#departmentDropdown').html(initialDepartmentOptions);
+
+            // Handle faculty dropdown change event
+            $('#facultyDropdown').change(function () {
+                var selectedFacultyId = $(this).val();
+                if (selectedFacultyId) {
+                    // Make an AJAX call to get departments based on the selected faculty
+                    $.ajax({
+                        url: '/ManagePost/GetDepartmentsByFacultyId',
+                        type: 'GET',
+                        data: { facultyId: selectedFacultyId },
+                        success: function (result) {
+                            var departmentOptions = getDepartmentOptions(result);
+                            $('#departmentDropdown').html(departmentOptions);
+                        }
+                    });
+                } else {
+                    // Reset department dropdown if no faculty is selected
+                    $('#departmentDropdown').html(initialDepartmentOptions);
+                }
+            });
+
+            function getDepartmentOptions(departments) {
+                var options = '<option value="">Select Department</option>';
+                for (var i = 0; i < departments.length; i++) {
+                    options += '<option value="' + departments[i].departmentId + '">' + departments[i].name + '</option>';
+                }
+                return options;
+            }
+        });
+    </script>
+
     @{
         <partial name="_ValidationScriptsPartial" />
     }

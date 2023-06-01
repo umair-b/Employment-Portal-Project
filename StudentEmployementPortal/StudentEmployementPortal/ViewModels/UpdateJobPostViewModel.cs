@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Mvc;
+using StudentEmployementPortal.Models;
 
 namespace StudentEmployementPortal.ViewModels
 {
@@ -16,10 +17,14 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Internal")]
         public bool Internal { get; set; }
 
-        public string? Faculty { get; set; } = string.Empty;
+        public int FacultyId { get; set; }
+        //public Faculty Faculty { get; set; }
+        public int DepartmentId { get; set; }
+        //public Department Department { get; set; }
 
-        public string? Department { get; set; } = string.Empty;
-        [Required]
+        public List<Faculty> FacultyList { get; set; }
+        public List<Department> DepartmentList { get; set; }
+
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
 
@@ -51,7 +56,24 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Hourly Rate")]
         public string HourlyRate { get; set; }
 
-        public string LimitedTo { get; set; }
+        [DisplayName("1st Years")]
+        public bool limitedToFirst { get; set; }
+        [DisplayName("2nd Years")]
+        public bool limitedToSecond { get; set; }
+        [DisplayName("3rd Years")]
+        public bool limitedToThird { get; set; }
+        [DisplayName("Honours")]
+        public bool limitedToHonours { get; set; }
+        [DisplayName("Masters")]
+        public bool limitedToMasters { get; set; }
+        [DisplayName("PhD")]
+        public bool limitedToPhD { get; set; }
+        [DisplayName("PostDoc")]
+        public bool limitedToPostDoc { get; set; }
+        [DisplayName("Department")]
+        public bool limitedToDepartment { get; set; }
+        [DisplayName("Faculty")]
+        public bool limitedToFaculty { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]

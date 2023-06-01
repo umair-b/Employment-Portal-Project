@@ -22,27 +22,72 @@ namespace StudentEmployementPortal.Controllers
             {
                 return NotFound();
             }
-    
+
             return View(jobPosts);
         }
 
-       public IActionResult CreatePost()
-        {
 
-            return View();
+        // GET
+        public IActionResult CreatePost()
+        {
+            var viewModel = new CreateJobPostViewModel()
+            {
+                FacultyList = _db.Faculties.ToList(),
+                DepartmentList = _db.Departments.ToList(),  
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreatePost(JobPost obj)
+        public IActionResult CreatePost(CreateJobPostViewModel obj)
         {
-
             if (ModelState.IsValid)
             {
-                _db.JobPosts.Add(obj);
+                var jobPost = new JobPost()
+                {
+                    PostId = obj.PostId,
+                    ApplicationInstructions = obj.ApplicationInstructions,
+                    //ApproverNote = obj.ApproverNote,
+                    CitizensOnly = obj.CitizensOnly,
+                    ClosingDate = obj.ClosingDate,
+                    ContactEmail = obj.ContactEmail,
+                    ContactNumber = obj.ContactNumber,
+                    ContactPerson = obj.ContactPerson,
+                    FacultyId = obj.FacultyId,
+                    //Faculty = _db.Faculties.Find(obj.FacultyId),
+                    DepartmentId = obj.DepartmentId,
+                    //Department = _db.Departments.Find(obj.DepartmentId),
+                    FacultyList = obj.FacultyList,
+                    DepartmentList = obj.DepartmentList,
+                    EndDate = obj.EndDate,
+                    FullTime = obj.FullTime,
+                    HourlyRate = obj.HourlyRate,
+                    Internal = obj.Internal,
+                    JobDescription = obj.JobDescription,
+                    JobLocation = obj.JobLocation,
+                    JobTitle = obj.JobTitle,
+                    KeyResponsibilities = obj.KeyResponsibilities,
+                    limitedToFirst = obj.limitedToFirst,
+                    limitedToSecond = obj.limitedToSecond,
+                    limitedToThird = obj.limitedToThird,
+                    limitedToHonours = obj.limitedToHonours,
+                    limitedToMasters = obj.limitedToMasters,
+                    limitedToPhD = obj.limitedToPhD,
+                    limitedToPostDoc = obj.limitedToPostDoc,
+                    limitedToDepartment = obj.limitedToDepartment,
+                    limitedToFaculty = obj.limitedToFaculty,
+                    MinRequirements = obj.MinRequirements,
+                    StartDate = obj.StartDate
+
+                };
+
+                _db.JobPosts.Add(jobPost);
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(obj);
         }
 
@@ -69,9 +114,11 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = obj.ContactEmail,
                 ContactNumber = obj.ContactNumber,
                 ContactPerson = obj.ContactPerson,
-                Department = obj.Department,
+                FacultyId = obj.FacultyId,
+                //Faculty = _db.Faculties.Find(obj.FacultyId),
+                DepartmentId = obj.DepartmentId,
+                //Department = _db.Departments.Find(obj.DepartmentId),
                 EndDate = obj.EndDate,
-                Faculty = obj.Faculty,
                 FullTime = obj.FullTime,
                 HourlyRate = obj.HourlyRate,
                 Internal = obj.Internal,
@@ -79,11 +126,21 @@ namespace StudentEmployementPortal.Controllers
                 JobLocation = obj.JobLocation,
                 JobTitle = obj.JobTitle,
                 KeyResponsibilities = obj.KeyResponsibilities,
-                LimitedTo = obj.LimitedTo,
+                limitedToFirst = obj.limitedToFirst,
+                limitedToSecond = obj.limitedToSecond,
+                limitedToThird = obj.limitedToThird,
+                limitedToHonours = obj.limitedToHonours,
+                limitedToMasters = obj.limitedToMasters,
+                limitedToPhD = obj.limitedToPhD,
+                limitedToPostDoc = obj.limitedToPostDoc,
+                limitedToDepartment = obj.limitedToDepartment,
+                limitedToFaculty = obj.limitedToFaculty,
                 MinRequirements = obj.MinRequirements,
-                StartDate   = obj.StartDate
+                StartDate = obj.StartDate
             };
 
+            updateJobPostViewModel.FacultyList = _db.Faculties.ToList();
+            updateJobPostViewModel.DepartmentList = _db.Departments.ToList();
 
             return View(updateJobPostViewModel);
         }
@@ -99,7 +156,7 @@ namespace StudentEmployementPortal.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 var jobPost = _db.JobPosts.Find(obj.PostId);
 
                 if (jobPost != null)
@@ -113,9 +170,9 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.ContactEmail = obj.ContactEmail;
                     jobPost.ContactNumber = obj.ContactNumber;
                     jobPost.ContactPerson = obj.ContactPerson;
-                    jobPost.Department = obj.Department;
+                    jobPost.DepartmentId = obj.DepartmentId;
                     jobPost.EndDate = obj.EndDate;
-                    jobPost.Faculty = obj.Faculty;
+                    jobPost.FacultyId = obj.FacultyId;
                     jobPost.FullTime = obj.FullTime;
                     jobPost.HourlyRate = obj.HourlyRate;
                     jobPost.Internal = obj.Internal;
@@ -123,15 +180,26 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.JobLocation = obj.JobLocation;
                     jobPost.JobTitle = obj.JobTitle;
                     jobPost.KeyResponsibilities = obj.KeyResponsibilities;
-                    jobPost.LimitedTo = obj.LimitedTo;
+                    jobPost.limitedToFirst = obj.limitedToFirst;
+                    jobPost.limitedToSecond = obj.limitedToSecond;
+                    jobPost.limitedToThird = obj.limitedToThird;
+                    jobPost.limitedToHonours = obj.limitedToHonours;
+                    jobPost.limitedToMasters = obj.limitedToMasters;
+                    jobPost.limitedToPhD = obj.limitedToPhD;
+                    jobPost.limitedToPostDoc = obj.limitedToPostDoc;
+                    jobPost.limitedToDepartment = obj.limitedToDepartment;
+                    jobPost.limitedToFaculty = obj.limitedToFaculty;
                     jobPost.MinRequirements = obj.MinRequirements;
                     jobPost.StartDate = obj.StartDate;
 
                     _db.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
-                return View(obj);
 
+                obj.FacultyList = _db.Faculties.ToList();
+                obj.DepartmentList = _db.Departments.ToList();
+
+                return View(obj);
             }
             return View(obj);
 

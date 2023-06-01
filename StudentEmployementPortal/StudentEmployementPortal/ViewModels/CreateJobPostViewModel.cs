@@ -1,30 +1,30 @@
-﻿
-using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Plugins;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using StudentEmployementPortal.Models;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace StudentEmployementPortal.Models
+namespace StudentEmployementPortal.ViewModels
 {
-    public class JobPost
+    public class CreateJobPostViewModel
     {
         [Key]
+        [HiddenInput]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
-
         [Required]
-        [DisplayName("Internal")]
+        [Display(Name = "Internal")]
         public bool Internal { get; set; }
+
         public int FacultyId { get; set; }
-        public Faculty Faculty { get; set; }
+        //public Faculty Faculty { get; set; }
         public int DepartmentId { get; set; }
-        public Department Department { get; set; }
+        //public Department Department { get; set; }
+
         public List<Faculty> FacultyList { get; set; }
         public List<Department> DepartmentList { get; set; }
 
-        [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
 
@@ -76,7 +76,7 @@ namespace StudentEmployementPortal.Models
         public bool limitedToFaculty { get; set; }
 
         [Required]
-        [DisplayName("Limited to Citizens:")]
+        [DisplayName("Limited to Citizens")]
         public bool CitizensOnly { get; set; }
 
         [Required]
@@ -102,23 +102,8 @@ namespace StudentEmployementPortal.Models
         public string ContactNumber { get; set; }
 
         [Required]
-        [DisplayName("Contact " +
-            "Email")]
+        [DisplayName("Contact Email")]
         public string ContactEmail { get; set; }
 
-        public Status PostStatus { get; set; } = Status.Pending;
-
-        public string? ApproverNote { get; set; }
-
-        public enum Status
-        {
-            Approved,
-            Rejected,
-            Pending,
-            Withdraw
-        }
-
     }
-
-
 }

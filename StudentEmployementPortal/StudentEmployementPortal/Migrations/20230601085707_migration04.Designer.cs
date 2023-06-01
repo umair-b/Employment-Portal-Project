@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEmployementPortal.Data;
 
@@ -11,9 +12,11 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230601085707_migration04")]
+    partial class migration04
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,12 +269,7 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JobPostPostId")
-                        .HasColumnType("int");
-
                     b.HasKey("DepartmentId");
-
-                    b.HasIndex("JobPostPostId");
 
                     b.ToTable("Departments");
 
@@ -518,12 +516,7 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("JobPostPostId")
-                        .HasColumnType("int");
-
                     b.HasKey("FacultyId");
-
-                    b.HasIndex("JobPostPostId");
 
                     b.ToTable("Faculties");
 
@@ -849,20 +842,6 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>
-                {
-                    b.HasOne("StudentEmployementPortal.Models.JobPost", null)
-                        .WithMany("DepartmentList")
-                        .HasForeignKey("JobPostPostId");
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.Faculty", b =>
-                {
-                    b.HasOne("StudentEmployementPortal.Models.JobPost", null)
-                        .WithMany("FacultyList")
-                        .HasForeignKey("JobPostPostId");
-                });
-
             modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
                 {
                     b.HasOne("StudentEmployementPortal.Models.Department", "Department")
@@ -880,13 +859,6 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Faculty");
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
-                {
-                    b.Navigation("DepartmentList");
-
-                    b.Navigation("FacultyList");
                 });
 #pragma warning restore 612, 618
         }
