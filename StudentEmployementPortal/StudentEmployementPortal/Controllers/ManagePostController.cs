@@ -33,7 +33,7 @@ namespace StudentEmployementPortal.Controllers
             var viewModel = new CreateJobPostViewModel()
             {
                 FacultyList = _db.Faculties.ToList(),
-                DepartmentList = _db.Departments.ToList(),  
+                DepartmentList = _db.Departments.ToList(), 
             };
 
             return View(viewModel);
@@ -115,8 +115,10 @@ namespace StudentEmployementPortal.Controllers
                 ContactNumber = obj.ContactNumber,
                 ContactPerson = obj.ContactPerson,
                 FacultyId = obj.FacultyId,
+                FacultyList = obj.FacultyList,
                 //Faculty = _db.Faculties.Find(obj.FacultyId),
                 DepartmentId = obj.DepartmentId,
+                DepartmentList = obj.DepartmentList,
                 //Department = _db.Departments.Find(obj.DepartmentId),
                 EndDate = obj.EndDate,
                 FullTime = obj.FullTime,
@@ -138,9 +140,6 @@ namespace StudentEmployementPortal.Controllers
                 MinRequirements = obj.MinRequirements,
                 StartDate = obj.StartDate
             };
-
-            updateJobPostViewModel.FacultyList = _db.Faculties.ToList();
-            updateJobPostViewModel.DepartmentList = _db.Departments.ToList();
 
             return View(updateJobPostViewModel);
         }
