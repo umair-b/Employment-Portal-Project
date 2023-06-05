@@ -1,7 +1,11 @@
-﻿namespace StudentEmployementPortal.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StudentEmployementPortal.Models
 {
     public class Employer
     {
+        [Key]
+        public int EmployerId { get; set; }
         public string? JobTitle { get; set; }
         public string? RegistrationNumber { get; set;}
         public string? RegistrationName { get; set; }

@@ -7,16 +7,23 @@ using StudentEmployementPortal.Models;
 
 namespace StudentEmployementPortal.ViewModels
 {
-    public class UpdateJobPostViewModel
+    public class CreateJobPostViewModel
     {
         [Key]
         [HiddenInput]
         public int PostId { get; set; }
 
+        public int? EmployerId { get; set; }
+
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
+        
+        [Required]
+        [Display(Name = "Faculty")]
         public Faculty Faculty { get; set; }
+        [Required]
+        [Display(Name = "Department")]
         public Department Department { get; set; }
         public List<Department> DepartmentList { get; set; }
         public List<Faculty> FacultyList { get; set; }
@@ -40,12 +47,12 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("End Date")]
         public DateTime EndDate { get; set; }
@@ -85,7 +92,7 @@ namespace StudentEmployementPortal.ViewModels
         public string ApplicationInstructions { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("Closing Date")]
         public DateTime ClosingDate { get; set; }
@@ -99,8 +106,8 @@ namespace StudentEmployementPortal.ViewModels
         public string ContactNumber { get; set; }
 
         [Required]
-        [DisplayName("Contact Email")]
+        [DisplayName("Contact " +
+            "Email")]
         public string ContactEmail { get; set; }
-        public string? ApproverNote { get; set; }
     }
 }
