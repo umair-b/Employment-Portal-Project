@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using StudentEmployementPortal.Utils;
 
 namespace StudentEmployementPortal.Models
 {
@@ -83,7 +84,7 @@ namespace StudentEmployementPortal.Models
             "Email")]
         public string ContactEmail { get; set; }
 
-        public Status PostStatus { get; set; } = Status.Pending;
+        public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
 
         public string? ApproverNote { get; set; }
 

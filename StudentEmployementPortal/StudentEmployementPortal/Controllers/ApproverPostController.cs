@@ -1,13 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
+using System.Linq;
 
 namespace StudentEmployementPortal.Controllers
 {
     public class ApproverPostController : Controller
     {
-        private AppDbContext _db; 
+        private AppDbContext _db;
+
+        public ApproverPostController(AppDbContext db)
+        {
+            _db = db;
+        }
 
         public IActionResult Index()
         {
@@ -21,14 +28,77 @@ namespace StudentEmployementPortal.Controllers
         }
 
         [HttpGet]
-        private IActionResult ReviewPost(int? id)
+        public IActionResult ReviewPost(int? id)
         {
             if (id == null || id == 0)
             {
                 return NotFound();
             }
-            var jobPost = _db.JobPosts.Find(id);
-            return View(jobPost);
+            var JobPost = _db.JobPosts.Find(id);
+
+            if (JobPost == null)
+            {
+                return NotFound();
+            }
+
+            var ReviewJobPostVm = new ReviewPostViewModel()
+            {
+                ApplicationInstructions = JobPost.ApplicationInstructions,
+                ApproverNote = JobPost.ApproverNote,
+                CitizensOnly = JobPost.CitizensOnly,
+                ClosingDate = JobPost.ClosingDate,
+                ContactEmail = JobPost.ContactEmail,
+                ContactNumber = JobPost.ContactNumber,
+                ContactPerson = JobPost.ContactPerson,
+                Department = JobPost.Department,
+                EndDate = JobPost.EndDate,
+                Faculty = JobPost.Faculty,
+                FullTime = JobPost.FullTime,
+                HourlyRate = JobPost.HourlyRate,
+                JobDescription = JobPost.JobDescription,
+                JobLocation = JobPost.JobLocation,
+                JobTitle = JobPost.JobTitle,
+                Internal = JobPost.Internal,
+                KeyResponsibilities = JobPost.KeyResponsibilities,
+                LimitedTo = JobPost.LimitedTo,
+                MinRequirements = JobPost.MinRequirements,
+                PostId = JobPost.PostId,
+                SelectedStatus = JobPost.PostStatus,
+                StartDate = JobPost.StartDate,
+                StatusNames = Enum.GetValues(typeof(Enums.JobPostStatus)).Cast<JobPost.Status>().Select(
+                e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                {
+                    Value = e.ToString(),
+                    Text = e.ToString()
+                }).ToList()
+        };
+            
+           
+
+            return View(ReviewJobPostVm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ReviewPost (ReviewPostViewModel ReviewPostVm)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var JobPost = _db.JobPosts.Find(ReviewPostVm.PostId);
+
+                if (JobPost != null)
+                {
+                    JobPost.ApproverNote = ReviewPostVm.ApproverNote;
+                    JobPost.PostStatus = ReviewPostVm.SelectedStatus;
+
+                    _db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(ReviewPostVm);
+            }
+
+            return View(ReviewPostVm);
         }
     }
 }
