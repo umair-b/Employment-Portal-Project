@@ -87,6 +87,8 @@ namespace StudentEmployementPortal.Controllers
                 _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
+            obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList(); 
 
             return View(obj);
         }
