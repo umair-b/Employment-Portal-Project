@@ -14,9 +14,13 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
-        public Faculty Faculty { get; set; }
-        public Department Department { get; set; }
-
+        /*public int FacultyId { get; set; }
+        //[ForeignKey(nameof(FacultyId))]
+        //public Faculty Faculty { get; set; }
+        public int DepartmentId { get; set; }
+        //[ForeignKey(nameof(DepartmentId))]
+        //public Department Department { get; set; }
+*/
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -35,6 +39,8 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
+        public string PartTimeHours { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
@@ -47,7 +53,7 @@ namespace StudentEmployementPortal.Models
         public DateTime EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
-        public string HourlyRate { get; set; }
+        public double HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
         public bool limitedToFirst { get; set; }
@@ -101,6 +107,7 @@ namespace StudentEmployementPortal.Models
 
         public Status PostStatus { get; set; } = Status.Pending;
 
+        [Display(Name = "Approver's Note")]
         public string? ApproverNote { get; set; }
 
         public enum Status

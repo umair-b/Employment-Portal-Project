@@ -25,6 +25,18 @@ namespace StudentEmployementPortal.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            /*modelBuilder.Entity<JobPost>()
+            .HasOne(j => j.Department)
+            .WithMany()
+            .HasForeignKey(j => j.DepartmentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<JobPost>()
+            .HasOne(j => j.Faculty)
+            .WithMany()
+            .HasForeignKey(j => j.FacultyId)
+            .OnDelete(DeleteBehavior.Restrict);*/
+
             modelBuilder.Entity<Faculty>().HasData(
                 new Faculty { FacultyId = 1, FacultyName = "Faculty of Commerce, Law and Management" },
                 new Faculty { FacultyId = 2, FacultyName = "Faculty of Engineering and the Built Environment" },
