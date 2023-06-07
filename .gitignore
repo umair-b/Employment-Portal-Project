@@ -1,6 +1,9 @@
 **/.vs/
-StudentEmployementPortal/.vs/
-.vs/
-obj/
-StudentEmployementPortal/StudentEmployementPortal/obj/Debug/net6.0/StudentEmployementPortal.assets.cache
-StudentEmployementPortal/StudentEmployementPortal/obj/Debug/net6.0/StudentEmployementPortal.GeneratedMSBuildEditorConfig.editorconfig
+**/obj/
+StudentEmployementPortal/.vs/StudentEmployementPortal/v17/.suo
+StudentEmployementPortal/.vs/StudentEmployementPortal/v17/.suo
+StudentEmployementPortal/StudentEmployementPortal/bin/Debug/net6.0/StudentEmployementPortal.dll
+StudentEmployementPortal/StudentEmployementPortal/bin/Debug/net6.0/StudentEmployementPortal.pdb
+*.dll
+*.cache
+*.pdb
