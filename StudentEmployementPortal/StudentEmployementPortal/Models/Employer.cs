@@ -10,7 +10,7 @@
         public string? RegisteredAddress { get; set;}
         public bool? TrueInfo { get; set; } = false;
         public bool? Approved { get; set; } = false;
-        public BusinessType EmployerBusinessType { get; set; }
+        //public BusinessType EmployerBusinessType { get; set; }
 
 
     }
