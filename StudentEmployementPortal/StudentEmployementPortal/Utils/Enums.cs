@@ -24,16 +24,6 @@ namespace StudentEmployementPortal.Utils
             Withdraw
         }
 
-<<<<<<< HEAD
-        public enum Faculties
-        {
-            
-            CLM,
-            EBE,
-            HS,
-            H,
-            S
-=======
         public enum Gender
         {
             [Display(Name ="Male")]
@@ -64,12 +54,7 @@ namespace StudentEmployementPortal.Utils
             PhD
         }
 
-        public enum LicenceType
-        {
-
->>>>>>> main
-        }
-
+     
         
     }
 }
