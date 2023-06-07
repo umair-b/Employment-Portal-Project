@@ -23,6 +23,16 @@ namespace StudentEmployementPortal.Utils
             Withdraw
         }
 
+        public enum Faculties
+        {
+            
+            CLM,
+            EBE,
+            HS,
+            H,
+            S
+        }
+
         
     }
 }

@@ -11,12 +11,21 @@
         <div>
             <div>
                 <label asp-for="Internal" class="mb-2"></label>
-                <input type="radio" asp-for="Internal" value="true" class="m-2"/>Yes
-                <input type="radio" asp-for="Internal" value="false" class="m-2"/>No
+                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2"/>Yes
+                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2"/>No
             </div>
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        <div>
+        @*<div>
+            <select id="facultyId" asp-for="@Model.FacultyId">
+                <option value="" selected disabled> Select Faculty </option>
+                @foreach (var faculty in Model.FacultyList)
+                {
+                    <option value="@faculty.FacultyId">@faculty.FacultyName</option>
+                }
+            </select>
+        </div>*@
+        <div id="facultyContainer" style="display: none">
             <select id="facultyId" asp-for="@Model.FacultyId">
                 <option value="" selected disabled> Select Faculty </option>
                 <option value="1"> Faculty of Commerce, Law and Management </option>
@@ -24,6 +33,21 @@
                 <option value="3"> Faculty of Health Sciences </option>
                 <option value="4">Faculty of Humanities </option>
                 <option value="5"> Faculty of Science </option>
+            </select>
+        </div>
+        <br/>
+        <div id="departmentContainer" style="display: none">
+            <select id="departmentId" asp-for="@Model.DepartmentName">
+                <option value="" selected disabled">Select Department</option>
+                <option value="Animal, Plant and Environmental Sciences"> Animal, Plant and Environmental Sciences </option>
+                <option value="Chemistry"> Chemistry </option>
+                <option value="Computer Science and Applied Mathematics">Computer Science and Applied Mathematics</option>
+                <option value="Geography, Archaeology and Environmental Sciences">Geography, Archaeology and Environmental Sciences</option>
+                <option value="Geosciences">Geosciences</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Molecular and Cell Biology">Molecular and Cell Biology</option>
+                <option value="Physics">Physics</option>
+                <option value="Statistics and Actuarial Science">Statistics and Actuarial Science</option>
             </select>
         </div>
        @* <div>
@@ -214,6 +238,23 @@
                 $('input[name="fullTime"]:checked').trigger('change');
             }
         });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#internalTrue').change(function () {
+                $('#facultyContainer').show();
+                $('#departmentContainer').show();
+            });
+            $('#internalFalse').change(function () {
+                $('#facultyContainer').hide();
+                $('#departmentContainer').hide();
+            });
+
+            // Check if a radio button is already selected
+            if ($('input[name="internal"]:checked').length > 0) {
+                $('input[name="internal"]:checked').trigger('change');
+            }
+        })
     </script>
 
     @{

@@ -17,12 +17,10 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Internal")]
         public bool Internal { get; set; }
         public int FacultyId { get; set; }
-        //[ForeignKey(nameof(FacultyId))]
         //public Faculty Faculty { get; set; }
         public int DepartmentId { get; set; }
-        //[ForeignKey(nameof(DepartmentId))]
         //public Department Department { get; set; }
-
+        public string? DepartmentName { get; set; }
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }

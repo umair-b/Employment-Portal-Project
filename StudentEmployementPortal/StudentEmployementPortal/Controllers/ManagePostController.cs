@@ -17,7 +17,7 @@ namespace StudentEmployementPortal.Controllers
             _db = db;
         }
 
-        private List<Faculty> GetFaculties()
+        /*private List<Faculty> GetFaculties()
         {
             var faculties = _db.Faculties;
 
@@ -34,7 +34,7 @@ namespace StudentEmployementPortal.Controllers
             }
 
             return facultyList;
-        }
+        }*/
 
         public IActionResult Index()
         {
@@ -75,6 +75,9 @@ namespace StudentEmployementPortal.Controllers
                     ContactPerson = obj.ContactPerson,
                     FacultyId = obj.FacultyId,
                     DepartmentId = obj.DepartmentId,
+                    DepartmentName = obj.DepartmentName,
+                    /*Faculty = _db.Faculties.Find(obj.FacultyId),
+                    Department = _db.Departments.Find(obj.DepartmentId),*/
                     EndDate = obj.EndDate,
                     FullTime = obj.FullTime,
                     PartTimeHours = obj.PartTimeHours,
@@ -134,6 +137,9 @@ namespace StudentEmployementPortal.Controllers
                 ContactPerson = obj.ContactPerson,
                 DepartmentId = obj.DepartmentId,
                 FacultyId = obj.FacultyId,
+                DepartmentName = obj.DepartmentName,
+               /* Department = _db.Departments.Find(obj.DepartmentId),
+                Faculty = _db.Faculties.Find(obj.FacultyId),*/
                 EndDate = obj.EndDate,
                 FullTime = obj.FullTime,
                 PartTimeHours = obj.PartTimeHours,
@@ -186,6 +192,9 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.ContactPerson = obj.ContactPerson;
                     jobPost.DepartmentId = obj.DepartmentId;
                     jobPost.FacultyId = obj.FacultyId;
+                    jobPost.DepartmentName = obj.DepartmentName;
+                    /*jobPost.Department = _db.Departments.Find(obj.DepartmentId);
+                    jobPost.Faculty = _db.Faculties.Find(obj.FacultyId);*/
                     jobPost.EndDate = obj.EndDate;
                     jobPost.FullTime = obj.FullTime;
                     jobPost.PartTimeHours = obj.PartTimeHours;

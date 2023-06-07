@@ -5,7 +5,7 @@
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migrationTest01 : Migration
+    public partial class migration01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -26,31 +26,19 @@ namespace StudentEmployementPortal.Migrations
                 name: "IX_JobPosts_FacultyId",
                 table: "JobPosts");
 
-            migrationBuilder.DropColumn(
-                name: "DepartmentId",
-                table: "JobPosts");
-
-            migrationBuilder.DropColumn(
-                name: "FacultyId",
-                table: "JobPosts");
+            migrationBuilder.AddColumn<string>(
+                name: "DepartmentName",
+                table: "JobPosts",
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "DepartmentId",
-                table: "JobPosts",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "FacultyId",
-                table: "JobPosts",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
+            migrationBuilder.DropColumn(
+                name: "DepartmentName",
+                table: "JobPosts");
 
             migrationBuilder.CreateIndex(
                 name: "IX_JobPosts_DepartmentId",

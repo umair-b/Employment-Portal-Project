@@ -581,6 +581,9 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("EmployerId")
                         .HasColumnType("int");
 

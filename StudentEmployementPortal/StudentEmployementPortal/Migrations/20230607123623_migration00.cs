@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migration01 : Migration
+    public partial class migration00 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -112,40 +112,6 @@ namespace StudentEmployementPortal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Faculties", x => x.FacultyId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "JobPosts",
-                columns: table => new
-                {
-                    PostId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployerId = table.Column<int>(type: "int", nullable: true),
-                    Internal = table.Column<bool>(type: "bit", nullable: false),
-                    Faculty = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    KeyResponsibilities = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FullTime = table.Column<bool>(type: "bit", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    HourlyRate = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LimitedTo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CitizensOnly = table.Column<bool>(type: "bit", nullable: false),
-                    MinRequirements = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClosingDate = table.Column<DateTime>(type: "Date", nullable: false),
-                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostStatus = table.Column<int>(type: "int", nullable: false),
-                    ApproverNote = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_JobPosts", x => x.PostId);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,6 +273,61 @@ namespace StudentEmployementPortal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "JobPosts",
+                columns: table => new
+                {
+                    PostId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployerId = table.Column<int>(type: "int", nullable: true),
+                    Internal = table.Column<bool>(type: "bit", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KeyResponsibilities = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FullTime = table.Column<bool>(type: "bit", nullable: false),
+                    PartTimeHours = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    HourlyRate = table.Column<double>(type: "float", nullable: false),
+                    limitedToFirst = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToSecond = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToThird = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToHonours = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToMasters = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToPhD = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToPostDoc = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToDepartment = table.Column<bool>(type: "bit", nullable: false),
+                    limitedToFaculty = table.Column<bool>(type: "bit", nullable: false),
+                    CitizensOnly = table.Column<bool>(type: "bit", nullable: false),
+                    MinRequirements = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationInstructions = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClosingDate = table.Column<DateTime>(type: "Date", nullable: false),
+                    ContactPerson = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostStatus = table.Column<int>(type: "int", nullable: false),
+                    ApproverNote = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_JobPosts", x => x.PostId);
+                    table.ForeignKey(
+                        name: "FK_JobPosts_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_JobPosts_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "FacultyId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "DepartmentId", "DepartmentName", "FacultyId" },
@@ -398,6 +419,16 @@ namespace StudentEmployementPortal.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobPosts_DepartmentId",
+                table: "JobPosts",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_JobPosts_FacultyId",
+                table: "JobPosts",
+                column: "FacultyId");
         }
 
         /// <inheritdoc />
@@ -422,13 +453,7 @@ namespace StudentEmployementPortal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Departments");
-
-            migrationBuilder.DropTable(
                 name: "Documents");
-
-            migrationBuilder.DropTable(
-                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "JobPosts");
@@ -447,6 +472,12 @@ namespace StudentEmployementPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
         }
     }
 }

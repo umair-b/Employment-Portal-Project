@@ -28,10 +28,12 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         //public Department Department { get; set; }
+        public string? DepartmentName { get; set; }
+
         /*public List<Faculty> FacultyList { get; set; } = new List<Faculty>();
         public List<Department> DepartmentList { get; set; } = new List<Department>();*/
-        public List<Faculty> FacultyList { get; set;  }
-        public List<Department> DepartmentList { get; set; }
+        /*public List<Faculty> FacultyList { get; set;  }
+        public List<Department> DepartmentList { get; set; }*/
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }

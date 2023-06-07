@@ -12,8 +12,8 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230605114153_migration02")]
-    partial class migration02
+    [Migration("20230607123623_migration00")]
+    partial class migration00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -596,9 +596,8 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<bool>("FullTime")
                         .HasColumnType("bit");
 
-                    b.Property<string>("HourlyRate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("HourlyRate")
+                        .HasColumnType("float");
 
                     b.Property<bool>("Internal")
                         .HasColumnType("bit");
@@ -620,6 +619,10 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MinRequirements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartTimeHours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -657,6 +660,10 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("PostId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("JobPosts");
                 });
@@ -836,6 +843,25 @@ namespace StudentEmployementPortal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
+                {
+                    b.HasOne("StudentEmployementPortal.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Faculty");
                 });
 #pragma warning restore 612, 618
         }
