@@ -41,8 +41,7 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
-        public string PartTimeHours { get; set; }
-
+        //public string PartTimeHours { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
