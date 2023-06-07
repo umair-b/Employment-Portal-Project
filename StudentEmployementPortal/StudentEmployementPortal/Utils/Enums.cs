@@ -54,11 +54,7 @@ namespace StudentEmployementPortal.Utils
             PhD
         }
 
-        public enum LicenceType
-        {
-
-        }
-
+     
         
     }
 }

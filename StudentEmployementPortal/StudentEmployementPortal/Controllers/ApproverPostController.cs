@@ -50,9 +50,9 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = JobPost.ContactEmail,
                 ContactNumber = JobPost.ContactNumber,
                 ContactPerson = JobPost.ContactPerson,
-                Department = JobPost.Department,
+                //Department = JobPost.Department,
                 EndDate = JobPost.EndDate,
-                Faculty = JobPost.Faculty,
+                //Faculty = JobPost.Faculty,
                 FullTime = JobPost.FullTime,
                 HourlyRate = JobPost.HourlyRate,
                 JobDescription = JobPost.JobDescription,
@@ -60,12 +60,19 @@ namespace StudentEmployementPortal.Controllers
                 JobTitle = JobPost.JobTitle,
                 Internal = JobPost.Internal,
                 KeyResponsibilities = JobPost.KeyResponsibilities,
-                LimitedTo = JobPost.LimitedTo,
                 MinRequirements = JobPost.MinRequirements,
                 PostId = JobPost.PostId,
                 SelectedStatus = JobPost.PostStatus,
-                StartDate = JobPost.StartDate
-        };
+                StartDate = JobPost.StartDate,
+                limitedToFirst = JobPost.limitedToFirst,
+                limitedToSecond = JobPost.limitedToSecond,
+                limitedToThird = JobPost.limitedToThird,
+                limitedToHonours = JobPost.limitedToHonours,
+                limitedToMasters = JobPost.limitedToMasters,
+                limitedToPhD = JobPost.limitedToPhD,
+                limitedToPostDoc = JobPost.limitedToPostDoc,
+                limitedToDepartment = JobPost.limitedToDepartment,
+            };
             
            
 

@@ -1,14 +1,17 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using Microsoft.AspNetCore.Mvc;
+using StudentEmployementPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StudentEmployementPortal.Utils;
 
-namespace StudentEmployementPortal.Models
+namespace StudentEmployementPortal.ViewModels
 {
-    public class JobPost
+    public class CreateJobPostViewModel
     {
         [Key]
+        [HiddenInput]
         public int PostId { get; set; }
 
         public int? EmployerId { get; set; }
@@ -16,11 +19,21 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
+
+
+        [Display(Name = "Faculty")]
         public int FacultyId { get; set; }
         //public Faculty Faculty { get; set; }
+        [Required]
+        [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         //public Department Department { get; set; }
         public string? DepartmentName { get; set; }
+
+        /*public List<Faculty> FacultyList { get; set; } = new List<Faculty>();
+        public List<Department> DepartmentList { get; set; } = new List<Department>();*/
+        /*public List<Faculty> FacultyList { get; set;  }
+        public List<Department> DepartmentList { get; set; }*/
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -35,24 +48,25 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Key Responsibilities")]
-        public string KeyResponsibilities {get; set; }
+        public string KeyResponsibilities { get; set; }
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
         public string PartTimeHours { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("Start Date")]
         public DateTime StartDate { get; set; }
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("End Date")]
         public DateTime EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
+        [Range(0, double.MaxValue, ErrorMessage = "The {0} field must be a positive number.")]
         public double HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
@@ -87,7 +101,7 @@ namespace StudentEmployementPortal.Models
         public string ApplicationInstructions { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
         [DisplayName("Closing Date")]
         public DateTime ClosingDate { get; set; }
@@ -104,13 +118,5 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Contact " +
             "Email")]
         public string ContactEmail { get; set; }
-
-        public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
-
-        [Display(Name = "Approver's Note")]
-        public string? ApproverNote { get; set; }
-
     }
-
-
 }

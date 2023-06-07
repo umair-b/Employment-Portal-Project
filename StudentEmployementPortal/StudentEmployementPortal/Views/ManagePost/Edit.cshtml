@@ -8,122 +8,210 @@
             <h2 class="text-primary">Update Post</h2>
             <hr />
         </div>
+        <div class="form-control">
+            <label asp-for="ApproverNote"></label>
+            <textarea asp-for="ApproverNote" class="form-control" readonly></textarea>
+        </div>
+        <br/>
         <div>
-            <label asp-for="Internal" class="mb-2"></label>
             <div>
-                <input type="radio" asp-for="Internal" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="Internal" value="false" class="m-2" />No
+                <label asp-for="Internal" class="mb-2"></label>
+                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes
+                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
             </div>
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        <div class="mb-2">
-            <label asp-for="Faculty"></label>
-            <input asp-for="Faculty" class="form-control" />
-            <span asp-validation-for="Faculty" class="text-danger"></span>
+        <div id="facultyContainer" style="display: none">
+            <select id="facultyId" asp-for="@Model.FacultyId">
+                <option value="" selected disabled> Select Faculty </option>
+                <option value="1"> Faculty of Commerce, Law and Management </option>
+                <option value="2"> Faculty of Engineering and the Built Environment </option>
+                <option value="3"> Faculty of Health Sciences </option>
+                <option value="4">Faculty of Humanities </option>
+                <option value="5"> Faculty of Science </option>
+            </select>
         </div>
-        <div class="mb-2">
-            <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" class="form-control" />
-            <span asp-validation-for="JobTitle" class="text-danger"></span>
+        <br />
+        <div id="departmentContainer" style="display: none">
+            <select id="departmentId" asp-for="@Model.DepartmentName">
+                <option value="" selected disabled">Select Department</option>
+                <option value="Animal, Plant and Environmental Sciences"> Animal, Plant and Environmental Sciences </option>
+                <option value="Chemistry"> Chemistry </option>
+                <option value="Computer Science and Applied Mathematics">Computer Science and Applied Mathematics</option>
+                <option value="Geography, Archaeology and Environmental Sciences">Geography, Archaeology and Environmental Sciences</option>
+                <option value="Geosciences">Geosciences</option>
+                <option value="Mathematics">Mathematics</option>
+                <option value="Molecular and Cell Biology">Molecular and Cell Biology</option>
+                <option value="Physics">Physics</option>
+                <option value="Statistics and Actuarial Science">Statistics and Actuarial Science</option>
+            </select>
         </div>
-        <div class="mb-2">
-            <label asp-for="JobLocation"></label>
-            <input asp-for="JobLocation" class="form-control" />
-            <span asp-validation-for="JobLocation" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="JobDescription"></label>
-            <input asp-for="JobDescription" class="form-control" />
-            <span asp-validation-for="JobDescription" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="KeyResponsibilities"></label>
-            <input asp-for="KeyResponsibilities" class="form-control" />
-            <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
+        @* <div>
+        <label asp-for="FacultyId" class="mb-2"></label>
+        <select asp-for="FacultyId" asp-items="@Model.FacultyList" class="form-control">
+        <option> Select Faculty </option>
+        <span asp-validation-for="FacultyId" class="text-danger"></span>
+        </select>
         </div>
         <div>
-            <label asp-for="FullTime" class="mb-2"></label>
-            <div>
-                <input type="radio" asp-for="FullTime" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="FullTime" value="false" class="m-2" />No
-            </div>
-            <span asp-validation-for="FullTime" class="text-danger"></span>
+        <label asp-for="DepartmentId" class="mb-2"></label>
+        <select asp-for="DepartmentId" asp-items="@Model.DepartmentList" class="form-control">
+        <option> Select Department </option>
+        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+        </select>
+        </div>*@
+        <br />
+        <div>
+            <label asp-for="JobTitle"></label>
+            <input asp-for="JobTitle" />
+            <span asp-validation-for="JobTitle" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="StartDate"></label>
+            <label asp-for="JobLocation"></label>
+            <input asp-for="JobLocation" />
+            <span asp-validation-for="JobLocation" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-2">
+            <label asp-for="JobDescription"></label>
+            <textarea asp-for="JobDescription"></textarea>
+            <span asp-validation-for="JobDescription" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="mb-2">
+            <label asp-for="KeyResponsibilities"></label>
+            <textarea asp-for="KeyResponsibilities"></textarea>
+            <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
             <div>
-                <input asp-for="StartDate" class="form-control" type="date" />
+                <label asp-for="FullTime" class="mb-2"></label>
+                <input type="radio" asp-for="FullTime" name="fullTime" value="true" id="yesRadioButton" class="m-2" />Yes
+                <input type="radio" asp-for="FullTime" name="fullTime" value="false" id="noRadioButton" class="m-2" />No
+            </div>
+            
+
+            <div id="partTimeHoursContainer" style="display: none;">
+                <label asp-for="PartTimeHours">Part Time Hours</label>
+                <select asp-for="PartTimeHours" name="partTimeHours" id="partTimeHours">
+                    <option value="">Select a rate</option>
+                    <option value="less than 2">less than 2</option>
+                    <option value="2 to 4">2 to 4</option>
+                    <option value="4 to 6">4 to 6</option>
+                    <option value="6 to 8">6 to 8</option>
+                    <option value="8 to 12">8 to 12</option>
+                    <option value="more than 12">more than 12</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="mb-2">
+            <div>
+                <label asp-for="StartDate"></label>
+                <input asp-for="StartDate" type="date" />
             </div>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="EndDate"></label>
             <div>
-                <input type="date" asp-for="EndDate" class="form-control" />
+                <label asp-for="EndDate"></label>
+                <input type="date" asp-for="EndDate" />
             </div>
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
-        <div class="mb-2">
-            <label asp-for="MinRequirements"></label>
-            <input asp-for="MinRequirements" class="form-control" />
-            <span asp-validation-for="MinRequirements" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="ApplicationInstructions"></label>
-            <input asp-for="ApplicationInstructions" class="form-control" />
-            <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="ClosingDate"></label>
-            <div>
-                <input asp-for="ClosingDate" class="form-control" type="date" />
-            </div>
-            <span asp-validation-for="ClosingDate" class="text-danger"></span>
-        </div>
+        <br />
         <div class="mb-2">
             <label asp-for="HourlyRate"></label>
-            <input asp-for="HourlyRate" class="form-control" />
+            <input asp-for="HourlyRate" />
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="LimitedTo"></label>
-            <input asp-for="LimitedTo" class="form-control" />
-            <span asp-validation-for="LimitedTo" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="CitizensOnly" class="mb-2"></label>
+
+            <label> Limited To: </label><br />
             <div>
+                @Html.CheckBoxFor(m => m.limitedToFirst)
+                <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToSecond)
+                <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToThird)
+                <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToHonours)
+                <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
+                <br />
+                @Html.CheckBoxFor(m => m.limitedToMasters)
+                <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToPhD)
+                <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToPostDoc)
+                <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToDepartment)
+                <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+
+                @Html.CheckBoxFor(m => m.limitedToFaculty)
+                <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                <label asp-for="CitizensOnly" class="mb-2"></label>
                 <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
                 <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
             </div>
             <span asp-validation-for="CitizensOnly" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="ContactPerson"></label>
-            <input asp-for="ContactPerson" class="form-control" />
-            <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            <label asp-for="MinRequirements"></label>
+            <input asp-for="MinRequirements" />
+            <span asp-validation-for="MinRequirements" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="ContactEmail"></label>
-            <input asp-for="ContactEmail" class="form-control" />
-            <span asp-validation-for="ContactEmail" class="text-danger"></span>
+            <label asp-for="ApplicationInstructions"></label>
+            <input asp-for="ApplicationInstructions" />
+            <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
-            <label asp-for="ContactNumber"></label>
-            <input asp-for="ContactNumber" class="form-control" />
-            <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            <div>
+                <label asp-for="ClosingDate"></label>
+                <input asp-for="ClosingDate" type="date" />
+            </div>
+            <span asp-validation-for="ClosingDate" class="text-danger"></span>
         </div>
-        <div class="mb-2" hidden>
-            <label asp-for="Department"></label>
-            <input asp-for="Department" class="form-control"/>
-            <span asp-validation-for="Department" class="text-danger"></span>
+        <br />
+        <div class="form-control">
+            <div class="mb-2">
+                <label asp-for="ContactPerson"></label>
+                <input asp-for="ContactPerson" />
+                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="mb-2">
+                <label asp-for="ContactEmail"></label>
+                <input asp-for="ContactEmail" />
+                <span asp-validation-for="ContactEmail" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="mb-2">
+                <label asp-for="ContactNumber"></label>
+                <input asp-for="ContactNumber" />
+                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            </div>
         </div>
+        <br />
         @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
-        @*<div class="mb-2" hidden>
-            <label asp-for="PostId"></label>
-            <input asp-for="PostId" class="form-control" />
-            <span asp-validation-for="PostId" class="text-danger"></span>
-        </div>*@
     </div>
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ManagePost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
@@ -131,6 +219,40 @@
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#noRadioButton').change(function () {
+                $('#partTimeHoursContainer').show();
+            });
+
+            $('#yesRadioButton').change(function () {
+                $('#partTimeHoursContainer').hide();
+            });
+
+            // Check if a radio button is already selected
+            if ($('input[name="fullTime"]:checked').length > 0) {
+                $('input[name="fullTime"]:checked').trigger('change');
+            }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#internalTrue').change(function () {
+                $('#facultyContainer').show();
+                $('#departmentContainer').show();
+            });
+            $('#internalFalse').change(function () {
+                $('#facultyContainer').hide();
+                $('#departmentContainer').hide();
+            });
+
+            // Check if a radio button is already selected
+            if ($('input[name="internal"]:checked').length > 0) {
+                $('input[name="internal"]:checked').trigger('change');
+            }
+        })
+    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }
