@@ -1,4 +1,6 @@
-﻿namespace StudentEmployementPortal.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace StudentEmployementPortal.Models
 {
     public class Student
     {

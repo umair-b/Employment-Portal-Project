@@ -1,4 +1,2 @@
 **/.vs/
-StudentEmployementPortal/.vs/
-.vs/
-obj/
+**/obj/
