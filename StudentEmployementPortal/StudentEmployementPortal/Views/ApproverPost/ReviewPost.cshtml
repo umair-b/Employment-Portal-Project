@@ -8,55 +8,77 @@
             <h2 class="text-primary">Review Post</h2>
             <hr />
         </div>
-        <div>
-            <label asp-for="ApproverNote" class="mb-2"></label>
-            <input asp-for="ApproverNote" class="form-control"/>
-            <span asp-validation-for="ApproverNote" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="SelectedStatus"></label>
-            @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, new { @class = "form-control" })
-        </div>
-        <div>
-            <label asp-for="Internal" class="mb-2"></label>
+        <div class="form-control">
             <div>
+                <label asp-for="ApproverNote"></label>
+                <textarea asp-for="ApproverNote" class="form-control"></textarea>
+            </div>
+            <br/>
+            <div>
+                <label asp-for="SelectedStatus"></label>
+                @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
+            </div>
+        </div>
+        <br />
+        <div>
+            <div>
+                <label asp-for="Internal" class="mb-2"></label>
                 <input type="radio" asp-for="Internal" value="true" class="m-2" />Yes
                 <input type="radio" asp-for="Internal" value="false" class="m-2" />No
             </div>
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        <div class="mb-2">
+        <br/>
+        @*<div class="mb-2">
             <label asp-for="Faculty"></label>
             <input asp-for="Faculty" class="form-control" />
             <span asp-validation-for="Faculty" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
+        </div>*@
+        <br />
+        <div>
             <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" class="form-control" />
+            <input asp-for="JobTitle" />
             <span asp-validation-for="JobTitle" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
             <label asp-for="JobLocation"></label>
-            <input asp-for="JobLocation" class="form-control" />
+            <input asp-for="JobLocation" />
             <span asp-validation-for="JobLocation" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
             <label asp-for="JobDescription"></label>
-            <input asp-for="JobDescription" class="form-control" />
+            <textarea asp-for="JobDescription"></textarea>
             <span asp-validation-for="JobDescription" class="text-danger"></span>
         </div>
+        <br />
         <div class="mb-2">
             <label asp-for="KeyResponsibilities"></label>
-            <input asp-for="KeyResponsibilities" class="form-control" />
+            <textarea asp-for="KeyResponsibilities"></textarea>
             <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
         </div>
+        <br />
         <div>
-            <label asp-for="FullTime" class="mb-2"></label>
             <div>
-                <input type="radio" asp-for="FullTime" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="FullTime" value="false" class="m-2" />No
+                <label asp-for="FullTime" class="mb-2"></label>
+                <input type="radio" asp-for="FullTime" name="fullTime" value="true" id="yesRadioButton" class="m-2" />Yes
+                <input type="radio" asp-for="FullTime" name="fullTime" value="false" id="noRadioButton" class="m-2" />No
             </div>
             <span asp-validation-for="FullTime" class="text-danger"></span>
+
+            <div id="partTimeHoursContainer" style="display: none;">
+                <label asp-for="PartTimeHours">Part Time Hours</label>
+                <select asp-for="PartTimeHours" name="partTimeHours" id="partTimeHours">
+                    <option value="">Select a rate</option>
+                    <option value="less than 2">less than 2</option>
+                    <option value="2 to 4">2 to 4</option>
+                    <option value="4 to 6">4 to 6</option>
+                    <option value="6 to 8">6 to 8</option>
+                    <option value="8 to 12">8 to 12</option>
+                    <option value="more than 12">more than 12</option>
+                </select>
+            </div>
         </div>
         <div class="mb-2">
             <label asp-for="StartDate"></label>
@@ -122,12 +144,12 @@
             <input asp-for="ContactNumber" class="form-control" />
             <span asp-validation-for="ContactNumber" class="text-danger"></span>
         </div>
-        <div class="mb-2" hidden>
+        @*<div class="mb-2" hidden>
             <label asp-for="Department"></label>
             <input asp-for="Department" class="form-control" />
             <span asp-validation-for="Department" class="text-danger"></span>
-        </div>
-        @Html.HiddenFor(Model => Model.Faculty, new {@readonly = "readonly"})
+        </div>*@
+       @* @Html.HiddenFor(Model => Model.Faculty, new {@readonly = "readonly"})*@
         @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
@@ -135,6 +157,23 @@
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#noRadioButton').change(function () {
+                $('#partTimeHoursContainer').show();
+            });
+
+            $('#yesRadioButton').change(function () {
+                $('#partTimeHoursContainer').hide();
+            });
+
+            // Check if a radio button is already selected
+            if ($('input[name="fullTime"]:checked').length > 0) {
+                $('input[name="fullTime"]:checked').trigger('change');
+            }
+        });
+    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

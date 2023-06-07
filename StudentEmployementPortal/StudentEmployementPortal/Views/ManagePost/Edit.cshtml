@@ -186,6 +186,7 @@
             </div>
         </div>
         <br />
+        @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
     </div>
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ManagePost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>

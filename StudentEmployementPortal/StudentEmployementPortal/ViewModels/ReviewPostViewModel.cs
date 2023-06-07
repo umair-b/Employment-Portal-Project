@@ -20,9 +20,9 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Internal")]
         public bool Internal { get; set; }
 
-        public string? Faculty { get; set; } = string.Empty;
+       /* public string? Faculty { get; set; } = string.Empty;
 
-        public string? Department { get; set; } = string.Empty;
+        public string? Department { get; set; } = string.Empty;*/
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -41,6 +41,8 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
+        public string PartTimeHours { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
@@ -106,10 +108,13 @@ namespace StudentEmployementPortal.ViewModels
             "Email")]
         public string ContactEmail { get; set; }
 
-        public Enums.JobPostStatus SelectedStatus { get; set; } = Enums.JobPostStatus.Pending;
+        [Display(Name = "Post Status")]
+        public Enums.JobPostStatus SelectedStatus { get; set; }
 
-        public List<SelectListItem> StatusNames { get; set; }
+        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> {Enums.JobPostStatus.Withdraw, Enums.JobPostStatus.Pending };
+        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);
 
+        [Display(Name = "Approver's Note")]
         public string? ApproverNote { get; set; }
 
     }
