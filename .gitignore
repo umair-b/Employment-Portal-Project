@@ -1,2 +1,3 @@
-**/.vs
-StudentEmployementPortal/.vs
+**/.vs/
+**/obj/
+StudentEmployementPortal/.vs/StudentEmployementPortal/v17/.suo

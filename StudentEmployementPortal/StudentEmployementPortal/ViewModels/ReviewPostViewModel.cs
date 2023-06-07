@@ -1,14 +1,17 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using StudentEmployementPortal.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentEmployementPortal.Utils;
 
-namespace StudentEmployementPortal.Models
+namespace StudentEmployementPortal.ViewModels
 {
-    public class JobPost
+    public class ReviewPostViewModel
     {
         [Key]
+        
         public int PostId { get; set; }
 
         public int? EmployerId { get; set; }
@@ -34,7 +37,7 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Key Responsibilities")]
-        public string KeyResponsibilities {get; set; }
+        public string KeyResponsibilities { get; set; }
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
@@ -51,8 +54,8 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Hourly Rate")]
         public string HourlyRate { get; set; }
-        
-        public string LimitedTo { get; set;}
+
+        public string LimitedTo { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]
@@ -85,11 +88,12 @@ namespace StudentEmployementPortal.Models
             "Email")]
         public string ContactEmail { get; set; }
 
-        public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
+        public Enums.JobPostStatus SelectedStatus { get; set; }
+
+        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> {Enums.JobPostStatus.Withdraw, Enums.JobPostStatus.Pending };
+        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);
 
         public string? ApproverNote { get; set; }
 
     }
-
-
 }
