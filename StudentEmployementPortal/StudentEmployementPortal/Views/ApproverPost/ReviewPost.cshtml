@@ -1,13 +1,21 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model ReviewPostViewModel
 
+<div class="row pt-2">
+    <div class="col-6">
+        <h2 class="text-primary">Review Posts</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-outline-dark">Cancel</a>
+    </div>
+</div>
 
 <form method="post" asp-action="ReviewPost">
     <div class="=border pt-2 mt-2">
-        <div class="row pb-2">
-            <h2 class="text-primary">Review Post</h2>
+        @*<div class="row pb-2">
+            <h2 class="text-primary col-6">Review Post</h2>
             <hr />
-        </div>
+        </div>*@
         <div>
             <label asp-for="ApproverNote" class="mb-2"></label>
             <input asp-for="ApproverNote" class="form-control"/>
@@ -15,7 +23,8 @@
         </div>
         <div>
             <label asp-for="SelectedStatus"></label>
-            @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, new { @class = "form-control" })
+            <select asp-for="SelectedStatus" asp-items="Model.StatusNames" class="form-select"></select>
+            
         </div>
         <div>
             <label asp-for="Internal" class="mb-2"></label>

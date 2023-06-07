@@ -88,9 +88,10 @@ namespace StudentEmployementPortal.ViewModels
             "Email")]
         public string ContactEmail { get; set; }
 
-        public Enums.JobPostStatus SelectedStatus { get; set; } = Enums.JobPostStatus.Pending;
+        public Enums.JobPostStatus SelectedStatus { get; set; }
 
-        public List<SelectListItem> StatusNames { get; set; }
+        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> {Enums.JobPostStatus.Withdraw, Enums.JobPostStatus.Pending };
+        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);
 
         public string? ApproverNote { get; set; }
 

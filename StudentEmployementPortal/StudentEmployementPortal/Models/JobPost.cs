@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentEmployementPortal.Utils;
 
 namespace StudentEmployementPortal.Models
@@ -87,15 +88,6 @@ namespace StudentEmployementPortal.Models
         public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
 
         public string? ApproverNote { get; set; }
-
-        public enum Status
-        {
-            
-            Approved,
-            Rejected,
-            Pending,
-            Withdraw
-        }
 
     }
 

@@ -18,7 +18,7 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> JobPosts = _db.JobPosts;
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending);
             if (JobPosts == null)
             {
                 return NotFound();
@@ -64,13 +64,7 @@ namespace StudentEmployementPortal.Controllers
                 MinRequirements = JobPost.MinRequirements,
                 PostId = JobPost.PostId,
                 SelectedStatus = JobPost.PostStatus,
-                StartDate = JobPost.StartDate,
-                StatusNames = Enum.GetValues(typeof(Enums.JobPostStatus)).Cast<JobPost.Status>().Select(
-                e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
-                {
-                    Value = e.ToString(),
-                    Text = e.ToString()
-                }).ToList()
+                StartDate = JobPost.StartDate
         };
             
            
