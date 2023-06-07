@@ -16,6 +16,16 @@
             </div>
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
+        <div>
+            <select id="facultyId" asp-for="@Model.FacultyId">
+                <option value="" selected disabled> Select Faculty </option>
+                <option value="1"> Faculty of Commerce, Law and Management </option>
+                <option value="2"> Faculty of Engineering and the Built Environment </option>
+                <option value="3"> Faculty of Health Sciences </option>
+                <option value="4">Faculty of Humanities </option>
+                <option value="5"> Faculty of Science </option>
+            </select>
+        </div>
        @* <div>
             <label asp-for="FacultyId" class="mb-2"></label>
             <select asp-for="FacultyId" asp-items="@Model.FacultyList" class="form-control">

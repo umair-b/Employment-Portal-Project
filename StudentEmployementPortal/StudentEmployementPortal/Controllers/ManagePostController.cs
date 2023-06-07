@@ -17,28 +17,24 @@ namespace StudentEmployementPortal.Controllers
             _db = db;
         }
 
-        /*private IEnumerable<SelectListItem> GetFaculties()
+        private List<Faculty> GetFaculties()
         {
-            var faculties = _db.Faculties.ToList();
-            var facultyList = faculties.Select(f => new SelectListItem
+            var faculties = _db.Faculties;
+
+            List<Faculty> facultyList = new List<Faculty>();
+
+            foreach (var f in faculties)
             {
-                Value = f.FacultyId.ToString(),
-                Text = f.FacultyName
-            });
+                var faculty = new Faculty
+                {
+                    FacultyId = f.FacultyId,
+                    FacultyName = f.FacultyName,
+                };
+                facultyList.Add(faculty);
+            }
 
             return facultyList;
-        }*/
-        /*private IEnumerable<SelectListItem> GetDepartments()
-        {
-            var departments = _db.Departments.ToList();
-            var departmentList = departments.Select(d => new SelectListItem
-            {
-                Value = d.DepartmentId.ToString(),
-                Text = d.DepartmentName
-            });
-
-            return departmentList;
-        }*/
+        }
 
         public IActionResult Index()
         {
@@ -51,23 +47,13 @@ namespace StudentEmployementPortal.Controllers
             return View(jobPosts);
         }
 
+
        public IActionResult CreatePost()
         {
-
-           /* var viewModel = new CreateJobPostViewModel()
+            /*var viewModel = new CreateJobPostViewModel
             {
-                FacultyList = _db.Faculties.Select(f => new SelectListItem
-                {
-                    Value = f.FacultyId.ToString(),
-                    Text = f.FacultyName
-                }),
-                DepartmentList = _db.Departments.Select(d => new SelectListItem
-                {
-                    Value = d.DepartmentId.ToString(),
-                    Text = d.DepartmentName
-                })
+                FacultyList = GetFaculties()
             };*/
-
             return View();
         }
 
@@ -87,8 +73,8 @@ namespace StudentEmployementPortal.Controllers
                     ContactEmail = obj.ContactEmail,
                     ContactNumber = obj.ContactNumber,
                     ContactPerson = obj.ContactPerson,
-                    /*FacultyId = obj.FacultyId,
-                    DepartmentId = obj.DepartmentId,*/
+                    FacultyId = obj.FacultyId,
+                    DepartmentId = obj.DepartmentId,
                     EndDate = obj.EndDate,
                     FullTime = obj.FullTime,
                     PartTimeHours = obj.PartTimeHours,
@@ -117,6 +103,8 @@ namespace StudentEmployementPortal.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            /*obj.FacultyList = GetFaculties();*/
+
             return View(obj);
         }
 
@@ -144,8 +132,8 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = obj.ContactEmail,
                 ContactNumber = obj.ContactNumber,
                 ContactPerson = obj.ContactPerson,
-                /*DepartmentId = obj.DepartmentId,
-                FacultyId = obj.FacultyId,*/
+                DepartmentId = obj.DepartmentId,
+                FacultyId = obj.FacultyId,
                 EndDate = obj.EndDate,
                 FullTime = obj.FullTime,
                 PartTimeHours = obj.PartTimeHours,
@@ -196,8 +184,8 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.ContactEmail = obj.ContactEmail;
                     jobPost.ContactNumber = obj.ContactNumber;
                     jobPost.ContactPerson = obj.ContactPerson;
-                    /*jobPost.DepartmentId = obj.DepartmentId;
-                    jobPost.FacultyId = obj.FacultyId;*/
+                    jobPost.DepartmentId = obj.DepartmentId;
+                    jobPost.FacultyId = obj.FacultyId;
                     jobPost.EndDate = obj.EndDate;
                     jobPost.FullTime = obj.FullTime;
                     jobPost.PartTimeHours = obj.PartTimeHours;
@@ -226,16 +214,9 @@ namespace StudentEmployementPortal.Controllers
 
             }
 
-            /*obj.FacultyList = _db.Faculties.Select(f => new SelectListItem
-            {
-                Value = f.FacultyId.ToString(),
-                Text = f.FacultyName
-            });
-            obj.DepartmentList = _db.Departments.Select(d => new SelectListItem
-            {
-                Value = d.DepartmentId.ToString(),
-                Text = d.DepartmentName
-            });*/
+            /*obj.FacultyList = GetFaculties();*/
+            ;            /*obj.FacultyList = _db.Faculties.ToList();*/
+            /*obj.DepartmentList = _db.Departments.ToList();*/
 
             return View(obj);
 

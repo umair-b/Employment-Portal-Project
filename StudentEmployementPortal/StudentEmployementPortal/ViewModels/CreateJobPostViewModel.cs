@@ -19,17 +19,19 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
-        
-        
-        /*[Display(Name = "Faculty")]
+
+
+        [Display(Name = "Faculty")]
         public int FacultyId { get; set; }
         //public Faculty Faculty { get; set; }
         [Required]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
         //public Department Department { get; set; }
-        public IEnumerable<SelectListItem> FacultyList { get; set; }
-        public IEnumerable<SelectListItem> DepartmentList { get; set; }*/
+        /*public List<Faculty> FacultyList { get; set; } = new List<Faculty>();
+        public List<Department> DepartmentList { get; set; } = new List<Department>();*/
+        public List<Faculty> FacultyList { get; set;  }
+        public List<Department> DepartmentList { get; set; }
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
