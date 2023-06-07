@@ -1,13 +1,17 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
+using StudentEmployementPortal.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StudentEmployementPortal.Utils;
 
-namespace StudentEmployementPortal.Models
+namespace StudentEmployementPortal.ViewModels
 {
-    public class JobPost
+    public class ReviewPostViewModel
     {
         [Key]
+        
         public int PostId { get; set; }
 
         public int? EmployerId { get; set; }
@@ -15,13 +19,10 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Internal")]
         public bool Internal { get; set; }
-        /*public int FacultyId { get; set; }
-        //[ForeignKey(nameof(FacultyId))]
-        //public Faculty Faculty { get; set; }
-        public int DepartmentId { get; set; }
-        //[ForeignKey(nameof(DepartmentId))]
-        //public Department Department { get; set; }
-*/
+
+        public string? Faculty { get; set; } = string.Empty;
+
+        public string? Department { get; set; } = string.Empty;
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -36,12 +37,10 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Key Responsibilities")]
-        public string KeyResponsibilities {get; set; }
+        public string KeyResponsibilities { get; set; }
         [Required]
         [DisplayName("Fulltime")]
         public bool FullTime { get; set; }
-        public string PartTimeHours { get; set; }
-
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
@@ -54,6 +53,7 @@ namespace StudentEmployementPortal.Models
         public DateTime EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
+        [Range(0, double.MaxValue, ErrorMessage = "The {0} field must be a positive number.")]
         public double HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
@@ -106,21 +106,11 @@ namespace StudentEmployementPortal.Models
             "Email")]
         public string ContactEmail { get; set; }
 
-        public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
+        public Enums.JobPostStatus SelectedStatus { get; set; } = Enums.JobPostStatus.Pending;
 
-        [Display(Name = "Approver's Note")]
+        public List<SelectListItem> StatusNames { get; set; }
+
         public string? ApproverNote { get; set; }
 
-        public enum Status
-        {
-            
-            Approved,
-            Rejected,
-            Pending,
-            Withdraw
-        }
-
     }
-
-
 }
