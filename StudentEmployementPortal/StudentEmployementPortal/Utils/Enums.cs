@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace StudentEmployementPortal.Utils
 {
@@ -21,6 +22,41 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             Pending,
             Withdraw
+        }
+
+        public enum Gender
+        {
+            [Display(Name ="Male")]
+            Male,
+            [Display(Name ="Female")]
+            Female,
+            [Display(Name ="Non-binary")]
+            NonBinary,
+            [Display(Name ="Other")]
+            Other,
+            [Display(Name ="Prefer Not to Say")]
+            PreferNotToSay
+        }
+
+        public enum YearOfStudy
+        {
+            [Display(Name ="First Year")]
+            FirstYear,
+            [Display(Name = "Second Year")]
+            SecondYear,
+            [Display(Name = "Third Year")]
+            ThirdYear,
+            [Display(Name = "Honours")]
+            Honours,
+            [Display(Name = "Masters")]
+            Masters,
+            [Display(Name = "PhD")]
+            PhD
+        }
+
+        public enum LicenceType
+        {
+
         }
 
         

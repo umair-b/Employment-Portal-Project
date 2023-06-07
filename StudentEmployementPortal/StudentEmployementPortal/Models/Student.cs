@@ -13,11 +13,11 @@ namespace StudentEmployementPortal.Models
         public string? Achievements { get; set; }
 
         public string? Interests { get; set;}
-        public DriversLicence StudentLicence { get; set; }
-        public Nationality StudentNationality { get; set; }
-        public Race StudentRace { get; set; }
-        public Gender StudentGender { get; set; }
-        public YearOfStudy StudentYos { get; set; }
+        //public DriversLicence StudentLicence { get; set; }
+        //public Nationality StudentNationality { get; set; }
+        //public Race StudentRace { get; set; }
+        //public Gender StudentGender { get; set; }
+        //public YearOfStudy StudentYos { get; set; }
 
     }
 }
