@@ -12,8 +12,8 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230607131220_migration01")]
-    partial class migration01
+    [Migration("20230608183337_migration00")]
+    partial class migration00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
