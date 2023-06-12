@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentEmployementPortal.Models
 {
@@ -16,6 +17,11 @@ namespace StudentEmployementPortal.Models
         public bool? Approved { get; set; } = false;
         //public BusinessType EmployerBusinessType { get; set; }
 
+
+        //Navigation Property
+        public AppUser User { get; set; }
+        [ForeignKey("User")]
+        public string UserId { get; set; }
 
     }
 }

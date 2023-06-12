@@ -12,7 +12,7 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230607123623_migration00")]
+    [Migration("20230612100502_migration00")]
     partial class migration00
     {
         /// <inheritdoc />
@@ -584,6 +584,9 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("EmployerId")
                         .HasColumnType("int");
 
@@ -660,10 +663,6 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("PostId");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyId");
 
                     b.ToTable("JobPosts");
                 });
@@ -843,25 +842,6 @@ namespace StudentEmployementPortal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
-                {
-                    b.HasOne("StudentEmployementPortal.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
-                        .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("Faculty");
                 });
 #pragma warning restore 612, 618
         }

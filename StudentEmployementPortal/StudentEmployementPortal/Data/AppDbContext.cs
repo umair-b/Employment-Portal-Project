@@ -20,6 +20,9 @@ namespace StudentEmployementPortal.Data
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Employer> Employers { get; set; }
+
+        public DbSet<BusinessType> BusinessTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +39,17 @@ namespace StudentEmployementPortal.Data
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<BusinessType>().HasData(
+                new BusinessType {BusinessTypeId = 1, Name = "Sole Proprietorship" },
+                new BusinessType { BusinessTypeId = 2, Name = "Partnership" },
+                new BusinessType { BusinessTypeId = 3, Name = "Private Limited Company (Pty Ltd)" },
+                new BusinessType { BusinessTypeId = 4, Name = "Public Limited Company (Ltd)" },
+                new BusinessType { BusinessTypeId = 5, Name = "Close Corporation (CC)" },
+                new BusinessType { BusinessTypeId = 6, Name = "Nonprofit Organization (NPO)" },
+                new BusinessType { BusinessTypeId = 7, Name = "State Owned Entity (SOE)" },
+                new BusinessType { BusinessTypeId = 8, Name = "Other" }
+                );
 
             modelBuilder.Entity<Faculty>().HasData(
                 new Faculty { FacultyId = 1, FacultyName = "Faculty of Commerce, Law and Management" },

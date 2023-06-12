@@ -1,0 +1,33 @@
+﻿@using StudentEmployementPortal.Models
+@model Employer
+
+<form method="post">
+    <div class="=border pt-2 mt-2">
+        <div class="row pb-2">
+            <h2 class="text-primary">Create Post</h2>
+            <hr />
+        </div>
+
+        <div>
+            <label asp-for="JobTitle"></label>
+            <input asp-for="JobTitle" />
+            <span asp-validation-for="JobTitle"></span>
+        </div>
+        <div>
+            <label asp-for="RegistrationNumber"></label>
+            <input asp-for="RegistrationNumber" />
+            <span asp-validation-for="RegistrationNumber"></span>
+        </div>
+        <div>
+            <label asp-for="RegistrationName"></label>
+            <input asp-for="RegistrationName" />
+            <span asp-validation-for="RegistrationName"></span>
+        </div>
+        <div>
+            <label asp-for="TradingName"></label>
+            <input asp-for="TradingName" />
+            <span asp-validation-for="TradingName"></span>
+        </div>
+
+    </div>
+</form>

@@ -501,6 +501,47 @@ namespace StudentEmployementPortal.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
+                {
+                    b.Property<int>("EmployerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployerId"));
+
+                    b.Property<bool?>("Approved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("JobTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegisteredAddress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegistrationName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RegistrationNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TradingName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("TrueInfo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("EmployerId");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Employers");
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.Models.Faculty", b =>
                 {
                     b.Property<int>("FacultyId")
@@ -838,6 +879,23 @@ namespace StudentEmployementPortal.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
+                {
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithOne("Employer")
+                        .HasForeignKey("StudentEmployementPortal.Models.Employer", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.AppUser", b =>
+                {
+                    b.Navigation("Employer")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618
