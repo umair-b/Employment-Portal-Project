@@ -113,7 +113,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             [Required]
             public string CellNumber { get; set; }
 
-            public string? TelNumber { get; set; }
+            public string TelNumber { get; set; }
 
             [Required]
             public string Role { get; set; }
@@ -157,7 +157,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.CellNumber = Input.CellNumber;
                 user.TelNumber = Input.TelNumber;
-
+                
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

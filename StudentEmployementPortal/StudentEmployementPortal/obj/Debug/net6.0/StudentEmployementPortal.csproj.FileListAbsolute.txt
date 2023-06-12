@@ -1553,3 +1553,4 @@ C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\Studen
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\obj\Debug\net6.0\StudentEmployementPortal.pdb
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\obj\Debug\net6.0\StudentEmployementPortal.genruntimeconfig.cache
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\obj\Debug\net6.0\ref\StudentEmployementPortal.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\AutoMapper.dll

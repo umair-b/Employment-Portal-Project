@@ -25,7 +25,7 @@ namespace StudentEmployementPortal.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            /*modelBuilder.Entity<JobPost>()
+            modelBuilder.Entity<JobPost>()
             .HasOne(j => j.Department)
             .WithMany()
             .HasForeignKey(j => j.DepartmentId)
@@ -35,7 +35,7 @@ namespace StudentEmployementPortal.Data
             .HasOne(j => j.Faculty)
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
-            .OnDelete(DeleteBehavior.Restrict);*/
+            .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Faculty>().HasData(
                 new Faculty { FacultyId = 1, FacultyName = "Faculty of Commerce, Law and Management" },

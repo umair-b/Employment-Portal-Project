@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StudentEmployementPortal</title>
+    <title>@ViewData["Title"] - Student Employment Portal</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StudentEmployementPortal.styles.css" asp-append-version="true" />
@@ -23,42 +23,14 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        @*@if (User.IsInRole(DefineRole.Role_Employer))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ManagePost" asp-action="Index">Manage Posts</a>
-                            </li>
-                        }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="ApproverPost" asp-action="Index">Manage Posts Approver</a>
-                        </li>*@
-                        
-                    </ul>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-
-        <main>
-            @*@if (SignInManager.IsSignedIn(User))
-            {
-                @if (User.IsInRole(DefineRole.Role_Employer))
-                {
-                    <partial name="_EmployerHomePartial" />
-                }
-            }
-            else
-            {
-                
-                <partial name="Index" />
-            }*@
+        <main role="main">
             @RenderBody()
         </main>
     </div>

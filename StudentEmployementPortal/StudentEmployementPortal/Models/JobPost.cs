@@ -6,8 +6,10 @@ using StudentEmployementPortal.Utils;
 
 namespace StudentEmployementPortal.Models
 {
+
     public class JobPost
     {
+
         [Key]
         public int PostId { get; set; }
 
@@ -15,12 +17,15 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Internal")]
-        public bool Internal { get; set; }
+        public bool? Internal { get; set; }
+        [Required]
         public int FacultyId { get; set; }
-        //public Faculty Faculty { get; set; }
+        [ForeignKey(nameof(FacultyId))]
+        public Faculty Faculty { get; set; }
+        [Required]
         public int DepartmentId { get; set; }
-        //public Department Department { get; set; }
-        public string? DepartmentName { get; set; }
+        [ForeignKey(nameof(DepartmentId))]
+        public Department Department { get; set; }
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -38,22 +43,22 @@ namespace StudentEmployementPortal.Models
         public string KeyResponsibilities {get; set; }
         [Required]
         [DisplayName("Fulltime")]
-        public bool FullTime { get; set; }
-        public string PartTimeHours { get; set; }
+        public bool? FullTime { get; set; }
+        public string? PartTimeHours { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Start Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("End Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
-        public double HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
         public bool limitedToFirst { get; set; }
@@ -76,7 +81,7 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Limited to Citizens")]
-        public bool CitizensOnly { get; set; }
+        public bool? CitizensOnly { get; set; }
 
         [Required]
         [DisplayName("Minimum Requirements")]
@@ -90,7 +95,7 @@ namespace StudentEmployementPortal.Models
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Closing Date")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
         [Required]
         [DisplayName("Contact Person")]

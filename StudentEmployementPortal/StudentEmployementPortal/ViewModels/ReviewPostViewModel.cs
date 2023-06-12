@@ -18,11 +18,8 @@ namespace StudentEmployementPortal.ViewModels
 
         [Required]
         [DisplayName("Internal")]
-        public bool Internal { get; set; }
+        public bool? Internal { get; set; }
 
-       /* public string? Faculty { get; set; } = string.Empty;
-
-        public string? Department { get; set; } = string.Empty;*/
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -40,22 +37,22 @@ namespace StudentEmployementPortal.ViewModels
         public string KeyResponsibilities { get; set; }
         [Required]
         [DisplayName("Fulltime")]
-        public bool FullTime { get; set; }
+        public bool? FullTime { get; set; }
         //public string PartTimeHours { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Start Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("End Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
         [Range(0, double.MaxValue, ErrorMessage = "The {0} field must be a positive number.")]
-        public double HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
         public bool limitedToFirst { get; set; }
@@ -78,7 +75,7 @@ namespace StudentEmployementPortal.ViewModels
 
         [Required]
         [DisplayName("Limited to Citizens")]
-        public bool CitizensOnly { get; set; }
+        public bool? CitizensOnly { get; set; }
 
         [Required]
         [DisplayName("Minimum Requirements")]
@@ -92,7 +89,7 @@ namespace StudentEmployementPortal.ViewModels
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Closing Date")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
         [Required]
         [DisplayName("Contact Person")]

@@ -29,14 +29,14 @@
                 {
                     <tr>
                         <td>@obj.JobTitle</td>
-                        @*<td>@obj.DepartmentId</td>*@
-                        @if (obj.FullTime)
+                        <td>@obj.Department.DepartmentName</td>
+                        @if (obj.FullTime == true)
                         {
-                            <td>Yes</td>
+                            <td>Fulltime</td>
                         }
-                        else
+                        else if (obj.FullTime == false)
                         {
-                            <td>No</td>
+                            <td>Part-time</td>
                         }
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
