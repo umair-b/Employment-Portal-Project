@@ -7,8 +7,6 @@ namespace StudentEmployementPortal.Models
 {
     public class Employer
     {
-        [Key]
-        public int EmployerId { get; set; }
         public string JobTitle { get; set; }
         public string RegistrationNumber { get; set;}
         public string RegistrationName { get; set; }
@@ -31,6 +29,7 @@ namespace StudentEmployementPortal.Models
 
         //Navigation Property
         public AppUser User { get; set; }
+        [Key]
         [ForeignKey("User")]
         public string UserId { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
+using StudentEmployementPortal.Models;
 using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
@@ -19,20 +20,64 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
-            var vm = new EmployerUpdateInfoViewModel
+            //var user = _userManager.GetUserAsync(User);
+            var userId = _userManager.GetUserId(User);
+            var employer = _appDbContext.Employers.Find(userId);
+            var appUser = _appDbContext.AppUsers.Find(userId);
+
+            if (employer == null)
             {
-                JobTitle = string.Empty,
-                EmployerCell = string.Empty,
-                EmployerPhone = string.Empty,
-                EmployerEmail = string.Empty,
-                RegisteredAddress = string.Empty,
-                RegistrationName = string.Empty,
-                RegistrationNumber = string.Empty,
-                TradingName = string.Empty,
-                EmployerFirstName = string.Empty,
-                EmployerSurname = string.Empty
-            };
-            return View(vm);
+                var vm = new EmployerUpdateInfoViewModel
+                {
+                    JobTitle = string.Empty,
+                    EmployerCell = appUser.CellNumber,
+                    EmployerPhone = appUser.TelNumber,
+                    EmployerEmail = appUser.Email,
+                    RegisteredAddress = string.Empty,
+                    RegistrationName = string.Empty,
+                    RegistrationNumber = string.Empty,
+                    TradingName = string.Empty,
+                    EmployerFirstName = appUser.FirstName,
+                    EmployerSurname = appUser.LastName
+                };
+
+                return View(vm);
+            }
+            else
+            {
+                var vm = new EmployerUpdateInfoViewModel
+                {
+                    JobTitle = employer.JobTitle,
+                    EmployerCell = appUser.CellNumber,
+                    EmployerPhone = appUser.TelNumber,
+                    EmployerEmail = appUser.Email,
+                    RegisteredAddress = employer.RegisteredAddress,
+                    RegistrationName = employer.RegistrationName,
+                    RegistrationNumber = employer.RegistrationNumber,
+                    TradingName = employer.TradingName,
+                    EmployerFirstName = appUser.FirstName,
+                    EmployerSurname = appUser.LastName
+                };
+                return View(vm);
+            }
+        }
+
+        public IActionResult update(EmployerUpdateInfoViewModel vm)
+        {
+            var userId = _userManager.GetUserId(User);
+            var employer = _appDbContext.Employers.Find(userId);
+            var appUser = _appDbContext.AppUsers.Find(userId);
+
+            if (ModelState.IsValid)
+            {
+                if (employer == null)
+                {
+                    
+                }
+
+            }
+
+            return View();
         }
     }
 }

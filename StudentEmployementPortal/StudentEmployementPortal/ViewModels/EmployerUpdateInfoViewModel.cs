@@ -17,7 +17,7 @@ namespace StudentEmployementPortal.ViewModels
 
         public string EmployerEmail { get; set; }
         public string EmployerPhone { get; set; }
-        public string EmployerCell { get; set; }
+        public string? EmployerCell { get; set; }
         public string EmployerFirstName { get; set; }
         public string EmployerSurname { get; set; }
 

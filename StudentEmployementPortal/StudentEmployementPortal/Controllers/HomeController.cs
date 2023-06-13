@@ -26,6 +26,13 @@ namespace StudentEmployementPortal.Controllers
                 var user = await _userManager.GetUserAsync(User);
                 if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Employer))
                 {
+                    var employer = _appDbContext.Employers.Find(_userManager.GetUserId(User));
+
+                    if (employer == null)
+                    {
+                        return RedirectToAction("Index", "ManageProfileEmployer");
+                    }
+
                     return View(nameof(Privacy));
                 }
                 

@@ -9,7 +9,7 @@
         </div>
         <div>
             <label asp-for="EmployerTitle"></label>
-            @Html.DropDownListFor(model => model.EmployerTitle, Model.EmployerTitles, "Select Title")
+            @Html.DropDownListFor(model => model.EmployerTitle, Model.EmployerTitles)
         </div>
         <div>
             <label asp-for="EmployerFirstName"></label>
@@ -58,7 +58,7 @@
         </div>
         <div>
             <label asp-for="EmployerBusinessType"></label>
-            @Html.DropDownListFor(model => model.EmployerBusinessType, Model.EmployerBusinessTypes, "Select Title")
+            @Html.DropDownListFor(model => model.EmployerBusinessType, Model.EmployerBusinessTypes)
         </div>
         <div>
             <label asp-for="TrueInfo"></label>

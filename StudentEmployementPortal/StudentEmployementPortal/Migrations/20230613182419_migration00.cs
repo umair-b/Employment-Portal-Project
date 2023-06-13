@@ -73,6 +73,19 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BusinessTypes",
+                columns: table => new
+                {
+                    BusinessTypeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BusinessTypes", x => x.BusinessTypeId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
@@ -317,6 +330,48 @@ namespace StudentEmployementPortal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Employers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TradingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegisteredAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrueInfo = table.Column<bool>(type: "bit", nullable: false),
+                    ApproverNote = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployerStatus = table.Column<int>(type: "int", nullable: false),
+                    EmployerTitle = table.Column<int>(type: "int", nullable: false),
+                    EmployerBusinessType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employers", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Employers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "BusinessTypes",
+                columns: new[] { "BusinessTypeId", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Sole Proprietorship" },
+                    { 2, "Partnership" },
+                    { 3, "Private Limited Company (Pty Ltd)" },
+                    { 4, "Public Limited Company (Ltd)" },
+                    { 5, "Close Corporation (CC)" },
+                    { 6, "Nonprofit Organization (NPO)" },
+                    { 7, "State Owned Entity (SOE)" },
+                    { 8, "Other" }
+                });
+
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "DepartmentId", "DepartmentName", "FacultyId" },
@@ -432,10 +487,16 @@ namespace StudentEmployementPortal.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BusinessTypes");
+
+            migrationBuilder.DropTable(
                 name: "Departments");
 
             migrationBuilder.DropTable(
                 name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "Employers");
 
             migrationBuilder.DropTable(
                 name: "Faculties");

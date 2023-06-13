@@ -251,6 +251,65 @@ namespace StudentEmployementPortal.Migrations
                     b.ToTable("Application");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.BusinessType", b =>
+                {
+                    b.Property<int>("BusinessTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BusinessTypeId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BusinessTypeId");
+
+                    b.ToTable("BusinessTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            BusinessTypeId = 1,
+                            Name = "Sole Proprietorship"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 2,
+                            Name = "Partnership"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 3,
+                            Name = "Private Limited Company (Pty Ltd)"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 4,
+                            Name = "Public Limited Company (Ltd)"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 5,
+                            Name = "Close Corporation (CC)"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 6,
+                            Name = "Nonprofit Organization (NPO)"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 7,
+                            Name = "State Owned Entity (SOE)"
+                        },
+                        new
+                        {
+                            BusinessTypeId = 8,
+                            Name = "Other"
+                        });
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>
                 {
                     b.Property<int>("DepartmentId")
@@ -503,41 +562,45 @@ namespace StudentEmployementPortal.Migrations
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
                 {
-                    b.Property<int>("EmployerId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApproverNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployerBusinessType")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployerId"));
+                    b.Property<int>("EmployerStatus")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("Approved")
-                        .HasColumnType("bit");
+                    b.Property<int>("EmployerTitle")
+                        .HasColumnType("int");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegisteredAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegistrationName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegistrationNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TradingName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("TrueInfo")
+                    b.Property<bool>("TrueInfo")
                         .HasColumnType("bit");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("EmployerId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasKey("UserId");
 
                     b.ToTable("Employers");
                 });
