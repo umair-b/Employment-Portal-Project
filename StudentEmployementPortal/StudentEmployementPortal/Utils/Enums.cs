@@ -24,6 +24,33 @@ namespace StudentEmployementPortal.Utils
             Withdraw
         }
 
+        public enum EmployerStatus
+        {
+            Approved, 
+            Rejected,
+            Pending
+        }
+
+        public enum Title
+        {
+            Mr,
+            Mrs,
+            Miss,
+            Dr,
+            Prof,
+            Other
+        }
+
+        public enum BusniessType
+        {
+            ClosedCorporation,
+            StateOwnedEntity,
+            PtyLtd,
+            SoleProprietorship,
+            Partnership,
+            NPO
+        }
+
         public enum Gender
         {
             [Display(Name ="Male")]

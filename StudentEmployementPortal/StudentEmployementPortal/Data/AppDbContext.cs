@@ -40,6 +40,11 @@ namespace StudentEmployementPortal.Data
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
 
+            modelBuilder.Entity<Employer>()
+                .Ignore(e => e.EmployerBusinessTypes)
+                .Ignore(e => e.EmployerTitles)
+                .Ignore(e => e.EmployerStatuses);
+
             modelBuilder.Entity<BusinessType>().HasData(
                 new BusinessType {BusinessTypeId = 1, Name = "Sole Proprietorship" },
                 new BusinessType { BusinessTypeId = 2, Name = "Partnership" },

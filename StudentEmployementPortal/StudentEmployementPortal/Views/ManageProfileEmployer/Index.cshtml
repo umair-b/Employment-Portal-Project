@@ -1,13 +1,41 @@
-﻿@using StudentEmployementPortal.Models
-@model Employer
+﻿@using StudentEmployementPortal.ViewModels
+@model EmployerUpdateInfoViewModel
 
 <form method="post">
     <div class="=border pt-2 mt-2">
         <div class="row pb-2">
-            <h2 class="text-primary">Create Post</h2>
+            <h2 class="text-primary">Update Details</h2>
             <hr />
         </div>
-
+        <div>
+            <label asp-for="EmployerTitle"></label>
+            @Html.DropDownListFor(model => model.EmployerTitle, Model.EmployerTitles, "Select Title")
+        </div>
+        <div>
+            <label asp-for="EmployerFirstName"></label>
+            <input asp-for="EmployerFirstName" />
+            <span asp-validation-for="EmployerFirstName"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerSurname"></label>
+            <input asp-for="EmployerSurname" />
+            <span asp-validation-for="EmployerSurname"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerEmail"></label>
+            <input asp-for="EmployerEmail" />
+            <span asp-validation-for="EmployerEmail"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerPhone"></label>
+            <input asp-for="EmployerPhone" />
+            <span asp-validation-for="EmployerPhone"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerCell"></label>
+            <input asp-for="EmployerCell" />
+            <span asp-validation-for="EmployerCell"></span>
+        </div>
         <div>
             <label asp-for="JobTitle"></label>
             <input asp-for="JobTitle" />
@@ -28,6 +56,26 @@
             <input asp-for="TradingName" />
             <span asp-validation-for="TradingName"></span>
         </div>
+        <div>
+            <label asp-for="EmployerBusinessType"></label>
+            @Html.DropDownListFor(model => model.EmployerBusinessType, Model.EmployerBusinessTypes, "Select Title")
+        </div>
+        <div>
+            <label asp-for="TrueInfo"></label>
+            <input asp-for="TrueInfo" type="checkbox" id="checkbox1" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
 
     </div>
 </form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#checkbox1').change(function () {
+                var isChecked = $(this).is(':checked');
+                $('#submitButton').prop('disabled', !isChecked);
+            });
+        });
+    </script>
+}
