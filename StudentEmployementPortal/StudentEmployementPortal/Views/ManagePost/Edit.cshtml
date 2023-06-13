@@ -37,7 +37,7 @@
             <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        <div id="facultyContainer">
+        @*<div id="facultyContainer">
             <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
                 <option value="" selected disabled>Select Faculty</option>
                 @foreach (var f in @Model.FacultyList)
@@ -54,7 +54,7 @@
                     <option value="@d.DepartmentId">@d.DepartmentName</option>
                 }
             </select>
-        </div>
+        </div>*@
         <div>
             <label asp-for="JobTitle"></label>
             <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" />

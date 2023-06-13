@@ -1,7 +1,23 @@
 ﻿@model IEnumerable<JobPost>
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
 <div class="container p-1">
-    <div class="row pt-2">
+    <div class="row">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
+            &larr; HOME
+        </a>
+    </div>
+    <hr />
+    <div class="row">
         <div class="col-6">
             <h2 class="text-primary">Manage Posts</h2>
         </div>

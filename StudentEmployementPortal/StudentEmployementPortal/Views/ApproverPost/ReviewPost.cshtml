@@ -1,13 +1,27 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model ReviewPostViewModel
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
 
 <form method="post" asp-action="ReviewPost">
     <div class="=border pt-2 mt-2">
+        <div>
+            <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+                &larr; Back
+            </a>
+        </div>
         <div class="row pb-2">
             <h2 class="text-primary">Review Post</h2>
-            <hr />
         </div>
+        <hr />
         <div class="form-control">
             <div>
                 <label asp-for="ApproverNote"></label>
@@ -20,12 +34,10 @@
             </div>
         </div>
         <br />
-        <div>
-            <div>
-                <label asp-for="Internal" class="mb-2"></label>
-                <input type="radio" asp-for="Internal" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="Internal" value="false" class="m-2" />No
-            </div>
+        <div class="mb-2">
+            <label asp-for="Internal" class="mb-2"></label>
+            <input type="radio" asp-for="Internal" value="true" class="m-2" readonly />Yes
+            <input type="radio" asp-for="Internal" value="false" class="m-2" readonly />No
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
         <br/>
@@ -166,6 +178,7 @@
             </div>
         </div>
         <br />
+    </div>
         @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>

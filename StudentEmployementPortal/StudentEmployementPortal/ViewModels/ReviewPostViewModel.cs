@@ -20,6 +20,12 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Internal")]
         public bool? Internal { get; set; }
 
+        [Display(Name = "Faculty")]
+        public int FacultyId { get; set; }
+
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }

@@ -27,17 +27,26 @@ namespace StudentEmployementPortal.Controllers
                 .Include(j => j.Department)
                 .Include(j => j.Faculty)
                 .ToList();
-            
+
             if (jobPosts == null)
             {
                 return NotFound();
             }
-            
+
 
             return View(jobPosts);
         }
 
-       public IActionResult CreatePost()
+        /*public async Task<IActionResult> Index()
+        {
+            var jobPosts = _db.JobPosts
+                .Include(j => j.Department)
+                .Include(j => j.Faculty);
+
+            return View(await  jobPosts.ToListAsync());
+        }*/
+
+        public IActionResult CreatePost()
         {
             var CreatePostViewModel = new CreateJobPostViewModel
             {
@@ -47,6 +56,14 @@ namespace StudentEmployementPortal.Controllers
 
             return View(CreatePostViewModel);
         }
+
+        /*public async Task<IActionResult> CreatePost()
+        {
+            ViewData["FacultyId"] = new SelectList(_db.Faculties, "FacultyId", "FacultyName");
+            ViewData["DepartmentId"] = new SelectList(_db.Departments, "DepartmentId", "DepartmentName");
+
+            return View();
+        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -159,6 +176,10 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UpdateJobPostViewModel obj)
         {
+           /* obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList();*/
+
+            /*var errors = ModelState.Values.SelectMany(x => x.Errors);*/
 
             if (ModelState.IsValid)
             {
@@ -167,7 +188,7 @@ namespace StudentEmployementPortal.Controllers
 
                 if (jobPost != null)
                 {
-                    //jobPost.PostId = obj.PostId;
+                    jobPost.PostId = obj.PostId;
                     jobPost.ApplicationInstructions = obj.ApplicationInstructions;
                     jobPost.ApproverNote = obj.ApproverNote;
                     jobPost.CitizensOnly = obj.CitizensOnly;
@@ -200,8 +221,6 @@ namespace StudentEmployementPortal.Controllers
                     _db.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
-
-                return View(obj);
 
             }
 
