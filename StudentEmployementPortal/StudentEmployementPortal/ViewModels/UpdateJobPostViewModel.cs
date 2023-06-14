@@ -9,7 +9,7 @@ using StudentEmployementPortal.Utils;
 
 namespace StudentEmployementPortal.ViewModels
 {
-    [BindProperties]
+    
     public class UpdateJobPostViewModel
     {
         [Key]
@@ -28,8 +28,8 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
 
-        public IEnumerable<Faculty> FacultyList { get; set; }
-        public IEnumerable<Department> DepartmentList { get; set; }  
+        public IEnumerable<Faculty>? FacultyList { get; set; }
+        public IEnumerable<Department>? DepartmentList { get; set; }  
 
         [Required]
         [Display(Name = "Job Title")]

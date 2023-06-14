@@ -12,8 +12,8 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230612092041_migration04")]
-    partial class migration04
+    [Migration("20230613100142_migration00")]
+    partial class migration00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -563,10 +563,12 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<string>("ApproverNote")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("CitizensOnly")
+                    b.Property<bool?>("CitizensOnly")
+                        .IsRequired()
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ClosingDate")
+                    b.Property<DateTime?>("ClosingDate")
+                        .IsRequired()
                         .HasColumnType("Date");
 
                     b.Property<string>("ContactEmail")
@@ -587,19 +589,23 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int?>("EmployerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
+                        .IsRequired()
                         .HasColumnType("Date");
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("FullTime")
+                    b.Property<bool?>("FullTime")
+                        .IsRequired()
                         .HasColumnType("bit");
 
-                    b.Property<double>("HourlyRate")
+                    b.Property<double?>("HourlyRate")
+                        .IsRequired()
                         .HasColumnType("float");
 
-                    b.Property<bool>("Internal")
+                    b.Property<bool?>("Internal")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("JobDescription")
@@ -623,13 +629,13 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PartTimeHours")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostStatus")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
+                        .IsRequired()
                         .HasColumnType("Date");
 
                     b.Property<bool>("limitedToDepartment")

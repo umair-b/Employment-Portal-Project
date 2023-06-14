@@ -50,7 +50,7 @@ namespace StudentEmployementPortal.ViewModels
         public bool? FullTime { get; set; }
 
         [Display(Name = "Part-Time Hours")]
-        public string PartTimeHours { get; set; } = string.Empty;
+        public string? PartTimeHours { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
@@ -115,5 +115,7 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         [Display( Name = "Contact Email")]
         public string ContactEmail { get; set; }
+
+        public string? ApproverNote { get; set; }
     }
 }
