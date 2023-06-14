@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.Utils;
@@ -18,7 +19,10 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending);
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending)
+                .Include(x => x.Department)
+                .Include(x => x.Faculty);
+
             if (JobPosts == null)
             {
                 return NotFound();
@@ -50,9 +54,11 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = JobPost.ContactEmail,
                 ContactNumber = JobPost.ContactNumber,
                 ContactPerson = JobPost.ContactPerson,
-                //Department = JobPost.Department,
+                DepartmentId = JobPost.DepartmentId,
+                FacultyId = JobPost.FacultyId,
+                /*Department = JobPost.Department,
+                Faculty = JobPost.Faculty,*/
                 EndDate = JobPost.EndDate,
-                //Faculty = JobPost.Faculty,
                 FullTime = JobPost.FullTime,
                 HourlyRate = JobPost.HourlyRate,
                 JobDescription = JobPost.JobDescription,

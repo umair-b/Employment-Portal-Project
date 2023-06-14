@@ -23,14 +23,15 @@
             <h2 class="text-primary">Update Post</h2>
         </div>
         <hr />
-        @*<div class="mb-3" >
+        <div class="mb-3" >
             <div class="row">
-                <div class="col form-control m-2">
-                    <label asp-for="ApproverNote" class="mb-2 text-black">APPROVER'S NOTE: </label>
-                    <output>@Model.ApproverNote</output>
+                <div>
+                    <label asp-for="ApproverNote"></label>
+                    <textarea asp-for="ApproverNote" class="form-control" readonly></textarea>
                 </div>
+                <br />
             </div>
-        </div>*@
+        </div>
         @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
         <div>
             <label asp-for="Internal" class="mb-2"></label>

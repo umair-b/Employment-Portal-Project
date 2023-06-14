@@ -1,31 +1,32 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model ReviewPostViewModel
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
 
 <form method="post" asp-action="ReviewPost">
     <div class="=border pt-2 mt-2">
+        <div>
+            <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+                &larr; Back
+            </a>
+        </div>
         <div class="row pb-2">
             <h2 class="text-primary">Review Post</h2>
-            <hr />
         </div>
-        <div class="form-control">
-            <div>
-                <label asp-for="ApproverNote"></label>
-                <textarea asp-for="ApproverNote" class="form-control"></textarea>
-            </div>
-            <br/>
-            <div>
-                <label asp-for="SelectedStatus"></label>
-                @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
-            </div>
-        </div>
+        <hr />
         <br />
-        <div>
-            <div>
-                <label asp-for="Internal" class="mb-2"></label>
-                <input type="radio" asp-for="Internal" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="Internal" value="false" class="m-2" />No
-            </div>
+        <div class="mb-2">
+            <label asp-for="Internal" class="mb-2"></label>
+            <input type="radio" asp-for="Internal" value="true" class="m-2" readonly />Yes
+            <input type="radio" asp-for="Internal" value="false" class="m-2" readonly />No
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
         <br/>
@@ -36,7 +37,7 @@
         </div>*@
         <div class="mb-2">
             <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" class="form-control" />
+            <input asp-for="JobTitle" class="form-control" readonly/>
             <span asp-validation-for="JobTitle" class="text-danger"></span>
         </div>
         <div class="mb-2">
@@ -46,26 +47,26 @@
         </div>
         <div class="mb-2">
             <label asp-for="JobDescription"></label>
-            <input asp-for="JobDescription" class="form-control" />
+            <input asp-for="JobDescription" class="form-control" readonly/>
             <span asp-validation-for="JobDescription" class="text-danger"></span>
         </div>
         <div class="mb-2">
             <label asp-for="KeyResponsibilities"></label>
-            <input asp-for="KeyResponsibilities" class="form-control" />
+            <input asp-for="KeyResponsibilities" class="form-control" readonly/>
             <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
         </div>
         <div>
             <div>
                 <label asp-for="FullTime" class="mb-2"></label>
-                <input type="radio" asp-for="FullTime" name="fullTime" value="true" id="yesRadioButton" class="m-2" />Yes
-                <input type="radio" asp-for="FullTime" name="fullTime" value="false" id="noRadioButton" class="m-2" />No
+                <input type="radio" asp-for="FullTime" name="fullTime" value="true" id="yesRadioButton" class="m-2" readonly />Yes
+                <input type="radio" asp-for="FullTime" name="fullTime" value="false" id="noRadioButton" class="m-2" readonly/>No
             </div>
         </div>
         <br />
         <div class="mb-2">
             <div>
                 <label asp-for="StartDate"></label>
-                <input asp-for="StartDate" type="date" />
+                <input asp-for="StartDate" type="date" readonly/>
             </div>
             <span asp-validation-for="StartDate" class="text-danger"></span>
         </div>
@@ -73,14 +74,14 @@
         <div class="mb-2">
             <div>
                 <label asp-for="EndDate"></label>
-                <input type="date" asp-for="EndDate" />
+                <input type="date" asp-for="EndDate" readonly/>
             </div>
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
         <br />
         <div class="mb-2">
             <label asp-for="HourlyRate"></label>
-            <input asp-for="HourlyRate" />
+            <input asp-for="HourlyRate" readonly/>
             <span asp-validation-for="HourlyRate" class="text-danger"></span>
         </div>
         <br />
@@ -120,28 +121,28 @@
         <div>
             <div>
                 <label asp-for="CitizensOnly" class="mb-2"></label>
-                <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
+                <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" readonly/>Yes
+                <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" readonly/>No
             </div>
             <span asp-validation-for="CitizensOnly" class="text-danger"></span>
         </div>
         <br />
         <div class="mb-2">
             <label asp-for="MinRequirements"></label>
-            <input asp-for="MinRequirements" />
+            <input asp-for="MinRequirements" readonly/>
             <span asp-validation-for="MinRequirements" class="text-danger"></span>
         </div>
         <br />
         <div class="mb-2">
             <label asp-for="ApplicationInstructions"></label>
-            <input asp-for="ApplicationInstructions" />
+            <input asp-for="ApplicationInstructions" readonly/>
             <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
         </div>
         <br />
         <div class="mb-2">
             <div>
                 <label asp-for="ClosingDate"></label>
-                <input asp-for="ClosingDate" type="date" />
+                <input asp-for="ClosingDate" type="date" readonly/>
             </div>
             <span asp-validation-for="ClosingDate" class="text-danger"></span>
         </div>
@@ -149,23 +150,35 @@
         <div class="form-control">
             <div class="mb-2">
                 <label asp-for="ContactPerson"></label>
-                <input asp-for="ContactPerson" />
+                <input asp-for="ContactPerson" readonly/>
                 <span asp-validation-for="ContactPerson" class="text-danger"></span>
             </div>
             <br />
             <div class="mb-2">
                 <label asp-for="ContactEmail"></label>
-                <input asp-for="ContactEmail" />
+                <input asp-for="ContactEmail" readonly/>
                 <span asp-validation-for="ContactEmail" class="text-danger"></span>
             </div>
             <br />
             <div class="mb-2">
                 <label asp-for="ContactNumber"></label>
-                <input asp-for="ContactNumber" />
+                <input asp-for="ContactNumber" readonly/>
                 <span asp-validation-for="ContactNumber" class="text-danger"></span>
             </div>
         </div>
         <br />
+        <div class="form-control">
+            <div>
+                <label asp-for="ApproverNote"></label>
+                <textarea asp-for="ApproverNote" class="form-control"></textarea>
+            </div>
+            <br />
+            <div>
+                <label asp-for="SelectedStatus"></label>
+                @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
+            </div>
+        </div>
+    </div>
         @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
     <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
     <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
