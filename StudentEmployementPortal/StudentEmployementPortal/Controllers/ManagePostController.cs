@@ -112,15 +112,15 @@ namespace StudentEmployementPortal.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            obj.FacultyList = _db.Faculties.ToList();
-            obj.DepartmentList = _db.Departments.ToList();
+            /*obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList();*/
 
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -162,12 +162,12 @@ namespace StudentEmployementPortal.Controllers
                 limitedToPhD = obj.limitedToPhD,
                 limitedToPostDoc = obj.limitedToPostDoc,
                 limitedToDepartment = obj.limitedToDepartment,
-                /*FacultyList = _db.Faculties.ToList(),
-                DepartmentList = _db.Departments.ToList(),*/
+                FacultyList = _db.Faculties.ToList(),
+                DepartmentList = _db.Departments.ToList(),
             };
 
-            UpdatePostViewModel.FacultyList = _db.Faculties.ToList();
-            UpdatePostViewModel.DepartmentList = _db.Departments.ToList();
+            /*UpdatePostViewModel.FacultyList = _db.Faculties.ToList();
+            UpdatePostViewModel.DepartmentList = _db.Departments.ToList();*/
 
             return View(UpdatePostViewModel);
         }
@@ -176,15 +176,13 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UpdateJobPostViewModel obj)
         {
-           /* obj.FacultyList = _db.Faculties.ToList();
-            obj.DepartmentList = _db.Departments.ToList();*/
-
+            
             /*var errors = ModelState.Values.SelectMany(x => x.Errors);*/
 
             if (ModelState.IsValid)
             {
 
-                var jobPost = _db.JobPosts.Find(obj.PostId);
+                var jobPost = _db.JobPosts.SingleOrDefault(d => d.PostId == obj.PostId);
 
                 if (jobPost != null)
                 {
@@ -218,10 +216,10 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.MinRequirements = obj.MinRequirements;
                     jobPost.StartDate = obj.StartDate;
 
+                    _db.Update(jobPost);
                     _db.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
-
             }
 
             obj.FacultyList = _db.Faculties.ToList();

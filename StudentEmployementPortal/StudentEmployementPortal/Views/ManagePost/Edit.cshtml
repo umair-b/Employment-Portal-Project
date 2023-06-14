@@ -25,19 +25,21 @@
         <hr />
         <div class="mb-3" >
             <div class="row">
-                <div class="col form-control m-2">
-                    <label asp-for="ApproverNote" class="mb-2 text-black">APPROVER'S NOTE: </label>
-                    <output>@Model.ApproverNote</output>
+                <div>
+                    <label asp-for="ApproverNote"></label>
+                    <textarea asp-for="ApproverNote" class="form-control" readonly></textarea>
                 </div>
+                <br />
             </div>
         </div>
+        @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
         <div>
             <label asp-for="Internal" class="mb-2"></label>
             <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes
             <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
             <span asp-validation-for="Internal" class="text-danger"></span>
         </div>
-        @*<div id="facultyContainer">
+        <div id="facultyContainer">
             <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
                 <option value="" selected disabled>Select Faculty</option>
                 @foreach (var f in @Model.FacultyList)
@@ -54,7 +56,7 @@
                     <option value="@d.DepartmentId">@d.DepartmentName</option>
                 }
             </select>
-        </div>*@
+        </div>
         <div>
             <label asp-for="JobTitle"></label>
             <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" />
