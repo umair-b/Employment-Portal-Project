@@ -12,23 +12,19 @@
 
 <div class="container p-1">
     <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar" style="width:150px">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
             &larr; HOME
         </a>
     </div>
-    <hr/>
-    <div class="row pt-2">
+    <hr />
+    <div class="row">
         <div class="col-6">
-            <h2 class="align-items-center">Manage Posts</h2>
-        </div>
-        <div class="col-6 text-end">
-            <a asp-controller="ManagePost" asp-action="CreatePost" class="btn btn-primary">Add Post</a>
+            <h2 class="text-primary">Search & Apply</h2>
         </div>
     </div>
-    <hr/>
     @if (Model.Count() == 0)
     {
-        <h6 class="text-center p-5">YOU HAVE NOT MADE ANY POSTS YET</h6>
+        <h6 class="text-center">THERE ARE NO AVAILABLE JOB POSTS TO APPLY FOR.</h6>
     }
     else
     {
@@ -37,10 +33,11 @@
                 <tr>
                     <th>Job Title</th>
                     <th>Department</th>
-                    <th>FT/PT</th>
+                    <th>Fulltime / Part-time</th>
                     <th>Start Date</th>
                     <th>End Date</th>
-                    <th>Status</th>
+                    <th>Hours Per Week</th>
+                    <th>Rate</th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,10 +57,18 @@
                         }
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
-                        <td>@obj.PostStatus</td>
+                        @if (obj.FullTime == false)
+                        {
+                            <td>@obj.PartTimeHours</td>
+                        }
+                        else
+                        {
+                            <td>N/A</td>
+                        }
+                        <td>R@(obj.HourlyRate)</td>
                         <td style="width:100%" class="btn-group" role="group">
-                            <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
-                               class="btn btn-primary mx-1">Edit</a>
+                            <a asp-controller="Application" asp-action="PostDetails" asp-route-id="@obj.PostId"
+                               class="btn btn-primary mx-1">Details</a>
                         </td>
 
                     </tr>
@@ -71,5 +76,5 @@
             </tbody>
         </table>
     }
-    
+
 </div>

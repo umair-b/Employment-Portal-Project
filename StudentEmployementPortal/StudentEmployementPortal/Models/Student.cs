@@ -1,18 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using StudentEmployementPortal.Utils;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentEmployementPortal.Models
 {
-    public class Student
+    public class Student : AppUser
     {
-        public string? CareerObjective { get; set; }
-        public string? Faculty { get; set; }
-        public string? Department { get; set;}
+        public AppUser User { get; set; }
+        [Key]
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public string Address { get; set; }
+        public string IdentityNumber { get; set; }
+        public string DriversLicense { get; set; }
+        public string CareerObjective { get; set; }
+        public Enums.Gender Gender { get; set; }
+        public Enums.Race Race { get; set; }
+        public string Nationality { get; set; }
+        public string YearOfStudy { get; set; }
 
-        public string? Skills { get; set; }
+        [ForeignKey(nameof(Faculty))]
+        public int FacultyId { get; set; }
 
-        public string? Achievements { get; set; }
+        [ForeignKey(nameof(Department))]
+        public int DepartmentId { get; set; }
 
-        public string? Interests { get; set;}
+        public Faculty Faculty { get; set; }
+        public Department Department { get; set; }
+
         //public DriversLicence StudentLicence { get; set; }
         //public Nationality StudentNationality { get; set; }
         //public Race StudentRace { get; set; }
