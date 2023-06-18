@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentEmployementPortal.Data;
 
@@ -11,9 +12,11 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230618202630_migration02")]
+    partial class migration02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -786,6 +789,74 @@ namespace StudentEmployementPortal.Migrations
                     b.ToTable("Referees");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
+                {
+                    b.Property<int>("StudentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
+
+                    b.Property<string>("Achievements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CareerObjective")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Citizen")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DriversLicense")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Interests")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Skills")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("YearOfStudy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Students");
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.Models.WorkExperience", b =>
                 {
                     b.Property<int>("Id")
@@ -825,6 +896,10 @@ namespace StudentEmployementPortal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentId"));
 
+                    b.Property<string>("Achievements")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -846,10 +921,11 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Gender")
-                        .HasColumnType("int");
-
                     b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Interests")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -857,26 +933,7 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Race")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentCel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentFirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentLastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StudentTel")
+                    b.Property<string>("Skills")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -910,59 +967,6 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("AppUser");
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
-                {
-                    b.HasBaseType("StudentEmployementPortal.Models.AppUser");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CareerObjective")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DriversLicense")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FacultyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<string>("IdentityNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nationality")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Race")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("YearOfStudy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("FacultyId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasDiscriminator().HasValue("Student");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

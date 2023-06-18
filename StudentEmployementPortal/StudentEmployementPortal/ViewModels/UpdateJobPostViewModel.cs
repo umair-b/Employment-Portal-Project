@@ -29,7 +29,7 @@ namespace StudentEmployementPortal.ViewModels
         public int DepartmentId { get; set; }
 
         public IEnumerable<Faculty>? FacultyList { get; set; }
-        public IEnumerable<Department>? DepartmentList { get; set; }  
+        public IEnumerable<Department>? DepartmentList { get; set; }
 
         [Required]
         [Display(Name = "Job Title")]
@@ -117,7 +117,10 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Contact Email")]
         public string ContactEmail { get; set; }
 
-        [Display(Name = "Approver's Note")]
+        /*private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> { Enums.JobPostStatus.Approved, Enums.JobPostStatus.Rejected, Enums.JobPostStatus.Pending };
+        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);*/
+
+        [Display(Name = "Approver's Comment")]
         public string? ApproverNote { get; set; }
     }
 }

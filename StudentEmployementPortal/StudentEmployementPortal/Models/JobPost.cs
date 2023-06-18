@@ -44,6 +44,7 @@ namespace StudentEmployementPortal.Models
         [Required]
         [DisplayName("Fulltime")]
         public bool? FullTime { get; set; }
+        [Display(Name = "Part-time Hours")]
         public string? PartTimeHours { get; set; }
 
         [Required]
@@ -112,7 +113,7 @@ namespace StudentEmployementPortal.Models
 
         public Enums.JobPostStatus PostStatus { get; set; } = Enums.JobPostStatus.Pending;
 
-        [Display(Name = "Approver's Note")]
+        [Display(Name = "Approver's Comment")]
         public string? ApproverNote { get; set; }
 
     }

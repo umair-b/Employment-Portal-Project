@@ -23,170 +23,187 @@
         </div>
         <hr />
         <br />
-        <div class="mb-2">
-            <label asp-for="Internal" class="mb-2"></label>
-            <input type="radio" asp-for="Internal" value="true" class="m-2" readonly />Yes
-            <input type="radio" asp-for="Internal" value="false" class="m-2" readonly />No
-            <span asp-validation-for="Internal" class="text-danger"></span>
-        </div>
-        <br/>
-        @*<div class="mb-2">
-            <label asp-for="Faculty"></label>
-            <input asp-for="Faculty" class="form-control" />
-            <span asp-validation-for="Faculty" class="text-danger"></span>
-        </div>*@
-        <div class="mb-2">
-            <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" class="form-control" readonly/>
-            <span asp-validation-for="JobTitle" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="JobLocation"></label>
-            <input asp-for="JobLocation" class="form-control" />
-            <span asp-validation-for="JobLocation" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="JobDescription"></label>
-            <input asp-for="JobDescription" class="form-control" readonly/>
-            <span asp-validation-for="JobDescription" class="text-danger"></span>
-        </div>
-        <div class="mb-2">
-            <label asp-for="KeyResponsibilities"></label>
-            <input asp-for="KeyResponsibilities" class="form-control" readonly/>
-            <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
-        </div>
-        <div>
-            <div>
-                <label asp-for="FullTime" class="mb-2"></label>
-                <input type="radio" asp-for="FullTime" name="fullTime" value="true" id="yesRadioButton" class="m-2" readonly />Yes
-                <input type="radio" asp-for="FullTime" name="fullTime" value="false" id="noRadioButton" class="m-2" readonly/>No
-            </div>
-        </div>
-        <br />
-        <div class="mb-2">
-            <div>
-                <label asp-for="StartDate"></label>
-                <input asp-for="StartDate" type="date" readonly/>
-            </div>
-            <span asp-validation-for="StartDate" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-            <div>
-                <label asp-for="EndDate"></label>
-                <input type="date" asp-for="EndDate" readonly/>
-            </div>
-            <span asp-validation-for="EndDate" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-            <label asp-for="HourlyRate"></label>
-            <input asp-for="HourlyRate" readonly/>
-            <span asp-validation-for="HourlyRate" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-
-            <label> Limited To: </label><br />
-            <div>
-                @Html.CheckBoxFor(m => m.limitedToFirst)
-                <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToSecond)
-                <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToThird)
-                <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToHonours)
-                <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
-                <br />
-                @Html.CheckBoxFor(m => m.limitedToMasters)
-                <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToPhD)
-                <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToPostDoc)
-                <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToDepartment)
-                <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
-
-                @Html.CheckBoxFor(m => m.limitedToFaculty)
-                <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
-            </div>
-        </div>
-        <br />
-        <div>
-            <div>
-                <label asp-for="CitizensOnly" class="mb-2"></label>
-                <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" readonly/>Yes
-                <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" readonly/>No
-            </div>
-            <span asp-validation-for="CitizensOnly" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-            <label asp-for="MinRequirements"></label>
-            <input asp-for="MinRequirements" readonly/>
-            <span asp-validation-for="MinRequirements" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-            <label asp-for="ApplicationInstructions"></label>
-            <input asp-for="ApplicationInstructions" readonly/>
-            <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
-        </div>
-        <br />
-        <div class="mb-2">
-            <div>
-                <label asp-for="ClosingDate"></label>
-                <input asp-for="ClosingDate" type="date" readonly/>
-            </div>
-            <span asp-validation-for="ClosingDate" class="text-danger"></span>
-        </div>
-        <br />
         <div class="form-control">
-            <div class="mb-2">
-                <label asp-for="ContactPerson"></label>
-                <input asp-for="ContactPerson" readonly/>
-                <span asp-validation-for="ContactPerson" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="mb-2">
-                <label asp-for="ContactEmail"></label>
-                <input asp-for="ContactEmail" readonly/>
-                <span asp-validation-for="ContactEmail" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="mb-2">
-                <label asp-for="ContactNumber"></label>
-                <input asp-for="ContactNumber" readonly/>
-                <span asp-validation-for="ContactNumber" class="text-danger"></span>
-            </div>
-        </div>
-        <br />
-        <div class="form-control">
+            @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
             <div>
-                <label asp-for="ApproverNote"></label>
-                <textarea asp-for="ApproverNote" class="form-control"></textarea>
+                <label asp-for="Internal" class="mb-2"></label>
+                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" readonly/>Yes
+                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" readonly/>No
+           </div>
+            <div id="facultyContainer">
+                <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3" readonly>
+                    <option value="" selected disabled>Select Faculty</option>
+                    @foreach (var f in @Model.FacultyList)
+                    {
+                        <option value="@f.FacultyId">@f.FacultyName</option>
+                    }
+                </select>
             </div>
-            <br />
+            <div id="departmentContainer">
+                <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3" readonly>
+                    <option value="" selected disabled>Select Department</option>
+                    @foreach (var d in @Model.DepartmentList)
+                    {
+                        <option value="@d.DepartmentId" >@d.DepartmentName</option>
+                    }
+                </select>
+            </div>
             <div>
-                <label asp-for="SelectedStatus"></label>
-                @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
+                <label asp-for="JobTitle"></label>
+                <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" style="cursor:default" readonly />
+            </div>
+            <div>
+                <label asp-for="JobLocation"></label>
+                <input asp-for="JobLocation" placeholder="Job Location" class="form-control mb-3" style="cursor:default" readonly />
+            </div>
+            <div>
+                <label asp-for="JobDescription"></label>
+                <textarea asp-for="JobDescription" placeholder="Job Description" class="form-control mb-3" style="cursor:default" readonly></textarea>
+            </div>
+            <div>
+                <label asp-for="KeyResponsibilities"></label>
+                <textarea asp-for="KeyResponsibilities" placeholder="Key Responsibilities" class="form-control mb-3" style="cursor:default" readonly></textarea>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="FullTime" class="mb-2"></label>
+                    <input type="radio" asp-for="FullTime" value="true" id="yesRadioButton" class="m-2" readonly/>Yes
+                    <input type="radio" asp-for="FullTime" value="false" id="noRadioButton" class="m-2" readonly/>No
+                </div>
+                <div id="partTimeHoursContainer" style="display: none;" class="col">
+                    <label asp-for="PartTimeHours" class="mb-2"></label>
+                    <select asp-for="PartTimeHours" name="partTimeHours" class="form-select mb-3" id="partTimeHours" readonly>
+                        <option value="" selected disabled>Select Part-Time Hours</option>
+                        <option value="< 2">&lt; 2</option>
+                        <option value="2 - 4">2 - 4</option>
+                        <option value="4 - 6">4 - 6</option>
+                        <option value="6 - 8">6 - 8</option>
+                        <option value="8 - 12">8 - 12</option>
+                        <option value="> 12">&gt; 12</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label asp-for="HourlyRate" class="mb-2"></label>
+                    <input asp-for="HourlyRate" class="form-control" style="cursor:default" readonly />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="StartDate"></label>
+                    <input type="date" asp-for="StartDate" class="form-control" style="cursor:default" readonly />
+                </div>
+                <div class="col">
+                    <label asp-for="EndDate"></label>
+                    <input type="date" asp-for="EndDate" class="form-control" style="cursor:default" readonly />
+                </div>
+                <div class="col">
+                    <label asp-for="ClosingDate"></label>
+                    <input asp-for="ClosingDate" type="date" class="form-control" style="cursor:default" readonly />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="CitizensOnly" class="mb-2"></label>
+                    <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" readonly/>Yes
+                    <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" readonly/>No
+                </div>
+                <div class="col">
+                    <label> Limited To: </label><br />
+                    <div>
+                        @Html.CheckBoxFor(m => m.limitedToFirst)
+                        <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToSecond)
+                        <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToThird)
+                        <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToHonours)
+                        <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
+                        <br />
+                        @Html.CheckBoxFor(m => m.limitedToMasters)
+                        <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToPhD)
+                        <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToPostDoc)
+                        <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToDepartment)
+                        <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToFaculty)
+                        <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="MinRequirements"></label>
+                <textarea asp-for="MinRequirements" placeholder="Minimum Requirements" class="form-control" style="cursor:default" readonly></textarea>
+            </div>
+            <div class="mb-4">
+                <label asp-for="ApplicationInstructions"></label>
+                <textarea asp-for="ApplicationInstructions" placeholder="Application Instructions" class="form-control" style="cursor:default" readonly></textarea>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label asp-for="ContactPerson"></label>
+                    <input asp-for="ContactPerson" placeholder="Contact Person" class="form-control" style="cursor:default" readonly />
+                </div>
+                <div class="col">
+                    <label asp-for="ContactEmail"></label>
+                    <input asp-for="ContactEmail" placeholder="Contact Email" class="form-control" style="cursor:default" readonly />
+                </div>
+                <div class="col">
+                    <label asp-for="ContactNumber"></label>
+                    <input asp-for="ContactNumber" placeholder="Contact Number" class="form-control" style="cursor:default" readonly />
+                </div>
             </div>
         </div>
     </div>
-        @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
-    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-    <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
+    <br />
+    <div class="form-control">
+        <div>
+            <label asp-for="ApproverNote"></label>
+            <textarea asp-for="ApproverNote" class="form-control"></textarea>
+        </div>
+        <br />
+        <div>
+            <label asp-for="SelectedStatus"></label>
+            @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
+                
+        </div>
+    </div>
+    <br/>
+    <div class="pb-2">
+        <button type="submit" class="btn btn-primary" style="width:150px">Update Outcome</button>
+    </div>
 
 </form>
 
 @section Scripts{
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#noRadioButton').change(function () {
+                $('#partTimeHoursContainer').show();
+            });
+
+            $('#yesRadioButton').change(function () {
+                $('#partTimeHoursContainer').hide();
+            });
+
+            $('input[name="FullTime"]:checked').trigger('change');
+
+            // Check if a radio button is already selected
+            if ($('input[name="FullTime"]:checked').length > 0) {
+                $('input[name="FullTime"]:checked').trigger('change');
+            }
+        });
+    </script>
     @{
         <partial name="_ValidationScriptsPartial" />
     }

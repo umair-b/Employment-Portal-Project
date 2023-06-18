@@ -1,4 +1,6 @@
 ﻿namespace StudentEmployementPortal.Models;
+
+using StudentEmployementPortal.Utils;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +13,7 @@ public class Application
 
         public int PostId { get; set; }
 
-        public string status { get; set; } = "PENDING";
+        public Enums.ApplicationStatus ApplicationStatus { get; set; } = Enums.ApplicationStatus.Pending;
+
     }
 

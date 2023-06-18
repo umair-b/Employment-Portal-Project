@@ -14,180 +14,184 @@
 
 <form asp-controller="ManagePost" asp-action="Edit" method="post">
     <div class="pt-2 mt-2">
-        <div>
+        <div class="p-2">
             <a asp-controller="ManagePost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
                 &larr; Back
             </a>
         </div>
         <div class="row pb-2">
-            <h2 class="text-primary">Update Post</h2>
+            <h2 class="text-primary">Edit Post</h2>
         </div>
         <hr />
-        <div class="mb-3" >
-            <div class="row">
-                <div>
-                    <label asp-for="ApproverNote"></label>
-                    <textarea asp-for="ApproverNote" class="form-control" readonly></textarea>
+        <div class="row mb-3">
+            <div>
+                <label asp-for="ApproverNote"></label>
+                <textarea asp-for="ApproverNote" class="form-control" style="cursor:default" readonly></textarea>
+            </div>
+            <br />
+        </div>
+        <div class="form-control">
+            @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
+            <div>
+                <label asp-for="Internal" class="mb-2"></label>
+                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes
+                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
+                <span asp-validation-for="Internal" class="text-danger"></span>
+            </div>
+            <div id="facultyContainer">
+                <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
+                    <option value="" selected disabled>Select Faculty</option>
+                    @foreach (var f in @Model.FacultyList)
+                    {
+                        <option value="@f.FacultyId">@f.FacultyName</option>
+                    }
+                </select>
+            </div>
+            <div id="departmentContainer">
+                <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3">
+                    <option value="" selected disabled>Select Department</option>
+                    @foreach (var d in @Model.DepartmentList)
+                    {
+                        <option value="@d.DepartmentId">@d.DepartmentName</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <label asp-for="JobTitle"></label>
+                <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="JobLocation"></label>
+                <input asp-for="JobLocation" placeholder="Job Location" class="form-control mb-3" />
+                <span asp-validation-for="JobLocation" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="JobDescription"></label>
+                <textarea asp-for="JobDescription" placeholder="Job Description" class="form-control mb-3"></textarea>
+                <span asp-validation-for="JobDescription" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="KeyResponsibilities"></label>
+                <textarea asp-for="KeyResponsibilities" placeholder="Key Responsibilities" class="form-control mb-3"></textarea>
+                <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="FullTime" class="mb-2"></label>
+                    <input type="radio" asp-for="FullTime" value="true" id="yesRadioButton" class="m-2" />Yes
+                    <input type="radio" asp-for="FullTime" value="false" id="noRadioButton" class="m-2" />No
+                    <span asp-validation-for="FullTime" class="text-danger"></span>
                 </div>
-                <br />
-            </div>
-        </div>
-        @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
-        <div>
-            <label asp-for="Internal" class="mb-2"></label>
-            <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes
-            <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
-            <span asp-validation-for="Internal" class="text-danger"></span>
-        </div>
-        <div id="facultyContainer">
-            <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
-                <option value="" selected disabled>Select Faculty</option>
-                @foreach (var f in @Model.FacultyList)
-                {
-                    <option value="@f.FacultyId">@f.FacultyName</option>
-                }
-            </select>
-        </div>
-        <div id="departmentContainer">
-            <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3">
-                <option value="" selected disabled>Select Department</option>
-                @foreach (var d in @Model.DepartmentList)
-                {
-                    <option value="@d.DepartmentId">@d.DepartmentName</option>
-                }
-            </select>
-        </div>
-        <div>
-            <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" />
-            <span asp-validation-for="JobTitle" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="JobLocation"></label>
-            <input asp-for="JobLocation" placeholder="Job Location" class="form-control mb-3" />
-            <span asp-validation-for="JobLocation" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="JobDescription"></label>
-            <textarea asp-for="JobDescription" placeholder="Job Description" class="form-control mb-3"></textarea>
-            <span asp-validation-for="JobDescription" class="text-danger"></span>
-        </div>
-        <div>
-            <label asp-for="KeyResponsibilities"></label>
-            <textarea asp-for="KeyResponsibilities" placeholder="Key Responsibilities" class="form-control mb-3"></textarea>
-            <span asp-validation-for="KeyResponsibilities" class="text-danger"></span>
-        </div>
-        <div class="row mb-3">
-        <div class="col">
-            <label asp-for="FullTime" class="mb-2"></label>
-            <input type="radio" asp-for="FullTime" value="true" id="yesRadioButton" class="m-2" />Yes
-            <input type="radio" asp-for="FullTime" value="false" id="noRadioButton" class="m-2" />No
-            <span asp-validation-for="FullTime" class="text-danger"></span>
-        </div>
-        <div id="partTimeHoursContainer" style="display: none;" class="col">
-            <label asp-for="PartTimeHours" class="mb-2"></label>
-            <select asp-for="PartTimeHours" name="partTimeHours" class="form-select mb-3" id="partTimeHours">
-                <option value="" selected disabled>Select Part-Time Hours</option>
-                <option value="less than 2">less than 2 hours</option>
-                <option value="2 to 4">2 to 4 hours</option>
-                <option value="4 to 6">4 to 6 hours</option>
-                <option value="6 to 8">6 to 8 hours</option>
-                <option value="8 to 12">8 to 12 hours</option>
-                <option value="more than 12">more than 12 hours</option>
-            </select>
-        </div>
-        <div class="col">
-            <label asp-for="HourlyRate" class="mb-2"></label>
-            <input asp-for="HourlyRate" class="form-control" />
-            <span asp-validation-for="HourlyRate" class="text-danger"></span>
-        </div>
-    </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <label asp-for="StartDate"></label>
-                <input type="date" asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="col">
-                <label asp-for="EndDate"></label>
-                <input type="date" asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="col">
-                <label asp-for="ClosingDate"></label>
-                <input asp-for="ClosingDate" type="date" class="form-control" />
-                <span asp-validation-for="ClosingDate" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col">
-                <label asp-for="CitizensOnly" class="mb-2"></label>
-                <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
-                <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
-                <span asp-validation-for="CitizensOnly" class="text-danger"></span>
-            </div>
-            <div class="col">
-                <label> Limited To: </label><br />
-                <div>
-                    @Html.CheckBoxFor(m => m.limitedToFirst)
-                    <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToSecond)
-                    <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToThird)
-                    <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToHonours)
-                    <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
-                    <br />
-                    @Html.CheckBoxFor(m => m.limitedToMasters)
-                    <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToPhD)
-                    <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToPostDoc)
-                    <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToDepartment)
-                    <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
-
-                    @Html.CheckBoxFor(m => m.limitedToFaculty)
-                    <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+                <div id="partTimeHoursContainer" style="display: none;" class="col">
+                    <label asp-for="PartTimeHours" class="mb-2"></label>
+                    <select asp-for="PartTimeHours" name="partTimeHours" class="form-select mb-3" id="partTimeHours">
+                        <option value="" selected disabled>Select Part-Time Hours</option>
+                        <option value="< 2">&lt; 2</option>
+                        <option value="2 - 4">2 - 4</option>
+                        <option value="4 - 6">4 - 6</option>
+                        <option value="6 - 8">6 - 8</option>
+                        <option value="8 - 12">8 - 12</option>
+                        <option value="> 12">&gt; 12</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label asp-for="HourlyRate" class="mb-2"></label>
+                    <input asp-for="HourlyRate" class="form-control" />
+                    <span asp-validation-for="HourlyRate" class="text-danger"></span>
                 </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <label asp-for="MinRequirements"></label>
-            <input asp-for="MinRequirements" placeholder="Minimum Requirements" class="form-control" />
-            <span asp-validation-for="MinRequirements" class="text-danger"></span>
-        </div>
-        <div class="mb-4">
-            <label asp-for="ApplicationInstructions"></label>
-            <input asp-for="ApplicationInstructions" placeholder="Application Instructions" class="form-control" />
-            <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
-        </div>
-        <div class="row mb-4">
-            <div class="col">
-                <label asp-for="ContactPerson"></label>
-                <input asp-for="ContactPerson" placeholder="Contact Person" class="form-control" />
-                <span asp-validation-for="ContactPerson" class="text-danger"></span>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="StartDate"></label>
+                    <input type="date" asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="EndDate"></label>
+                    <input type="date" asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="ClosingDate"></label>
+                    <input asp-for="ClosingDate" type="date" class="form-control" />
+                    <span asp-validation-for="ClosingDate" class="text-danger"></span>
+                </div>
             </div>
-            <div class="col">
-                <label asp-for="ContactEmail"></label>
-                <input asp-for="ContactEmail" placeholder="Contact Email" class="form-control" />
-                <span asp-validation-for="ContactEmail" class="text-danger"></span>
+            <div class="row mb-3">
+                <div class="col">
+                    <label asp-for="CitizensOnly" class="mb-2"></label>
+                    <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
+                    <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
+                    <span asp-validation-for="CitizensOnly" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label> Limited To: </label><br />
+                    <div>
+                        @Html.CheckBoxFor(m => m.limitedToFirst)
+                        <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToSecond)
+                        <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToThird)
+                        <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToHonours)
+                        <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
+                        <br />
+                        @Html.CheckBoxFor(m => m.limitedToMasters)
+                        <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToPhD)
+                        <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToPostDoc)
+                        <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToDepartment)
+                        <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+
+                        @Html.CheckBoxFor(m => m.limitedToFaculty)
+                        <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
+                    </div>
+                </div>
             </div>
-            <div class="col">
-                <label asp-for="ContactNumber"></label>
-                <input asp-for="ContactNumber" placeholder="Contact Number" class="form-control" />
-                <span asp-validation-for="ContactNumber" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="MinRequirements"></label>
+                <textarea asp-for="MinRequirements" placeholder="Minimum Requirements" class="form-control"></textarea>
+                <span asp-validation-for="MinRequirements" class="text-danger"></span>
             </div>
-        </div>
+            <div class="mb-4">
+                <label asp-for="ApplicationInstructions"></label>
+                <textarea asp-for="ApplicationInstructions" placeholder="Application Instructions" class="form-control"></textarea>
+                <span asp-validation-for="ApplicationInstructions" class="text-danger"></span>
+            </div>
+            <div class="row mb-4">
+                <div class="col">
+                    <label asp-for="ContactPerson"></label>
+                    <input asp-for="ContactPerson" placeholder="Contact Person" class="form-control" />
+                    <span asp-validation-for="ContactPerson" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="ContactEmail"></label>
+                    <input asp-for="ContactEmail" placeholder="Contact Email" class="form-control" />
+                    <span asp-validation-for="ContactEmail" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="ContactNumber"></label>
+                    <input asp-for="ContactNumber" placeholder="Contact Number" class="form-control" />
+                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>  
     </div>
-    <button type="submit" class="btn btn-primary mb-3" style="width:150px">Update</button>
+    <br/>
+    <div class="d-flex p-2 justify-content-between">
+        <button type="submit" class="d-inline-block btn btn-primary mb-3" style="width:150px">Update</button>
+        @*<button onclick="return confirm('Are you sure you want to delete this post?');" type="submit" asp-action="DeleteConfirmed" class="d-inline-block btn btn-danger mb-3" style="width:150px">Delete</button>*@
+    </div>
 </form>
 
 @section Scripts{
@@ -238,6 +242,10 @@
                     success: function (response) {
                         $('#departmentId').html(response);
                         $('#departmentId').prop('disabled', false);
+
+                        // Set the selected department based on the model's DepartmentId
+                        var selectedDepartment = '@Model.DepartmentId';
+                        $('#departmentId').val(selectedDepartment);
                     }
                 });
             } else {
@@ -245,6 +253,12 @@
                 $('#departmentId').prop('disabled', true);
             }
         });
+
+        // Trigger the change event on faculty dropdown to initialize the department dropdown
+        $('#facultyId').trigger('change');
+    </script>
+    <script>
+
     </script>
 
 

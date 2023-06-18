@@ -1,0 +1,42 @@
+﻿@model StudentEmployementPortal.ViewModels.DocumentUploadViewModel
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="pt-2 mt-2">
+        <div>
+            <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+                &larr; Back
+            </a>
+        </div>
+        <div class="row pb-2">
+            <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
+        </div>
+        <hr/>
+        <div style="display:inline-block">
+            <h5 style="display:inline-block">
+                You are applying for the post of 
+                <p style="display:inline-block; font-weight:bold">@Model.JobTitle</p>
+            </h5>
+        </div>
+        <br />
+        <div class="form-control">
+            
+            <div>
+                <label for="File"> Upload Document </label>
+                <br/>
+                <input type="file" name="File" id="File" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary mb-3" style="width:150px">Upload</button>
+</form>

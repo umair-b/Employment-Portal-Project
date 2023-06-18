@@ -26,12 +26,8 @@ namespace StudentEmployementPortal.ViewModels
         //public Faculty Faculty { get; set; }
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
-
-        /*public IEnumerable<Faculty> FacultyList { get; set; }
-        public IEnumerable<Department> DepartmentList { get; set; }*/
-
-        public List<Faculty> FacultyList { get; set; }
-        public List<Department> DepartmentList { get;set; }
+        public IEnumerable<Faculty> FacultyList { get; set; }
+        public IEnumerable<Department> DepartmentList { get; set; }
 
         [Required]
         [Display(Name = "Job Title")]

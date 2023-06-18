@@ -1,13 +1,12 @@
-﻿<div class="text-center">
-    <h1>Welcome Student</h1>
-    <br />
-    <ul class="list-inline">
-        <li class="pb-2">
-            <a id="searchApply" class="btn btn-dark">Manage Posts</a>
-        </li>
+﻿@using Microsoft.AspNetCore.Identity
 
-        <li class="pb-2">
-            <a id="manageStudentProfile" class="btn btn-dark">Manage Profile</a>
-        </li>
-    </ul>
+<div class="text-center">
+    <h1>Welcome Student</h1>
+    <div class="d-flex justify-content-center">
+        <div class="d-inline-block">
+            <a id="manageStudentProfile" asp-area="" asp-controller="StudentProfile" asp-action="Index" class="btn btn-primary p-2 m-2">Manage Profile</a>
+            <a id="searchAndApply" asp-area="" asp-controller="Application" asp-action="Index" asp-route-id="" class="btn btn-primary p-2 m-2">Search And Apply</a>
+            <a id="applicationHistory" asp-area="" asp-controller="" asp-action="" class="btn btn-primary p-2 m-2">Application History</a>
+        </div>
+    </div>
 </div>

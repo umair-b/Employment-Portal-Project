@@ -176,6 +176,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/Application/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/Application/PostDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25cUG9zdERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/Application/Upload.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25cVXBsb2FkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ApproverPost/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwcm92ZXJQb3N0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -226,6 +238,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/StudentProfile/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudFByb2ZpbGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/_ViewImports.cshtml]

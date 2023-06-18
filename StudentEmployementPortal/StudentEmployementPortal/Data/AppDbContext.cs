@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Models;
 using System;
+using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Data
 {
@@ -15,12 +16,13 @@ namespace StudentEmployementPortal.Data
         public DbSet<Document> Documents { get; set; }
         public DbSet<JobPost> JobPosts { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
-
         public DbSet<Referee> Referees { get; set; }
         public DbSet<WorkExperience> WorkExperience { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Employer> Employers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -87,5 +89,7 @@ namespace StudentEmployementPortal.Data
                 new Department { DepartmentId = 34, DepartmentName = "Statistics and Actuarial Science", FacultyId = 5 }
             );
         }
+
+        public DbSet<StudentEmployementPortal.ViewModels.UpdateStudentProfileViewModel>? UpdateStudentProfileViewModel { get; set; }
     }
 }
