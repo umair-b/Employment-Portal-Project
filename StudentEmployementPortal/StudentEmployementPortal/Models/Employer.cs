@@ -28,10 +28,10 @@ namespace StudentEmployementPortal.Models
 
 
         //Navigation Property
-        public AppUser User { get; set; }
+        
         [Key]
-        [ForeignKey("User")]
+        [ForeignKey("UserId")]
         public string UserId { get; set; }
-
+        public AppUser User { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migration00 : Migration
+    public partial class migration06 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

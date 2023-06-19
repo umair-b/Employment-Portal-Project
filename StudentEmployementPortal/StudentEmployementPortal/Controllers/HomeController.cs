@@ -24,16 +24,19 @@ namespace StudentEmployementPortal.Controllers
             if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
-                if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Employer))
+                if (user != null)
                 {
-                    var employer = _appDbContext.Employers.Find(_userManager.GetUserId(User));
-
-                    if (employer == null)
+                    if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Employer))
                     {
-                        return RedirectToAction("Index", "ManageProfileEmployer");
-                    }
+                        var employer = _appDbContext.Employers.Find(_userManager.GetUserId(User));
 
-                    return View(nameof(Privacy));
+                        if (employer == null)
+                        {
+                            return RedirectToAction("Index", "ManageProfileEmployer");
+                        }
+
+                        return View(nameof(Privacy));
+                    }
                 }
                 
             }

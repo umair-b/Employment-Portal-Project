@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
@@ -62,22 +63,60 @@ namespace StudentEmployementPortal.Controllers
             }
         }
 
-        public IActionResult update(EmployerUpdateInfoViewModel vm)
+        [HttpPost]
+        public IActionResult Index(EmployerUpdateInfoViewModel vm)
         {
             var userId = _userManager.GetUserId(User);
             var employer = _appDbContext.Employers.Find(userId);
             var appUser = _appDbContext.AppUsers.Find(userId);
 
-            if (ModelState.IsValid)
-            {
+            
                 if (employer == null)
                 {
-                    
+                    var newEmployer = new Employer
+                    {
+                        RegisteredAddress = vm.RegisteredAddress,
+                        RegistrationName = vm.RegistrationName,
+                        RegistrationNumber = vm.RegistrationNumber,
+                        EmployerBusinessType = vm.EmployerBusinessType,
+                        EmployerTitle = vm.EmployerTitle,
+                        JobTitle = vm.JobTitle,
+                        TradingName= vm.TradingName,
+                        TrueInfo = vm.TrueInfo,
+                        UserId = userId
+                    };
+                    _appDbContext.Employers.Add(newEmployer);
+
+                    appUser.TelNumber = vm.EmployerPhone;
+                    appUser.FirstName = vm.EmployerFirstName;
+                    appUser.LastName = vm.EmployerSurname;
+                    appUser.Email = vm.EmployerEmail;
+                    appUser.CellNumber = vm.EmployerCell;
+
+                    _appDbContext.SaveChanges();
+                }
+                else
+                {
+                    employer.RegisteredAddress = vm.RegisteredAddress;
+                    employer.RegistrationName = vm.RegistrationName;
+                    employer.RegistrationNumber = vm.RegistrationNumber;
+                    employer.EmployerBusinessType = vm.EmployerBusinessType;
+                    employer.EmployerTitle = vm.EmployerTitle;
+                    employer.JobTitle = vm.JobTitle;
+                    employer.TradingName = vm.TradingName;
+                    employer.TrueInfo = vm.TrueInfo;
+                    appUser.TelNumber = vm.EmployerPhone;
+                    appUser.FirstName = vm.EmployerFirstName;
+                    appUser.LastName = vm.EmployerSurname;
+                    appUser.Email = vm.EmployerEmail;
+                    appUser.CellNumber = vm.EmployerCell;
+
+                    _appDbContext.SaveChanges();
                 }
 
-            }
+            
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

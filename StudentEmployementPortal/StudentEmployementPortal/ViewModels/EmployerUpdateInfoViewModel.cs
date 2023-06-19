@@ -23,7 +23,7 @@ namespace StudentEmployementPortal.ViewModels
 
         //Get Enums
         
-        public IEnumerable<SelectListItem> EmployerTitles => Enums.GetEnumList<Enums.Title>();
-        public IEnumerable<SelectListItem> EmployerBusinessTypes => Enums.GetEnumList<Enums.BusniessType>();
+        public IEnumerable<SelectListItem> EmployerTitles { get => Enums.GetEnumList<Enums.Title>(); set { } }
+        public IEnumerable<SelectListItem> EmployerBusinessTypes { get => Enums.GetEnumList<Enums.BusniessType>(); set { } }
     }
 }

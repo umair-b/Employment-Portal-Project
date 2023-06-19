@@ -9,11 +9,11 @@
         </div>
         <div>
             <label asp-for="EmployerTitle"></label>
-            @Html.DropDownListFor(model => model.EmployerTitle, Model.EmployerTitles)
+            <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select"></select>
         </div>
         <div>
             <label asp-for="EmployerFirstName"></label>
-            <input asp-for="EmployerFirstName" />
+            <input asp-for="EmployerFirstName"/>
             <span asp-validation-for="EmployerFirstName"></span>
         </div>
         <div>
@@ -52,17 +52,22 @@
             <span asp-validation-for="RegistrationName"></span>
         </div>
         <div>
+            <label asp-for="RegisteredAddress"></label>
+            <input asp-for="RegisteredAddress" />
+            <span asp-validation-for="RegisteredAddress"></span>
+        </div>
+        <div>
             <label asp-for="TradingName"></label>
             <input asp-for="TradingName" />
             <span asp-validation-for="TradingName"></span>
         </div>
         <div>
             <label asp-for="EmployerBusinessType"></label>
-            @Html.DropDownListFor(model => model.EmployerBusinessType, Model.EmployerBusinessTypes)
+            <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select"></select>
         </div>
         <div>
             <label asp-for="TrueInfo"></label>
-            <input asp-for="TrueInfo" type="checkbox" id="checkbox1" />
+            <input asp-for="TrueInfo" type="checkbox" id="checkbox1" checked="false" />
         </div>
         <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
 
