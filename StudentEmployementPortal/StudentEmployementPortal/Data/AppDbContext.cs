@@ -13,7 +13,7 @@ namespace StudentEmployementPortal.Data
         public DbSet<Application> Application { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<JobPost> JobPosts { get; set; }
-        public DbSet<Qualification> Qualifications { get; set; }
+        //public DbSet<Qualification> Qualifications { get; set; }
 
         public DbSet<Referee> Referees { get; set; }
         public DbSet<WorkExperience> WorkExperience { get; set; }
@@ -21,7 +21,7 @@ namespace StudentEmployementPortal.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Employer> Employers { get; set; }
-
+        public DbSet<Student> Students { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
         public DbSet<License> Licences { get; set; }
 
