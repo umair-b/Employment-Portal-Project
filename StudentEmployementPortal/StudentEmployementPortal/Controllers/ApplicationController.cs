@@ -53,34 +53,59 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Upload(int id)
         {
-            var obj = _db.JobPosts.Find(id);
+            var jobPost = _db.JobPosts.Find(id);
 
-            if (obj == null)
+            if (jobPost == null)
             {
                 return NotFound();
             }
 
             var UploadViewModel = new DocumentUploadViewModel()
             {
-                JobTitle = obj.JobTitle
+                JobTitle = jobPost.JobTitle,
+                UploadedDocuments = _db.Documents.ToList()
             };
 
             return View(UploadViewModel);
         }
 
         [HttpPost]
-        public ActionResult Upload(DocumentUploadViewModel UploadViewModel)
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload()
         {
-            if (ModelState.IsValid)
+            // Save the Application record
+            /*var application = new Application
             {
+                PostId = id,
+            };
+            _db.Application.Add(application);
+            _db.SaveChanges();
 
-                var file = UploadViewModel.File;
+            foreach (var file in Files)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
 
-                return RedirectToAction(nameof(Index));
+                    var document = new Document
+                    {
+                        FileName = fileName,
+                        ApplicationId = viewModel.ApplicationId,
+                        ApplicationFile = file
+                    };
+
+                    _db.Documents.Add(document);
+                    _db.SaveChanges();
+                }
             }
-
-            // If the model is not valid, return the view with validation errors
-            return View(UploadViewModel);
+            return RedirectToAction("Index");
+        }*/
+            return View();
         }
     }
 }

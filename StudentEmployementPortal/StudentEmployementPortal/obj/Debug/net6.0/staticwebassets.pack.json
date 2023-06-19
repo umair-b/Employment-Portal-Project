@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\StudentEmployementPortal.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\Full CV Template.docx",
+      "PackagePath": "staticwebassets\\Uploads\\Full CV Template.docx"
+    },
+    {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\class_diagram_final.pdf",
+      "PackagePath": "staticwebassets\\Uploads\\class_diagram_final.pdf"
+    },
+    {
       "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

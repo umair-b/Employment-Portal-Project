@@ -5,12 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentEmployementPortal.Models
 {
-    public class Student : AppUser
+    public class Student
     {
-        public AppUser User { get; set; }
-        [Key]
-        [ForeignKey("User")]
-        public string UserId { get; set; }
+       
         public string Address { get; set; }
         public string IdentityNumber { get; set; }
         public string DriversLicense { get; set; }
@@ -28,7 +25,10 @@ namespace StudentEmployementPortal.Models
 
         public Faculty Faculty { get; set; }
         public Department Department { get; set; }
-
+        public AppUser User { get; set; }
+        [Key]
+        [ForeignKey("User")]
+        public string UserId { get; set; }
         //public DriversLicence StudentLicence { get; set; }
         //public Nationality StudentNationality { get; set; }
         //public Race StudentRace { get; set; }

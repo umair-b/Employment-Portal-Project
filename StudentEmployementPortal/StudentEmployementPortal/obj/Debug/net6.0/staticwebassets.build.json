@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OG1/CMGJfhclq6JkhaKrg/rNFcHOlBuATgqBkOYLCb0=",
+  "Hash": "B9/dYaw90CLyiyiByOuQzpLzs1qqoC7/odlt5K61iUg=",
   "Source": "StudentEmployementPortal",
   "BasePath": "_content/StudentEmployementPortal",
   "Mode": "Default",
@@ -2089,6 +2089,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\class_diagram_final.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/class_diagram_final.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\class_diagram_final.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\Full CV Template.docx",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/Full CV Template.docx",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Full CV Template.docx"
     }
   ]
 }
