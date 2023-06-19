@@ -23,6 +23,7 @@ namespace StudentEmployementPortal.Data
         public DbSet<Employer> Employers { get; set; }
 
         public DbSet<BusinessType> BusinessTypes { get; set; }
+        public DbSet<Licence> Licences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +40,20 @@ namespace StudentEmployementPortal.Data
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<Licence>().HasData(
+                new Licence { Id = 1, LicenceName = "Code A1 driver's license" },
+                new Licence { Id = 2, LicenceName = "Code A driver's license" },
+                new Licence { Id = 3, LicenceName = "Code B driver's license" },
+                new Licence { Id = 4, LicenceName = "Code B5 driver's license" },
+                new Licence { Id = 5, LicenceName = "Code B7 driver's license" },
+                new Licence { Id = 6, LicenceName = "Code C driver's license" },
+                new Licence { Id = 7, LicenceName = "Code C1 driver's license" },
+                new Licence { Id = 8, LicenceName = "Code EB driver's license" },
+                new Licence { Id = 9, LicenceName = "Code EC driver's license" },
+                new Licence { Id = 10, LicenceName = "Code EC1 driver's license" },
+                new Licence { Id = 11, LicenceName = "Code EC1-8 driver's license" }
+                );
 
             modelBuilder.Entity<Employer>()
                 .Ignore(e => e.EmployerBusinessTypes)
