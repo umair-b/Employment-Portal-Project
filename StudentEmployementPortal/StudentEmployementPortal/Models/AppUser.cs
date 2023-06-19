@@ -15,7 +15,8 @@ namespace StudentEmployementPortal.Models
         
         public string TelNumber { get; set; }
 
-        //Navigation Property
+        //Navigation Properties
         public Employer Employer { get; set; }
+        public Student Student { get; set; }
     }
 }
