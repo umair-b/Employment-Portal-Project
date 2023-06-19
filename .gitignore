@@ -7,3 +7,5 @@ StudentEmployementPortal/StudentEmployementPortal/bin/Debug/net6.0/StudentEmploy
 *.dll
 *.cache
 *.pdb
+StudentEmployementPortal/.vs/StudentEmployementPortal/DesignTimeBuild/.dtbcache.v2
+StudentEmployementPortal/.vs/StudentEmployementPortal/v17/.suo
