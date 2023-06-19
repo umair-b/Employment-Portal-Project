@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migration06 : Migration
+    public partial class migration00 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -128,6 +128,19 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Gender",
+                columns: table => new
+                {
+                    GenderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GenderName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gender", x => x.GenderId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "JobPosts",
                 columns: table => new
                 {
@@ -172,56 +185,29 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Qualifications",
+                name: "Licences",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    LicenseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    QualificationId = table.Column<int>(type: "int", nullable: false),
-                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QualificationType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Majors = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Submajors = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Research = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    LicenceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Qualifications", x => x.Id);
+                    table.PrimaryKey("PK_Licences", x => x.LicenseId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Referees",
+                name: "Race",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    RaceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RefereesId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Cellphone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RaceName = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Referees", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "WorkExperience",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    WorkExperienceId = table.Column<int>(type: "int", nullable: false),
-                    Employer = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "Date", nullable: false),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TasksAndResps = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_WorkExperience", x => x.Id);
+                    table.PrimaryKey("PK_Race", x => x.RaceId);
                 });
 
             migrationBuilder.CreateTable(
@@ -357,6 +343,141 @@ namespace StudentEmployementPortal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CareerObjective = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Skills = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Achievements = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Interests = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Citizen = table.Column<bool>(type: "bit", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    LicenseId = table.Column<int>(type: "int", nullable: false),
+                    RaceId = table.Column<int>(type: "int", nullable: false),
+                    GenderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "FacultyId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Gender_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Gender",
+                        principalColumn: "GenderId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Licences_LicenseId",
+                        column: x => x.LicenseId,
+                        principalTable: "Licences",
+                        principalColumn: "LicenseId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Race_RaceId",
+                        column: x => x.RaceId,
+                        principalTable: "Race",
+                        principalColumn: "RaceId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Education",
+                columns: table => new
+                {
+                    EducationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Qualification = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subjects = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Majors = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SubMajors = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Research = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Education", x => x.EducationId);
+                    table.ForeignKey(
+                        name: "FK_Education_Students_StudentUserId",
+                        column: x => x.StudentUserId,
+                        principalTable: "Students",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Referees",
+                columns: table => new
+                {
+                    RefereeId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CellNumber = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Referees", x => x.RefereeId);
+                    table.ForeignKey(
+                        name: "FK_Referees_Students_StudentUserId",
+                        column: x => x.StudentUserId,
+                        principalTable: "Students",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WorkExperience",
+                columns: table => new
+                {
+                    WorkExperienceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmployerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TasksAndResponsibilities = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkExperience", x => x.WorkExperienceId);
+                    table.ForeignKey(
+                        name: "FK_WorkExperience_Students_StudentUserId",
+                        column: x => x.StudentUserId,
+                        principalTable: "Students",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "BusinessTypes",
                 columns: new[] { "BusinessTypeId", "Name" },
@@ -425,6 +546,24 @@ namespace StudentEmployementPortal.Migrations
                     { 5, "Faculty of Science" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Licences",
+                columns: new[] { "LicenseId", "LicenceName" },
+                values: new object[,]
+                {
+                    { 1, "Code A1 driver's license" },
+                    { 2, "Code A driver's license" },
+                    { 3, "Code B driver's license" },
+                    { 4, "Code B5 driver's license" },
+                    { 5, "Code B7 driver's license" },
+                    { 6, "Code C driver's license" },
+                    { 7, "Code C1 driver's license" },
+                    { 8, "Code EB driver's license" },
+                    { 9, "Code EC driver's license" },
+                    { 10, "Code EC1 driver's license" },
+                    { 11, "Code EC1-8 driver's license" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -463,6 +602,46 @@ namespace StudentEmployementPortal.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Education_StudentUserId",
+                table: "Education",
+                column: "StudentUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Referees_StudentUserId",
+                table: "Referees",
+                column: "StudentUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_DepartmentId",
+                table: "Students",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_FacultyId",
+                table: "Students",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_GenderId",
+                table: "Students",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_LicenseId",
+                table: "Students",
+                column: "LicenseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_RaceId",
+                table: "Students",
+                column: "RaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkExperience_StudentUserId",
+                table: "WorkExperience",
+                column: "StudentUserId");
         }
 
         /// <inheritdoc />
@@ -490,22 +669,16 @@ namespace StudentEmployementPortal.Migrations
                 name: "BusinessTypes");
 
             migrationBuilder.DropTable(
-                name: "Departments");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "Education");
 
             migrationBuilder.DropTable(
                 name: "Employers");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
-
-            migrationBuilder.DropTable(
                 name: "JobPosts");
-
-            migrationBuilder.DropTable(
-                name: "Qualifications");
 
             migrationBuilder.DropTable(
                 name: "Referees");
@@ -517,7 +690,25 @@ namespace StudentEmployementPortal.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Students");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
+
+            migrationBuilder.DropTable(
+                name: "Gender");
+
+            migrationBuilder.DropTable(
+                name: "Licences");
+
+            migrationBuilder.DropTable(
+                name: "Race");
         }
     }
 }
