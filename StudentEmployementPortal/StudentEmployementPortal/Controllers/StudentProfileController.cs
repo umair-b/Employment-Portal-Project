@@ -69,71 +69,7 @@ namespace StudentEmployementPortal.Controllers
 
         }
 
-        // GET: StudentProfileController/Details/5
-        public ActionResult Details(int? id)
-        {
-           
-            return View();
-        }
-
-        // GET: StudentProfileController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: StudentProfileController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: StudentProfileController/Edit/5
-        public ActionResult EditProfile()
-        {
-            
-            
-            return View();
-        }
-
-        // POST: StudentProfileController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(UpdateStudentProfileViewModel obj)
-        {
-            
-            return View();
-        }
-
-        // GET: StudentProfileController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: StudentProfileController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
 
         public IActionResult GetDepartmentsByFaculty(int facultyId)
         {

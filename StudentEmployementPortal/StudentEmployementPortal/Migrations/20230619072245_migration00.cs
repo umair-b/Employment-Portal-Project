@@ -21,7 +21,7 @@ namespace StudentEmployementPortal.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ApplicationStatus = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -73,20 +73,6 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Departments",
-                columns: table => new
-                {
-                    DepartmentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Departments", x => x.DepartmentId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Documents",
                 columns: table => new
                 {
@@ -102,16 +88,22 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Faculties",
+                name: "Employers",
                 columns: table => new
                 {
-                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                    EmployerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FacultyName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegistrationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TradingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RegisteredAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TrueInfo = table.Column<bool>(type: "bit", nullable: true),
+                    Approved = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faculties", x => x.FacultyId);
+                    table.PrimaryKey("PK_Employers", x => x.EmployerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -148,6 +140,34 @@ namespace StudentEmployementPortal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Referees", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UpdateStudentProfileViewModel",
+                columns: table => new
+                {
+                    StudentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentTel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentCel = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StudentEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DriversLicense = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CareerObjective = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: true),
+                    Race = table.Column<int>(type: "int", nullable: true),
+                    Citizen = table.Column<bool>(type: "bit", nullable: false),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YearOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UpdateStudentProfileViewModel", x => x.StudentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -274,6 +294,45 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Departments",
+                columns: table => new
+                {
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DepartmentName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    UpdateStudentProfileViewModelStudentId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Departments", x => x.DepartmentId);
+                    table.ForeignKey(
+                        name: "FK_Departments_UpdateStudentProfileViewModel_UpdateStudentProfileViewModelStudentId",
+                        column: x => x.UpdateStudentProfileViewModelStudentId,
+                        principalTable: "UpdateStudentProfileViewModel",
+                        principalColumn: "StudentId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Faculties",
+                columns: table => new
+                {
+                    FacultyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FacultyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UpdateStudentProfileViewModelStudentId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Faculties", x => x.FacultyId);
+                    table.ForeignKey(
+                        name: "FK_Faculties_UpdateStudentProfileViewModel_UpdateStudentProfileViewModelStudentId",
+                        column: x => x.UpdateStudentProfileViewModelStudentId,
+                        principalTable: "UpdateStudentProfileViewModel",
+                        principalColumn: "StudentId");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "JobPosts",
                 columns: table => new
                 {
@@ -328,57 +387,96 @@ namespace StudentEmployementPortal.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DriversLicense = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CareerObjective = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    Race = table.Column<int>(type: "int", nullable: false),
+                    Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YearOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Departments_DepartmentId",
+                        column: x => x.DepartmentId,
+                        principalTable: "Departments",
+                        principalColumn: "DepartmentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "FacultyId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Departments",
-                columns: new[] { "DepartmentId", "DepartmentName", "FacultyId" },
+                columns: new[] { "DepartmentId", "DepartmentName", "FacultyId", "UpdateStudentProfileViewModelStudentId" },
                 values: new object[,]
                 {
-                    { 1, "Accountancy", 1 },
-                    { 2, "Business Sciences", 1 },
-                    { 3, "Economics and Finance", 1 },
-                    { 4, "Law", 1 },
-                    { 5, "Wits Business School", 1 },
-                    { 6, "Wits School of Governance", 1 },
-                    { 7, "Architecture and Planning", 2 },
-                    { 8, "Civil & Environmental Engineering", 2 },
-                    { 9, "Chemical & Metallurgical Engineering", 2 },
-                    { 10, "Construction Economics & Management", 2 },
-                    { 11, "Electrical & Information Engineeringg", 2 },
-                    { 12, "Mechanical, Industrial & Aeronautical Engineering", 2 },
-                    { 13, "Mining Engineering", 2 },
-                    { 14, "Anatomical Sciences", 3 },
-                    { 15, "Clinical Medicine", 3 },
-                    { 16, "Oral Health Sciences", 3 },
-                    { 17, "Pathology", 3 },
-                    { 18, "Physiology", 3 },
-                    { 19, "Public Health", 3 },
-                    { 20, "Therapeutic Sciences", 3 },
-                    { 21, "Wits School of Arts", 4 },
-                    { 22, "Wits School of Education", 4 },
-                    { 23, "Human and Community Development", 4 },
-                    { 24, "Literature, Language and Media", 4 },
-                    { 25, "Social Sciences", 4 },
-                    { 26, "Animal, Plant and Environmental Sciences", 5 },
-                    { 27, "Chemistry", 5 },
-                    { 28, "Computer Science and Applied Mathematics", 5 },
-                    { 29, "Geography, Archaeology and Environmental Sciences", 5 },
-                    { 30, "Geosciences", 5 },
-                    { 31, "Mathematics", 5 },
-                    { 32, "Molecular and Cell Biology", 5 },
-                    { 33, "Physics", 5 },
-                    { 34, "Statistics and Actuarial Science", 5 }
+                    { 1, "Accountancy", 1, null },
+                    { 2, "Business Sciences", 1, null },
+                    { 3, "Economics and Finance", 1, null },
+                    { 4, "Law", 1, null },
+                    { 5, "Wits Business School", 1, null },
+                    { 6, "Wits School of Governance", 1, null },
+                    { 7, "Architecture and Planning", 2, null },
+                    { 8, "Civil & Environmental Engineering", 2, null },
+                    { 9, "Chemical & Metallurgical Engineering", 2, null },
+                    { 10, "Construction Economics & Management", 2, null },
+                    { 11, "Electrical & Information Engineeringg", 2, null },
+                    { 12, "Mechanical, Industrial & Aeronautical Engineering", 2, null },
+                    { 13, "Mining Engineering", 2, null },
+                    { 14, "Anatomical Sciences", 3, null },
+                    { 15, "Clinical Medicine", 3, null },
+                    { 16, "Oral Health Sciences", 3, null },
+                    { 17, "Pathology", 3, null },
+                    { 18, "Physiology", 3, null },
+                    { 19, "Public Health", 3, null },
+                    { 20, "Therapeutic Sciences", 3, null },
+                    { 21, "Wits School of Arts", 4, null },
+                    { 22, "Wits School of Education", 4, null },
+                    { 23, "Human and Community Development", 4, null },
+                    { 24, "Literature, Language and Media", 4, null },
+                    { 25, "Social Sciences", 4, null },
+                    { 26, "Animal, Plant and Environmental Sciences", 5, null },
+                    { 27, "Chemistry", 5, null },
+                    { 28, "Computer Science and Applied Mathematics", 5, null },
+                    { 29, "Geography, Archaeology and Environmental Sciences", 5, null },
+                    { 30, "Geosciences", 5, null },
+                    { 31, "Mathematics", 5, null },
+                    { 32, "Molecular and Cell Biology", 5, null },
+                    { 33, "Physics", 5, null },
+                    { 34, "Statistics and Actuarial Science", 5, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Faculties",
-                columns: new[] { "FacultyId", "FacultyName" },
+                columns: new[] { "FacultyId", "FacultyName", "UpdateStudentProfileViewModelStudentId" },
                 values: new object[,]
                 {
-                    { 1, "Faculty of Commerce, Law and Management" },
-                    { 2, "Faculty of Engineering and the Built Environment" },
-                    { 3, "Faculty of Health Sciences" },
-                    { 4, "Faculty of Humanities" },
-                    { 5, "Faculty of Science" }
+                    { 1, "Faculty of Commerce, Law and Management", null },
+                    { 2, "Faculty of Engineering and the Built Environment", null },
+                    { 3, "Faculty of Health Sciences", null },
+                    { 4, "Faculty of Humanities", null },
+                    { 5, "Faculty of Science", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -421,6 +519,16 @@ namespace StudentEmployementPortal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Departments_UpdateStudentProfileViewModelStudentId",
+                table: "Departments",
+                column: "UpdateStudentProfileViewModelStudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Faculties_UpdateStudentProfileViewModelStudentId",
+                table: "Faculties",
+                column: "UpdateStudentProfileViewModelStudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_JobPosts_DepartmentId",
                 table: "JobPosts",
                 column: "DepartmentId");
@@ -428,6 +536,16 @@ namespace StudentEmployementPortal.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_JobPosts_FacultyId",
                 table: "JobPosts",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_DepartmentId",
+                table: "Students",
+                column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_FacultyId",
+                table: "Students",
                 column: "FacultyId");
         }
 
@@ -456,6 +574,9 @@ namespace StudentEmployementPortal.Migrations
                 name: "Documents");
 
             migrationBuilder.DropTable(
+                name: "Employers");
+
+            migrationBuilder.DropTable(
                 name: "JobPosts");
 
             migrationBuilder.DropTable(
@@ -463,6 +584,9 @@ namespace StudentEmployementPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Referees");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "WorkExperience");
@@ -478,6 +602,9 @@ namespace StudentEmployementPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "Faculties");
+
+            migrationBuilder.DropTable(
+                name: "UpdateStudentProfileViewModel");
         }
     }
 }
