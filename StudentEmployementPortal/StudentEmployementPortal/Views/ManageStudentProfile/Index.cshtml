@@ -1,0 +1,40 @@
+﻿@using StudentEmployementPortal.ViewModels
+@model StudentUpdateInfoViewModel
+
+<form method="post">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div>
+        <label asp-for="TelNumber"></label>
+        <input asp-for="TelNumber" />
+        <span asp-validation-for="TelNumber"></span>
+    </div>
+    <div>
+        <label asp-for="CellNumber"></label>
+        <input asp-for="CellNumber" />
+        <span asp-validation-for="CellNumber"></span>
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label asp-for="StudentIdNumber"></label>
+        <input asp-for="StudentIdNumber" />
+        <span asp-validation-for="StudentIdNumber"></span>
+    </div>
+    <div>
+        <label asp-for="Faculty"></label>
+        
+    </div>
+
+</form>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
+using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
@@ -21,9 +22,53 @@ namespace StudentEmployementPortal.Controllers
             var Student = _appDbContext.Students.Find(UserId);
             var AppUser = _appDbContext.AppUsers.Find(UserId);
 
+            if (Student == null)
+            {
+                var StudentVM = new StudentUpdateInfoViewModel
+                {
+                    FirstName = AppUser.FirstName,
+                    LastName = AppUser.LastName,
+                    CellNumber = AppUser.CellNumber,
+                    TelNumber = AppUser.TelNumber,
+                    Email = AppUser.Email,
+                    FacultyList = _appDbContext.Faculties.ToList(),
+                    DepartmentList = _appDbContext.Departments.ToList(),
+                    GenderList = _appDbContext.Genders.ToList(),
+                    RaceList = _appDbContext.Races.ToList(),
+                    LicenseList = _appDbContext.Licences.ToList()
 
+                };
 
-            return View();
+                return View(StudentVM);
+            }
+            else
+            {
+                var StudentVM = new StudentUpdateInfoViewModel
+                {
+                    FirstName = AppUser.FirstName,
+                    LastName = AppUser.LastName,
+                    CellNumber = AppUser.CellNumber,
+                    TelNumber = AppUser.TelNumber,
+                    Email = AppUser.Email,
+                    FacultyList = _appDbContext.Faculties.ToList(),
+                    DepartmentList = _appDbContext.Departments.ToList(),
+                    GenderList = _appDbContext.Genders.ToList(),
+                    RaceList = _appDbContext.Races.ToList(),
+                    LicenseList = _appDbContext.Licences.ToList(),
+                    FacultyId = Student.FacultyId,
+                    DepartmentId = Student.DepartmentId,
+                    GenderId = Student.GenderId,
+                    RaceId = Student.RaceId,
+                    LicenseId = Student.LicenseId,
+                    CareerObjective = Student.CareerObjective,
+                    Achievements = Student.Achievements,
+                    Citizen = Student.Citizen,
+                    Interests = Student.Interests,
+                    Skills = Student.Skills
+                };
+
+                return View(StudentVM); 
+            }
         }
     }
 }

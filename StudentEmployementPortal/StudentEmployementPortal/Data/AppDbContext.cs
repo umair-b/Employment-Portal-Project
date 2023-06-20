@@ -23,7 +23,9 @@ namespace StudentEmployementPortal.Data
         public DbSet<Employer> Employers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<BusinessType> BusinessTypes { get; set; }
-        public DbSet<License> Licences { get; set; }
+        public DbSet<DriversLicense> Licences { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<Race> Races { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,19 +43,37 @@ namespace StudentEmployementPortal.Data
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
 
-            modelBuilder.Entity<License>().HasData(
-                new License { LicenseId = 1, LicenceName = "Code A1 driver's license" },
-                new License { LicenseId = 2, LicenceName = "Code A driver's license" },
-                new License { LicenseId = 3, LicenceName = "Code B driver's license" },
-                new License { LicenseId = 4, LicenceName = "Code B5 driver's license" },
-                new License { LicenseId = 5, LicenceName = "Code B7 driver's license" },
-                new License { LicenseId = 6, LicenceName = "Code C driver's license" },
-                new License { LicenseId = 7, LicenceName = "Code C1 driver's license" },
-                new License { LicenseId = 8, LicenceName = "Code EB driver's license" },
-                new License { LicenseId = 9, LicenceName = "Code EC driver's license" },
-                new License { LicenseId = 10, LicenceName = "Code EC1 driver's license" },
-                new License { LicenseId = 11, LicenceName = "Code EC1-8 driver's license" }
+            modelBuilder.Entity<Gender>().HasData(
+                new Gender { GenderId = 1, GenderName = "Male" },
+                new Gender { GenderId = 2, GenderName = "Female"},
+                new Gender { GenderId = 3, GenderName = "Non-binary"},
+                new Gender { GenderId = 4, GenderName = "Other"},
+                new Gender { GenderId = 5, GenderName = "Prefer not to say."}
                 );
+
+            modelBuilder.Entity<Race>().HasData(
+                new Race { RaceId = 1, RaceName = "Black"},
+                new Race { RaceId = 2, RaceName = "White"},
+                new Race { RaceId = 3, RaceName = "Coloured"},
+                new Race { RaceId = 4, RaceName = "Indian"},
+                new Race { RaceId = 5, RaceName = "Other"}
+                );
+
+            modelBuilder.Entity<DriversLicense>().HasData(
+                new DriversLicense { LicenseId = 1, LicenceName = "Code A1 driver's license" },
+                new DriversLicense { LicenseId = 2, LicenceName = "Code A driver's license" },
+                new DriversLicense { LicenseId = 3, LicenceName = "Code B driver's license" },
+                new DriversLicense { LicenseId = 4, LicenceName = "Code B5 driver's license" },
+                new DriversLicense { LicenseId = 5, LicenceName = "Code B7 driver's license" },
+                new DriversLicense { LicenseId = 6, LicenceName = "Code C driver's license" },
+                new DriversLicense { LicenseId = 7, LicenceName = "Code C1 driver's license" },
+                new DriversLicense { LicenseId = 8, LicenceName = "Code EB driver's license" },
+                new DriversLicense { LicenseId = 9, LicenceName = "Code EC driver's license" },
+                new DriversLicense { LicenseId = 10, LicenceName = "Code EC1 driver's license" },
+                new DriversLicense { LicenseId = 11, LicenceName = "Code EC1-8 driver's license" }
+                );
+
+            
 
             modelBuilder.Entity<Employer>()
                 .Ignore(e => e.EmployerBusinessTypes)

@@ -6,7 +6,8 @@ namespace StudentEmployementPortal.Models
 {
     public class Student
     {
-
+        [DisplayName("ID/Passport Number")]
+        public string StudentIdNumber { get; set; }
         [DisplayName("Career Objective")]
         public string? CareerObjective { get; set; }
         [DisplayName("Skills")]
@@ -19,7 +20,7 @@ namespace StudentEmployementPortal.Models
         public bool Citizen { get; set; }
 
         //Education
-        public IEnumerable<Education> Educations { get; set; }
+        public IEnumerable<Education> Education { get; set; }
         
         //Work Experience
         public IEnumerable<WorkExperience> WorkExperience { get; set; }
@@ -28,27 +29,27 @@ namespace StudentEmployementPortal.Models
         public IEnumerable<Referee> Referee { get; set; }
         
         //Faculty
-        public Faculty faculty { get; set; }
+        public Faculty Faculty { get; set; }
         [ForeignKey(nameof(FacultyId))]
         public int FacultyId { get; set; }
 
         //Department
-        public Department department { get; set; }
+        public Department Department { get; set; }
         [ForeignKey(nameof (DepartmentId))]
         public int DepartmentId { get; set; }
 
         //License
-        public License license { get; set; }
+        public DriversLicense License { get; set; }
         [ForeignKey(nameof(LicenseId))]
         public int LicenseId { get; set; }
 
         //Race
-        public Race race { get; set; }
+        public Race Race { get; set; }
         [ForeignKey(nameof(RaceId))]
         public int RaceId { get; set; }
 
         //Gender
-        public Gender gender { get; set; }
+        public Gender Gender { get; set; }
         [ForeignKey(nameof(GenderId))]
         public int GenderId { get; set; }
 
