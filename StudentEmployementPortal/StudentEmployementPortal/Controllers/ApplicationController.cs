@@ -21,7 +21,10 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Approved)
+            var applications = _db.Application
+                .Select(a => a.PostId) .ToList();
+
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved)
                 .Include(x => x.Faculty)
                 .Include(x => x.Department);
 
@@ -61,7 +64,7 @@ namespace StudentEmployementPortal.Controllers
                 return NotFound();
             }
 
-            var application = new Application
+            var application = new Models.Application
             {
                 PostId = id
             };
@@ -94,43 +97,54 @@ namespace StudentEmployementPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(DocumentUploadViewModel viewModel)
+        public ActionResult Upload(int id, DocumentUploadViewModel viewModel)
         {
-            /*var application = _db.Application.Find(id);
+            
+            
+                var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+
+                viewModel.ApplicationId = id;
+                viewModel.UploadedDocuments = documents;
+
+                var file = viewModel.File;
+
+                if (file != null && file.Length > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var document = new Document
+                    {
+                        FileDescription = viewModel.FileDescription,
+                        FileName = fileName,
+                        ApplicationId = viewModel.ApplicationId,
+                        ApplicationFile = file
+                    };
+
+                    _db.Documents.Add(document);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("Upload");
+        } 
+        
+        public IActionResult Cancel(int id)
+        {
+            var application = _db.Application.Find(id);
 
             if (application == null)
             {
                 return NotFound();
-            }*/
-
-            var file = viewModel.File;
-
-            if (file != null && file.Length > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                var document = new Document
-                {
-                    FileDescription = viewModel.FileDescription,
-                    FileName = fileName,
-                    ApplicationId = viewModel.ApplicationId,
-                    ApplicationFile = file
-                };
-
-                _db.Documents.Add(document);
-                _db.SaveChanges();
             }
-            return RedirectToAction("Upload");
+
+            _db.Application.Remove(application);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
-
-       
-
-        
            
     }
 }

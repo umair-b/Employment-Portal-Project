@@ -14,20 +14,6 @@ namespace StudentEmployementPortal.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Application",
-                columns: table => new
-                {
-                    ApplicationId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationStatus = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Application", x => x.ApplicationId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -169,26 +155,6 @@ namespace StudentEmployementPortal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkExperience", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Documents",
-                columns: table => new
-                {
-                    DocumentId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ApplicationId = table.Column<int>(type: "int", nullable: false),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
-                    table.ForeignKey(
-                        name: "FK_Documents_Application_ApplicationId",
-                        column: x => x.ApplicationId,
-                        principalTable: "Application",
-                        principalColumn: "ApplicationId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -430,6 +396,47 @@ namespace StudentEmployementPortal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Application",
+                columns: table => new
+                {
+                    ApplicationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationStatus = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Application", x => x.ApplicationId);
+                    table.ForeignKey(
+                        name: "FK_Application_JobPosts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "JobPosts",
+                        principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Documents",
+                columns: table => new
+                {
+                    DocumentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ApplicationId = table.Column<int>(type: "int", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documents", x => x.DocumentId);
+                    table.ForeignKey(
+                        name: "FK_Documents_Application_ApplicationId",
+                        column: x => x.ApplicationId,
+                        principalTable: "Application",
+                        principalColumn: "ApplicationId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "DepartmentId", "DepartmentName", "FacultyId", "UpdateStudentProfileViewModelStudentId" },
@@ -482,6 +489,11 @@ namespace StudentEmployementPortal.Migrations
                     { 4, "Faculty of Humanities", null },
                     { 5, "Faculty of Science", null }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Application_PostId",
+                table: "Application",
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -583,9 +595,6 @@ namespace StudentEmployementPortal.Migrations
                 name: "Employers");
 
             migrationBuilder.DropTable(
-                name: "JobPosts");
-
-            migrationBuilder.DropTable(
                 name: "Qualifications");
 
             migrationBuilder.DropTable(
@@ -605,6 +614,9 @@ namespace StudentEmployementPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "JobPosts");
 
             migrationBuilder.DropTable(
                 name: "Departments");

@@ -1,22 +1,30 @@
 ﻿@model StudentEmployementPortal.Models.Application
 
-<h4>Application Details</h4>
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
 
 <form method="post">
-    <div>
-        <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
-            &larr; Back
-        </a>
+    <div class="pt-2 mt-2">
+        <div class="pb-2">
+            <h4 class="text-primary">Confirm Application</h4>
+        </div>
+        <div style="display:inline-block">
+            <p style="display:inline-block"> You are about to submit your application for the following post:
+                <p style="font-weight:bold; display:inline-block">@Model.Post.JobTitle</p>
+                <p> Go to the next page and upload required documents.</p>
+            </p>
+        </div>
     </div>
     <br />
-    <div class="row pb-2">
-        <h4 class="text-primary" style="font-weight:bold">Confirm Application</h4>
+    <div>
+        <a asp-action="Upload" asp-route-id="@Model.ApplicationId" class="btn btn-primary">Upload</a>
+        <a asp-action="Cancel" asp-route-id="@Model.ApplicationId" class="btn btn-secondary">Cancel</a>
     </div>
-    <div style="display:inline-block">
-        <p style="display:inline-block">
-            You are about to submit your application for: <p style="font-weight:bold; display:inline-block">@Model.Post.JobTitle</p>
-            <p> Go to the next page and upload required documents.</p>
-        </p>
-    </div>
-    <a asp-action="Upload" asp-route-id="@Model.ApplicationId" class="btn btn-primary">Apply</a>
 </form>
