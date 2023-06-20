@@ -14,6 +14,7 @@ namespace StudentEmployementPortal.Models
         [NotMapped]
         public IFormFile ApplicationFile { get; set; }
         public string FileName { get; set; }
+        public string FileDescription { get; set; }
        
     }
 }

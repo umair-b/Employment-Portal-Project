@@ -17,10 +17,23 @@
                 &larr; Back
             </a>
         </div>
+        <br />
+        <div class="row pb-2">
+            <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
+        </div>
+        <hr />
+        <div style="display:inline-block">
+            <h5 style="display:inline-block">
+                You are applying for the post of
+                <p style="display:inline-block; font-weight:bold">@Model.JobTitle</p>
+            </h5>
+        </div>
+        <br />
         <table>
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,31 +41,27 @@
                 {
                     <tr>
                         <td>@document.FileName</td>
+                        <td>@document.FileDescription</td>
                     </tr>
                 }
             </tbody>
         </table>
         <br />
-        <div class="row pb-2">
-            <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
-        </div>
-        <hr/>
-        <div style="display:inline-block">
-            <h5 style="display:inline-block">
-                You are applying for the post of 
-                <p style="display:inline-block; font-weight:bold">@Model.JobTitle</p>
-            </h5>
-        </div>
-        <br />
         <div class="form-control">
             <div>
-                <label asp-for="Files" class="pb-2"></label>
-                <input type="file" name="Files" id="Files" multiple class="form-control"/>
+                <label asp-for="File" class="pb-2"></label>
                 <br />
-                <input type="submit" value="Upload" asp-action="Upload"/>
+                <div>
+                    <label>File Description</label>
+                    <input asp-for="FileDescription" />
+                </div>
+                <br />
+                <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
+                <br />
+                <input type="submit" value="Upload" asp-action="Upload" />
             </div>
         </div>
     </div>
     <br />
-    <button type="submit" class="btn btn-primary mb-3" style="width:150px">Apply</button>
+    <a asp-action="Apply" asp-route-id="@Model.ApplicationId" class="btn btn-primary">Apply</a>
 </form>

@@ -51,7 +51,8 @@ namespace StudentEmployementPortal.Controllers
             return View(jobPost);
         }
 
-        public IActionResult Upload(int id)
+        [HttpGet]
+        public IActionResult Apply(int id)
         {
             var jobPost = _db.JobPosts.Find(id);
 
@@ -60,10 +61,32 @@ namespace StudentEmployementPortal.Controllers
                 return NotFound();
             }
 
+            var application = new Application
+            {
+                PostId = id
+            };
+
+            _db.Application.Add(application);
+            _db.SaveChanges();
+
+            return View(application);
+        }
+
+        public IActionResult Upload(int id)
+        {
+            var application = _db.Application.Find(id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            var document = _db.Documents.Where(d => d.ApplicationId == application.ApplicationId).ToList();
+
             var UploadViewModel = new DocumentUploadViewModel()
             {
-                JobTitle = jobPost.JobTitle,
-                UploadedDocuments = _db.Documents.ToList()
+                ApplicationId = application.ApplicationId,
+                UploadedDocuments = document
             };
 
             return View(UploadViewModel);
@@ -71,41 +94,43 @@ namespace StudentEmployementPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload()
+        public ActionResult Upload(DocumentUploadViewModel viewModel)
         {
-            // Save the Application record
-            /*var application = new Application
-            {
-                PostId = id,
-            };
-            _db.Application.Add(application);
-            _db.SaveChanges();
+            /*var application = _db.Application.Find(id);
 
-            foreach (var file in Files)
+            if (application == null)
             {
-                if (file != null && file.Length > 0)
+                return NotFound();
+            }*/
+
+            var file = viewModel.File;
+
+            if (file != null && file.Length > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                using (var stream = new FileStream(path, FileMode.Create))
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-
-                    var document = new Document
-                    {
-                        FileName = fileName,
-                        ApplicationId = viewModel.ApplicationId,
-                        ApplicationFile = file
-                    };
-
-                    _db.Documents.Add(document);
-                    _db.SaveChanges();
+                    file.CopyTo(stream);
                 }
+
+                var document = new Document
+                {
+                    FileDescription = viewModel.FileDescription,
+                    FileName = fileName,
+                    ApplicationId = viewModel.ApplicationId,
+                    ApplicationFile = file
+                };
+
+                _db.Documents.Add(document);
+                _db.SaveChanges();
             }
-            return RedirectToAction("Index");
-        }*/
-            return View();
+            return RedirectToAction("Upload");
         }
+
+       
+
+        
+           
     }
 }

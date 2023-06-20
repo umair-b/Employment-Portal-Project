@@ -12,8 +12,8 @@ namespace StudentEmployementPortal.ViewModels
 
         [Required]
         [Display(Name = "Upload a Document")]
-        public IEnumerable<IFormFile> Files { get; set; }
-
+        public IFormFile File { get; set; }
+        public string FileDescription { get; set; }
         public IEnumerable<Document> UploadedDocuments { get; set; }
     }
 }
