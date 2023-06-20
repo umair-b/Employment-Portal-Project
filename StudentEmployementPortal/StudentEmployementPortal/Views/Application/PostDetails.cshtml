@@ -1,0 +1,108 @@
+﻿@model StudentEmployementPortal.Models.JobPost
+
+@{
+    ViewData["Title"] = "PostDetails";
+}
+
+<h4>Job Post Details</h4>
+
+<div>
+    <hr />
+    <div class="form-control">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.JobLocation)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.JobLocation)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.JobDescription)
+            </dd>
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.KeyResponsibilities)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.KeyResponsibilities)
+            </dd>
+
+            <dt class="col-sm-2">
+                Fulltime / Part-time
+            </dt>
+            @if (Model.FullTime == true)
+            {
+                <dd class="col-sm-10">
+                    Fulltime
+                </dd>
+            }
+            else if (Model.FullTime == false)
+            {
+                <dd class="col-sm-10">
+                    Part-time
+                </dd>
+
+                <dd></dd>
+
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PartTimeHours)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PartTimeHours) hours per week
+                </dd>
+            }
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.HourlyRate)
+            </dt>
+            <dd class="col-sm-10">
+                R@(Html.DisplayFor(model => model.HourlyRate))
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ClosingDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ClosingDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.MinRequirements)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.MinRequirements)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ApplicationInstructions)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ApplicationInstructions)
+            </dd>
+        </dl>
+    </div>
+</div>
+<br/>
+<div class="pb-2">
+    <a asp-action="Upload" asp-route-id="@Model.PostId" class="btn btn-primary">Apply</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

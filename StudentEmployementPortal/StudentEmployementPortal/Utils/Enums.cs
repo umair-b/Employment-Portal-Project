@@ -21,7 +21,9 @@ namespace StudentEmployementPortal.Utils
             Approved,
             Rejected,
             Pending,
-            Withdraw
+            Withdrawn,
+            Closed,
+            Queried
         }
 
         public enum Gender
@@ -37,6 +39,30 @@ namespace StudentEmployementPortal.Utils
             [Display(Name ="Prefer Not to Say")]
             PreferNotToSay
         }
+
+        public enum Race
+        {
+            Black,
+            Coloured,
+            Indian,
+            White,
+            Other
+        }
+
+        public enum ApplicationStatus
+        {
+            [Display(Name = "Pending")]
+            Pending,
+            [Display(Name = "Interview")]
+            Interview,
+            [Display(Name = "On Hold")]
+            OnHold,
+            [Display(Name = "Rejected")]
+            Rejected,
+            [Display(Name = "Appointed")]
+            Appointed
+        }
+
 
         public enum YearOfStudy
         {

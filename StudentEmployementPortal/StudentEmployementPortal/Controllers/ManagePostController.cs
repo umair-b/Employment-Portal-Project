@@ -37,15 +37,6 @@ namespace StudentEmployementPortal.Controllers
             return View(jobPosts);
         }
 
-        /*public async Task<IActionResult> Index()
-        {
-            var jobPosts = _db.JobPosts
-                .Include(j => j.Department)
-                .Include(j => j.Faculty);
-
-            return View(await  jobPosts.ToListAsync());
-        }*/
-
         public IActionResult CreatePost()
         {
             var CreatePostViewModel = new CreateJobPostViewModel
@@ -56,14 +47,6 @@ namespace StudentEmployementPortal.Controllers
 
             return View(CreatePostViewModel);
         }
-
-        /*public async Task<IActionResult> CreatePost()
-        {
-            ViewData["FacultyId"] = new SelectList(_db.Faculties, "FacultyId", "FacultyName");
-            ViewData["DepartmentId"] = new SelectList(_db.Departments, "DepartmentId", "DepartmentName");
-
-            return View();
-        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -112,8 +95,8 @@ namespace StudentEmployementPortal.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            /*obj.FacultyList = _db.Faculties.ToList();
-            obj.DepartmentList = _db.Departments.ToList();*/
+            obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList();
 
             return View(obj);
         }
@@ -125,7 +108,7 @@ namespace StudentEmployementPortal.Controllers
                 return NotFound();
             }
             var obj = _db.JobPosts.Find(id);
-            
+
             if (obj == null)
             {
                 return NotFound();
@@ -153,7 +136,7 @@ namespace StudentEmployementPortal.Controllers
                 JobTitle = obj.JobTitle,
                 KeyResponsibilities = obj.KeyResponsibilities,
                 MinRequirements = obj.MinRequirements,
-                StartDate   = obj.StartDate,
+                StartDate = obj.StartDate,
                 limitedToFirst = obj.limitedToFirst,
                 limitedToSecond = obj.limitedToSecond,
                 limitedToThird = obj.limitedToThird,
@@ -166,9 +149,6 @@ namespace StudentEmployementPortal.Controllers
                 DepartmentList = _db.Departments.ToList(),
             };
 
-            /*UpdatePostViewModel.FacultyList = _db.Faculties.ToList();
-            UpdatePostViewModel.DepartmentList = _db.Departments.ToList();*/
-
             return View(UpdatePostViewModel);
         }
 
@@ -176,8 +156,6 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UpdateJobPostViewModel obj)
         {
-            
-            /*var errors = ModelState.Values.SelectMany(x => x.Errors);*/
 
             if (ModelState.IsValid)
             {
@@ -227,6 +205,43 @@ namespace StudentEmployementPortal.Controllers
 
             return View(obj);
         }
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || _db.JobPosts == null)
+            {
+                return NotFound();
+            }
+
+            var jobPost = _db.JobPosts.SingleOrDefault(j => j.PostId == id);
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobPost);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(UpdateJobPostViewModel obj)
+        {
+            if (_db.JobPosts == null)
+            {
+                return Problem("Entity set 'AppDbContext.JobPosts'  is null.");
+            }
+
+            var jobPost = _db.JobPosts.SingleOrDefault(j => j.PostId == obj.PostId);
+
+            if (jobPost != null)
+            {
+                _db.JobPosts.Remove(jobPost);
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
 
         public IActionResult GetDepartmentsByFaculty(int facultyId)
         {

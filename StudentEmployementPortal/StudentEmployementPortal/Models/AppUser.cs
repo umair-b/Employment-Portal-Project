@@ -6,7 +6,6 @@ namespace StudentEmployementPortal.Models
 {
     public class AppUser : IdentityUser
     {
-        internal object FullName;
 
         [Required]
         public string FirstName { get; set; }
@@ -16,5 +15,7 @@ namespace StudentEmployementPortal.Models
         public string CellNumber { get; set; }
         
         public string TelNumber { get; set; }
+
+        public Student Student { get; set; }
     }
 }

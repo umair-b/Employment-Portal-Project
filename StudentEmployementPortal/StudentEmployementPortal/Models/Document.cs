@@ -6,11 +6,14 @@ namespace StudentEmployementPortal.Models
     public class Document
     {
         [Key]
-        public int Id { get; set; }
+        public int DocumentId { get; set; }
+        [ForeignKey(nameof(Application))]
         public int ApplicationId { get; set; }
-        public string ApplicationName { get; set; }
-        public string ApplicationDescription { get; set; }
+        public Application Application { get; set; }
+
         [NotMapped]
         public IFormFile ApplicationFile { get; set; }
+        public string FileName { get; set; }
+       
     }
 }

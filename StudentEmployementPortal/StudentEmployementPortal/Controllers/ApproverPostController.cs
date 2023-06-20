@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
+using System.Data;
 using System.Linq;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Approver)]
     public class ApproverPostController : Controller
     {
         private AppDbContext _db;
@@ -56,10 +59,9 @@ namespace StudentEmployementPortal.Controllers
                 ContactPerson = JobPost.ContactPerson,
                 DepartmentId = JobPost.DepartmentId,
                 FacultyId = JobPost.FacultyId,
-                /*Department = JobPost.Department,
-                Faculty = JobPost.Faculty,*/
                 EndDate = JobPost.EndDate,
                 FullTime = JobPost.FullTime,
+                PartTimeHours = JobPost.PartTimeHours,
                 HourlyRate = JobPost.HourlyRate,
                 JobDescription = JobPost.JobDescription,
                 JobLocation = JobPost.JobLocation,
@@ -79,15 +81,16 @@ namespace StudentEmployementPortal.Controllers
                 limitedToPostDoc = JobPost.limitedToPostDoc,
                 limitedToDepartment = JobPost.limitedToDepartment,
             };
-            
-           
+
+            ReviewJobPostVm.FacultyList = _db.Faculties.ToList();
+            ReviewJobPostVm.DepartmentList = _db.Departments.ToList();
 
             return View(ReviewJobPostVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ReviewPost (ReviewPostViewModel ReviewPostVm)
+        public IActionResult ReviewPost(ReviewPostViewModel ReviewPostVm)
         {
 
             if (ModelState.IsValid)
@@ -104,6 +107,9 @@ namespace StudentEmployementPortal.Controllers
                 }
                 return View(ReviewPostVm);
             }
+
+            ReviewPostVm.FacultyList = _db.Faculties.ToList();
+            ReviewPostVm.DepartmentList = _db.Departments.ToList();
 
             return View(ReviewPostVm);
         }

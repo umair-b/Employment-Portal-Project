@@ -1,0 +1,58 @@
+﻿@model StudentEmployementPortal.ViewModels.DocumentUploadViewModel
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="pt-2 mt-2">
+        <div>
+            <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+                &larr; Back
+            </a>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var document in Model.UploadedDocuments)
+                {
+                    <tr>
+                        <td>@document.FileName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <div class="row pb-2">
+            <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
+        </div>
+        <hr/>
+        <div style="display:inline-block">
+            <h5 style="display:inline-block">
+                You are applying for the post of 
+                <p style="display:inline-block; font-weight:bold">@Model.JobTitle</p>
+            </h5>
+        </div>
+        <br />
+        <div class="form-control">
+            <div>
+                <label asp-for="Files" class="pb-2"></label>
+                <input type="file" name="Files" id="Files" multiple class="form-control"/>
+                <br />
+                <input type="submit" value="Upload" asp-action="Upload"/>
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary mb-3" style="width:150px">Apply</button>
+</form>
