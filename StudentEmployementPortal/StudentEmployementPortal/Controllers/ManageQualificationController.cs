@@ -2,7 +2,7 @@
 
 namespace StudentEmployementPortal.Controllers
 {
-    public class AddQualification : Controller
+    public class ManageQualificationController : Controller
     {
         public IActionResult Index()
         {
