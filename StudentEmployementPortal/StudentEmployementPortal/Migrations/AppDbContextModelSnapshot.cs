@@ -244,6 +244,8 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("ApplicationId");
 
+                    b.HasIndex("PostId");
+
                     b.ToTable("Application");
                 });
 
@@ -488,6 +490,10 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Property<int>("ApplicationId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FileDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FileName")
                         .IsRequired()
@@ -1006,6 +1012,17 @@ namespace StudentEmployementPortal.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.Application", b =>
+                {
+                    b.HasOne("StudentEmployementPortal.Models.JobPost", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>

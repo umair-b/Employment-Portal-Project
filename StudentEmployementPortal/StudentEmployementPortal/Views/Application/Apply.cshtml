@@ -1,0 +1,22 @@
+﻿@model StudentEmployementPortal.Models.Application
+
+<h4>Application Details</h4>
+
+<form method="post">
+    <div>
+        <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+            &larr; Back
+        </a>
+    </div>
+    <br />
+    <div class="row pb-2">
+        <h4 class="text-primary" style="font-weight:bold">Confirm Application</h4>
+    </div>
+    <div style="display:inline-block">
+        <p style="display:inline-block">
+            You are about to submit your application for: <p style="font-weight:bold; display:inline-block">@Model.Post.JobTitle</p>
+            <p> Go to the next page and upload required documents.</p>
+        </p>
+    </div>
+    <a asp-action="Upload" asp-route-id="@Model.ApplicationId" class="btn btn-primary">Apply</a>
+</form>
