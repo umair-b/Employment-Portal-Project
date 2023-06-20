@@ -2,39 +2,129 @@
 @model StudentUpdateInfoViewModel
 
 <form method="post">
-    <div>
+    <div class="p-1">
         <label asp-for="FirstName"></label>
         <input asp-for="FirstName" />
         <span asp-validation-for="FirstName"></span>
     </div>
-    <div>
+    <div class="p-1">
         <label asp-for="LastName"></label>
         <input asp-for="LastName" />
         <span asp-validation-for="LastName"></span>
     </div>
-    <div>
+    <div class="p-1">
         <label asp-for="TelNumber"></label>
         <input asp-for="TelNumber" />
         <span asp-validation-for="TelNumber"></span>
     </div>
-    <div>
+    <div class="p-1">
         <label asp-for="CellNumber"></label>
         <input asp-for="CellNumber" />
         <span asp-validation-for="CellNumber"></span>
     </div>
-    <div>
+    <div class="p-1">
         <label asp-for="Email"></label>
         <input asp-for="Email" />
         <span asp-validation-for="Email"></span>
     </div>
-    <div>
+    <div class="p-1">
         <label asp-for="StudentIdNumber"></label>
         <input asp-for="StudentIdNumber" />
         <span asp-validation-for="StudentIdNumber"></span>
     </div>
-    <div>
-        <label asp-for="Faculty"></label>
-        
+    <div class="p-1">
+        <select asp-for="@Model.LicenseId" class="form-select">
+            <option value="" selected disabled>Select Drivers Licence</option>
+            @foreach (var license in Model.LicenseList)
+            {
+                <option value="@license.LicenseId">@license.LicenceName</option>
+            }
+        </select>
+    </div>
+    <div class = "p-1">
+        <label asp-for="CareerObjective"></label>
+        <input asp-for="CareerObjective" />
+        <span asp-validation-for="CareerObjective"></span>
+    </div>
+    <div class="p-1">
+        <select asp-for="@Model.GenderId" class="form-select">
+            <option value  = "" selected disabled>Select Gender</option>
+            @foreach (var gender in Model.GenderList)
+            {
+                <option value="@gender.GenderId">@gender.GenderName</option>
+            }
+        </select>
+    </div>
+    <div class="p-1">
+        <select asp-for="@Model.RaceId" class="form-select">
+            <option value="" selected disabled>Select Race</option>
+            @foreach (var race in Model.RaceList)
+            {
+                <option value="@race.RaceId">@race.RaceName</option>
+            }
+        </select>
+    </div>
+    <div class="p-1">
+        <div>
+            <label asp-for="Citizen" class="mb-2"></label>
+            <input type="radio" asp-for="Citizen" value="true" class="m-2" />Yes
+            <input type="radio" asp-for="Citizen" value="false" class="m-2" />No
+        </div>
+        <span asp-validation-for="Citizen" class="text-danger"></span>
+    </div>
+    <div id="facultyContainer" class="p-1">
+        <select asp-for="@Model.FacultyId" id="facultyId" class="form-select">
+            <option value="" selected disabled>Select Faculty</option>
+                @foreach (var f in @Model.FacultyList)
+                {
+                    <option value="@f.FacultyId">@f.FacultyName</option>
+                }
+        </select>
+    </div>
+    <div id="departmentContainer" class="p-1">
+        <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select">
+            <option value="" selected disabled>Select Department</option>
+                @foreach (var d in @Model.DepartmentList)
+                {
+                    <option value="@d.DepartmentId">@d.DepartmentName</option>
+                }
+        </select>
+    </div>
+    <div class="p-1">
+        <label asp-for="Achievements"></label>
+        <input asp-for="Achievements" />
+        <span asp-validation-for="Achievements"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="Interests"></label>
+        <input asp-for="Interests" />
+        <span asp-validation-for="Interests"></span>
     </div>
 
+
 </form>
+
+
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#facultyId').change(function () {
+            var facultyId = $(this).val();
+            if (facultyId) {
+                $.ajax({
+                    url: '/ManagePost/GetDepartmentsByFaculty',
+                    type: 'POST',
+                    data: { facultyId: facultyId },
+                    success: function (response) {
+                        $('#departmentId').html(response);
+                        $('#departmentId').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#departmentId').html('<option value="" selected disabled>Select Department</option>');
+                $('#departmentId').prop('disabled', true);
+            }
+        });
+    </script>
+}

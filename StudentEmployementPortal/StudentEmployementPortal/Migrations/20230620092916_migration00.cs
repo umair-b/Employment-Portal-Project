@@ -128,7 +128,7 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gender",
+                name: "Genders",
                 columns: table => new
                 {
                     GenderId = table.Column<int>(type: "int", nullable: false)
@@ -137,7 +137,7 @@ namespace StudentEmployementPortal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gender", x => x.GenderId);
+                    table.PrimaryKey("PK_Genders", x => x.GenderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +198,7 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Race",
+                name: "Races",
                 columns: table => new
                 {
                     RaceId = table.Column<int>(type: "int", nullable: false)
@@ -207,7 +207,7 @@ namespace StudentEmployementPortal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Race", x => x.RaceId);
+                    table.PrimaryKey("PK_Races", x => x.RaceId);
                 });
 
             migrationBuilder.CreateTable(
@@ -348,6 +348,7 @@ namespace StudentEmployementPortal.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentIdNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CareerObjective = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Skills = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Achievements = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -381,9 +382,9 @@ namespace StudentEmployementPortal.Migrations
                         principalColumn: "FacultyId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Students_Gender_GenderId",
+                        name: "FK_Students_Genders_GenderId",
                         column: x => x.GenderId,
-                        principalTable: "Gender",
+                        principalTable: "Genders",
                         principalColumn: "GenderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -393,9 +394,9 @@ namespace StudentEmployementPortal.Migrations
                         principalColumn: "LicenseId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Students_Race_RaceId",
+                        name: "FK_Students_Races_RaceId",
                         column: x => x.RaceId,
-                        principalTable: "Race",
+                        principalTable: "Races",
                         principalColumn: "RaceId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -547,6 +548,18 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Genders",
+                columns: new[] { "GenderId", "GenderName" },
+                values: new object[,]
+                {
+                    { 1, "Male" },
+                    { 2, "Female" },
+                    { 3, "Non-binary" },
+                    { 4, "Other" },
+                    { 5, "Prefer not to say." }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Licences",
                 columns: new[] { "LicenseId", "LicenceName" },
                 values: new object[,]
@@ -562,6 +575,18 @@ namespace StudentEmployementPortal.Migrations
                     { 9, "Code EC driver's license" },
                     { 10, "Code EC1 driver's license" },
                     { 11, "Code EC1-8 driver's license" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Races",
+                columns: new[] { "RaceId", "RaceName" },
+                values: new object[,]
+                {
+                    { 1, "Black" },
+                    { 2, "White" },
+                    { 3, "Coloured" },
+                    { 4, "Indian" },
+                    { 5, "Other" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -702,13 +727,13 @@ namespace StudentEmployementPortal.Migrations
                 name: "Faculties");
 
             migrationBuilder.DropTable(
-                name: "Gender");
+                name: "Genders");
 
             migrationBuilder.DropTable(
                 name: "Licences");
 
             migrationBuilder.DropTable(
-                name: "Race");
+                name: "Races");
         }
     }
 }

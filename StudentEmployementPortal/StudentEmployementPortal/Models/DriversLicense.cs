@@ -2,7 +2,7 @@
 
 namespace StudentEmployementPortal.Models
 {
-    public class License
+    public class DriversLicense
     {
         [Key]
         public int LicenseId { get; set; }

@@ -12,7 +12,7 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230619134032_migration00")]
+    [Migration("20230620092916_migration00")]
     partial class migration00
     {
         /// <inheritdoc />
@@ -563,6 +563,80 @@ namespace StudentEmployementPortal.Migrations
                     b.ToTable("Documents");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.DriversLicense", b =>
+                {
+                    b.Property<int>("LicenseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LicenseId"));
+
+                    b.Property<string>("LicenceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LicenseId");
+
+                    b.ToTable("Licences");
+
+                    b.HasData(
+                        new
+                        {
+                            LicenseId = 1,
+                            LicenceName = "Code A1 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 2,
+                            LicenceName = "Code A driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 3,
+                            LicenceName = "Code B driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 4,
+                            LicenceName = "Code B5 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 5,
+                            LicenceName = "Code B7 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 6,
+                            LicenceName = "Code C driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 7,
+                            LicenceName = "Code C1 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 8,
+                            LicenceName = "Code EB driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 9,
+                            LicenceName = "Code EC driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 10,
+                            LicenceName = "Code EC1 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 11,
+                            LicenceName = "Code EC1-8 driver's license"
+                        });
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.Models.Education", b =>
                 {
                     b.Property<int>("EducationId")
@@ -715,7 +789,34 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("GenderId");
 
-                    b.ToTable("Gender");
+                    b.ToTable("Genders");
+
+                    b.HasData(
+                        new
+                        {
+                            GenderId = 1,
+                            GenderName = "Male"
+                        },
+                        new
+                        {
+                            GenderId = 2,
+                            GenderName = "Female"
+                        },
+                        new
+                        {
+                            GenderId = 3,
+                            GenderName = "Non-binary"
+                        },
+                        new
+                        {
+                            GenderId = 4,
+                            GenderName = "Other"
+                        },
+                        new
+                        {
+                            GenderId = 5,
+                            GenderName = "Prefer not to say."
+                        });
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.JobPost", b =>
@@ -837,80 +938,6 @@ namespace StudentEmployementPortal.Migrations
                     b.ToTable("JobPosts");
                 });
 
-            modelBuilder.Entity("StudentEmployementPortal.Models.License", b =>
-                {
-                    b.Property<int>("LicenseId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LicenseId"));
-
-                    b.Property<string>("LicenceName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("LicenseId");
-
-                    b.ToTable("Licences");
-
-                    b.HasData(
-                        new
-                        {
-                            LicenseId = 1,
-                            LicenceName = "Code A1 driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 2,
-                            LicenceName = "Code A driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 3,
-                            LicenceName = "Code B driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 4,
-                            LicenceName = "Code B5 driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 5,
-                            LicenceName = "Code B7 driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 6,
-                            LicenceName = "Code C driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 7,
-                            LicenceName = "Code C1 driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 8,
-                            LicenceName = "Code EB driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 9,
-                            LicenceName = "Code EC driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 10,
-                            LicenceName = "Code EC1 driver's license"
-                        },
-                        new
-                        {
-                            LicenseId = 11,
-                            LicenceName = "Code EC1-8 driver's license"
-                        });
-                });
-
             modelBuilder.Entity("StudentEmployementPortal.Models.Race", b =>
                 {
                     b.Property<int>("RaceId")
@@ -925,7 +952,34 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("RaceId");
 
-                    b.ToTable("Race");
+                    b.ToTable("Races");
+
+                    b.HasData(
+                        new
+                        {
+                            RaceId = 1,
+                            RaceName = "Black"
+                        },
+                        new
+                        {
+                            RaceId = 2,
+                            RaceName = "White"
+                        },
+                        new
+                        {
+                            RaceId = 3,
+                            RaceName = "Coloured"
+                        },
+                        new
+                        {
+                            RaceId = 4,
+                            RaceName = "Indian"
+                        },
+                        new
+                        {
+                            RaceId = 5,
+                            RaceName = "Other"
+                        });
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Referee", b =>
@@ -1003,6 +1057,10 @@ namespace StudentEmployementPortal.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Skills")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentIdNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
@@ -1138,7 +1196,7 @@ namespace StudentEmployementPortal.Migrations
             modelBuilder.Entity("StudentEmployementPortal.Models.Education", b =>
                 {
                     b.HasOne("StudentEmployementPortal.Models.Student", "Student")
-                        .WithMany("Educations")
+                        .WithMany("Education")
                         .HasForeignKey("StudentUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1170,31 +1228,31 @@ namespace StudentEmployementPortal.Migrations
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
                 {
-                    b.HasOne("StudentEmployementPortal.Models.Department", "department")
+                    b.HasOne("StudentEmployementPortal.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.Faculty", "faculty")
+                    b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
                         .WithMany()
                         .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.Gender", "gender")
+                    b.HasOne("StudentEmployementPortal.Models.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.License", "license")
+                    b.HasOne("StudentEmployementPortal.Models.DriversLicense", "License")
                         .WithMany()
                         .HasForeignKey("LicenseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.Race", "race")
+                    b.HasOne("StudentEmployementPortal.Models.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1206,17 +1264,17 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Department");
+
+                    b.Navigation("Faculty");
+
+                    b.Navigation("Gender");
+
+                    b.Navigation("License");
+
+                    b.Navigation("Race");
+
                     b.Navigation("User");
-
-                    b.Navigation("department");
-
-                    b.Navigation("faculty");
-
-                    b.Navigation("gender");
-
-                    b.Navigation("license");
-
-                    b.Navigation("race");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.WorkExperience", b =>
@@ -1232,7 +1290,7 @@ namespace StudentEmployementPortal.Migrations
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
                 {
-                    b.Navigation("Educations");
+                    b.Navigation("Education");
 
                     b.Navigation("Referee");
 

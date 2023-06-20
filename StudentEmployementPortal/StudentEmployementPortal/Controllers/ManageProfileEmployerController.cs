@@ -57,7 +57,9 @@ namespace StudentEmployementPortal.Controllers
                     RegistrationNumber = employer.RegistrationNumber,
                     TradingName = employer.TradingName,
                     EmployerFirstName = appUser.FirstName,
-                    EmployerSurname = appUser.LastName
+                    EmployerSurname = appUser.LastName,
+                    EmployerBusinessType = employer.EmployerBusinessType,
+                    EmployerTitle = employer.EmployerTitle
                 };
                 return View(vm);
             }

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using StudentEmployementPortal.Models;
 
 namespace StudentEmployementPortal.Models
 {

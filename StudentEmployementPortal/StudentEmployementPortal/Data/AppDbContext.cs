@@ -70,7 +70,8 @@ namespace StudentEmployementPortal.Data
                 new DriversLicense { LicenseId = 8, LicenceName = "Code EB driver's license" },
                 new DriversLicense { LicenseId = 9, LicenceName = "Code EC driver's license" },
                 new DriversLicense { LicenseId = 10, LicenceName = "Code EC1 driver's license" },
-                new DriversLicense { LicenseId = 11, LicenceName = "Code EC1-8 driver's license" }
+                new DriversLicense { LicenseId = 11, LicenceName = "Code EC1-8 driver's license" },
+                new DriversLicense { LicenseId = 12, LicenceName = "None"}
                 );
 
             
