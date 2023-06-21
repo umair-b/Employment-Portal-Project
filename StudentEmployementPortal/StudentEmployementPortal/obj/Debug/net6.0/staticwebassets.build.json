@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ftscGbDkTr685CtZRSMpPTDBr5HQCD86guIXJ1p0Q4I=",
+  "Hash": "EBkMn8+m4ASDmWOrqkpt+FEXJyJLnkzYqswta7gDULU=",
   "Source": "StudentEmployementPortal",
   "BasePath": "_content/StudentEmployementPortal",
   "Mode": "Default",
@@ -2140,6 +2140,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\DB Design.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\sequence diagram.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/sequence diagram.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\sequence diagram.pdf"
     }
   ]
 }

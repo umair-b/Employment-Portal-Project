@@ -1,0 +1,165 @@
+﻿@model StudentEmployementPortal.Models.Application
+
+@{
+    ViewData["Title"] = "ApplicantDetail";
+}
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div>
+    <a asp-action="Index" asp-route-id="@Model.PostId" class="btn btn-secondary right-align">Back</a>
+    <h4>View Applicant</h4>
+    <hr />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Job Title:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Post.JobTitle
+            </dd>
+
+            <dt class="col-sm-2">
+                Job Description:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Post.JobDescription
+            </dd>
+        </dl>
+    </div>
+    <div class="form-control">
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Department
+                </dt>
+                <dd class="col-sm-10">
+
+                </dd>
+
+                <dt class="col-sm-2">
+                    Course
+                </dt>
+                <dd class="col-sm-10">
+
+                </dd>
+
+                <dt class="col-sm-2">
+                    Level
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+            </dl>
+        </div>
+        <br />
+        <div>
+            <h4 class="text-primary" style="font-weight:bold">Profile</h4>
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    Name
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.FirstName
+                </dd>
+
+                <dt class="col-sm-2">
+                    Surname
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.LastName
+                </dd>
+
+                <dt class="col-sm-2">
+                    Email
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.Email
+                </dd>
+
+                <dt class="col-sm-2">
+                    Cellphone Number
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.CellNumber
+                </dd>
+
+                <dt class="col-sm-2">
+                    Telephone Number
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.User.TelNumber
+                </dd>
+
+                <dt class="col-sm-2">
+                    Gender
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+
+                <dt class="col-sm-2">
+                    Nationality
+                </dt>
+                <dd class="col-sm-10">
+                    
+                </dd>
+            </dl>
+        </div>
+        <br />
+        <div>
+            <h4 class="text-primary" style="font-weight:bold">Uploaded Documents</h4>
+            
+            @if (Model.Documents == null)
+            {
+                <h6>There are no documents uploaded.</h6>
+            }
+            else
+            {
+                <table class="table table-borderless" style="width:50%">
+                    <thead>
+                        <tr>
+                            <th>Document Name</th>
+                            <th>Document Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var doc in Model.Documents)
+                        {
+                            <tr>
+                                <td class="m-2">
+                                    <a href="@Url.Action("DownloadDocument", "ViewApplicants", new {docId = doc.DocumentId})">@doc.FileName</a>
+                                </td>
+                                <td>
+                                    @doc.FileDescription
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <br />
+    <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
+    <br />
+    <div class="pb-2">
+        <a class="btn btn-primary">Interview</a>
+        <a class="btn btn-primary">On Hold</a>
+        <a class="btn btn-success">Appoint</a>
+        <a class="btn btn-danger">Reject</a>
+    </div>
+</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model?.ApplicationId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@

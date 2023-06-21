@@ -13,7 +13,7 @@ namespace StudentEmployementPortal.Controllers
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
     public class ApplicationController : Controller
     {
-        private AppDbContext _db;
+        private readonly AppDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
 
         public ApplicationController(AppDbContext db, UserManager<IdentityUser> userManager)

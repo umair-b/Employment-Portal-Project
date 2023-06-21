@@ -23,6 +23,10 @@
             <h2 class="text-primary">Edit Post</h2>
         </div>
         <hr />
+        <div>
+            <a class="btn btn-primary" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@Model.PostId">View Applicants</a>
+        </div>
+        <hr />
         <div class="row mb-3">
             <div>
                 <label asp-for="ApproverNote"></label>
@@ -190,8 +194,7 @@
     </div>
     <br/>
     <div class="d-flex p-2 justify-content-between">
-        <button type="submit" class="d-inline-block btn btn-primary mb-3" style="width:150px">Update</button>
-        @*<button onclick="return confirm('Are you sure you want to delete this post?');" type="submit" asp-action="DeleteConfirmed" class="d-inline-block btn btn-danger mb-3" style="width:150px">Delete</button>*@
+        <button type="submit" class="d-inline-block btn btn-check mb-3" style="width:150px">Update</button>
     </div>
 </form>
 

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<Application>
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div class="container p-1">
+    <div class="row">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
+            &larr; HOME
+        </a>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">View Applicants</h2>
+        </div>
+    </div>
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Job Title:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.First().Post.JobTitle
+            </dd>
+
+            <dt class="col-sm-2">
+                Job Description:
+            </dt>
+            <dd class="col-sm-10">
+                @Model.First().Post.JobDescription
+            </dd>
+        </dl>
+    </div>
+    <br />
+    @if (Model.Count() == 0)
+    {
+        <h6 class="text-center">THERE ARE NO APPLICATIONS MADE TO THIS POST.</h6>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Department</th>
+                    <th>Course</th>
+                    <th>Level</th>
+                    <th>Gender</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.User.FirstName</td>
+                        <td>@obj.User.LastName</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@obj.ApplicationStatus</td>
+                        <td style="width:100%" class="btn-group" role="group">
+                            <a asp-controller="ViewApplicants" asp-action="ApplicantDetails" asp-route-id="@obj.ApplicationId"
+                               class="btn btn-primary mx-1">Details</a>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>
