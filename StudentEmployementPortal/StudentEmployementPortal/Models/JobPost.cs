@@ -13,7 +13,9 @@ namespace StudentEmployementPortal.Models
         [Key]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        [ForeignKey(nameof(User))]
+        public string EmployerId { get; set; }
+        public AppUser User { get; set; }
 
         [Required]
         [DisplayName("Internal")]

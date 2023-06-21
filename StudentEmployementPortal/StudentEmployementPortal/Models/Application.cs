@@ -9,7 +9,7 @@ public class Application
     [Key]
     public int ApplicationId { get; set; }
 
-    /*public int StudentId { get; set; }*/
+    public string StudentId { get; set; }
 
     public int PostId { get; set; }
     [ForeignKey(nameof(PostId))]

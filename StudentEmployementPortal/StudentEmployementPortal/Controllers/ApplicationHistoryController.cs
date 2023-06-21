@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
@@ -8,15 +9,20 @@ namespace StudentEmployementPortal.Controllers
     public class ApplicationHistoryController : Controller
     {
         private AppDbContext _db;
-
-        public ApplicationHistoryController(AppDbContext db)
+        private readonly UserManager<IdentityUser> _userManager;
+        public ApplicationHistoryController(AppDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
         // GET: ApplicationHistoryController
         public ActionResult Index()
         {
-            var application = _db.Application.Include(a => a.Post).Include(a => a.Post.Department).ToList();
+            var userId = _userManager.GetUserId(User);
+
+            var application = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Include(a => a.Post).Include(a => a.Post.Department).ToList();
 
             if (application == null)
             {

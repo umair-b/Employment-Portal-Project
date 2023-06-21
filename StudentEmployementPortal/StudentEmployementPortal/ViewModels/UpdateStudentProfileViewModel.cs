@@ -36,9 +36,11 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         public string CareerObjective { get; set; }
         [Display(Name = "Gender")]
+        [NotMapped]
         [Required]
         public Enums.Gender Gender { get; set; }
         [Display(Name = "Race")]
+        [NotMapped]
         [Required]
         public Enums.Race Race { get; set; }
         [Display(Name = "South African Citizen?")]
@@ -58,8 +60,9 @@ namespace StudentEmployementPortal.ViewModels
         [Required]
         public IEnumerable<Faculty> FacultyList { get; set; }
         public IEnumerable<Department> DepartmentList { get; set; }
-
+        [NotMapped]
         public IEnumerable<SelectListItem> Genderlist = Enums.GetEnumList<Enums.Gender>();
+        [NotMapped]
         public IEnumerable<SelectListItem> RaceLList = Enums.GetEnumList<Enums.Race>();
         /*public string Skills { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
@@ -13,15 +14,22 @@ namespace StudentEmployementPortal.Controllers
     public class ApplicationController : Controller
     {
         private AppDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ApplicationController(AppDbContext db)
+        public ApplicationController(AppDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
+
 
         public IActionResult Index()
         {
+            var userId = _userManager.GetUserId(User);
+            //var student = _db.Students.Find(userId);
+
             var applications = _db.Application
+                .Where(a => a.StudentId == userId)
                 .Select(a => a.PostId) .ToList();
 
             IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved)
@@ -57,6 +65,7 @@ namespace StudentEmployementPortal.Controllers
         [HttpGet]
         public IActionResult Apply(int id)
         {
+            var userId = _userManager.GetUserId(User);
             var jobPost = _db.JobPosts.Find(id);
 
             if (jobPost == null)
@@ -66,7 +75,8 @@ namespace StudentEmployementPortal.Controllers
 
             var application = new Models.Application
             {
-                PostId = id
+                PostId = id,
+                StudentId = userId
             };
 
             _db.Application.Add(application);

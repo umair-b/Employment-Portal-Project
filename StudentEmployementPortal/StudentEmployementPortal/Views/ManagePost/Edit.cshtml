@@ -32,6 +32,7 @@
         </div>
         <div class="form-control">
             @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
+            @Html.HiddenFor(Model => Model.EmployerId, new { @readonly = "readonly" })
             <div>
                 <label asp-for="Internal" class="mb-2"></label>
                 <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes

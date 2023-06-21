@@ -16,7 +16,7 @@ namespace StudentEmployementPortal.ViewModels
         [HiddenInput]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        public string EmployerId { get; set; }
 
         [Required]
         [Display(Name = "Internal")]

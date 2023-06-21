@@ -23,6 +23,7 @@ namespace StudentEmployementPortal.Controllers
         public IActionResult Index()
         {
             IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending)
+                .Include(x => x.User)
                 .Include(x => x.Department)
                 .Include(x => x.Faculty);
 
@@ -80,6 +81,7 @@ namespace StudentEmployementPortal.Controllers
                 limitedToPhD = JobPost.limitedToPhD,
                 limitedToPostDoc = JobPost.limitedToPostDoc,
                 limitedToDepartment = JobPost.limitedToDepartment,
+                EmployerId = JobPost.EmployerId,
             };
 
             ReviewJobPostVm.FacultyList = _db.Faculties.ToList();

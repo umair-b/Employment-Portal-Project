@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +15,21 @@ namespace StudentEmployementPortal.Controllers
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ManagePostController(AppDbContext db)
+        public ManagePostController(AppDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
         {
+            var userId = _userManager.GetUserId(User);
+
             //IEnumerable<JobPost> jobPosts = _db.JobPosts;
             var jobPosts = _db.JobPosts
+                .Where(j => j.EmployerId == userId)
                 .Include(j => j.Department)
                 .Include(j => j.Faculty)
                 .ToList();
@@ -39,10 +45,13 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult CreatePost()
         {
+            var userId = _userManager.GetUserId(User);
+
             var CreatePostViewModel = new CreateJobPostViewModel
             {
                 FacultyList = _db.Faculties.ToList(),
-                DepartmentList = _db.Departments.ToList()
+                DepartmentList = _db.Departments.ToList(),
+                EmployerId = userId
             };
 
             return View(CreatePostViewModel);
@@ -52,12 +61,14 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CreatePost(CreateJobPostViewModel obj)
         {
+            var userId = _userManager.GetUserId(User);
 
             if (!ModelState.IsValid)
             {
 
                 var jobPost = new JobPost()
                 {
+                    EmployerId = userId,
                     PostId = obj.PostId,
                     ApplicationInstructions = obj.ApplicationInstructions,
                     CitizensOnly = obj.CitizensOnly,
@@ -95,6 +106,7 @@ namespace StudentEmployementPortal.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+
             obj.FacultyList = _db.Faculties.ToList();
             obj.DepartmentList = _db.Departments.ToList();
 
@@ -116,6 +128,7 @@ namespace StudentEmployementPortal.Controllers
 
             var UpdatePostViewModel = new UpdateJobPostViewModel()
             {
+                EmployerId = obj.EmployerId,
                 PostId = obj.PostId,
                 ApplicationInstructions = obj.ApplicationInstructions,
                 ApproverNote = obj.ApproverNote,
@@ -164,6 +177,7 @@ namespace StudentEmployementPortal.Controllers
 
                 if (jobPost != null)
                 {
+                    jobPost.EmployerId = obj.EmployerId;
                     jobPost.PostId = obj.PostId;
                     jobPost.ApplicationInstructions = obj.ApplicationInstructions;
                     jobPost.ApproverNote = obj.ApproverNote;
@@ -199,9 +213,11 @@ namespace StudentEmployementPortal.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+            
 
             obj.FacultyList = _db.Faculties.ToList();
             obj.DepartmentList = _db.Departments.ToList();
+          
 
             return View(obj);
         }

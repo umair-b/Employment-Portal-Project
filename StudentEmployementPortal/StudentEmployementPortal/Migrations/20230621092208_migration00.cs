@@ -58,25 +58,6 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employers",
-                columns: table => new
-                {
-                    EmployerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegistrationName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TradingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RegisteredAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TrueInfo = table.Column<bool>(type: "bit", nullable: true),
-                    Approved = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employers", x => x.EmployerId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Qualifications",
                 columns: table => new
                 {
@@ -127,8 +108,6 @@ namespace StudentEmployementPortal.Migrations
                     IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DriversLicense = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CareerObjective = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Gender = table.Column<int>(type: "int", nullable: false),
-                    Race = table.Column<int>(type: "int", nullable: false),
                     Citizen = table.Column<bool>(type: "bit", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     YearOfStudy = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -264,6 +243,34 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Employers",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EmployerId = table.Column<int>(type: "int", nullable: false),
+                    JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegistrationName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TradingName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RegisteredAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrueInfo = table.Column<bool>(type: "bit", nullable: false),
+                    ApproverNote = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmployerStatus = table.Column<int>(type: "int", nullable: false),
+                    EmployerTitle = table.Column<int>(type: "int", nullable: false),
+                    EmployerBusinessType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Employers", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Employers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
@@ -308,7 +315,7 @@ namespace StudentEmployementPortal.Migrations
                 {
                     PostId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployerId = table.Column<int>(type: "int", nullable: true),
+                    EmployerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Internal = table.Column<bool>(type: "bit", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
@@ -362,6 +369,7 @@ namespace StudentEmployementPortal.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IdentityNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DriversLicense = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -402,6 +410,7 @@ namespace StudentEmployementPortal.Migrations
                 {
                     ApplicationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostId = table.Column<int>(type: "int", nullable: false),
                     ApplicationStatus = table.Column<int>(type: "int", nullable: false)
                 },
