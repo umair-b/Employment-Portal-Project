@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
-namespace StudentEmployementPortal.Models
+namespace StudentEmployementPortal.ViewModels
 {
-    public class Education
+    public class EducationViewModel
     {
         [Key]
         public int EducationId { get; set; }
@@ -27,10 +27,5 @@ namespace StudentEmployementPortal.Models
         public string? SubMajors { get; set; }
         [DisplayName("Research")]
         public string? Research { get; set; }
-
-        //Navigation Property 
-        [ForeignKey("UserId")]
-        public string UserId { get; set; }
-        public Student Student { get; set; }
     }
 }

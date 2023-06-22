@@ -85,7 +85,8 @@ namespace StudentEmployementPortal.Controllers
                         JobTitle = vm.JobTitle,
                         TradingName= vm.TradingName,
                         TrueInfo = vm.TrueInfo,
-                        UserId = userId
+                        UserId = userId,
+                        User = appUser
                     };
                     _appDbContext.Employers.Add(newEmployer);
 

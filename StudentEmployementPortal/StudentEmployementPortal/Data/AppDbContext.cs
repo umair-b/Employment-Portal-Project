@@ -17,6 +17,7 @@ namespace StudentEmployementPortal.Data
 
         public DbSet<Referee> Referees { get; set; }
         public DbSet<WorkExperience> WorkExperience { get; set; }
+        public DbSet<Education> Educations { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Faculty> Faculties { get; set; }

@@ -37,6 +37,16 @@ namespace StudentEmployementPortal.Controllers
 
                         return View(nameof(Privacy));
                     }
+
+                    if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Student))
+                    {
+                        var student = _appDbContext.Students.Find(_userManager.GetUserId(User));
+
+                        if (student == null)
+                        {
+                            return RedirectToAction("Index", "ManageStudentProfile");
+                        }
+                    }
                 }
                 
             }

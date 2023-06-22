@@ -12,8 +12,8 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230620092916_migration00")]
-    partial class migration00
+    [Migration("20230622103954_migration-02")]
+    partial class migration02
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -634,6 +634,11 @@ namespace StudentEmployementPortal.Migrations
                         {
                             LicenseId = 11,
                             LicenceName = "Code EC1-8 driver's license"
+                        },
+                        new
+                        {
+                            LicenseId = 12,
+                            LicenceName = "None"
                         });
                 });
 
@@ -683,7 +688,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("StudentUserId");
 
-                    b.ToTable("Education");
+                    b.ToTable("Educations");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>

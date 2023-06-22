@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migration00 : Migration
+    public partial class migration01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -574,7 +574,8 @@ namespace StudentEmployementPortal.Migrations
                     { 8, "Code EB driver's license" },
                     { 9, "Code EC driver's license" },
                     { 10, "Code EC1 driver's license" },
-                    { 11, "Code EC1-8 driver's license" }
+                    { 11, "Code EC1-8 driver's license" },
+                    { 12, "None" }
                 });
 
             migrationBuilder.InsertData(

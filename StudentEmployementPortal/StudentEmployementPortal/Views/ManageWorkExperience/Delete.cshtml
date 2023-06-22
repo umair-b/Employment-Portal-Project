@@ -1,0 +1,33 @@
+﻿@namespace StudentEmployementPortal.ViewModels
+@model WorkExperienceViewModel
+
+<form asp-action="DeleteWorkExperience">
+    <div>
+        <label asp-for="EmployerName"></label>
+        <input asp-for="EmployerName"/>
+    </div>
+
+    <div>
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="date"/>
+    </div>
+    <div>
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" type="date" />
+    </div>
+
+    <div>
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" />
+    </div>
+    <div>
+        <label asp-for="TasksAndResponsibilities"></label>
+        <input asp-for="TasksAndResponsibilities" />
+    </div>
+    @Html.HiddenFor(Model => Model.WorkExperienceId, new { @readonly = "readonly" })
+    <hr />
+
+    <button type="submit" class="pt-2 btn btn-primary">Delete Work Experience</button>
+    
+
+</form>

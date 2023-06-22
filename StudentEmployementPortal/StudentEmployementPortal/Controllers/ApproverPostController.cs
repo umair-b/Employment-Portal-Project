@@ -3,7 +3,6 @@ using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
-using System.Linq;
 
 namespace StudentEmployementPortal.Controllers
 {
