@@ -12,6 +12,7 @@
     }
 </style>
 
+
 <form asp-controller="ManagePost" asp-action="Edit" method="post">
     <div class="pt-2 mt-2">
         <div class="p-2">
@@ -21,10 +22,6 @@
         </div>
         <div class="row pb-2">
             <h2 class="text-primary">Edit Post</h2>
-        </div>
-        <hr />
-        <div>
-            <a class="btn btn-primary" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@Model.PostId">View Applicants</a>
         </div>
         <hr />
         <div class="row mb-3">
@@ -155,11 +152,6 @@
                         @Html.CheckBoxFor(m => m.limitedToPostDoc)
                         <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
 
-                        @Html.CheckBoxFor(m => m.limitedToDepartment)
-                        <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
-
-                        @Html.CheckBoxFor(m => m.limitedToFaculty)
-                        <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
                     </div>
                 </div>
             </div>
@@ -194,47 +186,17 @@
     </div>
     <br/>
     <div class="d-flex p-2 justify-content-between">
-        <button type="submit" class="d-inline-block btn btn-check mb-3" style="width:150px">Update</button>
+        <button type="submit" class="d-inline-block btn btn-success mb-3" style="width:150px">Update</button>
+        <a class="btn btn-primary mb-3" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@Model.PostId">View Applicants</a>
     </div>
 </form>
 
 @section Scripts{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#noRadioButton').change(function () {
-                $('#partTimeHoursContainer').show();
-            });
+@*    <script src="~/js/FDCascading_v2.js"></script>
+*@    <script src="~/js/fulltimeValidation.js"></script>
+    <script src="~/js/dateValidation.js"></script>
 
-            $('#yesRadioButton').change(function () {
-                $('#partTimeHoursContainer').hide();
-            });
-
-            $('input[name="FullTime"]:checked').trigger('change');
-
-            // Check if a radio button is already selected
-            if ($('input[name="FullTime"]:checked').length > 0) {
-                $('input[name="FullTime"]:checked').trigger('change');
-            }
-        });
-    </script>
-    @*<script>
-        $(document).ready(function () {
-            $('#internalTrue').change(function () {
-                $('#facultyContainer').show();
-                $('#departmentContainer').show();
-            });
-            $('#internalFalse').change(function () {
-                $('#facultyContainer').hide();
-                $('#departmentContainer').hide();
-            });
-
-            // Check if a radio button is already selected
-            if ($('input[name="internal"]:checked').length > 0) {
-                $('input[name="internal"]:checked').trigger('change');
-            }
-        })
-    </script>*@
     <script>
         $('#facultyId').change(function () {
             var facultyId = $(this).val();
@@ -261,10 +223,6 @@
         // Trigger the change event on faculty dropdown to initialize the department dropdown
         $('#facultyId').trigger('change');
     </script>
-    <script>
-
-    </script>
-
 
     @{
         <partial name="_ValidationScriptsPartial" />

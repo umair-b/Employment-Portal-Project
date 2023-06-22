@@ -77,10 +77,6 @@ namespace StudentEmployementPortal.Models
         public bool limitedToPhD { get; set; }
         [DisplayName("PostDoc")]
         public bool limitedToPostDoc { get; set; }
-        [DisplayName("Department")]
-        public bool limitedToDepartment { get; set; }
-        [DisplayName("Faculty")]
-        public bool limitedToFaculty { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]

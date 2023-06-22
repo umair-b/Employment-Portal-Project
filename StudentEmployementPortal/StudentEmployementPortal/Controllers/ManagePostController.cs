@@ -94,8 +94,6 @@ namespace StudentEmployementPortal.Controllers
                     limitedToMasters = obj.limitedToMasters,
                     limitedToPhD = obj.limitedToPhD,
                     limitedToPostDoc = obj.limitedToPostDoc,
-                    limitedToDepartment = obj.limitedToDepartment,
-                    limitedToFaculty = obj.limitedToFaculty,
                     MinRequirements = obj.MinRequirements,
                     StartDate = obj.StartDate
 
@@ -157,7 +155,6 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = obj.limitedToMasters,
                 limitedToPhD = obj.limitedToPhD,
                 limitedToPostDoc = obj.limitedToPostDoc,
-                limitedToDepartment = obj.limitedToDepartment,
                 FacultyList = _db.Faculties.ToList(),
                 DepartmentList = _db.Departments.ToList(),
             };
@@ -204,7 +201,6 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.limitedToMasters = obj.limitedToMasters;
                     jobPost.limitedToPhD = obj.limitedToPhD;
                     jobPost.limitedToPostDoc = obj.limitedToPostDoc;
-                    jobPost.limitedToDepartment = obj.limitedToDepartment;
                     jobPost.MinRequirements = obj.MinRequirements;
                     jobPost.StartDate = obj.StartDate;
 

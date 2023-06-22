@@ -78,7 +78,7 @@ namespace StudentEmployementPortal.Controllers
 
             application.ApplicationStatus = Utils.Enums.ApplicationStatus.Interview;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {id = application.PostId});
         }
 
 
@@ -95,7 +95,7 @@ namespace StudentEmployementPortal.Controllers
 
             application.ApplicationStatus = Utils.Enums.ApplicationStatus.OnHold;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = application.PostId });
         }
 
         [HttpPost]
@@ -111,7 +111,7 @@ namespace StudentEmployementPortal.Controllers
 
             application.ApplicationStatus = Utils.Enums.ApplicationStatus.Appointed;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = application.PostId });
         }
 
         [HttpPost]
@@ -127,7 +127,7 @@ namespace StudentEmployementPortal.Controllers
 
             application.ApplicationStatus = Utils.Enums.ApplicationStatus.Rejected;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { id = application.PostId });
         }
 
         // GET: ViewApplicantsController/Create

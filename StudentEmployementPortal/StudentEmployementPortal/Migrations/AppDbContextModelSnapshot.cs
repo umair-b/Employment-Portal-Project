@@ -244,11 +244,13 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Property<string>("StudentId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ApplicationId");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Application");
                 });
@@ -647,7 +649,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Property<string>("EmployerId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("EndDate")
                         .IsRequired()
@@ -698,12 +700,6 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
-                    b.Property<bool>("limitedToDepartment")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("limitedToFaculty")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("limitedToFirst")
                         .HasColumnType("bit");
 
@@ -728,6 +724,8 @@ namespace StudentEmployementPortal.Migrations
                     b.HasKey("PostId");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("EmployerId");
 
                     b.HasIndex("FacultyId");
 
@@ -1038,7 +1036,15 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>
@@ -1051,7 +1057,7 @@ namespace StudentEmployementPortal.Migrations
             modelBuilder.Entity("StudentEmployementPortal.Models.Document", b =>
                 {
                     b.HasOne("StudentEmployementPortal.Models.Application", "Application")
-                        .WithMany()
+                        .WithMany("Documents")
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1085,6 +1091,12 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("EmployerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
                         .WithMany()
                         .HasForeignKey("FacultyId")
@@ -1094,6 +1106,8 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Faculty");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
@@ -1111,8 +1125,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
-                        .WithOne("Student")
-                        .HasForeignKey("StudentEmployementPortal.Models.Student", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1123,17 +1137,16 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.Application", b =>
+                {
+                    b.Navigation("Documents");
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.ViewModels.UpdateStudentProfileViewModel", b =>
                 {
                     b.Navigation("DepartmentList");
 
                     b.Navigation("FacultyList");
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.AppUser", b =>
-                {
-                    b.Navigation("Student")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

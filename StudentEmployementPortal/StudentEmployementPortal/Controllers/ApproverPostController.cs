@@ -80,7 +80,6 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = JobPost.limitedToMasters,
                 limitedToPhD = JobPost.limitedToPhD,
                 limitedToPostDoc = JobPost.limitedToPostDoc,
-                limitedToDepartment = JobPost.limitedToDepartment,
                 EmployerId = JobPost.EmployerId,
             };
 

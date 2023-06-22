@@ -29,6 +29,26 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\FDCascading_v1.js",
+      "PackagePath": "staticwebassets\\js\\FDCascading_v1.js"
+    },
+    {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\FDCascading_v2.js",
+      "PackagePath": "staticwebassets\\js\\FDCascading_v2.js"
+    },
+    {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\dateValidation.js",
+      "PackagePath": "staticwebassets\\js\\dateValidation.js"
+    },
+    {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\fulltimeValidation.js",
+      "PackagePath": "staticwebassets\\js\\fulltimeValidation.js"
+    },
+    {
+      "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\jquery.js",
+      "PackagePath": "staticwebassets\\js\\jquery.js"
+    },
+    {
       "Id": "C:\\Users\\lesli\\Projects\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

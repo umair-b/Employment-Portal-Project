@@ -98,18 +98,18 @@
             <div class="row mb-3">
                 <div class="col">
                     <label asp-for="StartDate"></label>
-                    <input type="date" asp-for="StartDate" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                    <input type="date" asp-for="StartDate" class="form-control" id="startDate"/>
+                    <span asp-validation-for="StartDate" class="text-danger" id="startDateError"></span>
                 </div>
                 <div class="col">
                     <label asp-for="EndDate"></label>
-                    <input type="date" asp-for="EndDate" class="form-control" />
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                    <input type="date" asp-for="EndDate" class="form-control" id="endDate" />
+                    <span asp-validation-for="EndDate" class="text-danger" id="endDateError"></span>
                 </div>
                 <div class="col">
                     <label asp-for="ClosingDate"></label>
-                    <input asp-for="ClosingDate" type="date" class="form-control" />
-                    <span asp-validation-for="ClosingDate" class="text-danger"></span>
+                    <input asp-for="ClosingDate" type="date" class="form-control" id="closingDate" />
+                    <span asp-validation-for="ClosingDate" class="text-danger" id="closingDateError"></span>
                 </div>
             </div>
             <div class="row mb-3">
@@ -143,11 +143,6 @@
                         @Html.CheckBoxFor(m => m.limitedToPostDoc)
                         <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
 
-                        @Html.CheckBoxFor(m => m.limitedToDepartment)
-                        <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
-
-                        @Html.CheckBoxFor(m => m.limitedToFaculty)
-                        <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
                     </div>
                 </div>
             </div>
@@ -186,60 +181,9 @@
 
 @section Scripts{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#noRadioButton').change(function () {
-                $('#partTimeHoursContainer').show();
-            });
-
-            $('#yesRadioButton').change(function () {
-                $('#partTimeHoursContainer').hide();
-            });
-
-            $('input[name="FullTime"]:checked').trigger('change');
-
-            // Check if a radio button is already selected
-            if ($('input[name="FullTime"]:checked').length > 0) {
-                $('input[name="FullTime"]:checked').trigger('change');
-            }
-        });
-    </script>
-    @*<script>
-        $(document).ready(function () {
-            $('#internalTrue').change(function () {
-                $('#facultyContainer').show();
-                $('#departmentContainer').show();
-            });
-            $('#internalFalse').change(function () {
-                $('#facultyContainer').hide();
-                $('#departmentContainer').hide();
-            });
-
-            // Check if a radio button is already selected
-            if ($('input[name="internal"]:checked').length > 0) {
-                $('input[name="internal"]:checked').trigger('change');
-            }
-        })
-    </script>*@
-    <script>
-        $('#facultyId').change(function () {
-            var facultyId = $(this).val();
-            if (facultyId) {
-                $.ajax({
-                    url: '/ManagePost/GetDepartmentsByFaculty',
-                    type: 'POST',
-                    data: { facultyId: facultyId },
-                    success: function (response) {
-                        $('#departmentId').html(response);
-                        $('#departmentId').prop('disabled', false);
-                    }
-                });
-            } else {
-                $('#departmentId').html('<option value="" selected disabled>Select Department</option>');
-                $('#departmentId').prop('disabled', true);
-            }
-        });
-    </script>
+    <script src="~/js/fulltimeValidation.js"></script>
+    <script src="~/js/FDCascading_v1.js"></script>
+    <script src="~/js/dateValidation.js"></script>
 
 
     @{

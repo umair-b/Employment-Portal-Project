@@ -154,17 +154,16 @@
     <br />
     
     <form method="post">
-        <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
-        <br />        
-        <div class="pb-2">
-            <a class="btn btn-primary" asp-controller="ViewApplicants" asp-action="Interview" asp-route-id="@Model.ApplicationId">Interview</a>
-            <a class="btn btn-primary" asp-controller="ViewApplicants" asp-action="OnHold" asp-route-id="@Model.ApplicationId">On Hold</a>
-            <a class="btn btn-success" asp-controller="ViewApplicants" asp-action="Appoint" asp-route-id="@Model.ApplicationId">Appoint</a>
-            <a class="btn btn-danger" asp-controller="ViewApplicants" asp-action="Reject" asp-route-id="@Model.ApplicationId">Reject</a>
+        <div class="form-control pb-2">
+            <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
+            <br />
+            <div class="pb-2">
+                <button type="submit" class="btn btn-primary" asp-controller="ViewApplicants" asp-action="Interview" asp-route-id="@Model.ApplicationId">Interview</button>
+                <button type="submit" class="btn btn-primary" asp-controller="ViewApplicants" asp-action="OnHold" asp-route-id="@Model.ApplicationId">On Hold</button>
+                <button type="submit" class="btn btn-success" asp-controller="ViewApplicants" asp-action="Appoint" asp-route-id="@Model.ApplicationId">Appoint</button>
+                <button type="submit" class="btn btn-danger" asp-controller="ViewApplicants" asp-action="Reject" asp-route-id="@Model.ApplicationId">Reject</button>
+            </div>
         </div>
     </form>
 </div>
-@*<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ApplicationId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+
