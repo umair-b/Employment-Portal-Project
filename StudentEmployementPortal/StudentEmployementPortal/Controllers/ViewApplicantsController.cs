@@ -64,6 +64,72 @@ namespace StudentEmployementPortal.Controllers
             return File(fileStream, "application/octet-stream", document.FileName);
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Interview(int id)
+        {
+            var application = _db.Application.Find(id);
+
+            if(application == null)
+            {
+                return NotFound();
+            }
+
+            application.ApplicationStatus = Utils.Enums.ApplicationStatus.Interview;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult OnHold(int id)
+        {
+            var application = _db.Application.Find(id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            application.ApplicationStatus = Utils.Enums.ApplicationStatus.OnHold;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Appoint(int id)
+        {
+            var application = _db.Application.Find(id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            application.ApplicationStatus = Utils.Enums.ApplicationStatus.Appointed;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Reject(int id)
+        {
+            var application = _db.Application.Find(id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            application.ApplicationStatus = Utils.Enums.ApplicationStatus.Rejected;
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
         // GET: ViewApplicantsController/Create
         public ActionResult Create()
         {

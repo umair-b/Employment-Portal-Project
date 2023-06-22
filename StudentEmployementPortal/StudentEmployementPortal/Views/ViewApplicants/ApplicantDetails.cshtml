@@ -1,5 +1,7 @@
 ﻿@model StudentEmployementPortal.Models.Application
 
+@using StudentEmployementPortal.Utils
+
 @{
     ViewData["Title"] = "ApplicantDetail";
 }
@@ -119,7 +121,7 @@
         <div>
             <h4 class="text-primary" style="font-weight:bold">Uploaded Documents</h4>
             
-            @if (Model.Documents == null)
+            @if (Model.Documents == null || Model.Documents.Count() == 0)
             {
                 <h6>There are no documents uploaded.</h6>
             }
@@ -150,14 +152,17 @@
         </div>
     </div>
     <br />
-    <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
-    <br />
-    <div class="pb-2">
-        <a class="btn btn-primary">Interview</a>
-        <a class="btn btn-primary">On Hold</a>
-        <a class="btn btn-success">Appoint</a>
-        <a class="btn btn-danger">Reject</a>
-    </div>
+    
+    <form method="post">
+        <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
+        <br />        
+        <div class="pb-2">
+            <a class="btn btn-primary" asp-controller="ViewApplicants" asp-action="Interview" asp-route-id="@Model.ApplicationId">Interview</a>
+            <a class="btn btn-primary" asp-controller="ViewApplicants" asp-action="OnHold" asp-route-id="@Model.ApplicationId">On Hold</a>
+            <a class="btn btn-success" asp-controller="ViewApplicants" asp-action="Appoint" asp-route-id="@Model.ApplicationId">Appoint</a>
+            <a class="btn btn-danger" asp-controller="ViewApplicants" asp-action="Reject" asp-route-id="@Model.ApplicationId">Reject</a>
+        </div>
+    </form>
 </div>
 @*<div>
     <a asp-action="Edit" asp-route-id="@Model?.ApplicationId">Edit</a> |
