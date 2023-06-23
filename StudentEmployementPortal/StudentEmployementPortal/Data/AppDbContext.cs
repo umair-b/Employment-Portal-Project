@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Models;
@@ -43,6 +44,9 @@ namespace StudentEmployementPortal.Data
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<IdentityUser>().HasData(
+                new IdentityUser {});
 
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { GenderId = 1, GenderName = "Male" },

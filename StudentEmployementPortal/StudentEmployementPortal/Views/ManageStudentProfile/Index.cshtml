@@ -75,6 +75,63 @@
         </div>
         <span asp-validation-for="Citizen" class="text-danger"></span>
     </div>
+    @*<fieldset>
+        <legend>Limited To</legend>
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToFirst, true)
+            @Html.DisplayNameFor(m => m.limitedToFirst)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToSecond, true)
+            @Html.DisplayNameFor(m => m.limitedToSecond)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToThird, true)
+            @Html.DisplayNameFor(m => m.limitedToThird)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToHonours, true)
+            @Html.DisplayNameFor(m => m.limitedToHonours)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToMasters, true)
+            @Html.DisplayNameFor(m => m.limitedToMasters)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToPhD, true)
+            @Html.DisplayNameFor(m => m.limitedToPhD)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToPostDoc, true)
+            @Html.DisplayNameFor(m => m.limitedToPostDoc)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToDepartment, true)
+            @Html.DisplayNameFor(m => m.limitedToDepartment)
+        </label>
+        <br />
+
+        <label>
+            @Html.RadioButtonFor(m => m.limitedToFaculty, true)
+            @Html.DisplayNameFor(m => m.limitedToFaculty)
+        </label>
+        <br />
+    </fieldset>*@
     <div id="facultyContainer" class="p-1">
         <select asp-for="@Model.FacultyId" id="facultyId" class="form-select">
             <option value="" selected disabled>Select Faculty</option>
@@ -120,7 +177,11 @@
         <a asp-controller="ManageEducation" asp-action="Index" class="btn btn-primary">Add</a>
     </div>
 
-    @if (Model.Education.Count() == 0)
+    @if (Model.Education == null)
+    {
+        <h3>There is no education.</h3>
+    }
+    else if (Model.Education.Count() == 0)
     {
         <h3>There is no education.</h3>
     }
@@ -162,8 +223,10 @@
         <a asp-controller="ManageWorkExperience" asp-action="Index" class="btn btn-primary">Add</a>
     </div>
 
-    @if (Model.WorkExperience.Count() == 0)
+    @if (Model.WorkExperience == null)
     {
+        <h3>There is no work experience.</h3>
+    }else if(Model.WorkExperience.Count() == 0){
         <h3>There is no work experience.</h3>
     }
     else
@@ -204,7 +267,11 @@
         <a asp-controller="ManageReferee" asp-action="Index" class="btn btn-primary">Add</a>
     </div>
 
-    @if (Model.Referee.Count() == 0)
+    @if (Model.Referee == null)
+    {
+        <h3>There are no referees.</h3>
+    }
+    else if (Model.Referee.Count() == 0)
     {
         <h3>There are no referees.</h3>
     }

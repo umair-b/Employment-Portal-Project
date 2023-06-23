@@ -38,14 +38,14 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="ManageStudentProfile" asp-action="Index">Manage Profile</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ApproverEmployer" asp-action="Index">Approve Employer</a>
-                            </li>
                         }
                         @if (User.IsInRole(DefineRole.Role_Approver))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="ApproverPost" asp-action="Index">Manage Posts Approver</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ApproverEmployer" asp-action="Index">Approve Employer</a>
                             </li>
                         }
 

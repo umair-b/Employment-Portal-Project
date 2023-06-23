@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace StudentEmployementPortal.Migrations
 {
     /// <inheritdoc />
-    public partial class migration01 : Migration
+    public partial class migration02 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -402,7 +402,7 @@ namespace StudentEmployementPortal.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Education",
+                name: "Educations",
                 columns: table => new
                 {
                     EducationId = table.Column<int>(type: "int", nullable: false)
@@ -420,9 +420,9 @@ namespace StudentEmployementPortal.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Education", x => x.EducationId);
+                    table.PrimaryKey("PK_Educations", x => x.EducationId);
                     table.ForeignKey(
-                        name: "FK_Education_Students_StudentUserId",
+                        name: "FK_Educations_Students_StudentUserId",
                         column: x => x.StudentUserId,
                         principalTable: "Students",
                         principalColumn: "UserId",
@@ -630,8 +630,8 @@ namespace StudentEmployementPortal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Education_StudentUserId",
-                table: "Education",
+                name: "IX_Educations_StudentUserId",
+                table: "Educations",
                 column: "StudentUserId");
 
             migrationBuilder.CreateIndex(
@@ -698,7 +698,7 @@ namespace StudentEmployementPortal.Migrations
                 name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Education");
+                name: "Educations");
 
             migrationBuilder.DropTable(
                 name: "Employers");

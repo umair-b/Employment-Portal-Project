@@ -32,6 +32,26 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Are you a South African Citizen?")]
         public bool Citizen { get; set; }
 
+        //Year of Study
+        /*[DisplayName("1st Years")]
+        public bool limitedToFirst { get; set; }
+        [DisplayName("2nd Years")]
+        public bool limitedToSecond { get; set; }
+        [DisplayName("3rd Years")]
+        public bool limitedToThird { get; set; }
+        [DisplayName("Honours")]
+        public bool limitedToHonours { get; set; }
+        [DisplayName("Masters")]
+        public bool limitedToMasters { get; set; }
+        [DisplayName("PhD")]
+        public bool limitedToPhD { get; set; }
+        [DisplayName("PostDoc")]
+        public bool limitedToPostDoc { get; set; }
+        [DisplayName("Department")]
+        public bool limitedToDepartment { get; set; }
+        [DisplayName("Faculty")]
+        public bool limitedToFaculty { get; set; }*/
+
         //Education
         public IEnumerable<Education> Education { get; set; }
 

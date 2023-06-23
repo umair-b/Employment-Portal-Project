@@ -136,7 +136,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             Input = new InputModel()
             {
-                Roles = _roleManager.Roles.Where(x => x.Name != DefineRole.Role_Approver).Select(x => x.Name).Select(i => new SelectListItem
+                Roles = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
