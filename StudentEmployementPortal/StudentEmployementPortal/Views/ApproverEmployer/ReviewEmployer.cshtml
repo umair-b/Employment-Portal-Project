@@ -1,0 +1,66 @@
+﻿@namespace StudentEmployementPortal.ViewModels
+@model ApproveEmployerViewModel
+
+<form asp-action="ReviewEmployer">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+    </div>
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+    </div>
+    <div>
+        <label asp-for="TelNumber"></label>
+        <input asp-for="TelNumber" />
+    </div>
+
+    <div>
+        <label asp-for="CelNumber"></label>
+        <input asp-for="CelNumber" />
+    </div>
+
+    <div>
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" />
+    </div>
+
+    <div>
+        <label asp-for="RegistrationName"></label>
+        <input asp-for="RegistrationName" />
+    </div>
+
+    <div>
+        <label asp-for="RegisteredAddress"></label>
+        <input asp-for="RegisteredAddress" />
+    </div>
+
+    <div>
+        <label asp-for="TradingName"></label>
+        <input asp-for="TradingName" />
+    </div>
+
+    <div>
+        <label asp-for="EmployerBusinessType"></label>
+        <input asp-for="EmployerBusinessType" />
+    </div>
+
+    <div>
+        <label asp-for="ApproverNote"></label>
+        <input asp-for="ApproverNote" />
+    </div>
+    <div>
+        <label asp-for="EmployerStatus"></label>
+        @Html.DropDownListFor(model => model.EmployerStatus, Model.StatusNames, "Select Status")
+    </div>
+
+    @Html.HiddenFor(Model => Model.Id, new { @readonly = "readonly" })
+    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+    <a asp-controller="ApproverEmployer" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
+
+</form>

@@ -1,0 +1,86 @@
+﻿@using StudentEmployementPortal.ViewModels
+@model EmployerUpdateInfoViewModel
+
+<form method="post">
+    <div class="=border pt-2 mt-2">
+        <div class="row pb-2">
+            <h2 class="text-primary">Update Details</h2>
+            <hr />
+        </div>
+        <div>
+            <label asp-for="EmployerTitle"></label>
+            <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select"></select>
+        </div>
+        <div>
+            <label asp-for="EmployerFirstName"></label>
+            <input asp-for="EmployerFirstName"/>
+            <span asp-validation-for="EmployerFirstName"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerSurname"></label>
+            <input asp-for="EmployerSurname" />
+            <span asp-validation-for="EmployerSurname"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerEmail"></label>
+            <input asp-for="EmployerEmail" />
+            <span asp-validation-for="EmployerEmail"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerPhone"></label>
+            <input asp-for="EmployerPhone" />
+            <span asp-validation-for="EmployerPhone"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerCell"></label>
+            <input asp-for="EmployerCell" />
+            <span asp-validation-for="EmployerCell"></span>
+        </div>
+        <div>
+            <label asp-for="JobTitle"></label>
+            <input asp-for="JobTitle" />
+            <span asp-validation-for="JobTitle"></span>
+        </div>
+        <div>
+            <label asp-for="RegistrationNumber"></label>
+            <input asp-for="RegistrationNumber" />
+            <span asp-validation-for="RegistrationNumber"></span>
+        </div>
+        <div>
+            <label asp-for="RegistrationName"></label>
+            <input asp-for="RegistrationName" />
+            <span asp-validation-for="RegistrationName"></span>
+        </div>
+        <div>
+            <label asp-for="RegisteredAddress"></label>
+            <input asp-for="RegisteredAddress" />
+            <span asp-validation-for="RegisteredAddress"></span>
+        </div>
+        <div>
+            <label asp-for="TradingName"></label>
+            <input asp-for="TradingName" />
+            <span asp-validation-for="TradingName"></span>
+        </div>
+        <div>
+            <label asp-for="EmployerBusinessType"></label>
+            <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select"></select>
+        </div>
+        <div>
+            <label asp-for="TrueInfo"></label>
+            <input asp-for="TrueInfo" type="checkbox" id="checkbox1" checked="false" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
+
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#checkbox1').change(function () {
+                var isChecked = $(this).is(':checked');
+                $('#submitButton').prop('disabled', !isChecked);
+            });
+        });
+    </script>
+}

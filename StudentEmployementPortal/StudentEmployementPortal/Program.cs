@@ -17,6 +17,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<AppDbContext>();
 
+builder.Services.AddScoped<UserManager<IdentityUser>>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -27,7 +27,7 @@ namespace StudentEmployementPortal.Utils
 
         public enum EmployerStatus
         {
-            Approved,
+            Approved, 
             Rejected,
             Pending
         }
@@ -52,31 +52,23 @@ namespace StudentEmployementPortal.Utils
             NPO
         }
 
-        public enum Gender
+        /*public enum Gender
         {
-            [Display(Name = "Male")]
+            [Display(Name ="Male")]
             Male,
-            [Display(Name = "Female")]
+            [Display(Name ="Female")]
             Female,
-            [Display(Name = "Non-binary")]
+            [Display(Name ="Non-binary")]
             NonBinary,
-            [Display(Name = "Other")]
+            [Display(Name ="Other")]
             Other,
-            [Display(Name = "Prefer Not to Say")]
+            [Display(Name ="Prefer Not to Say")]
             PreferNotToSay
-        }
+        }*/
 
-        public enum Race
-        {
-            Black,
-            Coloured,
-            Indian,
-            White,
-            Other
-        }
         public enum YearOfStudy
         {
-            [Display(Name = "First Year")]
+            [Display(Name ="First Year")]
             FirstYear,
             [Display(Name = "Second Year")]
             SecondYear,
@@ -89,6 +81,7 @@ namespace StudentEmployementPortal.Utils
             [Display(Name = "PhD")]
             PhD
         }
+
 
         public enum ApplicationStatus
         {
