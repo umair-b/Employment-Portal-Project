@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
-using StudentEmployementPortal.Utils;
 using System.Diagnostics;
 
 namespace StudentEmployementPortal.Controllers
@@ -8,14 +9,48 @@ namespace StudentEmployementPortal.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _appDbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
+            _appDbContext = appDbContext;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if (user != null)
+                {
+                    if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Employer))
+                    {
+                        var employer = _appDbContext.Employers.Find(_userManager.GetUserId(User));
+
+                        if (employer == null)
+                        {
+                            return RedirectToAction("Index", "ManageProfileEmployer");
+                        }
+
+                        return View();
+                    }
+
+                    if (await _userManager.IsInRoleAsync(user, Utils.DefineRole.Role_Student))
+                    {
+                        var student = _appDbContext.Students.Find(_userManager.GetUserId(User));
+
+                        if (student == null)
+                        {
+                            return RedirectToAction("Index", "ManageStudentProfile");
+                        }
+                    }
+                }
+                
+            }
+
             return View();
         }
 

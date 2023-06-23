@@ -110,7 +110,9 @@ namespace StudentEmployementPortal.Controllers
         public ActionResult Upload(int id, DocumentUploadViewModel viewModel)
         {
             
-            
+               /* var maxFileSize = 5 * 1024 * 1024;
+                var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*/
+
                 var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
 
                 viewModel.ApplicationId = id;
@@ -122,10 +124,24 @@ namespace StudentEmployementPortal.Controllers
                 {
                     var fileName = Path.GetFileName(file.FileName);
                     var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                    /*var fileExtension = Path.GetExtension(file.FileName).ToLower();*/
+
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         file.CopyTo(stream);
                     }
+                    /*if (allowedFileType.Contains(fileExtension))
+                    {
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+                    }
+                    else
+                    {
+                         ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
+                    }*/
+                    
 
                     var document = new Document
                     {

@@ -1,0 +1,36 @@
+﻿@model Referee
+
+<form asp-action="AddReferee">
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Institution"></label>
+        <input asp-for="Institution" />
+        <span asp-validation-for="Institution" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="CellNumber"></label>
+        <input asp-for="CellNumber" />
+        <span asp-validation-for="CellNumber" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="pt-2 btn btn-primary">Add Referee</button>
+
+</form>

@@ -34,7 +34,7 @@ namespace StudentEmployementPortal.Models
         //Navigation Property
 
         [Key]
-        [ForeignKey("User")]
+        [ForeignKey(nameof(User))]
         public string UserId { get; set; }
         public AppUser User { get; set; }
 
