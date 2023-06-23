@@ -1,8 +1,35 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using StudentEmployementPortal.Utils
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole(DefineRole.Role_Employer))
+    {
+        <partial name="EmployerHome" />
+    }
+    else if (User.IsInRole(DefineRole.Role_Student))
+    {
+        <partial name="StudentHome" />
+    }
+    else if (User.IsInRole(DefineRole.Role_Approver))
+    {
+        <partial name="ApproverHome" />
+    }
+}
+else
+{
+    <div class="text-center">
+        <h1> WELCOME TO THE STUDENT EMPLOYMENT PORTAL</h1>
+    </div>
+}
+    
+

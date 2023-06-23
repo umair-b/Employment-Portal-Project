@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using System.Diagnostics;
 
 namespace StudentEmployementPortal.Controllers

@@ -1,0 +1,61 @@
+﻿@model StudentEmployementPortal.ViewModels.DocumentUploadViewModel
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="pt-2 mt-2">
+        <div>
+            <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+                &larr; Back
+            </a>
+        </div>
+        <br />
+        <div class="row pb-2">
+            <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
+        </div>
+        <hr />
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var document in Model.UploadedDocuments)
+                {
+                    <tr>
+                        <td>@document.FileName</td>
+                        <td>@document.FileDescription</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br />
+        <div class="form-control">
+            <div>
+                <label asp-for="File" class="pb-2"></label>
+                <br />
+                <div>
+                    <label>File Description</label>
+                    <input asp-for="FileDescription" />
+                </div>
+                <br />
+                <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
+                <br />
+                <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <a asp-action="Index" class="btn btn-primary">Apply</a>
+</form>

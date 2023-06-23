@@ -21,26 +21,62 @@ namespace StudentEmployementPortal.Utils
             Approved,
             Rejected,
             Pending,
-            Withdraw
+            Withdrawn,
+            Closed
+        }
+
+        public enum EmployerStatus
+        {
+            Approved,
+            Rejected,
+            Pending
+        }
+
+        public enum Title
+        {
+            Mr,
+            Mrs,
+            Miss,
+            Dr,
+            Prof,
+            Other
+        }
+
+        public enum BusniessType
+        {
+            ClosedCorporation,
+            StateOwnedEntity,
+            PtyLtd,
+            SoleProprietorship,
+            Partnership,
+            NPO
         }
 
         public enum Gender
         {
-            [Display(Name ="Male")]
+            [Display(Name = "Male")]
             Male,
-            [Display(Name ="Female")]
+            [Display(Name = "Female")]
             Female,
-            [Display(Name ="Non-binary")]
+            [Display(Name = "Non-binary")]
             NonBinary,
-            [Display(Name ="Other")]
+            [Display(Name = "Other")]
             Other,
-            [Display(Name ="Prefer Not to Say")]
+            [Display(Name = "Prefer Not to Say")]
             PreferNotToSay
         }
 
+        public enum Race
+        {
+            Black,
+            Coloured,
+            Indian,
+            White,
+            Other
+        }
         public enum YearOfStudy
         {
-            [Display(Name ="First Year")]
+            [Display(Name = "First Year")]
             FirstYear,
             [Display(Name = "Second Year")]
             SecondYear,
@@ -54,7 +90,19 @@ namespace StudentEmployementPortal.Utils
             PhD
         }
 
-     
-        
+        public enum ApplicationStatus
+        {
+            [Display(Name = "Pending")]
+            Pending,
+            [Display(Name = "Interview")]
+            Interview,
+            [Display(Name = "On Hold")]
+            OnHold,
+            [Display(Name = "Rejected")]
+            Rejected,
+            [Display(Name = "Appointed")]
+            Appointed
+        }
+
     }
 }
