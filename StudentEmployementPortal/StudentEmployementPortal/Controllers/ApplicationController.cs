@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
@@ -12,16 +13,26 @@ namespace StudentEmployementPortal.Controllers
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
     public class ApplicationController : Controller
     {
-        private AppDbContext _db;
+        private readonly AppDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ApplicationController(AppDbContext db)
+        public ApplicationController(AppDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
+
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Approved)
+            var userId = _userManager.GetUserId(User);
+            //var student = _db.Students.Find(userId);
+
+            var applications = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Select(a => a.PostId) .ToList();
+
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved)
                 .Include(x => x.Faculty)
                 .Include(x => x.Department);
 
@@ -54,6 +65,7 @@ namespace StudentEmployementPortal.Controllers
         [HttpGet]
         public IActionResult Apply(int id)
         {
+            var userId = _userManager.GetUserId(User);
             var jobPost = _db.JobPosts.Find(id);
 
             if (jobPost == null)
@@ -61,9 +73,10 @@ namespace StudentEmployementPortal.Controllers
                 return NotFound();
             }
 
-            var application = new Application
+            var application = new Models.Application
             {
-                PostId = id
+                PostId = id,
+                StudentId = userId
             };
 
             _db.Application.Add(application);
@@ -94,43 +107,54 @@ namespace StudentEmployementPortal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(DocumentUploadViewModel viewModel)
+        public ActionResult Upload(int id, DocumentUploadViewModel viewModel)
         {
-            /*var application = _db.Application.Find(id);
+            
+            
+                var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+
+                viewModel.ApplicationId = id;
+                viewModel.UploadedDocuments = documents;
+
+                var file = viewModel.File;
+
+                if (file != null && file.Length > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+
+                    var document = new Document
+                    {
+                        FileDescription = viewModel.FileDescription,
+                        FileName = fileName,
+                        ApplicationId = viewModel.ApplicationId,
+                        ApplicationFile = file
+                    };
+
+                    _db.Documents.Add(document);
+                    _db.SaveChanges();
+                }
+                return RedirectToAction("Upload");
+        } 
+        
+        public IActionResult Cancel(int id)
+        {
+            var application = _db.Application.Find(id);
 
             if (application == null)
             {
                 return NotFound();
-            }*/
-
-            var file = viewModel.File;
-
-            if (file != null && file.Length > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-
-                var document = new Document
-                {
-                    FileDescription = viewModel.FileDescription,
-                    FileName = fileName,
-                    ApplicationId = viewModel.ApplicationId,
-                    ApplicationFile = file
-                };
-
-                _db.Documents.Add(document);
-                _db.SaveChanges();
             }
-            return RedirectToAction("Upload");
+
+            _db.Application.Remove(application);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
-
-       
-
-        
            
     }
 }

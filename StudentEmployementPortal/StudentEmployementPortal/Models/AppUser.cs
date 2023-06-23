@@ -16,6 +16,5 @@ namespace StudentEmployementPortal.Models
         
         public string TelNumber { get; set; }
 
-        public Student Student { get; set; }
     }
 }

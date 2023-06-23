@@ -16,7 +16,7 @@ namespace StudentEmployementPortal.ViewModels
         [HiddenInput]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        public string EmployerId { get; set; }
 
         [Required]
         [Display(Name = "Internal")]
@@ -82,10 +82,6 @@ namespace StudentEmployementPortal.ViewModels
         public bool limitedToPhD { get; set; }
         [Display(Name = "PostDoc")]
         public bool limitedToPostDoc { get; set; }
-        [Display(Name = "Department")]
-        public bool limitedToDepartment { get; set; }
-        [Display(Name = "Faculty")]
-        public bool limitedToFaculty { get; set; }
 
         [Required]
         [Display(Name = "Limited to Citizens")]

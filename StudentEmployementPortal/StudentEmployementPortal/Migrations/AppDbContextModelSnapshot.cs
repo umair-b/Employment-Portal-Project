@@ -242,9 +242,15 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ApplicationId");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("StudentId");
 
                     b.ToTable("Application");
                 });
@@ -508,34 +514,48 @@ namespace StudentEmployementPortal.Migrations
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
                 {
-                    b.Property<int>("EmployerId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ApproverNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EmployerBusinessType")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployerId"));
+                    b.Property<int>("EmployerId")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("Approved")
-                        .HasColumnType("bit");
+                    b.Property<int>("EmployerStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployerTitle")
+                        .HasColumnType("int");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegisteredAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegistrationName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegistrationNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TradingName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("TrueInfo")
+                    b.Property<bool>("TrueInfo")
                         .HasColumnType("bit");
 
-                    b.HasKey("EmployerId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Employers");
                 });
@@ -627,8 +647,9 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("EmployerId")
-                        .HasColumnType("int");
+                    b.Property<string>("EmployerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime?>("EndDate")
                         .IsRequired()
@@ -679,12 +700,6 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
-                    b.Property<bool>("limitedToDepartment")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("limitedToFaculty")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("limitedToFirst")
                         .HasColumnType("bit");
 
@@ -709,6 +724,8 @@ namespace StudentEmployementPortal.Migrations
                     b.HasKey("PostId");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("EmployerId");
 
                     b.HasIndex("FacultyId");
 
@@ -824,6 +841,9 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("Race")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("YearOfStudy")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -897,9 +917,6 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
                     b.Property<string>("IdentityNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -907,9 +924,6 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Race")
-                        .HasColumnType("int");
 
                     b.Property<string>("StudentCel")
                         .IsRequired()
@@ -1022,7 +1036,15 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Department", b =>
@@ -1035,12 +1057,23 @@ namespace StudentEmployementPortal.Migrations
             modelBuilder.Entity("StudentEmployementPortal.Models.Document", b =>
                 {
                     b.HasOne("StudentEmployementPortal.Models.Application", "Application")
-                        .WithMany()
+                        .WithMany("Documents")
                         .HasForeignKey("ApplicationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Application");
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
+                {
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Faculty", b =>
@@ -1058,6 +1091,12 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("EmployerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("StudentEmployementPortal.Models.Faculty", "Faculty")
                         .WithMany()
                         .HasForeignKey("FacultyId")
@@ -1067,6 +1106,8 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("Faculty");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
@@ -1084,8 +1125,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired();
 
                     b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
-                        .WithOne("Student")
-                        .HasForeignKey("StudentEmployementPortal.Models.Student", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1096,17 +1137,16 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("StudentEmployementPortal.Models.Application", b =>
+                {
+                    b.Navigation("Documents");
+                });
+
             modelBuilder.Entity("StudentEmployementPortal.ViewModels.UpdateStudentProfileViewModel", b =>
                 {
                     b.Navigation("DepartmentList");
 
                     b.Navigation("FacultyList");
-                });
-
-            modelBuilder.Entity("StudentEmployementPortal.Models.AppUser", b =>
-                {
-                    b.Navigation("Student")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

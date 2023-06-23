@@ -22,12 +22,6 @@
             <h4 class="text-primary" style="font-weight:bold">Upload Documents</h4>
         </div>
         <hr />
-        <div style="display:inline-block">
-            <h5 style="display:inline-block">
-                You are applying for the post of
-                <p style="display:inline-block; font-weight:bold">@Model.JobTitle</p>
-            </h5>
-        </div>
         <br />
         <table>
             <thead>
@@ -58,10 +52,10 @@
                 <br />
                 <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
                 <br />
-                <input type="submit" value="Upload" asp-action="Upload" />
+                <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
             </div>
         </div>
     </div>
     <br />
-    <a asp-action="Apply" asp-route-id="@Model.ApplicationId" class="btn btn-primary">Apply</a>
+    <a asp-action="Index" class="btn btn-primary">Apply</a>
 </form>

@@ -13,7 +13,9 @@ namespace StudentEmployementPortal.Models
         [Key]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        [ForeignKey(nameof(User))]
+        public string EmployerId { get; set; }
+        public AppUser User { get; set; }
 
         [Required]
         [DisplayName("Internal")]
@@ -75,10 +77,6 @@ namespace StudentEmployementPortal.Models
         public bool limitedToPhD { get; set; }
         [DisplayName("PostDoc")]
         public bool limitedToPostDoc { get; set; }
-        [DisplayName("Department")]
-        public bool limitedToDepartment { get; set; }
-        [DisplayName("Faculty")]
-        public bool limitedToFaculty { get; set; }
 
         [Required]
         [DisplayName("Limited to Citizens")]
