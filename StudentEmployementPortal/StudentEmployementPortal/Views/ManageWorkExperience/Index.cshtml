@@ -1,0 +1,34 @@
+﻿@model WorkExperience
+
+<form asp-action="AddWorkExperience">
+    <div>
+        <label asp-for="EmployerName"></label>
+        <input asp-for="EmployerName" />
+        <span asp-validation-for="EmployerName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="StartDate"></label>
+        <input asp-for="StartDate" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="EndDate"></label>
+        <input asp-for="EndDate" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+    <div>
+        <label asp-for="TasksAndResponsibilities"></label>
+        <input asp-for="TasksAndResponsibilities" />
+        <span asp-validation-for="TasksAndResponsibilities" class="text-danger"></span>
+    </div>
+    <hr />
+
+    <button type="submit" class="pt-2 btn btn-primary">Add Work Experience</button>
+</form>

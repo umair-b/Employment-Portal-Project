@@ -24,8 +24,8 @@
             startDateError.textContent = "The start date should not be set later than the end date.";
             startDateInput.value = null;
         }
-        if (startDate > closingDate) {
-            startDateError.textContent = "The start date should not be set later than the closing date.";
+        if (startDate < closingDate) {
+            startDateError.textContent = "The start date should not be set earlier than the closing date.";
             startDateInput.value = null;
         }
 
