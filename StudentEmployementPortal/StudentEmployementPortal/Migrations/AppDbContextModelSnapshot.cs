@@ -853,6 +853,9 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContactEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -865,7 +868,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("EmployerId")
@@ -876,7 +880,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
-                    b.Property<int>("FacultyId")
+                    b.Property<int?>("FacultyId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<bool?>("FullTime")

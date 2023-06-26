@@ -13,21 +13,21 @@ namespace StudentEmployementPortal.Models
         [Key]
         public int PostId { get; set; }
 
-        [ForeignKey(nameof(User))]
+        [ForeignKey(nameof(Employer))]
         public string EmployerId { get; set; }
-        public AppUser User { get; set; }
+        public Employer Employer { get; set; }
 
         [Required]
         [DisplayName("Internal")]
         public bool? Internal { get; set; }
         [Required]
-        public int FacultyId { get; set; }
+        public int? FacultyId { get; set; }
         [ForeignKey(nameof(FacultyId))]
-        public Faculty Faculty { get; set; }
+        public Faculty? Faculty { get; set; }
         [Required]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
-        public Department Department { get; set; }
+        public Department? Department { get; set; }
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }

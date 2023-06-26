@@ -10,23 +10,19 @@
     }
 </style>
 
+
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar" style="width:150px">
-            &larr; HOME
-        </a>
-    </div>
-    <hr/>
     <div class="row pt-2">
         <div class="col-6">
-            <h2 class="align-items-center">Manage Posts</h2>
+            <h2 class="align-items-center text-primary">Manage Posts</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="ManagePost" asp-action="CreatePost" class="btn btn-primary">Add Post</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Back</a>
         </div>
     </div>
     <hr/>
-    @if (Model.Count() == 0)
+    @if (Model.Count() == 0 )
     {
         <h6 class="text-center p-5">YOU HAVE NOT MADE ANY POSTS YET</h6>
     }
@@ -50,6 +46,15 @@
                     <tr>
                         <td>@obj.JobTitle</td>
                         <td>@obj.Department.DepartmentName</td>
+                        @*@if (obj.Internal == true)
+                        {
+                            <td>@obj.Department.DepartmentName</td>
+
+                        }
+                        else if (obj.Internal == false)
+                        {
+                            <td>@obj.Employer.RegistrationName</td>
+                        }*@
                         @if (obj.FullTime == true)
                         {
                             <td>Fulltime</td>

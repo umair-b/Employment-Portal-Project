@@ -12,7 +12,7 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230623093532_migration00")]
+    [Migration("20230626144421_migration00")]
     partial class migration00
     {
         /// <inheritdoc />
@@ -856,6 +856,9 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ContactEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -868,7 +871,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("EmployerId")
@@ -879,7 +883,8 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
-                    b.Property<int>("FacultyId")
+                    b.Property<int?>("FacultyId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<bool?>("FullTime")

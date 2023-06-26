@@ -27,11 +27,10 @@ namespace StudentEmployementPortal.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
-            //IEnumerable<JobPost> jobPosts = _db.JobPosts;
             var jobPosts = _db.JobPosts
                 .Where(j => j.EmployerId == userId)
                 .Include(j => j.Department)
-                .Include(j => j.Faculty)
+                .Include(j => j.Employer)
                 .ToList();
 
             if (jobPosts == null)
@@ -51,7 +50,7 @@ namespace StudentEmployementPortal.Controllers
             {
                 FacultyList = _db.Faculties.ToList(),
                 DepartmentList = _db.Departments.ToList(),
-                EmployerId = userId
+                EmployerId = userId,
             };
 
             return View(CreatePostViewModel);
@@ -170,7 +169,7 @@ namespace StudentEmployementPortal.Controllers
             if (ModelState.IsValid)
             {
 
-                var jobPost = _db.JobPosts.SingleOrDefault(d => d.PostId == obj.PostId);
+                var jobPost = _db.JobPosts.FirstOrDefault(d => d.PostId == obj.PostId);
 
                 if (jobPost != null)
                 {

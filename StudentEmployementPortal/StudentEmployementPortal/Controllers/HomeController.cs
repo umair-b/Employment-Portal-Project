@@ -46,6 +46,7 @@ namespace StudentEmployementPortal.Controllers
                         {
                             return RedirectToAction("Index", "ManageStudentProfile");
                         }
+                        return View();
                     }
                 }
                 
