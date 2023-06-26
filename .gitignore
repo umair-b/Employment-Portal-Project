@@ -7,3 +7,4 @@ StudentEmployementPortal/StudentEmployementPortal/bin/Debug/net6.0/StudentEmploy
 *.dll
 *.cache
 *.pdb
+StudentEmployementPortal/StudentEmployementPortal/appsettings.json
