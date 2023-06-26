@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
@@ -8,64 +11,64 @@ using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Employer)]
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ManagePostController(AppDbContext db)
+        public ManagePostController(AppDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
-
-        /*private List<Faculty> GetFaculties()
-        {
-            var faculties = _db.Faculties;
-
-            List<Faculty> facultyList = new List<Faculty>();
-
-            foreach (var f in faculties)
-            {
-                var faculty = new Faculty
-                {
-                    FacultyId = f.FacultyId,
-                    FacultyName = f.FacultyName,
-                };
-                facultyList.Add(faculty);
-            }
-
-            return facultyList;
-        }*/
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> jobPosts = _db.JobPosts;
+            var userId = _userManager.GetUserId(User);
+
+            //IEnumerable<JobPost> jobPosts = _db.JobPosts;
+            var jobPosts = _db.JobPosts
+                .Where(j => j.EmployerId == userId)
+                .Include(j => j.Department)
+                .Include(j => j.Faculty)
+                .ToList();
+
             if (jobPosts == null)
             {
                 return NotFound();
             }
-    
+
+
             return View(jobPosts);
         }
 
-
-       public IActionResult CreatePost()
+        public IActionResult CreatePost()
         {
-            /*var viewModel = new CreateJobPostViewModel
+            var userId = _userManager.GetUserId(User);
+
+            var CreatePostViewModel = new CreateJobPostViewModel
             {
-                FacultyList = GetFaculties()
-            };*/
-            return View();
+                FacultyList = _db.Faculties.ToList(),
+                DepartmentList = _db.Departments.ToList(),
+                EmployerId = userId
+            };
+
+            return View(CreatePostViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreatePost(CreateJobPostViewModel obj)
         {
+            var userId = _userManager.GetUserId(User);
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
+
                 var jobPost = new JobPost()
                 {
+                    EmployerId = userId,
                     PostId = obj.PostId,
                     ApplicationInstructions = obj.ApplicationInstructions,
                     CitizensOnly = obj.CitizensOnly,
@@ -75,9 +78,6 @@ namespace StudentEmployementPortal.Controllers
                     ContactPerson = obj.ContactPerson,
                     FacultyId = obj.FacultyId,
                     DepartmentId = obj.DepartmentId,
-                    DepartmentName = obj.DepartmentName,
-                    /*Faculty = _db.Faculties.Find(obj.FacultyId),
-                    Department = _db.Departments.Find(obj.DepartmentId),*/
                     EndDate = obj.EndDate,
                     FullTime = obj.FullTime,
                     PartTimeHours = obj.PartTimeHours,
@@ -94,8 +94,6 @@ namespace StudentEmployementPortal.Controllers
                     limitedToMasters = obj.limitedToMasters,
                     limitedToPhD = obj.limitedToPhD,
                     limitedToPostDoc = obj.limitedToPostDoc,
-                    limitedToDepartment = obj.limitedToDepartment,
-                    limitedToFaculty = obj.limitedToFaculty,
                     MinRequirements = obj.MinRequirements,
                     StartDate = obj.StartDate
 
@@ -106,14 +104,16 @@ namespace StudentEmployementPortal.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            /*obj.FacultyList = GetFaculties();*/
+
+            obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList();
 
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || id == 0)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -124,9 +124,9 @@ namespace StudentEmployementPortal.Controllers
                 return NotFound();
             }
 
-
-            var updateJobPostViewModel = new UpdateJobPostViewModel()
+            var UpdatePostViewModel = new UpdateJobPostViewModel()
             {
+                EmployerId = obj.EmployerId,
                 PostId = obj.PostId,
                 ApplicationInstructions = obj.ApplicationInstructions,
                 ApproverNote = obj.ApproverNote,
@@ -137,9 +137,6 @@ namespace StudentEmployementPortal.Controllers
                 ContactPerson = obj.ContactPerson,
                 DepartmentId = obj.DepartmentId,
                 FacultyId = obj.FacultyId,
-                DepartmentName = obj.DepartmentName,
-               /* Department = _db.Departments.Find(obj.DepartmentId),
-                Faculty = _db.Faculties.Find(obj.FacultyId),*/
                 EndDate = obj.EndDate,
                 FullTime = obj.FullTime,
                 PartTimeHours = obj.PartTimeHours,
@@ -150,7 +147,7 @@ namespace StudentEmployementPortal.Controllers
                 JobTitle = obj.JobTitle,
                 KeyResponsibilities = obj.KeyResponsibilities,
                 MinRequirements = obj.MinRequirements,
-                StartDate   = obj.StartDate,
+                StartDate = obj.StartDate,
                 limitedToFirst = obj.limitedToFirst,
                 limitedToSecond = obj.limitedToSecond,
                 limitedToThird = obj.limitedToThird,
@@ -158,31 +155,27 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = obj.limitedToMasters,
                 limitedToPhD = obj.limitedToPhD,
                 limitedToPostDoc = obj.limitedToPostDoc,
-                limitedToDepartment = obj.limitedToDepartment,
+                FacultyList = _db.Faculties.ToList(),
+                DepartmentList = _db.Departments.ToList(),
             };
 
-
-            return View(updateJobPostViewModel);
+            return View(UpdatePostViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(UpdateJobPostViewModel obj)
         {
-            //
-
-            //int Id = obj.PostId;
-            //ModelState.Remove("PostId");
 
             if (ModelState.IsValid)
             {
-                
-                var jobPost = _db.JobPosts.Find(obj.PostId);
+
+                var jobPost = _db.JobPosts.SingleOrDefault(d => d.PostId == obj.PostId);
 
                 if (jobPost != null)
                 {
-
-                    //jobPost.PostId = obj.PostId;
+                    jobPost.EmployerId = obj.EmployerId;
+                    jobPost.PostId = obj.PostId;
                     jobPost.ApplicationInstructions = obj.ApplicationInstructions;
                     jobPost.ApproverNote = obj.ApproverNote;
                     jobPost.CitizensOnly = obj.CitizensOnly;
@@ -192,9 +185,6 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.ContactPerson = obj.ContactPerson;
                     jobPost.DepartmentId = obj.DepartmentId;
                     jobPost.FacultyId = obj.FacultyId;
-                    jobPost.DepartmentName = obj.DepartmentName;
-                    /*jobPost.Department = _db.Departments.Find(obj.DepartmentId);
-                    jobPost.Faculty = _db.Faculties.Find(obj.FacultyId);*/
                     jobPost.EndDate = obj.EndDate;
                     jobPost.FullTime = obj.FullTime;
                     jobPost.PartTimeHours = obj.PartTimeHours;
@@ -211,24 +201,71 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.limitedToMasters = obj.limitedToMasters;
                     jobPost.limitedToPhD = obj.limitedToPhD;
                     jobPost.limitedToPostDoc = obj.limitedToPostDoc;
-                    jobPost.limitedToDepartment = obj.limitedToDepartment;
                     jobPost.MinRequirements = obj.MinRequirements;
                     jobPost.StartDate = obj.StartDate;
 
+                    _db.Update(jobPost);
                     _db.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
-                
-                return View(obj);
-
             }
+            
 
-            /*obj.FacultyList = GetFaculties();*/
-            ;            /*obj.FacultyList = _db.Faculties.ToList();*/
-            /*obj.DepartmentList = _db.Departments.ToList();*/
+            obj.FacultyList = _db.Faculties.ToList();
+            obj.DepartmentList = _db.Departments.ToList();
+          
 
             return View(obj);
+        }
 
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || _db.JobPosts == null)
+            {
+                return NotFound();
+            }
+
+            var jobPost = _db.JobPosts.SingleOrDefault(j => j.PostId == id);
+            if (jobPost == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobPost);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(UpdateJobPostViewModel obj)
+        {
+            if (_db.JobPosts == null)
+            {
+                return Problem("Entity set 'AppDbContext.JobPosts'  is null.");
+            }
+
+            var jobPost = _db.JobPosts.SingleOrDefault(j => j.PostId == obj.PostId);
+
+            if (jobPost != null)
+            {
+                _db.JobPosts.Remove(jobPost);
+            }
+
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult GetDepartmentsByFaculty(int facultyId)
+        {
+            IEnumerable<Department> Departments = _db.Departments.Where(f => f.FacultyId == facultyId);
+
+            string options = "<option value='' selected disabled>Select Department</option>";
+            foreach (var department in Departments)
+            {
+                options += $"<option value='{department.DepartmentId}'>{department.DepartmentName}</option>";
+            }
+
+            return Content(options, "text/html");
         }
 
     }

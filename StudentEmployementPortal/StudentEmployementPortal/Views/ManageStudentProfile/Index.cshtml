@@ -1,0 +1,263 @@
+﻿@using StudentEmployementPortal.ViewModels
+@model StudentUpdateInfoViewModel
+
+<h2 class="text-primary">Student Profile</h2>
+<hr/>
+
+<form method="post" asp-action="UpdateProfile">
+    <div class="p-1">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="TelNumber"></label>
+        <input asp-for="TelNumber" />
+        <span asp-validation-for="TelNumber"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="CellNumber"></label>
+        <input asp-for="CellNumber" />
+        <span asp-validation-for="CellNumber"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="StudentIdNumber"></label>
+        <input asp-for="StudentIdNumber" />
+        <span asp-validation-for="StudentIdNumber"></span>
+    </div>
+    <div class="p-1">
+        <select asp-for="@Model.LicenseId" class="form-select">
+            <option value="" selected disabled>Select Drivers Licence</option>
+            @foreach (var license in Model.LicenseList)
+            {
+                <option value="@license.LicenseId">@license.LicenceName</option>
+            }
+        </select>
+    </div>
+    <div class = "p-1">
+        <label asp-for="CareerObjective"></label>
+        <input asp-for="CareerObjective" />
+        <span asp-validation-for="CareerObjective"></span>
+    </div>
+    <div class="p-1">
+        <select asp-for="@Model.GenderId" class="form-select">
+            <option value  = "" selected disabled>Select Gender</option>
+            @foreach (var gender in Model.GenderList)
+            {
+                <option value="@gender.GenderId">@gender.GenderName</option>
+            }
+        </select>
+    </div>
+    <div class="p-1">
+        <select asp-for="@Model.RaceId" class="form-select">
+            <option value="" selected disabled>Select Race</option>
+            @foreach (var race in Model.RaceList)
+            {
+                <option value="@race.RaceId">@race.RaceName</option>
+            }
+        </select>
+    </div>
+    <div class="p-1">
+        <div>
+            <label asp-for="Citizen" class="mb-2"></label>
+            <input type="radio" asp-for="Citizen" value="true" class="m-2" />Yes
+            <input type="radio" asp-for="Citizen" value="false" class="m-2" />No
+        </div>
+        <span asp-validation-for="Citizen" class="text-danger"></span>
+    </div>
+    <div id="facultyContainer" class="p-1">
+        <select asp-for="@Model.FacultyId" id="facultyId" class="form-select">
+            <option value="" selected disabled>Select Faculty</option>
+                @foreach (var f in @Model.FacultyList)
+                {
+                    <option value="@f.FacultyId">@f.FacultyName</option>
+                }
+        </select>
+    </div>
+    <div id="departmentContainer" class="p-1">
+        <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select">
+            <option value="" selected disabled>Select Department</option>
+                @foreach (var d in @Model.DepartmentList)
+                {
+                    <option value="@d.DepartmentId">@d.DepartmentName</option>
+                }
+        </select>
+    </div>
+    <div class="p-1">
+        <label asp-for="Achievements"></label>
+        <input asp-for="Achievements" />
+        <span asp-validation-for="Achievements"></span>
+    </div>
+    <div class="p-1">
+        <label asp-for="Interests"></label>
+        <input asp-for="Interests" />
+        <span asp-validation-for="Interests"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary p-1" style="width:150px" id="submitButton">Update Profile</button>
+</form>
+
+@if (Model.StudentIdNumber == null)
+{
+    <h3 class="p-1">Note: Please Complete Profile and Save Changes to add Education, Referees, and Work Experience.</h3>
+}
+
+<div class="row pt-2">
+    <div class="col-6">
+        <h2 class="fw-bold">Education</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="ManageEducation" asp-action="Index" class="btn btn-primary">Add</a>
+    </div>
+
+    @if (Model.Education == null || Model.Education.Count() == 0)
+    {
+        <h3>There is no education.</h3>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Qualification</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach(var edu in Model.Education)
+                {
+                    <tr>
+                        <td>@edu.Qualification</td>
+                        <td>
+                            <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
+                               class="btn btn-primary mx-1">Edit</a>
+                            <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
+                               class="btn btn-danger mx-1">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <hr/>
+</div>
+
+<div class="row pt-2">
+    <div class="col-6">
+        <h2 class="fw-bold">Work Experience</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="ManageWorkExperience" asp-action="Index" class="btn btn-primary">Add</a>
+    </div>
+
+    @if (Model.WorkExperience == null || Model.WorkExperience.Count() == 0)
+    {
+        <h3>There is no work experience.</h3>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var we in Model.WorkExperience)
+                {
+                    <tr>
+                        <td>@we.JobTitle</td>
+                        <td>
+                            <a asp-controller="ManageWorkExperience" asp-action="Edit" asp-route-id="@we.WorkExperienceId"
+                               class="btn btn-primary mx-1">Edit</a>
+                            <a asp-controller="ManageWorkExperience" asp-action="Delete" asp-route-id="@we.WorkExperienceId"
+                               class="btn btn-danger mx-1">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    }
+    <hr/>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <h2 class="fw-bold">Referees</h2>
+    </div>
+    <div class="col-6 text-end">
+        <a asp-controller="ManageReferee" asp-action="Index" class="btn btn-primary">Add</a>
+    </div>
+
+    @if (Model.Referee == null || Model.Referee.Count() == 0)
+    {
+        <h3>There are no referees.</h3>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var referee in Model.Referee)
+                {
+                    <tr>
+                        <td>@referee.JobTitle</td>
+                        <td>
+                            <a asp-controller="ManageReferee" asp-action="Edit" asp-route-id="@referee.RefereeId"
+                               class="btn btn-primary mx-1">Edit</a>
+                            <a asp-controller="ManageReferee" asp-action="Delete" asp-route-id="@referee.RefereeId"
+                               class="btn btn-danger mx-1">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <hr/>
+</div>
+
+
+
+@section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#facultyId').change(function () {
+            var facultyId = $(this).val();
+            if (facultyId) {
+                $.ajax({
+                    url: '/ManagePost/GetDepartmentsByFaculty',
+                    type: 'POST',
+                    data: { facultyId: facultyId },
+                    success: function (response) {
+                        $('#departmentId').html(response);
+                        $('#departmentId').prop('disabled', false);
+                    }
+                });
+            } else {
+                $('#departmentId').html('<option value="" selected disabled>Select Department</option>');
+                $('#departmentId').prop('disabled', true);
+            }
+        });
+    </script>
+}

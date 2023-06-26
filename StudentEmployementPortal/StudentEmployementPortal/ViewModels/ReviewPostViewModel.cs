@@ -14,15 +14,20 @@ namespace StudentEmployementPortal.ViewModels
         
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        public string EmployerId { get; set; }
 
         [Required]
         [DisplayName("Internal")]
-        public bool Internal { get; set; }
+        public bool? Internal { get; set; }
 
-       /* public string? Faculty { get; set; } = string.Empty;
+        [Display(Name = "Faculty")]
+        public int FacultyId { get; set; }
 
-        public string? Department { get; set; } = string.Empty;*/
+        [Display(Name = "Department")]
+        public int DepartmentId { get; set; }
+        public IEnumerable<Faculty>? FacultyList { get; set; }
+        public IEnumerable<Department>? DepartmentList { get; set; }
+
         [Required]
         [DisplayName("Job Title")]
         public string JobTitle { get; set; }
@@ -40,22 +45,24 @@ namespace StudentEmployementPortal.ViewModels
         public string KeyResponsibilities { get; set; }
         [Required]
         [DisplayName("Fulltime")]
-        public bool FullTime { get; set; }
-        //public string PartTimeHours { get; set; }
+        public bool? FullTime { get; set; }
+        [Display(Name = "Part-Time Hours")]
+        public string? PartTimeHours { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Start Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("End Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         [Required]
         [DisplayName("Hourly Rate")]
         [Range(0, double.MaxValue, ErrorMessage = "The {0} field must be a positive number.")]
-        public double HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
         [DisplayName("1st Years")]
         public bool limitedToFirst { get; set; }
@@ -78,7 +85,7 @@ namespace StudentEmployementPortal.ViewModels
 
         [Required]
         [DisplayName("Limited to Citizens")]
-        public bool CitizensOnly { get; set; }
+        public bool? CitizensOnly { get; set; }
 
         [Required]
         [DisplayName("Minimum Requirements")]
@@ -92,7 +99,7 @@ namespace StudentEmployementPortal.ViewModels
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         [DisplayName("Closing Date")]
-        public DateTime ClosingDate { get; set; }
+        public DateTime? ClosingDate { get; set; }
 
         [Required]
         [DisplayName("Contact Person")]
@@ -107,13 +114,13 @@ namespace StudentEmployementPortal.ViewModels
             "Email")]
         public string ContactEmail { get; set; }
 
-        [Display(Name = "Post Status")]
+        [Display(Name = "Post Outcome")]
         public Enums.JobPostStatus SelectedStatus { get; set; }
 
-        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> {Enums.JobPostStatus.Withdraw, Enums.JobPostStatus.Pending };
+        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> {Enums.JobPostStatus.Withdrawn, Enums.JobPostStatus.Pending, Enums.JobPostStatus.Closed };
         public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);
 
-        [Display(Name = "Approver's Note")]
+        [Display(Name = "Approver's Comment")]
         public string? ApproverNote { get; set; }
 
     }

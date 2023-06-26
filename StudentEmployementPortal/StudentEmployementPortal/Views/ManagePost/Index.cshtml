@@ -1,17 +1,34 @@
 ﻿@model IEnumerable<JobPost>
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
 <div class="container p-1">
+    <div class="row">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar" style="width:150px">
+            &larr; HOME
+        </a>
+    </div>
+    <hr/>
     <div class="row pt-2">
         <div class="col-6">
-            <h2 class="text-primary">Manage Posts</h2>
+            <h2 class="align-items-center">Manage Posts</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="ManagePost" asp-action="CreatePost" class="btn btn-primary">Add Post</a>
         </div>
     </div>
+    <hr/>
     @if (Model.Count() == 0)
     {
-        <h3>There are no jobs posts.</h3>
+        <h6 class="text-center p-5">YOU HAVE NOT MADE ANY POSTS YET</h6>
     }
     else
     {
@@ -20,7 +37,7 @@
                 <tr>
                     <th>Job Title</th>
                     <th>Department</th>
-                    <th>Fulltime</th>
+                    <th>FT/PT</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Status</th>
@@ -32,21 +49,21 @@
                 {
                     <tr>
                         <td>@obj.JobTitle</td>
-                        <td>@obj.DepartmentName</td>
-                        @if (obj.FullTime)
+                        <td>@obj.Department.DepartmentName</td>
+                        @if (obj.FullTime == true)
                         {
-                            <td>FT</td>
+                            <td>Fulltime</td>
                         }
-                        else
+                        else if (obj.FullTime == false)
                         {
-                            <td>PT</td>
+                            <td>Part-time</td>
                         }
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
                         <td>@obj.PostStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
-                               class="btn btn-primary mx-1">Edit</a>
+                               class="btn btn-primary mx-1">Review</a>
                         </td>
 
                     </tr>

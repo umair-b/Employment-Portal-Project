@@ -8,115 +8,109 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace StudentEmployementPortal.ViewModels
 {
+    [BindProperties]
     public class CreateJobPostViewModel
     {
         [Key]
         [HiddenInput]
         public int PostId { get; set; }
 
-        public int? EmployerId { get; set; }
+        public string EmployerId { get; set; }
 
         [Required]
-        [DisplayName("Internal")]
-        public bool Internal { get; set; }
-
+        [Display(Name = "Internal")]
+        public bool? Internal { get; set; }
 
         [Display(Name = "Faculty")]
         public int FacultyId { get; set; }
         //public Faculty Faculty { get; set; }
-        [Required]
         [Display(Name = "Department")]
         public int DepartmentId { get; set; }
-        //public Department Department { get; set; }
-        public string? DepartmentName { get; set; }
+        public IEnumerable<Faculty> FacultyList { get; set; }
+        public IEnumerable<Department> DepartmentList { get; set; }
 
-        /*public List<Faculty> FacultyList { get; set; } = new List<Faculty>();
-        public List<Department> DepartmentList { get; set; } = new List<Department>();*/
-        /*public List<Faculty> FacultyList { get; set;  }
-        public List<Department> DepartmentList { get; set; }*/
         [Required]
-        [DisplayName("Job Title")]
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
 
         [Required]
-        [DisplayName("Job Description")]
+        [Display(Name = "Job Description")]
         public string JobDescription { get; set; }
 
         [Required]
-        [DisplayName("Job Location")]
+        [Display(Name = "Job Location")]
         public string JobLocation { get; set; }
 
         [Required]
-        [DisplayName("Key Responsibilities")]
+        [Display(Name = "Key Responsibilities")]
         public string KeyResponsibilities { get; set; }
         [Required]
-        [DisplayName("Fulltime")]
-        public bool FullTime { get; set; }
+        [Display(Name = "Fulltime")]
+        public bool? FullTime { get; set; }
+
+        [Display(Name = "Part-Time Hours")]
         public string? PartTimeHours { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        [DisplayName("Start Date")]
-        public DateTime StartDate { get; set; }
+        [Display(Name = "Start Date")]
+        public DateTime? StartDate { get; set; }
         [Required]
         [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        [DisplayName("End Date")]
-        public DateTime EndDate { get; set; }
+        [Display(Name = "End Date")]
+        public DateTime? EndDate { get; set; }
         [Required]
-        [DisplayName("Hourly Rate")]
+        [Display(Name = "Hourly Rate")]
         [Range(0, double.MaxValue, ErrorMessage = "The {0} field must be a positive number.")]
-        public double HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
 
-        [DisplayName("1st Years")]
+        [Display(Name = "1st Years")]
         public bool limitedToFirst { get; set; }
-        [DisplayName("2nd Years")]
+        [Display(Name = "2nd Years")]
         public bool limitedToSecond { get; set; }
-        [DisplayName("3rd Years")]
+        [Display(Name = "3rd Years")]
         public bool limitedToThird { get; set; }
-        [DisplayName("Honours")]
+        [Display(Name = "Honours")]
         public bool limitedToHonours { get; set; }
-        [DisplayName("Masters")]
+        [Display(Name = "Masters")]
         public bool limitedToMasters { get; set; }
-        [DisplayName("PhD")]
+        [Display(Name = "PhD")]
         public bool limitedToPhD { get; set; }
-        [DisplayName("PostDoc")]
+        [Display(Name = "PostDoc")]
         public bool limitedToPostDoc { get; set; }
-        [DisplayName("Department")]
-        public bool limitedToDepartment { get; set; }
-        [DisplayName("Faculty")]
-        public bool limitedToFaculty { get; set; }
 
         [Required]
-        [DisplayName("Limited to Citizens")]
-        public bool CitizensOnly { get; set; }
+        [Display(Name = "Limited to Citizens")]
+        public bool? CitizensOnly { get; set; }
 
         [Required]
-        [DisplayName("Minimum Requirements")]
+        [Display(Name = "Minimum Requirements")]
         public string MinRequirements { get; set; }
 
         [Required]
-        [DisplayName("Application Instructions")]
+        [Display(Name = "Application Instructions")]
         public string ApplicationInstructions { get; set; }
 
         [Required]
         [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        [DisplayName("Closing Date")]
-        public DateTime ClosingDate { get; set; }
+        [Display(Name = "Closing Date")]
+        public DateTime? ClosingDate { get; set; }
 
         [Required]
-        [DisplayName("Contact Person")]
+        [Display(Name = "Contact Person")]
         public string ContactPerson { get; set; }
 
         [Required]
-        [DisplayName("Contact Number")]
+        [Display(Name = "Contact Number")]
         public string ContactNumber { get; set; }
 
         [Required]
-        [DisplayName("Contact " +
-            "Email")]
+        [Display( Name = "Contact Email")]
         public string ContactEmail { get; set; }
+
+        public string? ApproverNote { get; set; }
     }
 }

@@ -21,10 +21,38 @@ namespace StudentEmployementPortal.Utils
             Approved,
             Rejected,
             Pending,
-            Withdraw
+            Withdrawn,
+            Closed
         }
 
-        public enum Gender
+        public enum EmployerStatus
+        {
+            Approved, 
+            Rejected,
+            Pending
+        }
+
+        public enum Title
+        {
+            Mr,
+            Mrs,
+            Miss,
+            Dr,
+            Prof,
+            Other
+        }
+
+        public enum BusniessType
+        {
+            ClosedCorporation,
+            StateOwnedEntity,
+            PtyLtd,
+            SoleProprietorship,
+            Partnership,
+            NPO
+        }
+
+        /*public enum Gender
         {
             [Display(Name ="Male")]
             Male,
@@ -36,7 +64,7 @@ namespace StudentEmployementPortal.Utils
             Other,
             [Display(Name ="Prefer Not to Say")]
             PreferNotToSay
-        }
+        }*/
 
         public enum YearOfStudy
         {
@@ -54,7 +82,20 @@ namespace StudentEmployementPortal.Utils
             PhD
         }
 
-     
-        
+
+        public enum ApplicationStatus
+        {
+            [Display(Name = "Pending")]
+            Pending,
+            [Display(Name = "Interview")]
+            Interview,
+            [Display(Name = "On Hold")]
+            OnHold,
+            [Display(Name = "Rejected")]
+            Rejected,
+            [Display(Name = "Appointed")]
+            Appointed
+        }
+
     }
 }

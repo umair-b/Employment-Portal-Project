@@ -4,6 +4,8 @@ namespace StudentEmployementPortal.Models
 {
     public class Department
     {
+        internal object FullName { get; set; }
+
         [Key]
         public int DepartmentId { get; set; }
         [Required]

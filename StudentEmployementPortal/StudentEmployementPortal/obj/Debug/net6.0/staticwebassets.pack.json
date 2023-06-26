@@ -5,12 +5,48 @@
       "PackagePath": "staticwebassets\\StudentEmployementPortal.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\Class Diagram.pdf",
+      "PackagePath": "staticwebassets\\Uploads\\Class Diagram.pdf"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\DB Design.pdf",
+      "PackagePath": "staticwebassets\\Uploads\\DB Design.pdf"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\class_diagram_final.pdf",
+      "PackagePath": "staticwebassets\\Uploads\\class_diagram_final.pdf"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\sequence diagram.pdf",
+      "PackagePath": "staticwebassets\\Uploads\\sequence diagram.pdf"
+    },
+    {
       "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
       "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\FDCascading_v1.js",
+      "PackagePath": "staticwebassets\\js\\FDCascading_v1.js"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\FDCascading_v2.js",
+      "PackagePath": "staticwebassets\\js\\FDCascading_v2.js"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\dateValidation.js",
+      "PackagePath": "staticwebassets\\js\\dateValidation.js"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\fulltimeValidation.js",
+      "PackagePath": "staticwebassets\\js\\fulltimeValidation.js"
+    },
+    {
+      "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\jquery.js",
+      "PackagePath": "staticwebassets\\js\\jquery.js"
     },
     {
       "Id": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\js\\site.js",

@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
+using System.Data;
 using System.Linq;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Approver)]
     public class ApproverPostController : Controller
     {
         private AppDbContext _db;
@@ -18,7 +22,11 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending);
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending)
+                .Include(x => x.User)
+                .Include(x => x.Department)
+                .Include(x => x.Faculty);
+
             if (JobPosts == null)
             {
                 return NotFound();
@@ -50,10 +58,11 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = JobPost.ContactEmail,
                 ContactNumber = JobPost.ContactNumber,
                 ContactPerson = JobPost.ContactPerson,
-                //Department = JobPost.Department,
+                DepartmentId = JobPost.DepartmentId,
+                FacultyId = JobPost.FacultyId,
                 EndDate = JobPost.EndDate,
-                //Faculty = JobPost.Faculty,
                 FullTime = JobPost.FullTime,
+                PartTimeHours = JobPost.PartTimeHours,
                 HourlyRate = JobPost.HourlyRate,
                 JobDescription = JobPost.JobDescription,
                 JobLocation = JobPost.JobLocation,
@@ -71,17 +80,18 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = JobPost.limitedToMasters,
                 limitedToPhD = JobPost.limitedToPhD,
                 limitedToPostDoc = JobPost.limitedToPostDoc,
-                limitedToDepartment = JobPost.limitedToDepartment,
+                EmployerId = JobPost.EmployerId,
             };
-            
-           
+
+            ReviewJobPostVm.FacultyList = _db.Faculties.ToList();
+            ReviewJobPostVm.DepartmentList = _db.Departments.ToList();
 
             return View(ReviewJobPostVm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ReviewPost (ReviewPostViewModel ReviewPostVm)
+        public IActionResult ReviewPost(ReviewPostViewModel ReviewPostVm)
         {
 
             if (ModelState.IsValid)
@@ -98,6 +108,9 @@ namespace StudentEmployementPortal.Controllers
                 }
                 return View(ReviewPostVm);
             }
+
+            ReviewPostVm.FacultyList = _db.Faculties.ToList();
+            ReviewPostVm.DepartmentList = _db.Departments.ToList();
 
             return View(ReviewPostVm);
         }
