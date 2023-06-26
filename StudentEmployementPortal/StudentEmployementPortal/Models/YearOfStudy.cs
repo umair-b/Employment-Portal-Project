@@ -9,5 +9,5 @@ public class YearOfStudy
     [Key]
     public int YearOfStudyId { get; set; }
     [Required]
-    public string YearOfStudyDescription { get; set; }
+    public string YearOfStudyName { get; set; }
 }

@@ -29,6 +29,8 @@ namespace StudentEmployementPortal.Data
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Race> Races { get; set; }
 
+        public DbSet<YearOfStudy> YearOfStudies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -44,6 +46,16 @@ namespace StudentEmployementPortal.Data
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<YearOfStudy>().HasData(
+                new YearOfStudy { YearOfStudyId = 1, YearOfStudyName="First Year"},
+                new YearOfStudy { YearOfStudyId = 2, YearOfStudyName = "Second Year"},
+                new YearOfStudy { YearOfStudyId = 3, YearOfStudyName = "Third Year"},
+                new YearOfStudy { YearOfStudyId = 4, YearOfStudyName = "Honours"},
+                new YearOfStudy { YearOfStudyId = 5, YearOfStudyName = "Masters"},
+                new YearOfStudy { YearOfStudyId = 6, YearOfStudyName = "PhD"},
+                new YearOfStudy { YearOfStudyId = 7, YearOfStudyName = "PostDoc"}
+                );
 
             modelBuilder.Entity<Gender>().HasData(
                 new Gender { GenderId = 1, GenderName = "Male" },
