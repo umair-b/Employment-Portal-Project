@@ -66,7 +66,7 @@ namespace StudentEmployementPortal.Utils
             PreferNotToSay
         }*/
 
-        public enum YearOfStudy
+        /*public enum YearOfStudy
         {
             [Display(Name ="First Year")]
             FirstYear,
@@ -80,7 +80,7 @@ namespace StudentEmployementPortal.Utils
             Masters,
             [Display(Name = "PhD")]
             PhD
-        }
+        }*/
 
 
         public enum ApplicationStatus

@@ -55,6 +55,11 @@ namespace StudentEmployementPortal.Models
         [ForeignKey(nameof(GenderId))]
         public int GenderId { get; set; }
 
+        //Year of Study
+        public YearOfStudy YearOfStudy { get; set; }
+        [ForeignKey("YearOfStudyId")]
+        public int YearOfStudyId { get; set;}
+
         //Navigation Property 
         [Key]
         [ForeignKey(nameof(User))]
