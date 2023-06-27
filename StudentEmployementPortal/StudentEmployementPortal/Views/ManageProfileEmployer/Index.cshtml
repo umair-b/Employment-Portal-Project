@@ -1,78 +1,116 @@
 ﻿@using StudentEmployementPortal.ViewModels
 @model EmployerUpdateInfoViewModel
 
-<form method="post">
-    <div class="=border pt-2 mt-2">
-        <div class="row pb-2">
-            <h2 class="text-primary">Update Details</h2>
-            <hr />
-        </div>
-        <div>
-            <label asp-for="EmployerTitle"></label>
-            <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select"></select>
-        </div>
-        <div>
-            <label asp-for="EmployerFirstName"></label>
-            <input asp-for="EmployerFirstName"/>
-            <span asp-validation-for="EmployerFirstName"></span>
-        </div>
-        <div>
-            <label asp-for="EmployerSurname"></label>
-            <input asp-for="EmployerSurname" />
-            <span asp-validation-for="EmployerSurname"></span>
-        </div>
-        <div>
-            <label asp-for="EmployerEmail"></label>
-            <input asp-for="EmployerEmail" />
-            <span asp-validation-for="EmployerEmail"></span>
-        </div>
-        <div>
-            <label asp-for="EmployerPhone"></label>
-            <input asp-for="EmployerPhone" />
-            <span asp-validation-for="EmployerPhone"></span>
-        </div>
-        <div>
-            <label asp-for="EmployerCell"></label>
-            <input asp-for="EmployerCell" />
-            <span asp-validation-for="EmployerCell"></span>
-        </div>
-        <div>
-            <label asp-for="JobTitle"></label>
-            <input asp-for="JobTitle" />
-            <span asp-validation-for="JobTitle"></span>
-        </div>
-        <div>
-            <label asp-for="RegistrationNumber"></label>
-            <input asp-for="RegistrationNumber" />
-            <span asp-validation-for="RegistrationNumber"></span>
-        </div>
-        <div>
-            <label asp-for="RegistrationName"></label>
-            <input asp-for="RegistrationName" />
-            <span asp-validation-for="RegistrationName"></span>
-        </div>
-        <div>
-            <label asp-for="RegisteredAddress"></label>
-            <input asp-for="RegisteredAddress" />
-            <span asp-validation-for="RegisteredAddress"></span>
-        </div>
-        <div>
-            <label asp-for="TradingName"></label>
-            <input asp-for="TradingName" />
-            <span asp-validation-for="TradingName"></span>
-        </div>
-        <div>
-            <label asp-for="EmployerBusinessType"></label>
-            <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select"></select>
-        </div>
-        <div>
-            <label asp-for="TrueInfo"></label>
-            <input asp-for="TrueInfo" type="checkbox" id="checkbox1" checked="false" />
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
+<style>
+    .right-align {
+        float: right;
+    }
 
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Employer Profile</h2>
+</div>
+<hr />
+
+<form method="post">
+    <div class="form-control">
+        <div class="=border pt-2 mt-2">
+            <div class="row">
+                <div class="col">
+                    <label asp-for="EmployerTitle"></label>
+                    <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select">
+                        <option selected disabled>Select title</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label asp-for="EmployerFirstName"></label>
+                    <input asp-for="EmployerFirstName" class="form-control" />
+                    <span asp-validation-for="EmployerFirstName"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="EmployerSurname"></label>
+                    <input asp-for="EmployerSurname" class="form-control" />
+                    <span asp-validation-for="EmployerSurname"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <label asp-for="EmployerEmail"></label>
+                    <input asp-for="EmployerEmail" class="form-control" />
+                    <span asp-validation-for="EmployerEmail"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="EmployerPhone"></label>
+                    <input asp-for="EmployerPhone" class="form-control" />
+                    <span asp-validation-for="EmployerPhone"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="EmployerCell"></label>
+                    <input asp-for="EmployerCell" class="form-control" />
+                    <span asp-validation-for="EmployerCell"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <label asp-for="RegistrationNumber"></label>
+                    <input asp-for="RegistrationNumber" class="form-control" />
+                    <span asp-validation-for="RegistrationNumber"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="RegistrationName"></label>
+                    <input asp-for="RegistrationName" class="form-control" />
+                    <span asp-validation-for="RegistrationName"></span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col">
+                    <label asp-for="JobTitle"></label>
+                    <input asp-for="JobTitle" class="form-control" />
+                    <span asp-validation-for="JobTitle"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="TradingName"></label>
+                    <input asp-for="TradingName" class="form-control" />
+                    <span asp-validation-for="TradingName"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="EmployerBusinessType"></label>
+                    <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select">
+                        <option selected disabled>Select Business Type</option>
+                    </select>
+                </div>
+            </div>
+            <br />
+            <div>
+                <label asp-for="RegisteredAddress"></label>
+                <textarea asp-for="RegisteredAddress" class="form-control"></textarea>
+                <span asp-validation-for="RegisteredAddress"></span>
+            </div>
+            <br />
+            <div>
+                <input asp-for="TrueInfo" type="checkbox" id="checkbox1" checked="false" /> I confirm that the information provided above is true to the best of my knowledge.
+            </div>
+            <br />
+        </div>
+    </div>
+    <br />
+    <div class="pb-2">
+        <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
     </div>
 </form>
+<br />
 
 @section Scripts{
     <script>

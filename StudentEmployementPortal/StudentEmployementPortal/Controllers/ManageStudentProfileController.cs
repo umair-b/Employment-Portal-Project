@@ -5,9 +5,12 @@ using StudentEmployementPortal.Models;
 using StudentEmployementPortal.ViewModels;
 using static StudentEmployementPortal.Utils.Enums;
 using System.ComponentModel;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Student)]
     public class ManageStudentProfileController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -38,7 +41,8 @@ namespace StudentEmployementPortal.Controllers
                     DepartmentList = _appDbContext.Departments.ToList(),
                     GenderList     = _appDbContext.Genders.ToList(),
                     RaceList       = _appDbContext.Races.ToList(),
-                    LicenseList    = _appDbContext.Licences.ToList()
+                    LicenseList    = _appDbContext.Licences.ToList(),
+                    YearOfStudyList = _appDbContext.YearOfStudies.ToList()
 
                 };
 
@@ -58,6 +62,7 @@ namespace StudentEmployementPortal.Controllers
                     GenderList = _appDbContext.Genders.ToList(),
                     RaceList = _appDbContext.Races.ToList(),
                     LicenseList = _appDbContext.Licences.ToList(),
+                    YearOfStudyList = _appDbContext.YearOfStudies.ToList(),
                     FacultyId = Student.FacultyId,
                     DepartmentId = Student.DepartmentId,
                     GenderId = Student.GenderId,
@@ -69,6 +74,7 @@ namespace StudentEmployementPortal.Controllers
                     Interests = Student.Interests,
                     Skills = Student.Skills,
                     StudentIdNumber = Student.StudentIdNumber,
+                    YearOfStudyId = Student.YearOfStudyId,
                     Education = _appDbContext.Educations.Where(e => e.UserId == UserId),
                     Referee = _appDbContext.Referees.Where(r => r.UserId == UserId),
                     WorkExperience = _appDbContext.WorkExperience.Where(w => w.UserId == UserId)
@@ -99,7 +105,8 @@ namespace StudentEmployementPortal.Controllers
                     Skills          = StudentVm.Skills,
                     RaceId          = StudentVm.RaceId,
                     LicenseId       = StudentVm.LicenseId,
-                    StudentIdNumber = StudentVm.StudentIdNumber
+                    StudentIdNumber = StudentVm.StudentIdNumber,
+                    YearOfStudyId   = StudentVm.YearOfStudyId
                 };
 
                 _appDbContext.Students.Add(NewStudent);
@@ -132,11 +139,25 @@ namespace StudentEmployementPortal.Controllers
                 Student.RaceId          = StudentVm.RaceId;
                 Student.LicenseId       = StudentVm.LicenseId;
                 Student.StudentIdNumber = StudentVm.StudentIdNumber;
+                Student.YearOfStudyId   = StudentVm.YearOfStudyId;
 
                 _appDbContext.SaveChanges();
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult GetDepartmentsByFaculty(int facultyId)
+        {
+            IEnumerable<Department> Departments = _appDbContext.Departments.Where(f => f.FacultyId == facultyId);
+
+            string options = "<option value='' selected disabled>Select Department</option>";
+            foreach (var department in Departments)
+            {
+                options += $"<option value='{department.DepartmentId}'>{department.DepartmentName}</option>";
+            }
+
+            return Content(options, "text/html");
         }
     }
 }

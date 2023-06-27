@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
+using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Employer)]
     public class ManageProfileEmployerController : Controller
     {
 
@@ -66,6 +69,7 @@ namespace StudentEmployementPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(EmployerUpdateInfoViewModel vm)
         {
             var userId = _userManager.GetUserId(User);

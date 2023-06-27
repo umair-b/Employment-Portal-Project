@@ -21,10 +21,13 @@ namespace StudentEmployementPortal.ViewModels
         public bool? Internal { get; set; }
 
         [Display(Name = "Faculty")]
-        public int FacultyId { get; set; }
+        public int? FacultyId { get; set; }
 
         [Display(Name = "Department")]
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
+
+        [Display(Name = "Company Name")]
+        public string? ComapnyName { get; set; }
         public IEnumerable<Faculty>? FacultyList { get; set; }
         public IEnumerable<Department>? DepartmentList { get; set; }
 

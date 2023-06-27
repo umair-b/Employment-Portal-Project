@@ -71,6 +71,12 @@ namespace StudentEmployementPortal.ViewModels
         public int GenderId { get; set; }
         public IEnumerable<Gender> GenderList { get; set; }
 
+        //Year of Study
+        public YearOfStudy YearOfStudy { get; set; }
+        [ForeignKey(nameof(YearOfStudyId))]
+        public int YearOfStudyId { get; set; }
+        public IEnumerable<YearOfStudy> YearOfStudyList { get; set; }
+
 
     }
 }

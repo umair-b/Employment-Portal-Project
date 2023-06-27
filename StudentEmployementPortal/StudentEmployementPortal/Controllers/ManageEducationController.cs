@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.ViewModels;
+using System.Data;
 using System.Linq.Expressions;
 
 namespace StudentEmployementPortal.Controllers
 {
+    [Authorize(Roles = Utils.DefineRole.Role_Student)]
     public class ManageEducationController : Controller
     {
 
