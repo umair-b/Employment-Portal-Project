@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QunheWVvzdSbLniCLlhaZncgrgGXC2PZG8CDnckhq+o=",
+  "Hash": "Zz/iBIoA/zNX4QX1ru+JjyxVfIXn0ZPLEMLvYOvs918=",
   "Source": "StudentEmployementPortal",
   "BasePath": "_content/StudentEmployementPortal",
   "Mode": "Default",
@@ -2242,6 +2242,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\sequence diagram.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\Student Employment Portal Overview.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/Student Employment Portal Overview.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Student Employment Portal Overview.pdf"
     }
   ]
 }

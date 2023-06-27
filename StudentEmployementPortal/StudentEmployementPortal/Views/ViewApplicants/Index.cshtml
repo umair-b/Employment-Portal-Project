@@ -50,7 +50,6 @@
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Department</th>
-                    <th>Course</th>
                     <th>Level</th>
                     <th>Gender</th>
                     <th>Status</th>
@@ -61,12 +60,11 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.User.FirstName</td>
-                        <td>@obj.User.LastName</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>@obj.Student.User.FirstName</td>
+                        <td>@obj.Student.User.LastName</td>
+                        <td>@obj.Student.Department</td>
+                        <td>@obj.Student.YearOfStudy</td>
+                        <td>@obj.Student.Gender</td>
                         <td>@obj.ApplicationStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ViewApplicants" asp-action="ApplicantDetails" asp-route-id="@obj.ApplicationId"

@@ -26,13 +26,16 @@ namespace StudentEmployementPortal.Controllers
         public IActionResult Index()
         {
             var userId = _userManager.GetUserId(User);
-            //var student = _db.Students.Find(userId);
+            var student = _db.Students.Find(userId);
 
             var applications = _db.Application
                 .Where(a => a.StudentId == userId)
                 .Select(a => a.PostId) .ToList();
 
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved)
+            var dateNow = DateTime.Now;
+
+            IEnumerable<JobPost> JobPosts = _db.JobPosts
+                .Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved && x.ClosingDate >= dateNow)
                 .Include(x => x.Faculty)
                 .Include(x => x.Department);
 
