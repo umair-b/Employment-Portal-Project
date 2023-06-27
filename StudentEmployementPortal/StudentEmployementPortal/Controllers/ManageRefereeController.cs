@@ -25,6 +25,7 @@ namespace StudentEmployementPortal.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult AddReferee(Referee Referee)
         {
             string UserId = _userManager.GetUserId(User);

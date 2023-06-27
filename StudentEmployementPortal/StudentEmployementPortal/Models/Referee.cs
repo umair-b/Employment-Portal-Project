@@ -19,7 +19,7 @@ namespace StudentEmployementPortal.Models
         public string Institution { get; set; }
 
         [DisplayName("Cellphone Number")]
-        public int CellNumber { get; set; }
+        public string CellNumber { get; set; }
 
         [DisplayName("Email Address")]
         public string Email { get; set; }
