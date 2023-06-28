@@ -80,7 +80,7 @@ namespace StudentEmployementPortal.Controllers
 
             var Employer = _appDbContext.Employers.Find(ApproveEmployerVm.Id);
 
-            if (Employer == null)
+            if (Employer != null)
             {
                 Employer.ApproverNote = ApproveEmployerVm.ApproverNote;
                 Employer.EmployerStatus = ApproveEmployerVm.EmployerStatus;
@@ -88,7 +88,7 @@ namespace StudentEmployementPortal.Controllers
                 _appDbContext.SaveChanges();
             }
 
-            return View(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

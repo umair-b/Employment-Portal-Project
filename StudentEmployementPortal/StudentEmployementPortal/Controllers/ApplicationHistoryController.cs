@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
+using StudentEmployementPortal.Utils;
 using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
+    [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ApplicationHistoryController : Controller
     {
         private AppDbContext _db;

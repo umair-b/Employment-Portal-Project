@@ -83,7 +83,7 @@ namespace StudentEmployementPortal.ViewModels
 
         [Required]
         [Display(Name = "Limited to Citizens")]
-        public bool? CitizensOnly { get; set; }
+        public bool CitizensOnly { get; set; }
 
         [Required]
         [Display(Name = "Minimum Requirements")]

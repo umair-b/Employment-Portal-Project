@@ -1,7 +1,7 @@
 ﻿@using StudentEmployementPortal.ViewModels
 @model EmployerUpdateInfoViewModel
 
-<form method="post">
+<form method="post" id="employerForm" onsubmit="confirmSubmission(event)">
     <div class="=border pt-2 mt-2">
         <div class="row pb-2">
             <h2 class="text-primary">Update Details</h2>
@@ -82,5 +82,23 @@
                 $('#submitButton').prop('disabled', !isChecked);
             });
         });
+    </script>
+
+    <script>
+        function confirmSubmission(e){
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Confirm Submission",
+                text: "Making changes to your profile will result in your profile having to be reviewed again. Are you sure you want to continue?",
+                icon: "question",
+                showCancelButton: true,
+            }).then(result => {
+                if (result.isConfirmed){
+                    const employerForm = document.getElementById("employerForm");
+                    employerForm.submit();
+                }
+            })
+        }
     </script>
 }

@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
+    [ServiceFilter(typeof(EmployerProfileAttribute))]
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
