@@ -16,7 +16,9 @@ public class Application
     public int PostId { get; set; }
     [ForeignKey(nameof(PostId))]
     public JobPost Post { get; set; }
-    public IEnumerable<Document>? Documents { get; set; } 
+    public IEnumerable<Document>? Documents { get; set; }
+    [NotMapped]
+    public Document Doc { get; set; }
     public Enums.ApplicationStatus ApplicationStatus { get; set; } = Enums.ApplicationStatus.Pending;
 
 /*    public DateTime created = DateTime.Now;

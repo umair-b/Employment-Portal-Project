@@ -18,7 +18,7 @@
 
 <div>
     <a asp-action="Index" asp-route-id="@Model.PostId" class="btn btn-secondary right-align">Back</a>
-    <h4>View Applicant</h4>
+    <h3 class="text-primary" style="font-weight:bold">View Applicant</h3>
     <hr />
     <div>
         <dl class="row">
@@ -37,6 +37,9 @@
             </dd>
         </dl>
     </div>
+    <div class="row">
+
+    </div>
     <div class="form-control">
         <div>
             <dl class="row">
@@ -44,27 +47,20 @@
                     Department
                 </dt>
                 <dd class="col-sm-10">
-
-                </dd>
-
-                <dt class="col-sm-2">
-                    Course
-                </dt>
-                <dd class="col-sm-10">
-
+                    @Model.Student.Department.DepartmentName
                 </dd>
 
                 <dt class="col-sm-2">
                     Level
                 </dt>
                 <dd class="col-sm-10">
-                    
+                    @Model.Student.YearOfStudy.YearOfStudyName
                 </dd>
             </dl>
         </div>
-        <br />
+        <hr />
         <div>
-            <h4 class="text-primary" style="font-weight:bold">Profile</h4>
+            <h4 class="text-success" style="font-weight:bold">Profile</h4>
 
             <dl class="row">
                 <dt class="col-sm-2">
@@ -106,7 +102,7 @@
                     Gender
                 </dt>
                 <dd class="col-sm-10">
-                    @Model.Student.Gender
+                    @Model.Student.Gender.GenderName
                 </dd>
 
                 <dt class="col-sm-2">
@@ -124,11 +120,158 @@
                         Non-SA
                     </dd>
                 }
+
+                <dt class="col-sm-2">
+                    Career Objective
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Student.CareerObjective
+                </dd>
+
+                <dt class="col-sm-2">
+                    Skills
+                </dt>
+                <dd class="col-sm-10">
+                    @Model.Student.Skills
+                </dd>
             </dl>
         </div>
-        <br />
+        <hr />
         <div>
-            <h4 class="text-primary" style="font-weight:bold">Uploaded Documents</h4>
+            <h4 class="text-success" style="font-weight:bold">Education</h4>
+
+            @if (Model.Student.Education == null || Model.Student.Education.Count() == 0)
+            {
+                <h6>There is no education recorded for the student.</h6>
+            }
+            else
+            {
+                <table class="table table-borderless" style="width:50%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Qualification</th>
+                            <th>Institution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var edu in Model.Student.Education)
+                        {
+                            <tr>
+                                @if (edu.EndDate == null)
+                                {
+                                    <td>
+                                        @edu.StartDate.Year - current
+                                    </td>
+                                }
+                                else if (edu.EndDate != null)
+                                {
+                                    <td>
+                                        @edu.StartDate.Year - @edu.EndDate.Value.Year
+                                    </td>
+                                }
+                                <td class="m-2">
+                                    @edu.Qualification
+                                </td>
+                                <td>
+                                    @edu.Institution
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <hr />
+        <div>
+            <h4 class="text-success" style="font-weight:bold">Work Experience</h4>
+
+            @if (Model.Student.WorkExperience == null || Model.Student.WorkExperience.Count() == 0)
+            {
+                <h6>There is no work experience recorded for the student.</h6>
+            }
+            else
+            {
+                <table class="table table-borderless" style="width:50%">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Job Title</th>
+                            <th>Institution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var job in Model.Student.WorkExperience)
+                        {
+                            <tr>
+                                @if (job.EndDate == null)
+                                {
+                                    <td>
+                                        @job.StartDate.Year - current
+                                    </td>
+                                }
+                                else if (job.EndDate != null)
+                                {
+                                    <td>
+                                        @job.StartDate.Year - @job.EndDate.Value.Year
+                                    </td>
+                                }
+                                <td class="m-2">
+                                    @job.JobTitle
+                                </td>
+                                <td>
+                                    @job.EmployerName
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <hr />
+        <div>
+            <h4 class="text-success" style="font-weight:bold">Referees</h4>
+
+            @if (Model.Student.Referee == null || Model.Student.Referee.Count() == 0)
+            {
+                <h6>There are no referres recorded for the student.</h6>
+            }
+            else
+            {
+                <table class="table table-borderless" style="width:50%">
+                    <thead>
+                        <tr>
+                            <th>Institution</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var refs in Model.Student.Referee)
+                        {
+                            <tr>
+                                <td class="m-2">
+                                    @refs.Institution
+                                </td>
+                                <td>
+                                    @refs.Name
+                                </td>
+                                <td>
+                                    @refs.Email
+                                </td>
+                                <td>
+                                    @refs.CellNumber
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <hr />
+        <div>
+            <h4 class="text-success" style="font-weight:bold">Uploaded Documents</h4>
             
             @if (Model.Documents == null || Model.Documents.Count() == 0)
             {
@@ -163,9 +306,8 @@
     <br />
     
     <form method="post">
-        <div class="form-control pb-2">
+        <div class="pb-2">
             <h6 style="font-weight:bold">Select Outcome Status of Application</h6>
-            <br />
             <div class="pb-2">
                 <button type="submit" class="btn btn-primary" asp-controller="ViewApplicants" asp-action="Interview" asp-route-id="@Model.ApplicationId">Interview</button>
                 <button type="submit" class="btn btn-primary" asp-controller="ViewApplicants" asp-action="OnHold" asp-route-id="@Model.ApplicationId">On Hold</button>
@@ -174,5 +316,6 @@
             </div>
         </div>
     </form>
+    <br />
 </div>
 

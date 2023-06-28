@@ -23,11 +23,12 @@
         </div>
         <hr />
         <br />
-        <table class="table table-borderless" style="width:50%">
+        <table class="table table-borderless" style="width:75%">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,11 @@
                     <tr>
                         <td>@document.FileName</td>
                         <td>@document.FileDescription</td>
+                        <td class="text-center">
+                            <button type="submit" class="btn btn-outline-danger" asp-action="DeleteConfirmed" asp-route-id="@document.DocumentId">
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -57,5 +63,5 @@
         </div>
     </div>
     <br />
-    <a asp-action="Index" class="btn btn-primary">Apply</a>
+    <a asp-action="Index" class="btn btn-primary">Done</a>
 </form>

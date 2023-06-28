@@ -176,8 +176,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ApplicationHistory/ApplicationDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25IaXN0b3J5XEFwcGxpY2F0aW9uRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ApplicationHistory/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25IaXN0b3J5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ApplicationHistory/UploadPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwbGljYXRpb25IaXN0b3J5XFVwbG9hZFBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/Application/Apply.cshtml]
@@ -306,10 +314,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ViewApplicants/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlld0FwcGxpY2FudHNcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/ViewApplicants/UploadedDocuments.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlld0FwcGxpY2FudHNcVXBsb2FkZWREb2N1bWVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lesli/Projects/Empoyment-Portal-Project/StudentEmployementPortal/StudentEmployementPortal/Views/_ViewImports.cshtml]

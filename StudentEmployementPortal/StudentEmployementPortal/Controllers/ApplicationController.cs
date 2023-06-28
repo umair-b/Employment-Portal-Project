@@ -30,10 +30,10 @@ namespace StudentEmployementPortal.Controllers
             var userId = _userManager.GetUserId(User);
             var student = _db.Students.Find(userId);
 
-            /*if (student == null)
+            if (student == null)
             {
-                return RedirectToAction("Index", "ManageStudentProfile");
-            }*/
+                return NotFound();
+            }
 
             var applications = _db.Application
                 .Where(a => a.StudentId == userId)
@@ -99,6 +99,7 @@ namespace StudentEmployementPortal.Controllers
             }
 
             var jobPost = _db.JobPosts
+                .Include(j => j.Department)
                 .FirstOrDefault(j => j.PostId == id);
 
             if (jobPost == null)
@@ -218,6 +219,31 @@ namespace StudentEmployementPortal.Controllers
 
             return RedirectToAction("Index");
         }
-           
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            if (_db.Documents == null)
+            {
+                return Problem("Entity set 'AppDbContext.Documents'  is null.");
+            }
+
+            var document = _db.Documents.SingleOrDefault(j => j.DocumentId == id);
+
+            if (document == null)
+            {
+                return NotFound();
+            }
+
+            var appId = document.ApplicationId;
+
+            appId = document.ApplicationId;
+            _db.Documents.Remove(document);
+
+            _db.SaveChanges();
+            return RedirectToAction("Upload", new {id = appId});
+        }
+
     }
 }

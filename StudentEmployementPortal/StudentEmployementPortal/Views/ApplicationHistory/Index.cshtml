@@ -57,8 +57,7 @@
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.Post.EndDate)</td>
                         <td>@obj.ApplicationStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
-                            <a
-                               class="btn btn-primary mx-1">Details</a>
+                            <a asp-action="ApplicationDetails" asp-route-id="@obj.ApplicationId" class="btn btn-primary mx-1">Details</a>
                         </td>
 
                     </tr>

@@ -75,9 +75,9 @@ namespace StudentEmployementPortal.Controllers
                     Skills = Student.Skills,
                     StudentIdNumber = Student.StudentIdNumber,
                     YearOfStudyId = Student.YearOfStudyId,
-                    Education = _appDbContext.Educations.Where(e => e.UserId == UserId),
-                    Referee = _appDbContext.Referees.Where(r => r.UserId == UserId),
-                    WorkExperience = _appDbContext.WorkExperience.Where(w => w.UserId == UserId)
+                    Education = _appDbContext.Educations.Where(e => e.UserId == UserId).ToList(),
+                    Referee = _appDbContext.Referees.Where(r => r.UserId == UserId).ToList(),
+                    WorkExperience = _appDbContext.WorkExperience.Where(w => w.UserId == UserId).ToList()
                 };
 
                 return View(StudentVm); 
