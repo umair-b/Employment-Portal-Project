@@ -853,9 +853,6 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("Date");
 
-                    b.Property<string>("CompanyName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ContactEmail")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1010,8 +1007,9 @@ namespace StudentEmployementPortal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RefereeId"));
 
-                    b.Property<int>("CellNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("CellNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -1083,6 +1081,9 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("YearOfStudyId")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
 
                     b.HasIndex("DepartmentId");
@@ -1094,6 +1095,8 @@ namespace StudentEmployementPortal.Migrations
                     b.HasIndex("LicenseId");
 
                     b.HasIndex("RaceId");
+
+                    b.HasIndex("YearOfStudyId");
 
                     b.ToTable("Students");
                 });
@@ -1137,6 +1140,60 @@ namespace StudentEmployementPortal.Migrations
                     b.HasIndex("StudentUserId");
 
                     b.ToTable("WorkExperience");
+                });
+
+            modelBuilder.Entity("StudentEmployementPortal.Models.YearOfStudy", b =>
+                {
+                    b.Property<int>("YearOfStudyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("YearOfStudyId"));
+
+                    b.Property<string>("YearOfStudyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("YearOfStudyId");
+
+                    b.ToTable("YearOfStudies");
+
+                    b.HasData(
+                        new
+                        {
+                            YearOfStudyId = 1,
+                            YearOfStudyName = "First Year"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 2,
+                            YearOfStudyName = "Second Year"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 3,
+                            YearOfStudyName = "Third Year"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 4,
+                            YearOfStudyName = "Honours"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 5,
+                            YearOfStudyName = "Masters"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 6,
+                            YearOfStudyName = "PhD"
+                        },
+                        new
+                        {
+                            YearOfStudyId = 7,
+                            YearOfStudyName = "PostDoc"
+                        });
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.AppUser", b =>
@@ -1273,7 +1330,7 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                    b.HasOne("StudentEmployementPortal.Models.Employer", "Employer")
                         .WithMany()
                         .HasForeignKey("EmployerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1287,9 +1344,9 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Navigation("Department");
 
-                    b.Navigation("Faculty");
+                    b.Navigation("Employer");
 
-                    b.Navigation("User");
+                    b.Navigation("Faculty");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Referee", b =>
@@ -1341,6 +1398,12 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentEmployementPortal.Models.YearOfStudy", "YearOfStudy")
+                        .WithMany()
+                        .HasForeignKey("YearOfStudyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
 
                     b.Navigation("Faculty");
@@ -1352,6 +1415,8 @@ namespace StudentEmployementPortal.Migrations
                     b.Navigation("Race");
 
                     b.Navigation("User");
+
+                    b.Navigation("YearOfStudy");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.WorkExperience", b =>

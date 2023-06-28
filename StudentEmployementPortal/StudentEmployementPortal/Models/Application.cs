@@ -9,9 +9,9 @@ public class Application
     [Key]
     public int ApplicationId { get; set; }
 
-    [ForeignKey(nameof(User))]
+    [ForeignKey(nameof(Student))]
     public string StudentId { get; set; }
-    public AppUser User { get; set; }
+    public Student Student { get; set; }
 
     public int PostId { get; set; }
     [ForeignKey(nameof(PostId))]

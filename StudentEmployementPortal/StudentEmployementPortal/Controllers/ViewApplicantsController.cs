@@ -22,9 +22,13 @@ namespace StudentEmployementPortal.Controllers
         // GET: ViewApplicantsController
         public IActionResult Index(int id)
         {
+            var userId = _userManager.GetUserId(User);
+            var currentStudent = _db.Students.Find(userId);
+            
             var applications = _db.Application.Where(a => a.PostId == id)
                 .Include(a => a.Post)
-                .Include(a => a.User)
+                .Include(a => a.Student)
+                .Include(a => a.Student.User)
                 .ToList();
 
             return View(applications);
@@ -33,13 +37,15 @@ namespace StudentEmployementPortal.Controllers
         // GET: ViewApplicantsController/Details/5
         public IActionResult ApplicantDetails(int id)
         {
+            var userId = _userManager.GetUserId(User);
+            
             var documents = _db.Documents
                 .Where(d => d.ApplicationId == id)
                 .ToList();
 
             var application = _db.Application
                 .Include(a => a.Post)
-                .Include(a => a.User)
+                .Include(a => a.Student)
                 .SingleOrDefault(a => a.ApplicationId == id);
 
             if (application == null || documents == null) 
