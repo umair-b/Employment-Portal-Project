@@ -327,25 +327,25 @@ namespace StudentEmployementPortal.Migrations
                         column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "GenderId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Students_Licences_LicenseId",
                         column: x => x.LicenseId,
                         principalTable: "Licences",
                         principalColumn: "LicenseId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Students_Races_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Races",
                         principalColumn: "RaceId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Students_YearOfStudies_YearOfStudyId",
                         column: x => x.YearOfStudyId,
                         principalTable: "YearOfStudies",
                         principalColumn: "YearOfStudyId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -356,8 +356,8 @@ namespace StudentEmployementPortal.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmployerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Internal = table.Column<bool>(type: "bit", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: true),
-                    DepartmentId = table.Column<int>(type: "int", nullable: true),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -392,7 +392,7 @@ namespace StudentEmployementPortal.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "DepartmentId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_JobPosts_Employers_EmployerId",
                         column: x => x.EmployerId,
@@ -404,7 +404,7 @@ namespace StudentEmployementPortal.Migrations
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
                         principalColumn: "FacultyId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -444,7 +444,7 @@ namespace StudentEmployementPortal.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Institution = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CellNumber = table.Column<int>(type: "int", nullable: false),
+                    CellNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -499,16 +499,16 @@ namespace StudentEmployementPortal.Migrations
                 {
                     table.PrimaryKey("PK_Application", x => x.ApplicationId);
                     table.ForeignKey(
-                        name: "FK_Application_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Application_JobPosts_PostId",
                         column: x => x.PostId,
                         principalTable: "JobPosts",
                         principalColumn: "PostId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Application_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.NoAction);
                 });
 
@@ -813,10 +813,19 @@ namespace StudentEmployementPortal.Migrations
                 name: "Application");
 
             migrationBuilder.DropTable(
+                name: "JobPosts");
+
+            migrationBuilder.DropTable(
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "JobPosts");
+                name: "Employers");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "Genders");
@@ -829,15 +838,6 @@ namespace StudentEmployementPortal.Migrations
 
             migrationBuilder.DropTable(
                 name: "YearOfStudies");
-
-            migrationBuilder.DropTable(
-                name: "Departments");
-
-            migrationBuilder.DropTable(
-                name: "Employers");
-
-            migrationBuilder.DropTable(
-                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

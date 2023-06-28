@@ -22,7 +22,10 @@ namespace StudentEmployementPortal.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Employer> Employers = _appDbContext.Employers.Where(e => e.EmployerStatus == Utils.Enums.EmployerStatus.Pending).Include(e => e.User);
+            var Employers = _appDbContext.Employers
+                .Where(e => e.EmployerStatus == Utils.Enums.EmployerStatus.Pending)
+                .Include(e => e.User)
+                .ToList();
             
             if (Employers == null)
             {

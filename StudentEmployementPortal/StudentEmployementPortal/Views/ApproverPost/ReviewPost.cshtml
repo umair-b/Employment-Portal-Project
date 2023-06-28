@@ -11,18 +11,18 @@
     }
 </style>
 
+<div>
+    <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Review Post</h2>
+</div>
+<hr />
+
 <form method="post" asp-action="ReviewPost">
     <div class="=border pt-2 mt-2">
-        <div>
-            <a asp-controller="ApproverPost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
-                &larr; Back
-            </a>
-        </div>
-        <div class="row pb-2">
-            <h2 class="text-primary">Review Post</h2>
-        </div>
-        <hr />
-        <br />
         <div class="form-control">
             @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
             @Html.HiddenFor(Model => Model.EmployerId, new { @readonly = "readonly" })

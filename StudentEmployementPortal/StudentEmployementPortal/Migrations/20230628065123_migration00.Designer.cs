@@ -12,8 +12,8 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230627102716_migration01")]
-    partial class migration01
+    [Migration("20230628065123_migration00")]
+    partial class migration00
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1281,7 +1281,7 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                    b.HasOne("StudentEmployementPortal.Models.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1289,7 +1289,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Navigation("Post");
 
-                    b.Navigation("User");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Document", b =>

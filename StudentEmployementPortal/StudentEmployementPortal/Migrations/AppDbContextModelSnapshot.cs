@@ -1278,7 +1278,7 @@ namespace StudentEmployementPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("StudentEmployementPortal.Models.AppUser", "User")
+                    b.HasOne("StudentEmployementPortal.Models.Student", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1286,7 +1286,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.Navigation("Post");
 
-                    b.Navigation("User");
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Document", b =>
