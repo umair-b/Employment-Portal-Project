@@ -17,12 +17,23 @@ namespace StudentEmployementPortal.Utils
         }
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var StudentProfile = _appDbContext.Students.Find(_userManager.GetUserId(context.HttpContext.User));
+            var EmployerProfile = _appDbContext.Employers.Find(_userManager.GetUserId(context.HttpContext.User));
 
-            if (StudentProfile == null)
+            if (EmployerProfile == null)
             {
                 context.Result = new RedirectToActionResult("Index", "ManageProfileEmployer", null);
             }
+
+            /*if (EmployerProfile.EmployerStatus == Enums.EmployerStatus.Rejected)
+            {
+                context.Result = new RedirectToActionResult("EmployerError", "Home", null);
+            }
+
+            if (EmployerProfile.EmployerStatus == Enums.EmployerStatus.Pending)
+            {
+                context.Result = new RedirectToActionResult("Index", "Home", null);
+            }*/
+
 
         }
     }
