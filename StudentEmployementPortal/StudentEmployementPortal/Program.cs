@@ -18,6 +18,8 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProvide
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<UserManager<IdentityUser>>();
+builder.Services.AddScoped<StudentProfileFilterAttribute>();
+builder.Services.AddScoped<EmployerProfileAttribute>();
 
 var app = builder.Build();
 

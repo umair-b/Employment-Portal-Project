@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using LinqKit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Data;
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
+    [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ApplicationController : Controller
     {
         private readonly AppDbContext _db;
@@ -22,22 +24,64 @@ namespace StudentEmployementPortal.Controllers
             _userManager = userManager;
         }
 
-
+        
         public IActionResult Index()
         {
             var userId = _userManager.GetUserId(User);
             var student = _db.Students.Find(userId);
 
+            /*if (student == null)
+            {
+                return RedirectToAction("Index", "ManageStudentProfile");
+            }*/
+
             var applications = _db.Application
                 .Where(a => a.StudentId == userId)
                 .Select(a => a.PostId) .ToList();
 
-            var dateNow = DateTime.Now;
+            //Predicate
+            var Pred = PredicateBuilder.New<JobPost>();
 
-            IEnumerable<JobPost> JobPosts = _db.JobPosts
-                .Where(x => !applications.Contains(x.PostId) && x.PostStatus == Enums.JobPostStatus.Approved && x.ClosingDate >= dateNow)
+            Pred = Pred.And(p => p.PostStatus == Enums.JobPostStatus.Approved);
+            
+            if (student.Citizen == false)
+            {
+                Pred = Pred.And(p => p.CitizensOnly == false);
+            }
+
+            int YearOfStudy = student.YearOfStudyId;
+            switch (YearOfStudy)
+            {
+                case 1:
+                    Pred = Pred.And(p => p.limitedToFirst);
+                    break;
+                case 2:
+                    Pred = Pred.And(p => p.limitedToSecond);
+                    break;
+                case 3:
+                    Pred = Pred.And(p => p.limitedToThird);
+                    break;
+                case 4:
+                    Pred = Pred.And(p => p.limitedToHonours);
+                    break;
+                case 5:
+                    Pred = Pred.And(p => p.limitedToMasters);
+                    break;
+                case 6:
+                    Pred = Pred.And(p => p.limitedToPhD);
+                    break;
+                case 7:
+                    Pred = Pred.And(p => p.limitedToPostDoc);
+                    break;
+            }
+
+            Pred = Pred.Or(p => p.PostStatus == Enums.JobPostStatus.Approved && !p.limitedToFirst && !p.limitedToSecond && !p.limitedToThird && !p.limitedToHonours && !p.limitedToMasters && !p.limitedToPhD && !p.limitedToPostDoc);
+
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(Pred)
                 .Include(x => x.Faculty)
                 .Include(x => x.Department);
+
+            JobPosts = JobPosts.Where(x => !applications.Contains(x.PostId));
 
             if (JobPosts == null)
             {

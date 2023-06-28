@@ -34,7 +34,7 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Business Type")]
         public Enums.BusniessType EmployerBusinessType { get; set; } = Enums.BusniessType.PtyLtd;
 
-        private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> { Enums.JobPostStatus.Withdrawn, Enums.JobPostStatus.Pending };
-        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);
+        //private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> { Enums.JobPostStatus.Withdrawn, Enums.JobPostStatus.Pending };
+        public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.EmployerStatus>();
     }
 }
