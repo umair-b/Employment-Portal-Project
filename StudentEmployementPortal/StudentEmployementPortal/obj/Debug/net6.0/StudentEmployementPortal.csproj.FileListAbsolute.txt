@@ -1511,3 +1511,13 @@ C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoym
 C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\zh-CN\Humanizer.resources.dll
 C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\zh-Hans\Humanizer.resources.dll
 C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\zh-Hant\Humanizer.resources.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\EntityFramework.SqlServer.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\EntityFramework.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\LinqKit.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\LinqKit.Core.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\System.Data.SqlClient.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\runtimes\win-arm64\native\sni.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\runtimes\win-x64\native\sni.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll

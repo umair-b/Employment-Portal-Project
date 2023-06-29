@@ -1,0 +1,14 @@
+﻿@model StudentEmployementPortal.ViewModels.DocUploadPartialViewModel
+
+<div>
+    <label asp-for="File" class="pb-2"></label>
+    <br />
+    <div>
+        <label>File Description</label>
+        <input asp-for="FileDescription" />
+    </div>
+    <br />
+    <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
+    <br />
+    <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
+</div>

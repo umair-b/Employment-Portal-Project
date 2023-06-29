@@ -1,15 +1,48 @@
 ﻿@model StudentEmployementPortal.Models.JobPost
+@using System.Globalization
 
 @{
     ViewData["Title"] = "PostDetails";
 }
 
-<h4 class="text-primary">Job Post Details</h4>
+@{
+
+    DateTime dateStart = new DateTime(Model.StartDate.Value.Year, Model.StartDate.Value.Month, Model.StartDate.Value.Day);
+    DateTime dateEnd = new DateTime(Model.EndDate.Value.Year, Model.EndDate.Value.Month, Model.EndDate.Value.Day);
+    DateTime dateClose = new DateTime(Model.ClosingDate.Value.Year, Model.ClosingDate.Value.Month, Model.ClosingDate.Value.Day);
+}
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
 
 <div>
-    <hr />
+    <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Job Post Details</h2>
+</div>
+<hr />
+
+<div>
     <div class="form-control">
+        <br />
         <dl class="row">
+            <dt class="col-sm-2">
+                Department
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Department.DepartmentName)
+            </dd>
+
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.JobTitle)
             </dt>
@@ -72,19 +105,19 @@
                 @Html.DisplayNameFor(model => model.StartDate)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.StartDate)
+                @Model.StartDate.Value.Day @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @Model.StartDate.Value.Year
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.EndDate)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.EndDate)
+                @Model.EndDate.Value.Day @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @Model.EndDate.Value.Year
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ClosingDate)
             </dt>
             <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.ClosingDate)
+                @Model.ClosingDate.Value.Day @dateClose.ToString("MMMM", CultureInfo.InvariantCulture) @Model.ClosingDate.Value.Year
             </dd>
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.MinRequirements)
@@ -104,5 +137,4 @@
 <br/>
 <div class="pb-2">
     <a asp-action="Apply" asp-route-id="@Model.PostId" class="btn btn-primary">Apply</a>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
 </div>

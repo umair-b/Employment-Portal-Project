@@ -62,9 +62,9 @@
                     <tr>
                         <td>@obj.Student.User.FirstName</td>
                         <td>@obj.Student.User.LastName</td>
-                        <td>@obj.Student.Department</td>
-                        <td>@obj.Student.YearOfStudy</td>
-                        <td>@obj.Student.Gender</td>
+                        <td>@obj.Student.Department.DepartmentName</td>
+                        <td>@obj.Student.YearOfStudy.YearOfStudyName</td>
+                        <td>@obj.Student.Gender.GenderName</td>
                         <td>@obj.ApplicationStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ViewApplicants" asp-action="ApplicantDetails" asp-route-id="@obj.ApplicationId"

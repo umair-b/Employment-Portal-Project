@@ -23,7 +23,7 @@
     <hr />
     @if (Model.Count() == 0)
     {
-        <h3>There are no Employers to Approve :).</h3>
+        <h5 class="text-center">There are no Employers to Approve :).</h5>
     }
     else
     {
@@ -42,14 +42,14 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.User.FirstName</td>
+                        <td>@obj.User.FirstName @obj.User.LastName</td>
                         <td>@obj.RegistrationName</td>
                         <td>@obj.TradingName</td>
                         <td>@obj.RegistrationNumber</td>
                         <td>@obj.EmployerStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ApproverEmployer" asp-action="ReviewEmployer" asp-route-id="@obj.UserId"
-                               class="btn btn-primary mx-1">Edit</a>
+                               class="btn btn-primary mx-1">Review</a>
                         </td>
 
                     </tr>

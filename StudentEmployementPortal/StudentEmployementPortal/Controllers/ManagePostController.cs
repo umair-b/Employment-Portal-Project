@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
+    [ServiceFilter(typeof(EmployerProfileAttribute))]
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
@@ -33,11 +35,23 @@ namespace StudentEmployementPortal.Controllers
                 .Include(j => j.Employer)
                 .ToList();
 
+
             if (jobPosts == null)
             {
                 return NotFound();
             }
 
+            var dateNow = DateTime.Now;
+
+            foreach (var post in jobPosts)
+            {
+                if (post.ClosingDate < dateNow)
+                {
+                    post.PostStatus = Utils.Enums.JobPostStatus.Closed;
+                    _db.Update(post);
+                    _db.SaveChanges();
+                }
+            }
 
             return View(jobPosts);
         }

@@ -100,7 +100,7 @@
             </div>
             <br />
             <div>
-                <input asp-for="TrueInfo" type="checkbox" id="checkbox1" checked="false" /> I confirm that the information provided above is true to the best of my knowledge.
+                <input asp-for="TrueInfo" type="checkbox" id="checkbox1" /> I confirm that the information provided above is true to the best of my knowledge.
             </div>
             <br />
         </div>
@@ -110,15 +110,37 @@
         <button type="submit" class="btn btn-primary" style="width:150px" id="submitButton">Update</button>
     </div>
 </form>
-<br />
 
 @section Scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#checkbox1').change(function () {
                 var isChecked = $(this).is(':checked');
                 $('#submitButton').prop('disabled', !isChecked);
             });
+
+            var isChecked = $(this).is(':checked');
+            $('#submitButton').prop('disabled', !isChecked);
+
         });
+    </script>
+
+    <script>
+        function confirmSubmission(e){
+            e.preventDefault();
+
+            Swal.fire({
+                title: "Confirm Submission",
+                text: "Making changes to your profile will result in your profile having to be reviewed again. Are you sure you want to continue?",
+                icon: "question",
+                showCancelButton: true,
+            }).then(result => {
+                if (result.isConfirmed){
+                    const employerForm = document.getElementById("employerForm");
+                    employerForm.submit();
+                }
+            })
+        }
     </script>
 }

@@ -94,7 +94,9 @@ namespace StudentEmployementPortal.Utils
             [Display(Name = "Rejected")]
             Rejected,
             [Display(Name = "Appointed")]
-            Appointed
+            Appointed,
+            [Display(Name = "Withdrawn")]
+            Withdrawn
         }
 
     }

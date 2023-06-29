@@ -22,13 +22,13 @@ namespace StudentEmployementPortal.Models
         public bool Citizen { get; set; }
 
         //Education
-        public IEnumerable<Education> Education { get; set; }
+        public IEnumerable<Education>? Education { get; set; }
 
         //Work Experience
-        public IEnumerable<WorkExperience> WorkExperience { get; set; }
+        public IEnumerable<WorkExperience>? WorkExperience { get; set; }
 
         //Referee
-        public IEnumerable<Referee> Referee { get; set; }
+        public IEnumerable<Referee>? Referee { get; set; }
 
         //Faculty
         public Faculty Faculty { get; set; }

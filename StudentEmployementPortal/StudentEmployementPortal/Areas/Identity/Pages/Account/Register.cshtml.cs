@@ -107,15 +107,19 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
             [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
             [Required]
+            [Display(Name = "Cellphone Number")]
             public string CellNumber { get; set; }
-
+            [Display(Name = "Telephone Number")]
             public string TelNumber { get; set; }
 
             [Required]
+            [Display(Name = "Select Role")]
             public string Role { get; set; }
 
             [ValidateNever]

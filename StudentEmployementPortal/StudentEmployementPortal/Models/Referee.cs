@@ -25,7 +25,7 @@ namespace StudentEmployementPortal.Models
         public string Email { get; set; }
 
         //Navigation Property
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(Student))]
         public string UserId { get; set; }
         public Student Student { get; set; }
     }

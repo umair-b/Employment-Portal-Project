@@ -132,25 +132,25 @@
         <br />
         <div>
             <label asp-for="CareerObjective"></label>
-            <textarea asp-for="CareerObjective" class="form-control"></textarea>
+            <textarea asp-for="CareerObjective" class="form-control" id="textarea" ></textarea>
             <span asp-validation-for="CareerObjective"></span>
         </div>
         <br />
         <div>
             <label asp-for="Achievements"></label>
-            <textarea asp-for="Achievements" class="form-control"></textarea>
+            <textarea asp-for="Achievements" class="form-control" id="textarea"></textarea>
             <span asp-validation-for="Achievements"></span>
         </div>
         <br />
         <div>
             <label asp-for="Interests"></label>
-            <textarea asp-for="Interests" class="form-control"></textarea>
+            <textarea asp-for="Interests" class="form-control" id="textarea"></textarea>
             <span asp-validation-for="Interests"></span>
         </div>
         <br />
         <div>
             <label asp-for="Skills"></label>
-            <textarea asp-for="Skills" class="form-control"></textarea>
+            <textarea asp-for="Skills" class="form-control" ></textarea>
             <span asp-validation-for="Skills"></span>
         </div>
         <br />
@@ -317,6 +317,17 @@
                 $('#departmentId').html('<option value="" selected disabled>Select Department</option>');
                 $('#departmentId').prop('disabled', true);
             }
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#textarea').on('input', function () {
+                // Reset the width to auto to get the correct content width
+                $(this).css('width', 'auto');
+
+                // Set the width to the scrollWidth of the content plus some additional padding
+                $(this).css('width', $(this)[0].scrollWidth + 'px');
+            });
         });
     </script>
 }
