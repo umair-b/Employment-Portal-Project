@@ -845,8 +845,7 @@ namespace StudentEmployementPortal.Migrations
                     b.Property<string>("ApproverNote")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("CitizensOnly")
-                        .IsRequired()
+                    b.Property<bool>("CitizensOnly")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("ClosingDate")
@@ -1027,17 +1026,13 @@ namespace StudentEmployementPortal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StudentUserId")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("RefereeId");
 
-                    b.HasIndex("StudentUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Referees");
                 });
@@ -1353,7 +1348,7 @@ namespace StudentEmployementPortal.Migrations
                 {
                     b.HasOne("StudentEmployementPortal.Models.Student", "Student")
                         .WithMany("Referee")
-                        .HasForeignKey("StudentUserId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

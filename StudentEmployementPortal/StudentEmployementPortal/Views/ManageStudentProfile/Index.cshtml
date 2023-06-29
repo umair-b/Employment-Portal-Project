@@ -319,15 +319,5 @@
             }
         });
     </script>
-    <script>
-        $(document).ready(function () {
-            $('#textarea').on('input', function () {
-                // Reset the width to auto to get the correct content width
-                $(this).css('width', 'auto');
-
-                // Set the width to the scrollWidth of the content plus some additional padding
-                $(this).css('width', $(this)[0].scrollWidth + 'px');
-            });
-        });
-    </script>
+    
 }

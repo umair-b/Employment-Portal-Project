@@ -67,8 +67,17 @@
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
                         <td>@obj.PostStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
-                            <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
-                               class="btn btn-primary mx-1">Review</a>
+                            @if (obj.PostStatus == StudentEmployementPortal.Utils.Enums.JobPostStatus.Approved)
+                            {
+                                <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
+                                   class="btn btn-primary mx-1">Details</a>
+                                <a class="btn btn-outline-primary mx-1" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@obj.PostId">View Applicants</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
+                                   class="btn btn-primary mx-1">Review</a>
+                            }
                         </td>
 
                     </tr>
