@@ -74,9 +74,82 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
         {
+            var maxFileSize = 5 * 1024 * 1024;
+            var allowedFileTypes = new[] { ".pdf", ".doc", ".docx" };
 
-            /* var maxFileSize = 5 * 1024 * 1024;
-             var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*/
+            var userId = _userManager.GetUserId(User);
+
+            var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+
+            var application = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Include(a => a.Post)
+                .Include(a => a.Post.Department)
+                .FirstOrDefault(a => a.ApplicationId == id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            viewModel.ApplicationId = id;
+            viewModel.Application = application;
+            viewModel.UploadedDocuments = documents;
+
+            var file = viewModel.File;
+
+            if (file != null && file.Length > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+
+                if (allowedFileTypes.Contains(fileExtension))
+                {
+                    if (file.Length <= maxFileSize)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+
+                        var document = new Document
+                        {
+                            FileDescription = viewModel.FileDescription,
+                            FileName = fileName,
+                            ApplicationId = viewModel.ApplicationId,
+                            ApplicationFile = file
+                        };
+
+                        _db.Documents.Add(document);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("File", "The file size should be 5MB or less.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("File", "Please select a file.");
+            }
+
+            return RedirectToAction("ApplicationDetails", new { id = application.ApplicationId });
+        }
+
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
+        {
+
+            *//* var maxFileSize = 5 * 1024 * 1024;
+             var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*//*
             var userId = _userManager.GetUserId(User);
 
             var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
@@ -102,13 +175,13 @@ namespace StudentEmployementPortal.Controllers
             {
                 var fileName = Path.GetFileName(file.FileName);
                 var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                /*var fileExtension = Path.GetExtension(file.FileName).ToLower();*/
+                *//*var fileExtension = Path.GetExtension(file.FileName).ToLower();*//*
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
                     file.CopyTo(stream);
                 }
-                /*if (allowedFileType.Contains(fileExtension))
+                *//*if (allowedFileType.Contains(fileExtension))
                 {
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
@@ -118,7 +191,7 @@ namespace StudentEmployementPortal.Controllers
                 else
                 {
                      ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
-                }*/
+                }*//*
 
 
                 var document = new Document
@@ -133,7 +206,7 @@ namespace StudentEmployementPortal.Controllers
                 _db.SaveChanges();
             }
             return RedirectToAction("ApplicationDetails", new {id = application.ApplicationId});
-        }
+        }*/
 
         [HttpPost]
         [ValidateAntiForgeryToken]

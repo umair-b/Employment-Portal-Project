@@ -54,9 +54,11 @@
                 <div>
                     <label>File Description</label>
                     <input asp-for="FileDescription" />
+                    <span asp-validation-for="FileDescription"></span>
                 </div>
                 <br />
                 <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
+                <span asp-validation-for="File"></span>
                 <br />
                 <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
             </div>

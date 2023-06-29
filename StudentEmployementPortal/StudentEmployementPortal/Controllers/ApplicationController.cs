@@ -157,54 +157,62 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Upload(int id, DocumentUploadViewModel viewModel)
         {
-            
-               /* var maxFileSize = 5 * 1024 * 1024;
-                var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*/
+            var maxFileSize = 5 * 1024 * 1024;
+            var allowedFileTypes = new[] { ".pdf", ".doc", ".docx" };
 
-                var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+            var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
 
-                viewModel.ApplicationId = id;
-                viewModel.UploadedDocuments = documents;
+            viewModel.ApplicationId = id;
+            viewModel.UploadedDocuments = documents;
 
-                var file = viewModel.File;
+            var file = viewModel.File;
 
-                if (file != null && file.Length > 0)
+            if (file != null && file.Length > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+
+                if (allowedFileTypes.Contains(fileExtension))
                 {
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                    /*var fileExtension = Path.GetExtension(file.FileName).ToLower();*/
+                    if (file.Length <= maxFileSize)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
 
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    /*if (allowedFileType.Contains(fileExtension))
-                    {
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             file.CopyTo(stream);
                         }
+
+                        var document = new Document
+                        {
+                            FileDescription = viewModel.FileDescription,
+                            FileName = fileName,
+                            ApplicationId = viewModel.ApplicationId,
+                            ApplicationFile = file
+                        };
+
+                        _db.Documents.Add(document);
+                        _db.SaveChanges();
                     }
                     else
                     {
-                         ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
-                    }*/
-                    
-
-                    var document = new Document
-                    {
-                        FileDescription = viewModel.FileDescription,
-                        FileName = fileName,
-                        ApplicationId = viewModel.ApplicationId,
-                        ApplicationFile = file
-                    };
-
-                    _db.Documents.Add(document);
-                    _db.SaveChanges();
+                        ModelState.AddModelError("File", "The file size should be 5MB or less.");
+                    }
                 }
-                return RedirectToAction("Upload");
-        } 
-        
+                else
+                {
+                    ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("File", "Please select a file.");
+            }
+
+            return RedirectToAction("Upload");
+        }
+
+
         public IActionResult Cancel(int id)
         {
             var application = _db.Application.Find(id);
