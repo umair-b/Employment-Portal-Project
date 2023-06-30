@@ -20,6 +20,7 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProvide
 builder.Services.AddScoped<UserManager<IdentityUser>>();
 builder.Services.AddScoped<StudentProfileFilterAttribute>();
 builder.Services.AddScoped<EmployerProfileAttribute>();
+builder.Services.AddScoped<EmployerStatusAttribute>();
 
 var app = builder.Build();
 

@@ -11,6 +11,7 @@ namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
     [ServiceFilter(typeof(EmployerProfileAttribute))]
+    [ServiceFilter(typeof(EmployerStatusAttribute))]
     public class ViewApplicantsController : Controller
     {
         private readonly AppDbContext _db;
