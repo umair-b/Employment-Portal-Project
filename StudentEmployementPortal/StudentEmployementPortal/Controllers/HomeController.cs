@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using System.Diagnostics;
 
 namespace StudentEmployementPortal.Controllers
@@ -19,6 +20,7 @@ namespace StudentEmployementPortal.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
@@ -33,6 +35,18 @@ namespace StudentEmployementPortal.Controllers
                         if (employer == null)
                         {
                             return RedirectToAction("Index", "ManageProfileEmployer");
+                        }
+
+                        if (employer != null)
+                        {
+                            if (employer.EmployerStatus == Utils.Enums.EmployerStatus.Rejected || employer.EmployerStatus == Utils.Enums.EmployerStatus.Pending)
+                            {
+                                var Status = new EmployerStatus
+                                {
+                                    Status = employer.EmployerStatus
+                                };
+                                return View(Status);
+                            }
                         }
 
                         return View();
@@ -54,10 +68,20 @@ namespace StudentEmployementPortal.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Index(EmployerStatus EmployerStatus)
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
         }
+
+        /*public IActionResult EmployerError()
+        {
+            return View();
+        }*/
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

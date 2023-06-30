@@ -10,6 +10,7 @@ using System.Data;
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
+    [ServiceFilter(typeof(EmployerStatusAttribute))]
     public class ManageProfileEmployerController : Controller
     {
 

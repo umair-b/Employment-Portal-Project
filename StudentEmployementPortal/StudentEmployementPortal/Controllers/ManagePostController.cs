@@ -14,6 +14,7 @@ namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
     [ServiceFilter(typeof(EmployerProfileAttribute))]
+    [ServiceFilter(typeof(EmployerStatusAttribute))]
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
@@ -205,6 +206,7 @@ namespace StudentEmployementPortal.Controllers
                     jobPost.limitedToPostDoc = obj.limitedToPostDoc;
                     jobPost.MinRequirements = obj.MinRequirements;
                     jobPost.StartDate = obj.StartDate;
+                    jobPost.PostStatus = Enums.JobPostStatus.Pending;
 
                     _db.Update(jobPost);
                     _db.SaveChanges();
