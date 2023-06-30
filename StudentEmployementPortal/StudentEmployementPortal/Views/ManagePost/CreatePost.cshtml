@@ -185,7 +185,24 @@
     <script src="~/js/FDCascading_v1.js"></script>
     <script src="~/js/dateValidation.js"></script>
 
+    @*<script>
+        $(document).ready(function () {
+            $('#internalTrue').change(function () {
+                $('#facultyContainer').show();
+                $('#departmentContainer').show();
+            });
+            $('#internalFalse').change(function () {
+                $('#facultyContainer').hide();
+                $('#departmentContainer').hide();
+                
+            });
 
+            // Check if a radio button is already selected
+            if ($('input[name="internal"]:checked').length > 0) {
+                $('input[name="internal"]:checked').trigger('change');
+            }
+        })
+    </script>*@
     @{
         <partial name="_ValidationScriptsPartial" />
     }

@@ -11,17 +11,15 @@
 </style>
 
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
-            &larr; HOME
+    <div class="p-2">
+        <a asp-controller="ManagePost" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+            &larr; Back
         </a>
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">View Applicants</h2>
-        </div>
+    <div class="row pb-2">
+        <h2 class="text-primary">View Applicants</h2>
     </div>
+    <hr />
     @if (Model.Count() == 0)
     {
         <h6 class="text-center">THERE ARE NO APPLICATIONS MADE TO THIS POST.</h6>
@@ -46,13 +44,12 @@
             </dl>
         </div>
         <br />
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Surname</th>
                     <th>Department</th>
-                    <th>Course</th>
                     <th>Level</th>
                     <th>Gender</th>
                     <th>Status</th>
@@ -63,12 +60,11 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@obj.User.FirstName</td>
-                        <td>@obj.User.LastName</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>@obj.Student.User.FirstName</td>
+                        <td>@obj.Student.User.LastName</td>
+                        <td>@obj.Student.Department.DepartmentName</td>
+                        <td>@obj.Student.YearOfStudy.YearOfStudyName</td>
+                        <td>@obj.Student.Gender.GenderName</td>
                         <td>@obj.ApplicationStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ViewApplicants" asp-action="ApplicantDetails" asp-route-id="@obj.ApplicationId"

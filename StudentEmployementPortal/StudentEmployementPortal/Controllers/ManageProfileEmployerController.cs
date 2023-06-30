@@ -69,6 +69,7 @@ namespace StudentEmployementPortal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Index(EmployerUpdateInfoViewModel vm)
         {
             var userId = _userManager.GetUserId(User);

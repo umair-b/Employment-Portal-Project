@@ -9,14 +9,16 @@ public class Application
     [Key]
     public int ApplicationId { get; set; }
 
-    [ForeignKey(nameof(User))]
+    [ForeignKey(nameof(Student))]
     public string StudentId { get; set; }
-    public AppUser User { get; set; }
+    public Student Student { get; set; }
 
     public int PostId { get; set; }
     [ForeignKey(nameof(PostId))]
     public JobPost Post { get; set; }
-    public IEnumerable<Document>? Documents { get; set; } 
+    public IEnumerable<Document>? Documents { get; set; }
+    [NotMapped]
+    public Document Doc { get; set; }
     public Enums.ApplicationStatus ApplicationStatus { get; set; } = Enums.ApplicationStatus.Pending;
 
 /*    public DateTime created = DateTime.Now;

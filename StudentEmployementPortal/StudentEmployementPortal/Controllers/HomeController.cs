@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.ViewModels;
+using System.Data.Entity;
 using System.Diagnostics;
 
 namespace StudentEmployementPortal.Controllers
@@ -35,6 +37,8 @@ namespace StudentEmployementPortal.Controllers
                             return RedirectToAction("Index", "ManageProfileEmployer");
                         }
 
+                        ViewData["Name"] = employer.User.FirstName + " " + employer.User.LastName;
+
                         return View();
                     }
 
@@ -46,6 +50,10 @@ namespace StudentEmployementPortal.Controllers
                         {
                             return RedirectToAction("Index", "ManageStudentProfile");
                         }
+
+                        ViewData["Name"] = student.User.FirstName + " " + student.User.LastName;
+
+                        return View();
                     }
                 }
                 

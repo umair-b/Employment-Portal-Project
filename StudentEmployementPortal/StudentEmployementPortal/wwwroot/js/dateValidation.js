@@ -20,6 +20,13 @@
         var endDate = new Date(endDateInput.value);
         var closingDate = new Date(closingDateInput.value);
 
+        /*var currentdate = new date().getfullyear();
+
+        if (closingdate < currentdate)
+            closingdateerror.textcontent = "the closing date cannot be set earlier than the current date.";
+            closingdateinput.value = null;
+        }*/
+
         if (startDate > endDate) {
             startDateError.textContent = "The start date should not be set later than the end date.";
             startDateInput.value = null;
@@ -46,5 +53,6 @@
             closingDateError.textContent = "The closing date should not be set earlier than the end date.";
             closingDateInput.value = null;
         }
+        
     }
 });

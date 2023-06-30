@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
+    [ServiceFilter(typeof(EmployerProfileAttribute))]
     public class ManagePostController : Controller
     {
         private readonly AppDbContext _db;
@@ -27,18 +29,29 @@ namespace StudentEmployementPortal.Controllers
         {
             var userId = _userManager.GetUserId(User);
 
-            //IEnumerable<JobPost> jobPosts = _db.JobPosts;
             var jobPosts = _db.JobPosts
                 .Where(j => j.EmployerId == userId)
                 .Include(j => j.Department)
-                .Include(j => j.Faculty)
+                .Include(j => j.Employer)
                 .ToList();
+
 
             if (jobPosts == null)
             {
                 return NotFound();
             }
 
+            var dateNow = DateTime.Now;
+
+            foreach (var post in jobPosts)
+            {
+                if (post.ClosingDate < dateNow)
+                {
+                    post.PostStatus = Utils.Enums.JobPostStatus.Closed;
+                    _db.Update(post);
+                    _db.SaveChanges();
+                }
+            }
 
             return View(jobPosts);
         }
@@ -51,7 +64,7 @@ namespace StudentEmployementPortal.Controllers
             {
                 FacultyList = _db.Faculties.ToList(),
                 DepartmentList = _db.Departments.ToList(),
-                EmployerId = userId
+                EmployerId = userId,
             };
 
             return View(CreatePostViewModel);
@@ -170,7 +183,7 @@ namespace StudentEmployementPortal.Controllers
             if (ModelState.IsValid)
             {
 
-                var jobPost = _db.JobPosts.SingleOrDefault(d => d.PostId == obj.PostId);
+                var jobPost = _db.JobPosts.FirstOrDefault(d => d.PostId == obj.PostId);
 
                 if (jobPost != null)
                 {

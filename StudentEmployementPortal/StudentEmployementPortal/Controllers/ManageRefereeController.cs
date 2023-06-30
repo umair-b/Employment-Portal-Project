@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
+    [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ManageRefereeController : Controller
     {
         private readonly AppDbContext _appDbContext;
@@ -25,6 +27,7 @@ namespace StudentEmployementPortal.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult AddReferee(Referee Referee)
         {
             string UserId = _userManager.GetUserId(User);

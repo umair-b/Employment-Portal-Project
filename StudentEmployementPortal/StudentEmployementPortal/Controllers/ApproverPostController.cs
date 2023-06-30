@@ -22,10 +22,13 @@ namespace StudentEmployementPortal.Controllers
 
         public IActionResult Index()
         {
+            var dateNow = DateTime.Now;
+
             IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending)
-                .Include(x => x.User)
+                .Include(x => x.Employer)
                 .Include(x => x.Department)
-                .Include(x => x.Faculty);
+                .Include(x => x.Faculty)
+                .Include(x => x.Employer.User);
 
             if (JobPosts == null)
             {

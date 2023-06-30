@@ -10,25 +10,24 @@
     }
 </style>
 
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Search & Apply</h2>
+</div>
+<hr />
+
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
-            &larr; HOME
-        </a>
-    </div>
-    <hr />
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">Search & Apply</h2>
-        </div>
-    </div>
     @if (Model.Count() == 0)
     {
         <h6 class="text-center">THERE ARE NO AVAILABLE JOB POSTS TO APPLY FOR.</h6>
     }
     else
     {
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Job Title</th>

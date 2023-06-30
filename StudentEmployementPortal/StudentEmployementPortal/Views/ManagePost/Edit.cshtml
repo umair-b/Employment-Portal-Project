@@ -12,7 +12,6 @@
     }
 </style>
 
-
 <form asp-controller="ManagePost" asp-action="Edit" method="post">
     <div class="pt-2 mt-2">
         <div class="p-2">
@@ -186,15 +185,13 @@
     </div>
     <br/>
     <div class="d-flex p-2 justify-content-between">
-        <button type="submit" class="d-inline-block btn btn-success mb-3" style="width:150px">Update</button>
-        <a class="btn btn-primary mb-3" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@Model.PostId">View Applicants</a>
+        <button type="submit" class="d-inline-block btn btn-success mb-3" id="updateButton" style="width:150px">Update</button>
     </div>
 </form>
 
 @section Scripts{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-@*    <script src="~/js/FDCascading_v2.js"></script>
-*@    <script src="~/js/fulltimeValidation.js"></script>
+    <script src="~/js/fulltimeValidation.js"></script>
     <script src="~/js/dateValidation.js"></script>
 
     <script>

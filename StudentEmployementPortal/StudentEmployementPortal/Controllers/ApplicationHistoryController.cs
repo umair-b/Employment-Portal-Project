@@ -4,11 +4,15 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
+using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
+using StudentEmployementPortal.ViewModels;
 using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
+    [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ApplicationHistoryController : Controller
     {
         private AppDbContext _db;
@@ -25,7 +29,9 @@ namespace StudentEmployementPortal.Controllers
 
             var application = _db.Application
                 .Where(a => a.StudentId == userId)
-                .Include(a => a.Post).Include(a => a.Post.Department).ToList();
+                .Include(a => a.Post)
+                .Include(a => a.Post.Department)
+                .ToList();
 
             if (application == null)
             {
@@ -36,72 +42,213 @@ namespace StudentEmployementPortal.Controllers
         }
 
         // GET: ApplicationHistoryController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ApplicationDetails(int id)
         {
-            return View();
+            var userId = _userManager.GetUserId(User);
+
+            var documents = _db.Documents
+                .Where(d => d.ApplicationId == id)
+                .ToList();
+
+            var application = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Include(a => a.Post)
+                .Include(a => a.Post.Department)
+                .FirstOrDefault(a => a.ApplicationId == id);
+
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new ApplicationDetailsViewModel
+            {
+                ApplicationId = id,
+                Application = application
+            };
+
+            return View(viewModel);
         }
 
-        // GET: ApplicationHistoryController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ApplicationHistoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
         {
-            try
+            var maxFileSize = 5 * 1024 * 1024;
+            var allowedFileTypes = new[] { ".pdf", ".doc", ".docx" };
+
+            var userId = _userManager.GetUserId(User);
+
+            var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+
+            var application = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Include(a => a.Post)
+                .Include(a => a.Post.Department)
+                .FirstOrDefault(a => a.ApplicationId == id);
+
+            if (application == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+
+            viewModel.ApplicationId = id;
+            viewModel.Application = application;
+            viewModel.UploadedDocuments = documents;
+
+            var file = viewModel.File;
+
+            if (file != null && file.Length > 0)
             {
-                return View();
+                var fileName = Path.GetFileName(file.FileName);
+                var fileExtension = Path.GetExtension(file.FileName).ToLower();
+
+                if (allowedFileTypes.Contains(fileExtension))
+                {
+                    if (file.Length <= maxFileSize)
+                    {
+                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            file.CopyTo(stream);
+                        }
+
+                        var document = new Document
+                        {
+                            FileDescription = viewModel.FileDescription,
+                            FileName = fileName,
+                            ApplicationId = viewModel.ApplicationId,
+                            ApplicationFile = file
+                        };
+
+                        _db.Documents.Add(document);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("File", "The file size should be 5MB or less.");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
+                }
             }
+            else
+            {
+                ModelState.AddModelError("File", "Please select a file.");
+            }
+
+            return RedirectToAction("ApplicationDetails", new { id = application.ApplicationId });
         }
 
-        // GET: ApplicationHistoryController/Edit/5
-        public ActionResult Edit(int id)
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
         {
-            return View();
-        }
 
-        // POST: ApplicationHistoryController/Edit/5
+            *//* var maxFileSize = 5 * 1024 * 1024;
+             var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*//*
+            var userId = _userManager.GetUserId(User);
+
+            var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
+
+            var application = _db.Application
+                .Where(a => a.StudentId == userId)
+                .Include(a => a.Post)
+                .Include(a => a.Post.Department)
+                .FirstOrDefault(a => a.ApplicationId == id);
+
+            if(application == null)
+            {
+                return NotFound();
+            }
+
+            viewModel.ApplicationId = id;
+            viewModel.Application = application;
+            viewModel.UploadedDocuments = documents;
+
+            var file = viewModel.File;
+
+            if (file != null && file.Length > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+                *//*var fileExtension = Path.GetExtension(file.FileName).ToLower();*//*
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+                *//*if (allowedFileType.Contains(fileExtension))
+                {
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        file.CopyTo(stream);
+                    }
+                }
+                else
+                {
+                     ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
+                }*//*
+
+
+                var document = new Document
+                {
+                    FileDescription = viewModel.FileDescription,
+                    FileName = fileName,
+                    ApplicationId = viewModel.ApplicationId,
+                    ApplicationFile = file
+                };
+
+                _db.Documents.Add(document);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("ApplicationDetails", new {id = application.ApplicationId});
+        }*/
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public IActionResult DeleteConfirmed(int id)
         {
-            try
+            if (_db.Documents == null)
             {
-                return RedirectToAction(nameof(Index));
+                return Problem("Entity set 'AppDbContext.Documents'  is null.");
             }
-            catch
+
+            var document = _db.Documents.SingleOrDefault(j => j.DocumentId == id);
+
+            if (document == null)
             {
-                return View();
+                return NotFound();
             }
+
+            var appId = document.ApplicationId;
+
+            appId = document.ApplicationId;
+            _db.Documents.Remove(document);
+
+            _db.SaveChanges();
+            return RedirectToAction("ApplicationDetails", new {id = appId});
         }
 
-        // GET: ApplicationHistoryController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ApplicationHistoryController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public IActionResult Withdraw(int id)
         {
-            try
+            var application = _db.Application.Find(id);
+
+            if (application == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+
+            application.ApplicationStatus = Enums.ApplicationStatus.Withdrawn;
+
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

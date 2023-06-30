@@ -10,20 +10,24 @@
     }
 </style>
 
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Applications History</h2>
+</div>
+<hr />
+
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar" style="width:150px">
-            &larr; HOME
-        </a>
-    </div>
-    <hr />
     @if (Model.Count() == 0)
     {
         <h6 class="text-center p-5">YOU HAVE NOT APPLIED TO ANYTHING YET</h6>
     }
     else
     {
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Job Title</th>
@@ -53,8 +57,7 @@
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.Post.EndDate)</td>
                         <td>@obj.ApplicationStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
-                            <a
-                               class="btn btn-primary mx-1">Details</a>
+                            <a asp-action="ApplicationDetails" asp-route-id="@obj.ApplicationId" class="btn btn-primary mx-1">Details</a>
                         </td>
 
                     </tr>

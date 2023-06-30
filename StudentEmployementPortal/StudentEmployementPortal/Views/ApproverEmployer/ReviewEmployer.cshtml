@@ -1,66 +1,124 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model ApproveEmployerViewModel
 
-<form asp-action="ReviewEmployer">
-    <div>
-        <label asp-for="FirstName"></label>
-        <input asp-for="FirstName" />
-    </div>
+<style>
+    .right-align {
+        float: right;
+    }
 
-    <div>
-        <label asp-for="LastName"></label>
-        <input asp-for="LastName" />
-    </div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-    </div>
-    <div>
-        <label asp-for="TelNumber"></label>
-        <input asp-for="TelNumber" />
-    </div>
+    .left-align {
+        float: left;
+    }
+</style>
 
-    <div>
-        <label asp-for="CelNumber"></label>
-        <input asp-for="CelNumber" />
-    </div>
+<div class="p-2">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Review Employer</h2>
+</div>
+<hr />
 
-    <div>
-        <label asp-for="JobTitle"></label>
-        <input asp-for="JobTitle" />
-    </div>
+<div class="row">
+    <div class="form-control col">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
 
-    <div>
-        <label asp-for="RegistrationName"></label>
-        <input asp-for="RegistrationName" />
-    </div>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
 
-    <div>
-        <label asp-for="RegisteredAddress"></label>
-        <input asp-for="RegisteredAddress" />
-    </div>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-    <div>
-        <label asp-for="TradingName"></label>
-        <input asp-for="TradingName" />
-    </div>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.TelNumber)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.TelNumber)
+            </dd>
 
-    <div>
-        <label asp-for="EmployerBusinessType"></label>
-        <input asp-for="EmployerBusinessType" />
-    </div>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.CelNumber)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.CelNumber)
+            </dd>
 
-    <div>
-        <label asp-for="ApproverNote"></label>
-        <input asp-for="ApproverNote" />
-    </div>
-    <div>
-        <label asp-for="EmployerStatus"></label>
-        @Html.DropDownListFor(model => model.EmployerStatus, Model.StatusNames, "Select Status")
-    </div>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
 
-    @Html.HiddenFor(Model => Model.Id, new { @readonly = "readonly" })
-    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-    <a asp-controller="ApproverEmployer" asp-action="Index" class="btn btn-secondary" style="width:150px">Back</a>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.RegistrationNumber)
+            </dd>
 
-</form>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.RegistrationName)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.RegistrationName)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.TradingName)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.TradingName)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.EmployerBusinessType)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.EmployerBusinessType)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.RegisteredAddress)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.RegisteredAddress)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <div class="col">
+        <form asp-action="ReviewEmployer">
+            @Html.HiddenFor(Model => Model.Id, new { @readonly = "readonly" })
+            <div>
+                <label asp-for="ApproverNote"></label>
+                <textarea asp-for="ApproverNote" class="form-control"></textarea>
+            </div>
+            <br />
+            <div>
+            <label asp-for="EmployerStatus"></label>
+            @Html.DropDownListFor(model => model.EmployerStatus, Model.StatusNames, "Select Status", new { @class = "form-select"})
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary right-align" style="width:150px">Update</button>
+            
+        </form>
+    </div>
+</div>

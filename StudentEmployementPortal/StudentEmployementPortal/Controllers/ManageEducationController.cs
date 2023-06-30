@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
 using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.ViewModels;
 using System.Data;
 using System.Linq.Expressions;
@@ -11,6 +12,7 @@ using System.Linq.Expressions;
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Student)]
+    [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ManageEducationController : Controller
     {
 

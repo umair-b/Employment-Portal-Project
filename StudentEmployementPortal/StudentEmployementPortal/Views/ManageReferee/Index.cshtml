@@ -1,36 +1,63 @@
 ﻿@model Referee
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div>
+    <a asp-controller="ManageStudentProfile" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Add Referee</h2>
+</div>
+<hr />
+
 <form asp-action="AddReferee">
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="form-control">
+        <div class="row">
+            <div class="col">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <label asp-for="JobTitle"></label>
+                <input asp-for="JobTitle" class="form-control" />
+                <span asp-validation-for="JobTitle" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="Institution"></label>
+                <input asp-for="Institution" class="form-control" />
+                <span asp-validation-for="Institution" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col">
+                <label asp-for="CellNumber"></label>
+                <input asp-for="CellNumber" class="form-control" />
+                <span asp-validation-for="CellNumber" class="text-danger"></span>
+            </div>
+            <div class="col">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
     </div>
-
-    <div>
-        <label asp-for="JobTitle"></label>
-        <input asp-for="JobTitle" />
-        <span asp-validation-for="JobTitle" class="text-danger"></span>
-    </div>
-
-    <div>
-        <label asp-for="Institution"></label>
-        <input asp-for="Institution" />
-        <span asp-validation-for="Institution" class="text-danger"></span>
-    </div>
-
-    <div>
-        <label asp-for="CellNumber"></label>
-        <input asp-for="CellNumber" />
-        <span asp-validation-for="CellNumber" class="text-danger"></span>
-    </div>
-
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-
+    <br />
     <button type="submit" class="pt-2 btn btn-primary">Add Referee</button>
 
 </form>

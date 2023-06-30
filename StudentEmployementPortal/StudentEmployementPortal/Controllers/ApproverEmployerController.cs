@@ -22,7 +22,10 @@ namespace StudentEmployementPortal.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Employer> Employers = _appDbContext.Employers.Where(e => e.EmployerStatus == Utils.Enums.EmployerStatus.Pending).Include(e => e.User);
+            var Employers = _appDbContext.Employers
+                .Where(e => e.EmployerStatus == Utils.Enums.EmployerStatus.Pending)
+                .Include(e => e.User)
+                .ToList();
             
             if (Employers == null)
             {
@@ -80,7 +83,7 @@ namespace StudentEmployementPortal.Controllers
 
             var Employer = _appDbContext.Employers.Find(ApproveEmployerVm.Id);
 
-            if (Employer == null)
+            if (Employer != null)
             {
                 Employer.ApproverNote = ApproveEmployerVm.ApproverNote;
                 Employer.EmployerStatus = ApproveEmployerVm.EmployerStatus;
@@ -88,7 +91,7 @@ namespace StudentEmployementPortal.Controllers
                 _appDbContext.SaveChanges();
             }
 
-            return View(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
 }

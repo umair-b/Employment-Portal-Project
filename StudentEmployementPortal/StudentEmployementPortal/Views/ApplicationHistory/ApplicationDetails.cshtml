@@ -1,0 +1,204 @@
+﻿@model StudentEmployementPortal.ViewModels.ApplicationDetailsViewModel
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "PostDetails";
+}
+
+@{
+
+    DateTime dateStart = new DateTime(Model.Application.Post.StartDate.Value.Year, Model.Application.Post.StartDate.Value.Month, Model.Application.Post.StartDate.Value.Day);
+    DateTime dateEnd = new DateTime(Model.Application.Post.EndDate.Value.Year, Model.Application.Post.EndDate.Value.Month, Model.Application.Post.EndDate.Value.Day);
+    DateTime dateClose = new DateTime(Model.Application.Post.ClosingDate.Value.Year, Model.Application.Post.ClosingDate.Value.Month, Model.Application.Post.ClosingDate.Value.Day);
+}
+
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div>
+    <a asp-controller="ApplicationHistory" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Application Details</h2>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col form-control">
+        <h4 class="text-primary text-center">Job Post Details</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-4">
+                Department
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.Department.DepartmentName)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.JobTitle)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.JobTitle)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.JobLocation)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.JobLocation)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.JobDescription)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.JobDescription)
+            </dd>
+
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.KeyResponsibilities)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.KeyResponsibilities)
+            </dd>
+
+            <dt class="col-sm-4">
+                Fulltime / Part-time
+            </dt>
+            @if (Model.Application.Post.FullTime == true)
+            {
+                <dd class="col-sm-8">
+                    Fulltime
+                </dd>
+            }
+            else if (Model.Application.Post.FullTime == false)
+            {
+                <dd class="col-sm-8">
+                    Part-time
+                </dd>
+
+                <dd></dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Application.Post.PartTimeHours)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Application.Post.PartTimeHours) hours per week
+                </dd>
+            }
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.HourlyRate)
+            </dt>
+            <dd class="col-sm-8">
+                R@(Html.DisplayFor(model => model.Application.Post.HourlyRate))
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.StartDate)
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Application.Post.StartDate.Value.Day @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @Model.Application.Post.StartDate.Value.Year
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.EndDate)
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Application.Post.EndDate.Value.Day @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @Model.Application.Post.EndDate.Value.Year
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.ClosingDate)
+            </dt>
+            <dd class="col-sm-8">
+                @Model.Application.Post.ClosingDate.Value.Day @dateClose.ToString("MMMM", CultureInfo.InvariantCulture) @Model.Application.Post.ClosingDate.Value.Year
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.MinRequirements)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.MinRequirements)
+            </dd>
+            <dt class="col-sm-4">
+                @Html.DisplayNameFor(model => model.Application.Post.ApplicationInstructions)
+            </dt>
+            <dd class="col-sm-8">
+                @Html.DisplayFor(model => model.Application.Post.ApplicationInstructions)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <div class="col form-control">
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                <div>
+                    <h4 class="text-primary text-center">Uploaded Documents</h4>
+                    <hr />
+                    <br />
+                    <div>
+                        <div>
+                            <label>File Description</label>
+                            <input asp-for="@Model.FileDescription" disabled="@(Model.Application.ApplicationStatus != StudentEmployementPortal.Utils.Enums.ApplicationStatus.Pending)" />
+                        </div>
+                        <br />
+                        <input type="file" name="File" id="File" asp-for="@Model.File" multiple class="form-control" disabled="@(Model.Application.ApplicationStatus != StudentEmployementPortal.Utils.Enums.ApplicationStatus.Pending)" />
+                        <br />
+                        <input type="submit" value="Upload" asp-controller="ApplicationHistory" asp-action="Upload" asp-route-id="@Model.ApplicationId"
+                               disabled="@(Model.Application.ApplicationStatus != StudentEmployementPortal.Utils.Enums.ApplicationStatus.Pending)" />
+                    </div>
+                    <br />
+                    @if (Model.Application.Documents == null || Model.Application.Documents.Count() == 0)
+                    {
+                        <h6 class="text-center">There are no documents uploaded.</h6>
+                    }
+                    else
+                    {
+                        <table class="table table-borderless" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var doc in Model.Application.Documents)
+                                {
+                                    <tr>
+                                        <td class="m-2">
+                                            <a href="@Url.Action("DownloadDocument", "ViewApplicants", new {docId = doc.DocumentId})">@doc.FileName</a>
+                                        </td>
+                                        <td>
+                                            @doc.FileDescription
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="submit" class="btn btn-outline-danger" asp-action="DeleteConfirmed" asp-route-id="@doc.DocumentId"
+                                            disabled="@(Model.Application.ApplicationStatus != StudentEmployementPortal.Utils.Enums.ApplicationStatus.Pending)">Delete</button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br />
+<form method="post">
+    <div class="text-center mb-2">
+        <button type="submit" class="btn btn-outline-dark" asp-controller="ApplicationHistory" asp-action="Withdraw" asp-route-id="@Model.ApplicationId"
+         disabled="@(Model.Application.ApplicationStatus != StudentEmployementPortal.Utils.Enums.ApplicationStatus.Pending)">Withdraw</button>
+    </div>
+    <br />
+</form>
+
+

@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
+using StudentEmployementPortal.Utils;
 using System.Data;
 
 namespace StudentEmployementPortal.Controllers
 {
     [Authorize(Roles = Utils.DefineRole.Role_Employer)]
+    [ServiceFilter(typeof(EmployerProfileAttribute))]
     public class ViewApplicantsController : Controller
     {
         private readonly AppDbContext _db;
@@ -22,9 +24,17 @@ namespace StudentEmployementPortal.Controllers
         // GET: ViewApplicantsController
         public IActionResult Index(int id)
         {
+            
             var applications = _db.Application.Where(a => a.PostId == id)
                 .Include(a => a.Post)
-                .Include(a => a.User)
+                .Include(a => a.Student)
+                .Include(a => a.Student.User)
+                .Include(a => a.Student.Department)
+                .Include(a => a.Student.YearOfStudy)
+                .Include(a => a.Student.Gender)
+                .Include(a => a.Student.Education)
+                .Include(a => a.Student.WorkExperience)
+                .Include(a => a.Student.Referee)
                 .ToList();
 
             return View(applications);
@@ -39,7 +49,14 @@ namespace StudentEmployementPortal.Controllers
 
             var application = _db.Application
                 .Include(a => a.Post)
-                .Include(a => a.User)
+                .Include(a => a.Student)
+                .Include(a => a.Student.User)
+                .Include(a => a.Student.Department)
+                .Include(a => a.Student.YearOfStudy)
+                .Include(a => a.Student.Gender)
+                .Include(a => a.Student.Education)
+                .Include(a => a.Student.WorkExperience)
+                .Include(a => a.Student.Referee)
                 .SingleOrDefault(a => a.ApplicationId == id);
 
             if (application == null || documents == null) 

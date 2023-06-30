@@ -19,13 +19,13 @@ namespace StudentEmployementPortal.Models
         public string Institution { get; set; }
 
         [DisplayName("Cellphone Number")]
-        public int CellNumber { get; set; }
+        public string CellNumber { get; set; }
 
         [DisplayName("Email Address")]
         public string Email { get; set; }
 
         //Navigation Property
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(Student))]
         public string UserId { get; set; }
         public Student Student { get; set; }
     }

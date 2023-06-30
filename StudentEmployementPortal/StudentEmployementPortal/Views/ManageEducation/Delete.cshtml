@@ -1,50 +1,104 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model EducationViewModel
+@using System.Globalization
 
+<style>
+    .right-align {
+        float: right;
+    }
+
+    .left-align {
+        float: left;
+    }
+</style>
+
+<div>
+    <a asp-controller="ManageStudentProfile" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+        &larr; Back
+    </a>
+</div>
+<div class="row pb-2">
+    <h2 class="text-primary">Delete Education</h2>
+</div>
+<hr />
+
+@{
+
+    DateTime dateStart = new DateTime(Model.StartDate.Year, Model.StartDate.Month, Model.StartDate.Day);
+    DateTime dateEnd = new DateTime(Model.EndDate.Value.Year, Model.EndDate.Value.Month, Model.EndDate.Value.Day);
+}
 <form asp-action="DeleteEducation">
 
-    <div>
-        <label asp-for="Institution"></label>
-        <input asp-for="Institution" />
+    <div class="form-control">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                Institution
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Institution
+            </dd>
+
+            <dt class="col-sm-2">
+                Start Date
+            </dt>
+            <dd class="col-sm-10">
+                @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @Model.StartDate.Year
+            </dd>
+
+            <dt class="col-sm-2">
+                End Date
+            </dt>
+            @if (Model.EndDate == null)
+            {
+                <dd class="col-sm-10">
+                    -
+                </dd>
+            }
+            else
+            {
+                <dd class="col-sm-10">
+                    @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @Model.EndDate.Value.Year
+                </dd>
+            }
+
+            <dt class="col-sm-2">
+                Qualification
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Qualification
+            </dd>
+
+            <dt class="col-sm-2">
+                Subjects
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Subjects
+            </dd>
+
+            <dt class="col-sm-2">
+                Majors
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Majors
+            </dd>
+
+            <dt class="col-sm-2">
+                Sub-Majors
+            </dt>
+            <dd class="col-sm-10">
+                @Model.SubMajors
+            </dd>
+
+            <dt class="col-sm-2">
+                Research
+            </dt>
+            <dd class="col-sm-10">
+                @Model.Research
+            </dd>
+        </dl>
     </div>
-
-    <div>
-        <label asp-for="StartDate"></label>
-        <input asp-for="StartDate" type="date" />
-    </div>
-
-    <div>
-        <label asp-for="EndDate"></label>
-        <input asp-for="EndDate" type="date" />
-    </div>
-
-    <div>
-        <label asp-for="Qualification"></label>
-        <input asp-for="Qualification" />
-    </div>
-
-    <div>
-        <label asp-for="Subjects"></label>
-        <input asp-for="Subjects" />
-    </div>
-
-    <div>
-        <label asp-for="Majors"></label>
-        <input asp-for="Majors" />
-    </div>
-
-    <div>
-        <label asp-for="SubMajors"></label>
-        <input asp-for="SubMajors" />
-    </div>
-
-    <div>
-        <label asp-for="Research"></label>
-        <input asp-for="Research" />
-    </div>
-
-    <hr />
-
+    <br />
     <button type="submit" class="pt-2 btn btn-primary">Delete Education</button>
 
     @Html.HiddenFor(Model => Model.EducationId, new { @readonly = "readonly" })

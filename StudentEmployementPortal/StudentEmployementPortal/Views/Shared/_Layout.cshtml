@@ -4,6 +4,14 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+<style>
+    .center-navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,18 +19,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Student Employment Portal</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="~/css/sandstone.bootstrap.css" />*@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StudentEmployementPortal.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="~/css/dataTable.CustomTheme.css" asp-append-version="true" />
+
+
 </head>
 <body>
-    <header>
+    <header class="header">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Student Employment Portal</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">STUDENT EMPLOYMENT PORTAL</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (User.IsInRole(DefineRole.Role_Employer))
+                    {
+                        <div class="navbar-brand center-navbar-brand justify-content-center">
+                            <span class="text-center text-primary" style="font-weight:bold">EMPLOYER</span>
+                        </div>
+                    }
+                    @if (User.IsInRole(DefineRole.Role_Student))
+                    {
+                        <div class="navbar-brand center-navbar-brand">
+                            <span class="text-center text-primary" style="font-weight:bold">STUDENT</span>
+                        </div>
+                    }
+                    @if (User.IsInRole(DefineRole.Role_Approver))
+                    {
+                        <div class="navbar-brand center-navbar-brand">
+                            <span class="text-center text-primary" style="font-weight:bold">APPROVER</span>
+                        </div>
+                    }
+                }
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
                     <partial name="_LoginPartial" />
                 </div>
@@ -42,7 +78,17 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable();
+
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

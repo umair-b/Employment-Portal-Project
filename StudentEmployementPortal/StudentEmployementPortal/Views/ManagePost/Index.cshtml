@@ -10,29 +10,25 @@
     }
 </style>
 
+
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar" style="width:150px">
-            &larr; HOME
-        </a>
-    </div>
-    <hr/>
     <div class="row pt-2">
         <div class="col-6">
-            <h2 class="align-items-center">Manage Posts</h2>
+            <h2 class="align-items-center text-primary">Manage Posts</h2>
         </div>
         <div class="col-6 text-end">
             <a asp-controller="ManagePost" asp-action="CreatePost" class="btn btn-primary">Add Post</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Back</a>
         </div>
     </div>
     <hr/>
-    @if (Model.Count() == 0)
+    @if (Model.Count() == 0 )
     {
         <h6 class="text-center p-5">YOU HAVE NOT MADE ANY POSTS YET</h6>
     }
     else
     {
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Job Title</th>
@@ -50,6 +46,15 @@
                     <tr>
                         <td>@obj.JobTitle</td>
                         <td>@obj.Department.DepartmentName</td>
+                        @*@if (obj.Internal == true)
+                        {
+                            <td>@obj.Department.DepartmentName</td>
+
+                        }
+                        else if (obj.Internal == false)
+                        {
+                            <td>@obj.Employer.RegistrationName</td>
+                        }*@
                         @if (obj.FullTime == true)
                         {
                             <td>Fulltime</td>
@@ -61,9 +66,18 @@
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
                         <td>@obj.PostStatus</td>
-                        <td style="width:100%" class="btn-group" role="group">
-                            <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
-                               class="btn btn-primary mx-1">Review</a>
+                        <td style="width:85%" class="btn-group" role="group">
+                            @if (obj.PostStatus == StudentEmployementPortal.Utils.Enums.JobPostStatus.Approved)
+                            {
+                                <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
+                                   class="btn btn-primary mx-1">Details</a>
+                                <a class="btn btn-outline-primary mx-1" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@obj.PostId">View Applicants</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
+                                   class="btn btn-primary mx-1">Review</a>
+                            }
                         </td>
 
                     </tr>

@@ -11,24 +11,22 @@
 </style>
 
 <div class="container p-1">
-    <div class="row">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-toolbar right-align" style="width:150px">
-            &larr; HOME
+    <div class="p-2">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+            &larr; Back
         </a>
     </div>
-    <hr />
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-primary">Manage Posts</h2>
-        </div>
+    <div class="row pb-2">
+        <h2 class="text-primary">Review Posts</h2>
     </div>
+    <hr />
     @if (Model.Count() == 0)
     {
         <h6 class="text-center">THERE ARE NO JOB POSTS TO REVIEW</h6>
     }
     else
     {
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Job Title</th>
@@ -57,7 +55,7 @@
                         }
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
-                        <td>@obj.User.FirstName @obj.User.LastName</td>
+                        <td>@obj.Employer.User.FirstName @obj.Employer.User.LastName</td>
                         <td>@obj.PostStatus</td>
                         <td style="width:100%" class="btn-group" role="group">
                             <a asp-controller="ApproverPost" asp-action="ReviewPost" asp-route-id="@obj.PostId"
