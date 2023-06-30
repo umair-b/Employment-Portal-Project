@@ -252,7 +252,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("Application");
+                    b.ToTable("Application", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.BusinessType", b =>
@@ -269,7 +269,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("BusinessTypeId");
 
-                    b.ToTable("BusinessTypes");
+                    b.ToTable("BusinessTypes", (string)null);
 
                     b.HasData(
                         new
@@ -331,7 +331,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
 
                     b.HasData(
                         new
@@ -563,7 +563,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("ApplicationId");
 
-                    b.ToTable("Documents");
+                    b.ToTable("Documents", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.DriversLicense", b =>
@@ -580,7 +580,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("LicenseId");
 
-                    b.ToTable("Licences");
+                    b.ToTable("Licences", (string)null);
 
                     b.HasData(
                         new
@@ -691,7 +691,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("StudentUserId");
 
-                    b.ToTable("Educations");
+                    b.ToTable("Educations", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Employer", b =>
@@ -739,7 +739,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Employers");
+                    b.ToTable("Employers", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Faculty", b =>
@@ -756,7 +756,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("FacultyId");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("Faculties", (string)null);
 
                     b.HasData(
                         new
@@ -800,7 +800,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("GenderId");
 
-                    b.ToTable("Genders");
+                    b.ToTable("Genders", (string)null);
 
                     b.HasData(
                         new
@@ -951,7 +951,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("FacultyId");
 
-                    b.ToTable("JobPosts");
+                    b.ToTable("JobPosts", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Race", b =>
@@ -968,7 +968,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("RaceId");
 
-                    b.ToTable("Races");
+                    b.ToTable("Races", (string)null);
 
                     b.HasData(
                         new
@@ -1034,7 +1034,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Referees");
+                    b.ToTable("Referees", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.Student", b =>
@@ -1093,7 +1093,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("YearOfStudyId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.WorkExperience", b =>
@@ -1134,7 +1134,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasIndex("StudentUserId");
 
-                    b.ToTable("WorkExperience");
+                    b.ToTable("WorkExperience", (string)null);
                 });
 
             modelBuilder.Entity("StudentEmployementPortal.Models.YearOfStudy", b =>
@@ -1151,7 +1151,7 @@ namespace StudentEmployementPortal.Migrations
 
                     b.HasKey("YearOfStudyId");
 
-                    b.ToTable("YearOfStudies");
+                    b.ToTable("YearOfStudies", (string)null);
 
                     b.HasData(
                         new

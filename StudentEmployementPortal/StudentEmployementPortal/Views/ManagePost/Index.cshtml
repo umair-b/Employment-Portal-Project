@@ -28,7 +28,7 @@
     }
     else
     {
-        <table class="table table-bordered table-striped" style="width:100%">
+        <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
                     <th>Job Title</th>
@@ -66,7 +66,7 @@
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.StartDate)</td>
                         <td>@String.Format("{0:dd MMMM yyyy}", obj.EndDate)</td>
                         <td>@obj.PostStatus</td>
-                        <td style="width:100%" class="btn-group" role="group">
+                        <td style="width:85%" class="btn-group" role="group">
                             @if (obj.PostStatus == StudentEmployementPortal.Utils.Enums.JobPostStatus.Approved)
                             {
                                 <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
