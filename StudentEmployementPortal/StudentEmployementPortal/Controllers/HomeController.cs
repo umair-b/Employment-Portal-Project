@@ -75,11 +75,6 @@ namespace StudentEmployementPortal.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Index(EmployerStatus EmployerStatus)
-        {
-            return View();
-        }
-
         public IActionResult Privacy()
         {
             return View();

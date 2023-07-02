@@ -108,13 +108,13 @@
                 <dt class="col-sm-2">
                     Nationality
                 </dt>
-                @if (Model.Student.Citizen)
+                @if (Model.Student.Citizen == true)
                 {
                     <dd class="col-sm-10">
                         South African
                     </dd>
                 }
-                else
+                else if (Model.Student.Citizen == false)
                 {
                     <dd class="col-sm-10">
                         Non-SA
