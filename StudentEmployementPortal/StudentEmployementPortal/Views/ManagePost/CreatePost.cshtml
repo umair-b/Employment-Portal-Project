@@ -27,8 +27,8 @@
 
             <div>
                 <label asp-for="Internal" class="mb-2"></label>
-                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" />Yes
-                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
+                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" checked="false"/>Yes
+                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" checked="false"/>No
                 <span asp-validation-for="Internal" class="text-danger"></span>
             </div>
             <div id="facultyContainer">
@@ -115,8 +115,8 @@
             <div class="row mb-3">
                 <div class="col">
                     <label asp-for="CitizensOnly" class="mb-2"></label>
-                    <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" />Yes
-                    <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" />No
+                    <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" checked ="false"/>Yes
+                    <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" checked="false"/>No
                     <span asp-validation-for="CitizensOnly" class="text-danger"></span>
                 </div>
                 <div class="col">
