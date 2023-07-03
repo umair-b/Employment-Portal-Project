@@ -195,7 +195,7 @@
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
                     <thead>
                         <tr>
                             <th>Qualification</th>
@@ -209,10 +209,12 @@
                             <tr>
                                 <td>@edu.Qualification</td>
                                 <td>
-                                    <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
-                                       class="btn btn-primary mx-1">Edit</a>
-                                    <a asp-controller="ManageEducation" asp-action="Delete" asp-route-id="@edu.EducationId"
-                                       class="btn btn-danger mx-1">Delete</a>
+                                    <div class="float-end">
+                                        <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
+                                           class="btn btn-outline-primary mx-1">Edit</a>
+                                        <a asp-controller="ManageEducation" asp-action="Delete" asp-route-id="@edu.EducationId"
+                                           class="btn btn-outline-danger mx-1">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -237,7 +239,7 @@
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
                     <thead>
                         <tr>
                             <th>Job Title</th>
@@ -251,10 +253,12 @@
                             <tr>
                                 <td>@we.JobTitle</td>
                                 <td>
-                                    <a asp-controller="ManageWorkExperience" asp-action="Edit" asp-route-id="@we.WorkExperienceId"
-                                       class="btn btn-primary mx-1">Edit</a>
-                                    <a asp-controller="ManageWorkExperience" asp-action="Delete" asp-route-id="@we.WorkExperienceId"
-                                       class="btn btn-danger mx-1">Delete</a>
+                                    <div class="float-end">
+                                        <a asp-controller="ManageWorkExperience" asp-action="Edit" asp-route-id="@we.WorkExperienceId"
+                                           class="btn btn-outline-primary mx-1">Edit</a>
+                                        <a asp-controller="ManageWorkExperience" asp-action="Delete" asp-route-id="@we.WorkExperienceId"
+                                           class="btn btn-outline-danger mx-1">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -274,13 +278,16 @@
                 <a asp-controller="ManageReferee" asp-action="Index" class="btn btn-primary">Add</a>
             </div>
             <hr/>
+            <div>
+
+            </div>
             @if (Model.Referee == null || Model.Referee.Count() == 0)
             {
                 <h5 class="text-center">There are no referees.</h5>
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:100%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
                     <thead>
                         <tr>
                             <th>Job Title</th>
@@ -294,10 +301,12 @@
                             <tr>
                                 <td>@referee.JobTitle</td>
                                 <td>
-                                    <a asp-controller="ManageReferee" asp-action="Edit" asp-route-id="@referee.RefereeId"
-                                       class="btn btn-primary mx-1">Edit</a>
-                                    <a asp-controller="ManageReferee" asp-action="Delete" asp-route-id="@referee.RefereeId"
-                                       class="btn btn-danger mx-1">Delete</a>
+                                    <div class="float-end">
+                                        <a asp-controller="ManageReferee" asp-action="Edit" asp-route-id="@referee.RefereeId"
+                                           class="btn btn-outline-primary mx-1">Edit</a>
+                                        <a asp-controller="ManageReferee" asp-action="Delete" asp-route-id="@referee.RefereeId"
+                                           class="btn btn-outline-danger mx-1">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         }

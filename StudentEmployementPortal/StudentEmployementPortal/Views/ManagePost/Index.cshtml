@@ -70,7 +70,7 @@
                             @if (obj.PostStatus == StudentEmployementPortal.Utils.Enums.JobPostStatus.Approved)
                             {
                                 <a asp-controller="ManagePost" asp-action="Edit" asp-route-id="@obj.PostId"
-                                   class="btn btn-primary mx-1">Details</a>
+                                   class="btn btn-primary mx-1">Review</a>
                                 <a class="btn btn-outline-primary mx-1" style="width:150px" asp-controller="ViewApplicants" asp-action="Index" asp-route-id="@obj.PostId">View Applicants</a>
                             }
                             else

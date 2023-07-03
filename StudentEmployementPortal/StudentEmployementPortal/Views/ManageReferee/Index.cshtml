@@ -20,44 +20,49 @@
 </div>
 <hr />
 
-<form asp-action="AddReferee">
+<form asp-action="AddReferee" id="refereeForm">
     <div class="form-control">
         <div class="row">
             <div class="col">
                 <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" class="form-control" id="refNameId"/>
+                <span asp-validation-for="Name" class="text-danger" id="refNameValidation"></span>
             </div>
         </div>
         <br />
         <div class="row">
             <div class="col">
                 <label asp-for="JobTitle"></label>
-                <input asp-for="JobTitle" class="form-control" />
-                <span asp-validation-for="JobTitle" class="text-danger"></span>
+                <input asp-for="JobTitle" class="form-control" id="refTitleId"/>
+                <span asp-validation-for="JobTitle" class="text-danger" id="refTitleValidation"></span>
             </div>
             <div class="col">
                 <label asp-for="Institution"></label>
-                <input asp-for="Institution" class="form-control" />
-                <span asp-validation-for="Institution" class="text-danger"></span>
+                <input asp-for="Institution" class="form-control" id="refInstitutionId"/>
+                <span asp-validation-for="Institution" class="text-danger" id="refInstitutionValidation"></span>
             </div>
         </div>
         <br />
         <div class="row">
             <div class="col">
                 <label asp-for="CellNumber"></label>
-                <input asp-for="CellNumber" class="form-control" />
-                <span asp-validation-for="CellNumber" class="text-danger"></span>
+                <input asp-for="CellNumber" class="form-control" id="refCellId"/>
+                <span asp-validation-for="CellNumber" class="text-danger" id="refCellValidation"></span>
             </div>
             <div class="col">
                 <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control" id="refEmailId"/>
+                <span asp-validation-for="Email" class="text-danger" id="refEmailValidation"></span>
             </div>
         </div>
         <br />
     </div>
     <br />
-    <button type="submit" class="pt-2 btn btn-primary">Add Referee</button>
+    <button type="submit" class="pt-2 btn btn-primary" id="submitButton">Add Referee</button>
 
 </form>
+
+@section Scripts{
+
+    <script src="~/js/studentRefereeValidation.js"></script>
+}

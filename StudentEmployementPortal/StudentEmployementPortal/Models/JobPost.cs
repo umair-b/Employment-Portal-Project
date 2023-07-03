@@ -80,7 +80,7 @@ namespace StudentEmployementPortal.Models
 
         [Required]
         [DisplayName("Limited to Citizens")]
-        public bool CitizensOnly { get; set; }
+        public bool? CitizensOnly { get; set; }
 
         [Required]
         [DisplayName("Minimum Requirements")]

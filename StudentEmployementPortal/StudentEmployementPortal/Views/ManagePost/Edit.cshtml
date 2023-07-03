@@ -39,23 +39,25 @@
                 <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" />No
                 <span asp-validation-for="Internal" class="text-danger"></span>
             </div>
-            <div id="facultyContainer">
-                <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
-                    <option value="" selected disabled>Select Faculty</option>
-                    @foreach (var f in @Model.FacultyList)
-                    {
-                        <option value="@f.FacultyId">@f.FacultyName</option>
-                    }
-                </select>
-            </div>
-            <div id="departmentContainer">
-                <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3">
-                    <option value="" selected disabled>Select Department</option>
-                    @foreach (var d in @Model.DepartmentList)
-                    {
-                        <option value="@d.DepartmentId">@d.DepartmentName</option>
-                    }
-                </select>
+            <div class="row">
+                <div id="facultyContainer" class="col">
+                    <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3">
+                        <option value="" selected disabled>Select Faculty</option>
+                        @foreach (var f in @Model.FacultyList)
+                        {
+                            <option value="@f.FacultyId">@f.FacultyName</option>
+                        }
+                    </select>
+                </div>
+                <div id="departmentContainer" class="col">
+                    <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3">
+                        <option value="" selected disabled>Select Department</option>
+                        @foreach (var d in @Model.DepartmentList)
+                        {
+                            <option value="@d.DepartmentId">@d.DepartmentName</option>
+                        }
+                    </select>
+                </div>
             </div>
             <div>
                 <label asp-for="JobTitle"></label>

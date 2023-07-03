@@ -3,12 +3,19 @@
 <div>
     <label asp-for="File" class="pb-2"></label>
     <br />
-    <div>
-        <label>File Description</label>
-        <input asp-for="FileDescription" />
+    <div class="row">
+        <div class="col-sm-5">
+            <label>File</label>
+            <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
+            <span asp-validation-for="File"></span>
+        </div>
+        <div class="col-sm-5">
+            <label>File Description</label>
+            <input asp-for="FileDescription" class="form-control" />
+            <span asp-validation-for="FileDescription"></span>
+        </div>
+        <div class="col-sm-2 d-flex align-items-center justify-content-center">
+            <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" class="btn btn-outline-secondary mt-md-3" />
+        </div>
     </div>
-    <br />
-    <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
-    <br />
-    <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
 </div>

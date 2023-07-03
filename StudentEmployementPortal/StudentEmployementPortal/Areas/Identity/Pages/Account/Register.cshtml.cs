@@ -138,6 +138,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             Input = new InputModel()
             {
                 Roles = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
@@ -146,6 +147,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                     Value = i
                 })
             };
+
 
         }
 
@@ -198,6 +200,16 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
+                Input = new InputModel()
+                {
+                    Roles = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
+                    {
+                        Text = i,
+                        Value = i
+                    })
+                };
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);

@@ -26,6 +26,7 @@ $(document).ready(function () {
         var majorsValue = $("#majorsId").val();
         if (majorsValue === "" || majorsValue === null) {
             $('#majorsValidation').text('Please enter your qualification majors.').addClass('text-danger');
+            isValid = false;
         }
 
         return isValid;
@@ -37,4 +38,9 @@ $(document).ready(function () {
         }
 
     });
+    $('#submitButton').click(function (event) {
+        if (!validateEducationForm()) {
+            event.preventDefault();
+        }
+    })
 })

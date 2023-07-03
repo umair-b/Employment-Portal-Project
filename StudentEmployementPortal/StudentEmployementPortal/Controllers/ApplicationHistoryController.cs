@@ -74,9 +74,7 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
         {
-            var maxFileSize = 5 * 1024 * 1024;
-            var allowedFileTypes = new[] { ".pdf", ".doc", ".docx" };
-
+            
             var userId = _userManager.GetUserId(User);
 
             var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
@@ -98,47 +96,26 @@ namespace StudentEmployementPortal.Controllers
 
             var file = viewModel.File;
 
-            if (file != null && file.Length > 0)
+            var fileName = Path.GetFileName(file.FileName);
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var fileExtension = Path.GetExtension(file.FileName).ToLower();
-
-                if (allowedFileTypes.Contains(fileExtension))
-                {
-                    if (file.Length <= maxFileSize)
-                    {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-
-                        using (var stream = new FileStream(path, FileMode.Create))
-                        {
-                            file.CopyTo(stream);
-                        }
-
-                        var document = new Document
-                        {
-                            FileDescription = viewModel.FileDescription,
-                            FileName = fileName,
-                            ApplicationId = viewModel.ApplicationId,
-                            ApplicationFile = file
-                        };
-
-                        _db.Documents.Add(document);
-                        _db.SaveChanges();
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("File", "The file size should be 5MB or less.");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
-                }
+                file.CopyTo(stream);
             }
-            else
+
+            var document = new Document
             {
-                ModelState.AddModelError("File", "Please select a file.");
-            }
+                FileDescription = viewModel.FileDescription,
+                FileName = fileName,
+                ApplicationId = viewModel.ApplicationId,
+                ApplicationFile = file
+            };
+
+            _db.Documents.Add(document);
+            _db.SaveChanges();
 
             return RedirectToAction("ApplicationDetails", new { id = application.ApplicationId });
         }

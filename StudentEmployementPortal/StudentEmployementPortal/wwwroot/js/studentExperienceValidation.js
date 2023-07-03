@@ -26,6 +26,7 @@ $(document).ready(function () {
         var TRValue = $("#TRId").val();
         if (TRValue === "" || TRValue === null) {
             $('#TRValidation').text('Please enter your tasks and responsibilities.').addClass('text-danger');
+            isValid = false;
         }
 
         return isValid;
@@ -37,4 +38,9 @@ $(document).ready(function () {
         }
 
     });
+    $('#submitButton').click(function (event) {
+        if (!validateExperienceForm()) {
+            event.preventDefault();
+        }
+    })
 })
