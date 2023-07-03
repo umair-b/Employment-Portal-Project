@@ -1,15 +1,20 @@
 ﻿@using StudentEmployementPortal.ViewModels
 @model EmployerUpdateInfoViewModel
 
-<form method="post" id="employerForm" onsubmit="confirmSubmission(event)">
+<form method="post" id="employerForm" onsubmit="">
     <div class="=border pt-2 mt-2">
         <div class="row pb-2">
             <h2 class="text-primary">Update Details</h2>
             <hr />
         </div>
-        <div>
-            <label asp-for="EmployerTitle"></label>
-            <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select"></select>
+        <div class="p-1">
+            <select asp-for="@Model.TitleId" class="form-select">
+                <option value="" selected disabled>Select Title</option>
+                @foreach (var title in Model.TitleList)
+                {
+                    <option value="@title.TitleId">@title.TitleName</option>
+                }
+            </select>
         </div>
         <div>
             <label asp-for="EmployerFirstName"></label>
@@ -61,9 +66,14 @@
             <input asp-for="TradingName" />
             <span asp-validation-for="TradingName"></span>
         </div>
-        <div>
-            <label asp-for="EmployerBusinessType"></label>
-            <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select"></select>
+        <div class="p-1">
+            <select asp-for="@Model.BusinessTypeId" class="form-select">
+                <option value="" selected disabled>Select Business Type</option>
+                @foreach (var business in Model.BusinessTypeList)
+                {
+                    <option value="@business.BusinessTypeId">@business.BusinessName</option>
+                }
+            </select>
         </div>
         <div>
             <label asp-for="TrueInfo"></label>
@@ -75,30 +85,35 @@
 </form>
 
 @section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
     <script>
         $(document).ready(function () {
             $('#checkbox1').change(function () {
                 var isChecked = $(this).is(':checked');
                 $('#submitButton').prop('disabled', !isChecked);
             });
-        });
-    </script>
 
-    <script>
-        function confirmSubmission(e){
-            e.preventDefault();
+            $('#employerForm').submit(function (e) {
+                e.preventDefault();
 
-            Swal.fire({
-                title: "Confirm Submission",
-                text: "Making changes to your profile will result in your profile having to be reviewed again. Are you sure you want to continue?",
-                icon: "question",
-                showCancelButton: true,
-            }).then(result => {
-                if (result.isConfirmed){
-                    const employerForm = document.getElementById("employerForm");
-                    employerForm.submit();
+                // Trigger form validation
+                if ($(this).valid()) {
+                    Swal.fire({
+                        title: "Confirm Submission",
+                        text: "Making changes to your profile will result in your profile having to be reviewed again. Are you sure you want to continue?",
+                        icon: "question",
+                        showCancelButton: true,
+                    }).then(result => {
+                        if (result.isConfirmed) {
+                            // Proceed with form submission
+                            this.submit();
+                        }
+                    });
                 }
-            })
-        }
+            });
+        });
     </script>
 }

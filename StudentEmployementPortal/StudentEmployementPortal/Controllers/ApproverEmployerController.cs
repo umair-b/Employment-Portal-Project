@@ -57,7 +57,7 @@ namespace StudentEmployementPortal.Controllers
                 CelNumber = EmployerCred.CellNumber,
                 TelNumber = EmployerCred.TelNumber,
                 Email = EmployerCred.Email,
-                EmployerBusinessType = Employer.EmployerBusinessType,
+                BusinessType = _appDbContext.BusinessTypes.Find(Employer.BusinessTypeId).BusinessName,
                 EmployerStatus = Employer.EmployerStatus,
                 FirstName = EmployerCred.FirstName,
                 LastName = EmployerCred.LastName,
