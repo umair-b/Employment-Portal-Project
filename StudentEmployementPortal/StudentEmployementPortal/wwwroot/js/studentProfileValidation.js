@@ -1,9 +1,9 @@
 ﻿$(document).ready(function () {
-
-    var isFormSubmitted = false;
-
-    // Check the fields on change
     
+    /*// Check the fields on change
+    $('input[type="text"], input[type="radio"], select').change(function () {
+        checkFields();
+    });
 
     // Function to check the fields and set readonly attribute
     function checkFields() {
@@ -53,15 +53,14 @@
             });
         }
 
-    }
-
-    
-
+    }*/
 
     // Function to validate the ID number
     function validateIdNumber() {
-        var idNumber = $('#StudentIdNumber').val();
+        var idNumber = $('#studentIdNumber').val();
         var isCitizen = $('input[name="Citizen"]:checked').val();
+
+        var digitRegex = /^[0-9]+$/;
 
         var month = idNumber.substr(2, 2);
         var mm = parseInt(month, 10);
@@ -70,15 +69,16 @@
 
         if (idNumber.length === 0 && (isCitizen === 'true' || isCitizen === 'false')) {
             $('#idNumberValidation').text('Please enter ID/Passport number.').addClass('text-danger');
-        }
-        else if (isCitizen === 'true' && idNumber.length !== 13) {
-            $('#idNumberValidation').text('ID number must be 13 digits long.').addClass('text-danger');
             return false;
-
-        } else if (isCitizen === 'false' && idNumber.length < 6) {
-            $('#idNumberValidation').text('Passport number must be at least 6 digits long.').addClass('text-danger');
-            return false;
-        } else if (isCitizen === 'true' && idNumber.length === 13) {
+        } else if (isCitizen === 'true') {
+            if (!digitRegex.test(idNumber)) {
+                $('#idNumberValidation').text('ID number should contain only digits.').addClass('text-danger');
+                return false;
+            }
+            if (idNumber.length !== 13) {
+                $('#idNumberValidation').text('ID number must be 13 digits long.').addClass('text-danger');
+                return false;
+            }
             var validMonth = mm >= 1 && mm <= 12;
             var validDay = dd >= 1 && dd <= 31;
 
@@ -99,14 +99,16 @@
 
             $('#idNumberValidation').empty().removeClass('text-danger');
             return true;
-        }
-        else {
-
+        } else if (isCitizen === 'false' && idNumber.length < 6) {
+            $('#idNumberValidation').text('Passport number must be at least 6 digits long.').addClass('text-danger');
+            return false;
+        } else {
             $('#idNumberValidation').empty().removeClass('text-danger');
             return true;
         }
     }
 
+    // function to validate form, check if all the required fields are selected.
     function validateForm() {
         var isValid = true;
 
@@ -156,6 +158,9 @@
 
     // Event handler for form submission
     $('#submitButton').click(function (event) {
+        if (!validateForm()) {
+            event.preventDefault();
+        }
 
         var isCitizenSelected = $('#citizenContainer input[name="Citizen"]:checked').length > 0;
 
@@ -172,29 +177,20 @@
             event.preventDefault(); // Prevent form submission if validation fails
         }
 
-        if (!validateForm()) {
-            event.preventDefault();
-        }
-
-        isFormSubmitted = true;
     });
 
     // Event handler for citizenship status change
     $('input[name="Citizen"]').change(function () {
         var isCitizen = $('input[name="Citizen"]:checked').val();
         if (isCitizen === 'true' || isCitizen === 'false') {
-            $('#StudentIdNumber').prop('disabled', false);
+            $('#studentIdNumber').prop('disabled', false);
             $('#idNumberValidation').empty().removeClass('text-danger');
         } else {
-            $('#StudentIdNumber').prop('disabled', true);
-            $('#StudentIdNumber').val('');
+            $('#studentIdNumber').prop('disabled', true);
+            $('#studentIdNumber').val('');
             $('#idNumberValidation').empty().removeClass('text-danger');
         }
     }).change();
 
-    $('input[type="text"], input[type="radio"], select').change(function () {
-        if (!isFormSubmitted) {
-            checkFields();
-        }
-    });
+    
 });

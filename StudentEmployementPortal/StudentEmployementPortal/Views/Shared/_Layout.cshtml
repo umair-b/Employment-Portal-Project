@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="~/StudentEmployementPortal.styles.css" asp-append-version="true" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
     <link rel="stylesheet" href="~/css/dataTable.CustomTheme.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 
 
 </head>
@@ -83,7 +84,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
-    <script src="~/js/customStudentValidation.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script src="~/js/textAreaValidation.js"></script>
+    @*<script src="~/js/studentProfileValidation.js"></script>
+    <script src="~/js/studentEducationValidation.js"></script>*@
 
     <script>
         $(document).ready(function () {
@@ -91,11 +95,7 @@
 
         });
     </script>
-    @*<script>
-        $(document).ready(function () {
-            $('form').validate(); // Initialize jQuery Validate on the form
-        });
-    </script>*@
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
