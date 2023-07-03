@@ -4,6 +4,7 @@ using StudentEmployementPortal.Data;
 using StudentEmployementPortal.Models;
 using StudentEmployementPortal.ViewModels;
 using System.Data.Entity;
+using StudentEmployementPortal.Utils;
 using System.Diagnostics;
 
 namespace StudentEmployementPortal.Controllers
@@ -21,6 +22,7 @@ namespace StudentEmployementPortal.Controllers
             _userManager = userManager;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
@@ -38,6 +40,17 @@ namespace StudentEmployementPortal.Controllers
                         }
 
                         ViewData["Name"] = employer.User.FirstName + " " + employer.User.LastName;
+                        if (employer != null)
+                        {
+                            if (employer.EmployerStatus == Utils.Enums.EmployerStatus.Rejected || employer.EmployerStatus == Utils.Enums.EmployerStatus.Pending)
+                            {
+                                var Status = new EmployerStatus
+                                {
+                                    Status = employer.EmployerStatus
+                                };
+                                return View(Status);
+                            }
+                        }
 
                         return View();
                     }
@@ -66,6 +79,11 @@ namespace StudentEmployementPortal.Controllers
         {
             return View();
         }
+
+        /*public IActionResult EmployerError()
+        {
+            return View();
+        }*/
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

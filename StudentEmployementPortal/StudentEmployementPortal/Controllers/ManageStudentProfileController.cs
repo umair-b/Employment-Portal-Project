@@ -147,6 +147,7 @@ namespace StudentEmployementPortal.Controllers
             return RedirectToAction("Index");
         }
 
+
         public IActionResult GetDepartmentsByFaculty(int facultyId)
         {
             IEnumerable<Department> Departments = _appDbContext.Departments.Where(f => f.FacultyId == facultyId);

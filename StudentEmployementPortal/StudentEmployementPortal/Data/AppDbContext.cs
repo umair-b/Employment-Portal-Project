@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Bogus;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 using StudentEmployementPortal.Models;
+using StudentEmployementPortal.TestData;
 using System;
 using static StudentEmployementPortal.Utils.Enums;
 
@@ -9,7 +11,12 @@ namespace StudentEmployementPortal.Data
 {
     public class AppDbContext : IdentityDbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        private readonly Fakers _fakers;
+
+        public AppDbContext(DbContextOptions<AppDbContext> options, Fakers fakers) : base(options)
+        {
+            _fakers = fakers;
+        }
 
         public DbSet<Application> Application { get; set; }
         public DbSet<Document> Documents { get; set; }
@@ -153,6 +160,11 @@ namespace StudentEmployementPortal.Data
                 new Department { DepartmentId = 33, DepartmentName = "Physics", FacultyId = 5 },
                 new Department { DepartmentId = 34, DepartmentName = "Statistics and Actuarial Science", FacultyId = 5 }
             );
+
+            /*var posts = _fakers.GetPostGenerator().Generate(50);
+
+            modelBuilder.Entity<JobPost>()
+                .HasData(posts);*/
         }
     }
 }

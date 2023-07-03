@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using StudentEmployementPortal.Utils;
+using StudentEmployementPortal.TestData;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,9 @@ builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProvide
 builder.Services.AddScoped<UserManager<IdentityUser>>();
 builder.Services.AddScoped<StudentProfileFilterAttribute>();
 builder.Services.AddScoped<EmployerProfileAttribute>();
+builder.Services.AddScoped<EmployerStatusAttribute>();
+
+builder.Services.AddSingleton<Fakers>();
 
 var app = builder.Build();
 
