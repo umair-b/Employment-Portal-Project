@@ -25,7 +25,8 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             Pending,
             Withdrawn,
-            Closed
+            Closed,
+            Queried
         }
 
         public enum EmployerStatus
