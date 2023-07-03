@@ -112,6 +112,7 @@ namespace StudentEmployementPortal.Controllers
                     employer.JobTitle = vm.JobTitle;
                     employer.TradingName = vm.TradingName;
                     employer.TrueInfo = vm.TrueInfo;
+                    employer.EmployerStatus = Enums.EmployerStatus.Pending;
                     appUser.TelNumber = vm.EmployerPhone;
                     appUser.FirstName = vm.EmployerFirstName;
                     appUser.LastName = vm.EmployerSurname;

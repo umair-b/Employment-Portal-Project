@@ -28,14 +28,14 @@
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.CellNumber" class="form-control" aria-required="true" />
+                <input asp-for="Input.CellNumber" class="form-control" aria-required="true" id="cellNumber" />
                 <label asp-for="Input.CellNumber"></label>
-                <span asp-validation-for="Input.CellNumber" class="text-danger"></span>
+                <span asp-validation-for="Input.CellNumber" class="text-danger" id="cellNumberError"></span>
             </div>
             <div class="form-floating">
-                <input asp-for="Input.TelNumber" class="form-control" aria-required="false" />
+                <input asp-for="Input.TelNumber" class="form-control" aria-required="false" id="telNumber" />
                 <label asp-for="Input.TelNumber"></label>
-                <span asp-validation-for="Input.TelNumber" class="text-danger"></span>
+                <span asp-validation-for="Input.TelNumber" class="text-danger" id="telNumberError"></span>
             </div>
             <div class="form-floating">
                 <select asp-for="Input.Role" asp-items="@Model.Input.Roles" class="form-control">
@@ -59,4 +59,52 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Get the form and form elements
+        const form = document.getElementById("registerForm");
+        const cellNumberField = document.getElementById("cellNumber");
+        const telNumberField = document.getElementById("telNumber");
+        const cellNumberError = document.getElementById("cellNumberError");
+        const telNumberError = document.getElementById("telNumberError");
+
+        // Regular expressions for cell number and telephone number formats
+        const cellNumberRegex = /^(?:\+27|0)[1-9]\d{8}$/; // South African cell number format
+        const telNumberRegex = /^(?:\+27|0)\d{8,}$/; // South African telephone number format
+
+        // Function to validate cell number
+        function validateCellNumber() {
+            if (!cellNumberRegex.test(cellNumberField.value)) {
+                cellNumberError.style.display = "block";
+                cellNumberError.textContent = "Your phone number is invalid";
+                return false;
+            } else {
+                cellNumberError.style.display = "none";
+                return true;
+            }
+        }
+
+        // Function to validate telephone number
+        function validateTelNumber() {
+            if (telNumberField.value !== "" && !telNumberRegex.test(telNumberField.value)) {
+                telNumberError.style.display = "block";
+                telNumberError.textContent = "Your phone number is invalid";
+                return false;
+            } else {
+                telNumberError.style.display = "none";
+                return true;
+            }
+        }
+
+        // Event listeners for form submission and field input/change
+        form.addEventListener("submit", function (event) {
+            if (!validateCellNumber() || !validateTelNumber()) {
+                event.preventDefault(); // Prevent form submission if validation fails
+            }
+        });
+
+        cellNumberField.addEventListener("input", validateCellNumber);
+        telNumberField.addEventListener("input", validateTelNumber);
+
+    </script>
 }
