@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KYfBijQhXLA+jjA2bp4zzMddEOasAtLO+vXHnUcJ9eY=",
+  "Hash": "0vNoPEdsCOkfNj+qpFPZcsrIOmWAEe33oSHh1HkNtpU=",
   "Source": "StudentEmployementPortal",
   "BasePath": "_content/StudentEmployementPortal",
   "Mode": "Default",
@@ -2431,6 +2431,40 @@
       "OriginalItemSpec": "wwwroot\\Uploads\\class_diagram_final.pdf"
     },
     {
+      "Identity": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\CoverLetter.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/CoverLetter.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\CoverLetter.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\CV.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/CV.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\CV.pdf"
+    },
+    {
       "Identity": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\DB Design.pdf",
       "SourceId": "StudentEmployementPortal",
       "SourceType": "Discovered",
@@ -2497,6 +2531,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Uploads\\Student Casual Employment System (JimmyNjoku).pdf"
+    },
+    {
+      "Identity": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\Uploads\\Transcript.pdf",
+      "SourceId": "StudentEmployementPortal",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\wwwroot\\",
+      "BasePath": "_content/StudentEmployementPortal",
+      "RelativePath": "Uploads/Transcript.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Uploads\\Transcript.pdf"
     }
   ]
 }

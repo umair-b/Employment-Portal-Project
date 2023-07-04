@@ -24,7 +24,7 @@ namespace StudentEmployementPortal.Controllers
         {
             var dateNow = DateTime.Now;
 
-            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending)
+            IEnumerable<JobPost> JobPosts = _db.JobPosts.Where(x => x.PostStatus == Enums.JobPostStatus.Pending || x.PostStatus == Enums.JobPostStatus.Queried)
                 .Include(x => x.Employer)
                 .Include(x => x.Department)
                 .Include(x => x.Faculty)

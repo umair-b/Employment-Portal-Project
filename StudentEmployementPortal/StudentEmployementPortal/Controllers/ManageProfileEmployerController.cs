@@ -43,7 +43,9 @@ namespace StudentEmployementPortal.Controllers
                     RegistrationNumber = string.Empty,
                     TradingName = string.Empty,
                     EmployerFirstName = appUser.FirstName,
-                    EmployerSurname = appUser.LastName
+                    EmployerSurname = appUser.LastName,
+                    BusinessTypeList = _appDbContext.BusinessTypes,
+                    TitleList = _appDbContext.Titles
                 };
 
                 return View(vm);
@@ -62,8 +64,10 @@ namespace StudentEmployementPortal.Controllers
                     TradingName = employer.TradingName,
                     EmployerFirstName = appUser.FirstName,
                     EmployerSurname = appUser.LastName,
-                    EmployerBusinessType = employer.BusinessType,
-                    EmployerTitle = employer.Title
+                    BusinessTypeId = employer.BusinessTypeId,
+                    TitleId = employer.TitleId,
+                    BusinessTypeList = _appDbContext.BusinessTypes,
+                    TitleList = _appDbContext.Titles
                 };
                 return View(vm);
             }
@@ -85,8 +89,8 @@ namespace StudentEmployementPortal.Controllers
                         RegisteredAddress = vm.RegisteredAddress,
                         RegistrationName = vm.RegistrationName,
                         RegistrationNumber = vm.RegistrationNumber,
-                        BusinessType = vm.EmployerBusinessType,
-                        Title = vm.EmployerTitle,
+                        BusinessTypeId = vm.BusinessTypeId,
+                        TitleId = vm.TitleId,
                         JobTitle = vm.JobTitle,
                         TradingName= vm.TradingName,
                         TrueInfo = vm.TrueInfo,
@@ -108,11 +112,12 @@ namespace StudentEmployementPortal.Controllers
                     employer.RegisteredAddress = vm.RegisteredAddress;
                     employer.RegistrationName = vm.RegistrationName;
                     employer.RegistrationNumber = vm.RegistrationNumber;
-                    employer.BusinessType = vm.EmployerBusinessType;
-                    employer.Title = vm.EmployerTitle;
+                    employer.BusinessTypeId = vm.BusinessTypeId;
+                    employer.TitleId = vm.TitleId;
                     employer.JobTitle = vm.JobTitle;
                     employer.TradingName = vm.TradingName;
                     employer.TrueInfo = vm.TrueInfo;
+                    employer.EmployerStatus = Enums.EmployerStatus.Pending;
                     appUser.TelNumber = vm.EmployerPhone;
                     appUser.FirstName = vm.EmployerFirstName;
                     appUser.LastName = vm.EmployerSurname;
