@@ -62,8 +62,8 @@ namespace StudentEmployementPortal.Controllers
                     TradingName = employer.TradingName,
                     EmployerFirstName = appUser.FirstName,
                     EmployerSurname = appUser.LastName,
-                    EmployerBusinessType = employer.EmployerBusinessType,
-                    EmployerTitle = employer.EmployerTitle
+                    EmployerBusinessType = employer.BusinessType,
+                    EmployerTitle = employer.Title
                 };
                 return View(vm);
             }
@@ -85,8 +85,8 @@ namespace StudentEmployementPortal.Controllers
                         RegisteredAddress = vm.RegisteredAddress,
                         RegistrationName = vm.RegistrationName,
                         RegistrationNumber = vm.RegistrationNumber,
-                        EmployerBusinessType = vm.EmployerBusinessType,
-                        EmployerTitle = vm.EmployerTitle,
+                        BusinessType = vm.EmployerBusinessType,
+                        Title = vm.EmployerTitle,
                         JobTitle = vm.JobTitle,
                         TradingName= vm.TradingName,
                         TrueInfo = vm.TrueInfo,
@@ -108,8 +108,8 @@ namespace StudentEmployementPortal.Controllers
                     employer.RegisteredAddress = vm.RegisteredAddress;
                     employer.RegistrationName = vm.RegistrationName;
                     employer.RegistrationNumber = vm.RegistrationNumber;
-                    employer.EmployerBusinessType = vm.EmployerBusinessType;
-                    employer.EmployerTitle = vm.EmployerTitle;
+                    employer.BusinessType = vm.EmployerBusinessType;
+                    employer.Title = vm.EmployerTitle;
                     employer.JobTitle = vm.JobTitle;
                     employer.TradingName = vm.TradingName;
                     employer.TrueInfo = vm.TrueInfo;

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentEmployementPortal.Utils
@@ -13,8 +15,9 @@ namespace StudentEmployementPortal.Utils
             return Enum.GetValues(typeof(T))
                 .Cast<T>()
                 .Where(e => !excludedVals.Contains(e))
-                .Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString() });
+                .Select(e => new SelectListItem { Text = e.Humanize(), Value = e.ToString() });
         }
+
 
         public enum JobPostStatus
         {
@@ -22,66 +25,37 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             Pending,
             Withdrawn,
-            Closed
+            Closed,
+            Queried
         }
 
         public enum EmployerStatus
         {
-            Approved, 
+            Approved,
             Rejected,
             Pending
         }
 
-        public enum Title
-        {
-            Mr,
-            Mrs,
-            Miss,
-            Dr,
-            Prof,
-            Other
-        }
 
         public enum BusniessType
         {
+            [Display(Name = "Closed Corporation")]
             ClosedCorporation,
+            [Display(Name = "State Owned Entity")]
             StateOwnedEntity,
+            [Display(Name = "Pty Ltd")]
             PtyLtd,
+            [Display(Name = "Sole Proprietorship")]
             SoleProprietorship,
+            [Display(Name = "Partnership")]
             Partnership,
-            NPO
+            [Display(Name = "Non-profit Organization")]
+            NPO,
+            [Display(Name = "Other")]
+            Other
         }
 
-        /*public enum Gender
-        {
-            [Display(Name ="Male")]
-            Male,
-            [Display(Name ="Female")]
-            Female,
-            [Display(Name ="Non-binary")]
-            NonBinary,
-            [Display(Name ="Other")]
-            Other,
-            [Display(Name ="Prefer Not to Say")]
-            PreferNotToSay
-        }*/
-
-        /*public enum YearOfStudy
-        {
-            [Display(Name ="First Year")]
-            FirstYear,
-            [Display(Name = "Second Year")]
-            SecondYear,
-            [Display(Name = "Third Year")]
-            ThirdYear,
-            [Display(Name = "Honours")]
-            Honours,
-            [Display(Name = "Masters")]
-            Masters,
-            [Display(Name = "PhD")]
-            PhD
-        }*/
-
+        
 
         public enum ApplicationStatus
         {
@@ -95,7 +69,6 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             [Display(Name = "Appointed")]
             Appointed,
-            [Display(Name = "Withdrawn")]
             Withdrawn
         }
 

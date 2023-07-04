@@ -32,9 +32,7 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Select Approval Status")]
         public Enums.EmployerStatus EmployerStatus { get; set; } = Enums.EmployerStatus.Pending;
         [Display(Name = "Business Type")]
-        public Enums.BusniessType EmployerBusinessType { get; set; } = Enums.BusniessType.PtyLtd;
-
-        //private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> { Enums.JobPostStatus.Withdrawn, Enums.JobPostStatus.Pending };
+        public string BusinessType { get; set; }
         public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.EmployerStatus>();
     }
 }

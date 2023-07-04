@@ -37,6 +37,7 @@ namespace StudentEmployementPortal.Data
         public DbSet<Race> Races { get; set; }
 
         public DbSet<YearOfStudy> YearOfStudies { get; set; }
+        public DbSet<Title> Titles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +54,15 @@ namespace StudentEmployementPortal.Data
             .WithMany()
             .HasForeignKey(j => j.FacultyId)
             .OnDelete(DeleteBehavior.Restrict);*/
+
+            modelBuilder.Entity<Models.Title>().HasData(
+               new Models.Title { TitleId = 1, TitleName = "Mr" },
+               new Models.Title { TitleId = 2, TitleName = "Mrs" },
+               new Models.Title { TitleId = 3, TitleName = "Miss" },
+               new Models.Title { TitleId = 4, TitleName = "Dr" },
+               new Models.Title { TitleId = 5, TitleName = "Prof" },
+               new Models.Title { TitleId = 6, TitleName = "Other" }
+               );
 
             modelBuilder.Entity<YearOfStudy>().HasData(
                 new YearOfStudy { YearOfStudyId = 1, YearOfStudyName="First Year"},
@@ -98,18 +108,16 @@ namespace StudentEmployementPortal.Data
 
 
             modelBuilder.Entity<Employer>()
-                .Ignore(e => e.EmployerBusinessTypes)
-                .Ignore(e => e.EmployerTitles)
             .Ignore(e => e.EmployerStatuses);
             modelBuilder.Entity<BusinessType>().HasData(
-                new BusinessType { BusinessTypeId = 1, Name = "Sole Proprietorship" },
-                new BusinessType { BusinessTypeId = 2, Name = "Partnership" },
-                new BusinessType { BusinessTypeId = 3, Name = "Private Limited Company (Pty Ltd)" },
-                new BusinessType { BusinessTypeId = 4, Name = "Public Limited Company (Ltd)" },
-                new BusinessType { BusinessTypeId = 5, Name = "Close Corporation (CC)" },
-                new BusinessType { BusinessTypeId = 6, Name = "Nonprofit Organization (NPO)" },
-                new BusinessType { BusinessTypeId = 7, Name = "State Owned Entity (SOE)" },
-                new BusinessType { BusinessTypeId = 8, Name = "Other" }
+                new BusinessType { BusinessTypeId = 1, BusinessName = "Sole Proprietorship" },
+                new BusinessType { BusinessTypeId = 2, BusinessName = "Partnership" },
+                new BusinessType { BusinessTypeId = 3, BusinessName = "Private Limited Company (Pty Ltd)" },
+                new BusinessType { BusinessTypeId = 4, BusinessName = "Public Limited Company (Ltd)" },
+                new BusinessType { BusinessTypeId = 5, BusinessName = "Close Corporation (CC)" },
+                new BusinessType { BusinessTypeId = 6, BusinessName = "Nonprofit Organization (NPO)" },
+                new BusinessType { BusinessTypeId = 7, BusinessName = "State Owned Entity (SOE)" },
+                new BusinessType { BusinessTypeId = 8, BusinessName = "Other" }
                 );
 
             modelBuilder.Entity<Faculty>().HasData(
