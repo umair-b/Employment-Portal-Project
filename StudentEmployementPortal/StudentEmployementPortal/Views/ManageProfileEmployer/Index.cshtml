@@ -15,6 +15,7 @@
                     <option value="@title.TitleId">@title.TitleName</option>
                 }
             </select>
+            <span asp-validation-for="TitleId"></span>
         </div>
         <div>
             <label asp-for="EmployerFirstName"></label>
@@ -74,6 +75,7 @@
                     <option value="@business.BusinessTypeId">@business.BusinessName</option>
                 }
             </select>
+            <span asp-validation-for="BusinessTypeId"></span>
         </div>
         <div>
             <label asp-for="TrueInfo"></label>

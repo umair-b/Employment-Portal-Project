@@ -147,6 +147,16 @@ namespace StudentEmployementPortal.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult DeleteEducation(int id)
+        {
+            if (id != null || id != 0)
+            {
+                
+            }
+
+            return View();
+        }
+
         public IActionResult GetDepartmentsByFaculty(int facultyId)
         {
             IEnumerable<Department> Departments = _appDbContext.Departments.Where(f => f.FacultyId == facultyId);

@@ -8,6 +8,7 @@ namespace StudentEmployementPortal.ViewModels
 {
     public class EmployerUpdateInfoViewModel
     {
+        //Employer Properties
         [Display(Name = "Job Title")]
         [Required]
         public string JobTitle { get; set; }
@@ -29,20 +30,26 @@ namespace StudentEmployementPortal.ViewModels
         //Employer Title
         [Display(Name ="Title")]
         [Required]
-        public Title EmployerTitle { get; set; } // = Enums.Title.Other;
+        public Title EmployerTitle { get; set; }
 
         [ForeignKey(nameof(TitleId))]
+        [Display(Name ="Title")]
         public int TitleId { get; set; }
         public IEnumerable<Title> TitleList { get; set; }
 
         //Employer Business Type
         [Display(Name = "Business Type")]
         [Required]
-        public BusinessType EmployerBusinessType { get; set; } //= Enums.BusniessType.PtyLtd;
+        public BusinessType EmployerBusinessType { get; set; }
+
         [ForeignKey(nameof(BusinessTypeId))]
+        [Display(Name ="Business Type")]
         public int BusinessTypeId { get; set; }
+
         public IEnumerable<BusinessType> BusinessTypeList { get; set; }
 
+
+        //AppUser Properties
         [Required]
         [EmailAddress]
         [Display(Name ="Email Address")]
@@ -58,10 +65,5 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name ="Last Name")]
         [Required]
         public string EmployerSurname { get; set; }
-
-        /*//Get Enums
-        
-        public IEnumerable<SelectListItem> EmployerTitles { get => Enums.GetEnumList<Enums.Title>(); set { } }
-        public IEnumerable<SelectListItem> EmployerBusinessTypes { get => Enums.GetEnumList<Enums.BusniessType>(); set { } }*/
     }
 }

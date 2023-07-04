@@ -12,7 +12,7 @@ using StudentEmployementPortal.Data;
 namespace StudentEmployementPortal.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230703154821_migration00")]
+    [Migration("20230704073735_migration00")]
     partial class migration00
     {
         /// <inheritdoc />
