@@ -1,12 +1,15 @@
 ﻿using StudentEmployementPortal.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentEmployementPortal.ViewModels
 {
     public class DocumentUploadViewModel
     {
-        public int ApplicationId { get; set; }
 
+        [ForeignKey(nameof(Application))]
+        public int ApplicationId { get; set; }
+        public Application Application { get; set; }
         [Display(Name = "Job Post")]
         public string JobTitle { get; set; }
 

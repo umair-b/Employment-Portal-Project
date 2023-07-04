@@ -1537,3 +1537,5 @@ C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoym
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\lesli\Projects\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\Bogus.dll
+C:\Users\A0075303\OneDrive - University of Witwatersrand\Documents\GitHub\Empoyment-Portal-Project\StudentEmployementPortal\StudentEmployementPortal\bin\Debug\net6.0\Bogus.dll

@@ -114,21 +114,21 @@
                 @Model.EndDate.Value.Day @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @Model.EndDate.Value.Year
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.ClosingDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Model.ClosingDate.Value.Day @dateClose.ToString("MMMM", CultureInfo.InvariantCulture) @Model.ClosingDate.Value.Year
-            </dd>
-            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.MinRequirements)
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.MinRequirements)
             </dd>
             <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.ClosingDate)
+            </dt>
+            <dd class="col-sm-10 text-danger" style="font-weight:bold">
+                @Model.ClosingDate.Value.Day @dateClose.ToString("MMMM", CultureInfo.InvariantCulture) @Model.ClosingDate.Value.Year
+            </dd>
+            <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.ApplicationInstructions)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-10 text-danger" style="font-weight:bold">
                 @Html.DisplayFor(model => model.ApplicationInstructions)
             </dd>
         </dl>

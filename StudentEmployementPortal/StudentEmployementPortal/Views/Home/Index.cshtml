@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using StudentEmployementPortal.Utils
+@model EmployerStatus
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -14,12 +15,27 @@
 {
     @if (User.IsInRole(DefineRole.Role_Employer))
     {
-        <h3 class="text-center text-dark" style="font-family:Courier New, Courier, monospace">Hello, @(ViewData["Name"]?.ToString())</h3>
-        <partial name="EmployerHome" />
+        <h3 class="text-center text-dark" style="font-family:Courier New, Courier, monospace">Hi @(ViewData["Name"]?.ToString())</h3>
+       
+        if (Model != null)
+        {
+            if (Model.Status == Enums.EmployerStatus.Rejected)
+            {
+                <partial name="EmployerError" />
+            }
+            else if (Model.Status == Enums.EmployerStatus.Pending)
+            {
+                <partial name="EmployerPending" />
+            }
+        }
+        else
+        {
+            <partial name="EmployerHome" />
+        }
     }
     else if (User.IsInRole(DefineRole.Role_Student))
     {
-        <h3 class="text-center text-dark" style="font-family:Courier New, Courier, monospace">Hello, @(ViewData["Name"]?.ToString())</h3>
+        <h3 class="text-center text-dark" style="font-family:Courier New, Courier, monospace">Hi @(ViewData["Name"]?.ToString())</h3>
         <partial name="StudentHome" />
     }
     else if (User.IsInRole(DefineRole.Role_Approver))

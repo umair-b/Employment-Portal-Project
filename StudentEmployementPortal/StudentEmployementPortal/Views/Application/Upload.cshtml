@@ -13,7 +13,7 @@
 <form method="post" enctype="multipart/form-data">
     <div class="pt-2 mt-2">
         <div>
-            <a asp-controller="Application" asp-action="Index" class="btn btn-outline-primary right-align " style="width:150px">
+            <a asp-controller="Application" asp-action="Cancel" asp-route-id="@Model.ApplicationId" class="btn btn-outline-primary right-align " style="width:150px">
                 &larr; Back
             </a>
         </div>
@@ -35,7 +35,9 @@
                 @foreach (var document in Model.UploadedDocuments)
                 {
                     <tr>
-                        <td>@document.FileName</td>
+                        <td>
+                            <a href="~/Uploads/@document.FileName" target="_blank">@document.FileName</a>
+                        </td>
                         <td>@document.FileDescription</td>
                         <td class="text-center">
                             <button type="submit" class="btn btn-outline-danger" asp-action="DeleteConfirmed" asp-route-id="@document.DocumentId">
@@ -47,23 +49,77 @@
             </tbody>
         </table>
         <br />
-        <div class="form-control">
-            <div>
-                <label asp-for="File" class="pb-2"></label>
-                <br />
-                <div>
-                    <label>File Description</label>
-                    <input asp-for="FileDescription" />
-                    <span asp-validation-for="FileDescription"></span>
-                </div>
-                <br />
-                <input type="file" name="File" id="File" asp-for="File" multiple class="form-control" />
-                <span asp-validation-for="File"></span>
-                <br />
-                <input type="submit" value="Upload" asp-action="Upload" asp-route-id="@Model.ApplicationId" />
+        <div class="row">
+            <div class="col-sm-5">
+                <label>File</label>
+                <input type="file" name="File" id="File" asp-for="@Model.File"
+                       multiple class="form-control"
+                       accept=".pdf"
+                       onchange="validateFileType(this)" />
+                <span asp-validation-for="File" id="fileValidation" class="text-danger"></span>
+            </div>
+            <div class="col-sm-5">
+                <label>File Description</label>
+                <input asp-for="@Model.FileDescription"
+                       class="form-control"
+                       id="fileDescription" />
+                <span asp-validation-for="FileDescription" id="fileDescValidation" class="text-danger"></span>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center justify-content-center">
+                <input type="submit" value="Upload" asp-controller="Application" asp-action="Upload" asp-route-id="@Model.ApplicationId"
+                       class="btn btn-outline-primary mt-md-4"
+                       id="uploadButton" />
             </div>
         </div>
     </div>
     <br />
     <a asp-action="Index" class="btn btn-primary">Done</a>
 </form>
+
+<script>
+    $(document).ready(function () {
+        // Disable the upload button initially
+        $('#uploadButton').prop('disabled', true);
+
+        // Enable or disable the upload button based on file description input
+        $('#fileDescription').on('input', function () {
+            var fileDescription = $(this).val();
+            $('#uploadButton').prop('disabled', !fileDescription);
+        });
+    });
+
+    function validateFileType(input) {
+        var allowedExtensions = /(\.pdf)$/i;
+        var file = input.files[0];
+        var fileDescription = $('#fileDescription').val();
+
+        // Check file extension
+        if (!allowedExtensions.test(file.name)) {
+            $(input).val(''); // Clear the selected file
+            $('#fileValidation').text('Please select a PDF file.');
+            return false;
+        }
+
+        // Check file size (in bytes)
+        var fileSizeInBytes = file.size;
+        var maxSizeInBytes = 5 * 1024 * 1024; //
+        if (fileSizeInBytes > maxSizeInBytes) {
+            $(input).val(''); // Clear the selected file
+            $('#fileValidation').text('File size exceeds the maximum limit (5MB).');
+            return false;
+        }
+
+        // Check file description
+        if (!fileDescription) {
+            $('#fileDescValidation').text('Please provide a file description.');
+            return false;
+        }
+
+        // Clear any error messages
+        $('#fileValidation').text('');
+        $('#fileDescValidation').text('');
+
+        return true;
+    }
+
+</script>

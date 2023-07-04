@@ -22,7 +22,8 @@ namespace StudentEmployementPortal.Models
         [DisplayName("Subjects")]
         public string? Subjects { get; set; }
         [DisplayName("Majors")]
-        public string? Majors { get; set; }
+        [Required]
+        public string Majors { get; set; }
         [DisplayName("Sub-majors")]
         public string? SubMajors { get; set; }
         [DisplayName("Research")]
