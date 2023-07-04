@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace StudentEmployementPortal.Utils
@@ -13,8 +15,9 @@ namespace StudentEmployementPortal.Utils
             return Enum.GetValues(typeof(T))
                 .Cast<T>()
                 .Where(e => !excludedVals.Contains(e))
-                .Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString() });
+                .Select(e => new SelectListItem { Text = e.Humanize(), Value = e.ToString() });
         }
+
 
         public enum JobPostStatus
         {
@@ -22,14 +25,16 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             Pending,
             Withdrawn,
-            Closed
+            Closed,
+            Queried
         }
 
         public enum EmployerStatus
         {
-            Approved, 
+            Approved,
             Rejected,
-            Pending
+            Pending,
+            Queried
         }
 
         public enum Title
@@ -44,12 +49,20 @@ namespace StudentEmployementPortal.Utils
 
         public enum BusniessType
         {
+            [Display(Name = "Closed Corporation")]
             ClosedCorporation,
+            [Display(Name = "State Owned Entity")]
             StateOwnedEntity,
+            [Display(Name = "Pty Ltd")]
             PtyLtd,
+            [Display(Name = "Sole Proprietorship")]
             SoleProprietorship,
+            [Display(Name = "Partnership")]
             Partnership,
-            NPO
+            [Display(Name = "Non-profit Organization")]
+            NPO,
+            [Display(Name = "Other")]
+            Other
         }
 
         /*public enum Gender

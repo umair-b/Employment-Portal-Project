@@ -113,6 +113,8 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "Contact Email")]
         public string ContactEmail { get; set; }
 
+        public Enums.JobPostStatus PostStatus { get; set; }
+
         /*private List<Enums.JobPostStatus> ExcludedVals = new List<Enums.JobPostStatus> { Enums.JobPostStatus.Approved, Enums.JobPostStatus.Rejected, Enums.JobPostStatus.Pending };
         public IEnumerable<SelectListItem> StatusNames => Enums.GetEnumList<Enums.JobPostStatus>(ExcludedVals);*/
 
