@@ -12,11 +12,9 @@ namespace StudentEmployementPortal.Models
         public string FirstName { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string LastName { get; set; }
-        [Index(IsUnique = true)]
         [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Cell number is already in use.")]
         [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African cell number.")]
         public string CellNumber { get; set; }
-        [Index(IsUnique = true)]
         [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Telephone number is already in use.")]
         [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African telephone number.")]
         public string TelNumber { get; set; }
