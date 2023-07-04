@@ -147,6 +147,60 @@ namespace StudentEmployementPortal.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult DeleteEducation(int id)
+        {
+            var education = _appDbContext.Educations.Find(id);
+
+            if (education != null)
+            {
+                if (_userManager.GetUserId(User) == education.UserId)
+                {
+                    _appDbContext.Educations.Remove(education);
+                    _appDbContext.SaveChanges();
+                    return Json(new { success = true });
+                }
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public IActionResult DeleteWorkExperience(int id)
+        {
+            var WorkExperience = _appDbContext.WorkExperience.Find(id);
+
+            if (WorkExperience != null)
+            {
+                if (_userManager.GetUserId(User) == WorkExperience.UserId)
+                {
+                    _appDbContext.WorkExperience.Remove(WorkExperience);
+                    _appDbContext.SaveChanges();
+                    return Json(new { success = true });
+                }
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public IActionResult DeleteReferee(int id)
+        {
+            var Referee = _appDbContext.Referees.Find(id);
+
+            if (Referee != null)
+            {
+                if (_userManager.GetUserId(User) == Referee.UserId)
+                {
+                    _appDbContext.Referees.Remove(Referee);
+                    _appDbContext.SaveChanges();
+                    return Json(new { success = true });
+                }
+            }
+
+            return Json(new { success = false });
+        }
+
         public IActionResult GetDepartmentsByFaculty(int facultyId)
         {
             IEnumerable<Department> Departments = _appDbContext.Departments.Where(f => f.FacultyId == facultyId);

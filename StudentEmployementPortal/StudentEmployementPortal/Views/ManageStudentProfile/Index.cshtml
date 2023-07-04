@@ -150,13 +150,12 @@
                 <tbody>
                     @foreach (var edu in Model.Education)
                     {
-                        <tr>
+                        <tr class="education-item">
                             <td>@edu.Qualification</td>
                             <td>
                                 <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
                                    class="btn btn-primary mx-1">Edit</a>
-                                <a asp-controller="ManageEducation" asp-action="Delete" asp-route-id="@edu.EducationId"
-                                   class="btn btn-danger mx-1">Delete</a>
+                                <a data-education-id="@edu.EducationId" class="btn btn-danger mx-1 delete-education-button">Delete</a>
                             </td>
                         </tr>
                     }
@@ -197,8 +196,7 @@
                             <td>
                                 <a asp-controller="ManageWorkExperience" asp-action="Edit" asp-route-id="@we.WorkExperienceId"
                                    class="btn btn-primary mx-1">Edit</a>
-                                <a asp-controller="ManageWorkExperience" asp-action="Delete" asp-route-id="@we.WorkExperienceId"
-                                   class="btn btn-danger mx-1">Delete</a>
+                                <a data-we-id="@we.WorkExperienceId" class="btn btn-danger mx-1 delete-we-button">Delete</a>
                             </td>
                         </tr>
                     }
@@ -239,8 +237,7 @@
                             <td>
                                 <a asp-controller="ManageReferee" asp-action="Edit" asp-route-id="@referee.RefereeId"
                                    class="btn btn-primary mx-1">Edit</a>
-                                <a asp-controller="ManageReferee" asp-action="Delete" asp-route-id="@referee.RefereeId"
-                                   class="btn btn-danger mx-1">Delete</a>
+                                <a data-ref-id="@referee.RefereeId" class="btn btn-danger mx-1 delete-ref-button">Delete</a>
                             </td>
                         </tr>
                     }
@@ -276,4 +273,174 @@
             }
         });
     </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-education-button').click(function () {
+                var educationId = $(this).data('education-id');
+                var row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: "Confirm Deletion",
+                    text: "Are you sure you want to delete this education record?",
+                    icon: "warning",
+                    showCancelButton: true,
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        deleteEducation(educationId);
+                    }
+                });
+            });
+
+            function deleteEducation(educationId) {
+                $.ajax({
+                    url: '/ManageStudentProfile/DeleteEducation/' + educationId,
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "The education record has been deleted.",
+                                icon: "success"
+                            }).then(() => {
+                                location.reload(); 
+                            });
+                        } else {
+                            Swal.fire("Error", "An error occurred while deleting the education record.", "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error", "An error occurred while deleting the education record.", "error");
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-we-button').click(function () {
+                var weId = $(this).data('we-id');
+                var row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: "Confirm Deletion",
+                    text: "Are you sure you want to delete this work experience record?",
+                    icon: "warning",
+                    showCancelButton: true,
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        deleteWorkExperience(weId);
+                    }
+                });
+            });
+
+            function deleteWorkExperience(weId) {
+                $.ajax({
+                    url: '/ManageStudentProfile/DeleteWorkExperience/' + weId,
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "The education record has been deleted.",
+                                icon: "success"
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire("Error", "An error occurred while deleting the work experience record.", "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error", "An error occurred while deleting the work experience record.", "error");
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.delete-ref-button').click(function () {
+                var refId = $(this).data('ref-id');
+                var row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: "Confirm Deletion",
+                    text: "Are you sure you want to delete this referee record?",
+                    icon: "warning",
+                    showCancelButton: true,
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        deleteRef(refId);
+                    }
+                });
+            });
+
+            function deleteRef(refId) {
+                // Make an AJAX request to delete the education record
+                $.ajax({
+                    url: '/ManageStudentProfile/DeleteReferee/' + refId,
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "The referee record has been deleted.",
+                                icon: "success"
+                            }).then(() => {
+                                location.reload(); // Reload the page
+                            });
+                        } else {
+                            Swal.fire("Error", "An error occurred while deleting the referee record.", "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error", "An error occurred while deleting the referee record.", "error");
+                    }
+                });
+            }
+        });
+    </script>
+
+    @*<script>
+        $(document).ready(function () {
+            $('.delete-button').click(function () {
+                var educationId = $(this).data('education-id');
+                var row = $(this).closest('tr');
+
+                Swal.fire({
+                    title: "Confirm Deletion",
+                    text: "Are you sure you want to delete this education record?",
+                    icon: "warning",
+                    showCancelButton: true,
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        deleteEducation(educationId, row);
+                    }
+                });
+            });
+
+            function deleteEducation(educationId, row) {
+                $.ajax({
+                    url: '/ManageStudentProfile/DeleteEducation/' + educationId,
+                    type: 'POST',
+                    success: function (response) {
+                        if (response.success) {
+                            row.remove();
+                            Swal.fire("Deleted!", "The education record has been deleted.", "success");
+                        } else {
+                            Swal.fire("Error", "An error occurred while deleting the education record.", "error");
+                        }
+                    },
+                    error: function () {
+                        Swal.fire("Error", "An error occurred while deleting the education record.", "error");
+                    }
+                });
+            }
+        });
+    </script>*@
 }
+

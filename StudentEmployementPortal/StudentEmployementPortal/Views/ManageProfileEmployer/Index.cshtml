@@ -1,7 +1,7 @@
 ﻿@using StudentEmployementPortal.ViewModels
 @model EmployerUpdateInfoViewModel
 
-<form method="post" id="employerForm" onsubmit="">
+<form method="post" id="employerForm" onsubmit="event.preventDefault(); if (validateForm()) showConfirmationDialog();">
     <div class="=border pt-2 mt-2">
         <div class="row pb-2">
             <h2 class="text-primary">Update Details</h2>
@@ -90,29 +90,27 @@
     }
 
     <script>
+        function validateForm() {
+            return $('#employerForm').valid();
+        }
+
+        function showConfirmationDialog() {
+            Swal.fire({
+                title: "Confirm Submission",
+                text: "By submitting you acknowledge all details are correct and that your profile status will be changed to Pending. Are you sure you want to continue?",
+                icon: "question",
+                showCancelButton: true,
+            }).then(result => {
+                if (result.isConfirmed) {
+                    document.getElementById("employerForm").submit();
+                }
+            });
+        }
+
         $(document).ready(function () {
             $('#checkbox1').change(function () {
                 var isChecked = $(this).is(':checked');
                 $('#submitButton').prop('disabled', !isChecked);
-            });
-
-            $('#employerForm').submit(function (e) {
-                e.preventDefault();
-
-                // Trigger form validation
-                if ($(this).valid()) {
-                    Swal.fire({
-                        title: "Confirm Submission",
-                        text: "Making changes to your profile will result in your profile having to be reviewed again. Are you sure you want to continue?",
-                        icon: "question",
-                        showCancelButton: true,
-                    }).then(result => {
-                        if (result.isConfirmed) {
-                            // Proceed with form submission
-                            this.submit();
-                        }
-                    });
-                }
             });
         });
     </script>

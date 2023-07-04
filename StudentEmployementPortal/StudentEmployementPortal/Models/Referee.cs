@@ -27,6 +27,7 @@ namespace StudentEmployementPortal.Models
 
         [DisplayName("Email Address")]
         [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         //Navigation Property
