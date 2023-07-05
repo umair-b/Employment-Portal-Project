@@ -1,0 +1,173 @@
+﻿@using StudentEmployementPortal.ViewModels
+@model ChartViewModel
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Charts</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .right-align {
+            float: right;
+        }
+
+        .left-align {
+            float: left;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="row pt-2">
+        <div class="col-6">
+            <h2 class="align-items-center text-primary">VIEW STATS</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Back</a>
+        </div>
+    </div>
+    <hr />
+    <br />
+    <h4 class="text-center">Hourly Rates vs Departments</h4>
+    <div>
+
+        <canvas id="departmentChart"></canvas>
+
+    </div>
+    <br />
+    <h4 class="text-center">Hourly Rates vs Part-time Hours</h4>
+    <div>
+
+        <canvas id="partTimeHoursChart"></canvas>
+
+    </div>
+
+
+
+    <script>
+
+        // Department Chart
+
+        var departmentLabels = @Html.Raw(Json.Serialize(Model.DepartmentChartData.Select(d => d.Label)));
+
+        var departmentValues = @Html.Raw(Json.Serialize(Model.DepartmentChartData.Select(d => d.Value)));
+
+
+
+        var departmentChartCanvas = document.getElementById("departmentChart").getContext('2d');
+
+        new Chart(departmentChartCanvas, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: departmentLabels,
+
+                datasets: [{
+
+                    label: 'Average Hourly Rates vs Departments',
+
+                    data: departmentValues,
+
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+
+                    borderColor: 'rgba(75, 192, 192, 1)',
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+
+
+        // Part-Time Hours Chart
+
+        var partTimeHoursLabels = @Html.Raw(Json.Serialize(Model.PartTimeHoursChartData
+
+            .OrderBy(p => p.Label == "> 12" ? 1 : 0) // Order "> 12" label last
+
+            .Select(p => p.Label)));
+
+        var partTimeHoursValues = @Html.Raw(Json.Serialize(Model.PartTimeHoursChartData
+
+            .OrderBy(p => p.Label == "> 12" ? 1 : 0) // Order "> 12" label last
+
+            .Select(p => p.Value)));
+
+
+
+        var partTimeHoursChartCanvas = document.getElementById("partTimeHoursChart").getContext('2d');
+
+        new Chart(partTimeHoursChartCanvas, {
+
+            type: 'bar',
+
+            data: {
+
+                labels: partTimeHoursLabels,
+
+                datasets: [{
+
+                    label: 'Average Hourly Rate vs Part Time Hours',
+
+                    data: partTimeHoursValues,
+
+                    backgroundColor: 'rgba(192, 75, 192, 0.2)',
+
+                    borderColor: 'rgba(192, 75, 192, 1)',
+
+                    borderWidth: 1
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                scales: {
+
+                    y: {
+
+                        beginAtZero: true
+
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
