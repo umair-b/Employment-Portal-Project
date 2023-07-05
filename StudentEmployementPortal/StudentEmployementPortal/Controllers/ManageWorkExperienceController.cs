@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
@@ -17,11 +18,14 @@ namespace StudentEmployementPortal.Controllers
 
         private readonly AppDbContext _appDbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ManageWorkExperienceController(AppDbContext appDbContext, UserManager<IdentityUser> userManager)
+
+        public ManageWorkExperienceController(AppDbContext appDbContext, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _appDbContext = appDbContext;
             _userManager  = userManager;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -53,6 +57,7 @@ namespace StudentEmployementPortal.Controllers
             _appDbContext.WorkExperience.Add(NewWorkExperience);
             _appDbContext.SaveChanges();
 
+            _toastNotification.Success("Work experience added successfully!");
             return RedirectToAction("Index", "ManageStudentProfile");
         }
 
@@ -105,6 +110,8 @@ namespace StudentEmployementPortal.Controllers
                     WorkExperience.TasksAndResponsibilities = WorkExperienceVm.TasksAndResponsibilities;
 
                     _appDbContext.SaveChanges();
+
+                    _toastNotification.Success("Work experience changes saved successfully!");
                     return RedirectToAction("Index", "ManageStudentProfile");
                 }
             }
@@ -156,6 +163,8 @@ namespace StudentEmployementPortal.Controllers
 
                     _appDbContext.WorkExperience.Remove(WorkExperience);
                     _appDbContext.SaveChanges();
+
+                    _toastNotification.Error("Work experience deleted!");
                     return RedirectToAction("Index", "ManageStudentProfile");
                 }
             }

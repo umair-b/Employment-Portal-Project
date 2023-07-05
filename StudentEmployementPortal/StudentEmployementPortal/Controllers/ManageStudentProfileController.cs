@@ -7,6 +7,7 @@ using static StudentEmployementPortal.Utils.Enums;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace StudentEmployementPortal.Controllers
 {
@@ -15,11 +16,13 @@ namespace StudentEmployementPortal.Controllers
     {
         private readonly AppDbContext _appDbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ManageStudentProfileController (AppDbContext appDbContext, UserManager<IdentityUser> userManager)
+        public ManageStudentProfileController (AppDbContext appDbContext, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _appDbContext = appDbContext;
             _userManager  = userManager;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -144,6 +147,7 @@ namespace StudentEmployementPortal.Controllers
                 _appDbContext.SaveChanges();
             }
 
+            _toastNotification.Success("Profile changes saved successfully!");
             return RedirectToAction("Index");
         }
 

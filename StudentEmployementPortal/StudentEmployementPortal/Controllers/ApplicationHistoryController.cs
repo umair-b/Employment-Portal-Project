@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,15 @@ namespace StudentEmployementPortal.Controllers
     [ServiceFilter(typeof(StudentProfileFilterAttribute))]
     public class ApplicationHistoryController : Controller
     {
-        private AppDbContext _db;
+        private readonly AppDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
-        public ApplicationHistoryController(AppDbContext db, UserManager<IdentityUser> userManager)
+        private readonly INotyfService _toastNotification;
+
+        public ApplicationHistoryController(AppDbContext db, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _db = db;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
         // GET: ApplicationHistoryController
         public ActionResult Index()
@@ -117,73 +121,11 @@ namespace StudentEmployementPortal.Controllers
             _db.Documents.Add(document);
             _db.SaveChanges();
 
+            _toastNotification.Success("Document uploaded successfully!");
             return RedirectToAction("ApplicationDetails", new { id = application.ApplicationId });
         }
 
-        /*[HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Upload(int id, ApplicationDetailsViewModel viewModel)
-        {
-
-            *//* var maxFileSize = 5 * 1024 * 1024;
-             var allowedFileType = new[] { ".pdf", ".doc", ".docx" };*//*
-            var userId = _userManager.GetUserId(User);
-
-            var documents = _db.Documents.Where(d => d.ApplicationId == id).ToList();
-
-            var application = _db.Application
-                .Where(a => a.StudentId == userId)
-                .Include(a => a.Post)
-                .Include(a => a.Post.Department)
-                .FirstOrDefault(a => a.ApplicationId == id);
-
-            if(application == null)
-            {
-                return NotFound();
-            }
-
-            viewModel.ApplicationId = id;
-            viewModel.Application = application;
-            viewModel.UploadedDocuments = documents;
-
-            var file = viewModel.File;
-
-            if (file != null && file.Length > 0)
-            {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", fileName);
-                *//*var fileExtension = Path.GetExtension(file.FileName).ToLower();*//*
-
-                using (var stream = new FileStream(path, FileMode.Create))
-                {
-                    file.CopyTo(stream);
-                }
-                *//*if (allowedFileType.Contains(fileExtension))
-                {
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        file.CopyTo(stream);
-                    }
-                }
-                else
-                {
-                     ModelState.AddModelError("File", "Only PDF, Word documents are allowed.");
-                }*//*
-
-
-                var document = new Document
-                {
-                    FileDescription = viewModel.FileDescription,
-                    FileName = fileName,
-                    ApplicationId = viewModel.ApplicationId,
-                    ApplicationFile = file
-                };
-
-                _db.Documents.Add(document);
-                _db.SaveChanges();
-            }
-            return RedirectToAction("ApplicationDetails", new {id = application.ApplicationId});
-        }*/
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -207,6 +149,8 @@ namespace StudentEmployementPortal.Controllers
             _db.Documents.Remove(document);
 
             _db.SaveChanges();
+
+            _toastNotification.Error("Document deleted");
             return RedirectToAction("ApplicationDetails", new {id = appId});
         }
 
@@ -225,6 +169,7 @@ namespace StudentEmployementPortal.Controllers
 
             _db.SaveChanges();
 
+            _toastNotification.Warning("Application withdrawn");
             return RedirectToAction("Index");
         }
     }

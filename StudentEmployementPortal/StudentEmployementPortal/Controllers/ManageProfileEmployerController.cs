@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using StudentEmployementPortal.Data;
@@ -16,11 +17,13 @@ namespace StudentEmployementPortal.Controllers
 
         private readonly AppDbContext _appDbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ManageProfileEmployerController(AppDbContext appDbContext, UserManager<IdentityUser> userManager)
+        public ManageProfileEmployerController(AppDbContext appDbContext, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _appDbContext = appDbContext;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -127,8 +130,9 @@ namespace StudentEmployementPortal.Controllers
                     _appDbContext.SaveChanges();
                 }
 
-            
 
+            _toastNotification.Success("Profile changes saved successfully!");
+            _toastNotification.Warning("Profile is under review");
             return RedirectToAction("Index", "Home");
         }
     }
