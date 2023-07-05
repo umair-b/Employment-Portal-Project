@@ -175,6 +175,7 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = obj.limitedToMasters,
                 limitedToPhD = obj.limitedToPhD,
                 limitedToPostDoc = obj.limitedToPostDoc,
+                PostStatus = obj.PostStatus,
                 FacultyList = _db.Faculties.ToList(),
                 DepartmentList = _db.Departments.ToList(),
             };

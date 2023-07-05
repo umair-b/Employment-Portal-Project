@@ -22,8 +22,8 @@ namespace StudentEmployementPortal.TestData
                 string[] PartTimeHours = { "< 2", "2 - 4", "4 - 6", "6 - 8", "8 - 12", "> 12"};
 
                 _postFaker = new Faker<JobPost>()
-                    .UseSeed(100)
-                    .RuleFor(p => p.EmployerId, "2ac124d7-c58d-4b97-a63b-a0186b71cc00")
+                    .UseSeed(101)
+                    .RuleFor(p => p.EmployerId, "4abcac17-0318-4255-887d-74fe05547547")
                     .RuleFor(p => p.PostId, f => ++id)
                     .RuleFor(p => p.StartDate, f => f.Date.Past())
                     .RuleFor(p => p.EndDate, f => f.Date.Future())
@@ -31,7 +31,7 @@ namespace StudentEmployementPortal.TestData
                     .RuleFor(p => p.ApplicationInstructions, f => f.Lorem.Paragraph())
                     .RuleFor(p => p.JobDescription, f => f.Lorem.Paragraph())
                     .RuleFor(p => p.JobLocation, f => f.Lorem.Word())
-                    .RuleFor(p => p.JobTitle, f => f.Lorem.Text())
+                    .RuleFor(p => p.JobTitle, f => f.Name.JobTitle())
                     .RuleFor(p => p.KeyResponsibilities, f => f.Lorem.Paragraph())
                     .RuleFor(p => p.MinRequirements, f => f.Lorem.Paragraph())
                     .RuleFor(p => p.ContactEmail, f => f.Person.Email)
@@ -41,7 +41,7 @@ namespace StudentEmployementPortal.TestData
                     .RuleFor(p => p.FacultyId, 1)
                     .RuleFor(p => p.CitizensOnly, f => f.Random.Bool())
                     .RuleFor(p => p.FullTime, f => f.Random.Bool())
-                    .RuleFor(p => p.HourlyRate, f => f.Random.Double(1))
+                    .RuleFor(p => p.HourlyRate, f => f.Random.Double(50, 400))
                     .RuleFor(p => p.Internal, f => f.Random.Bool())
                     .RuleFor(p => p.PartTimeHours, (f, p) => (bool)p.FullTime ? null : f.PickRandom(PartTimeHours));
             }
