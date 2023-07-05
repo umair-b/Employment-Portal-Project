@@ -404,43 +404,5 @@
             }
         });
     </script>
-
-    @*<script>
-        $(document).ready(function () {
-            $('.delete-button').click(function () {
-                var educationId = $(this).data('education-id');
-                var row = $(this).closest('tr');
-
-                Swal.fire({
-                    title: "Confirm Deletion",
-                    text: "Are you sure you want to delete this education record?",
-                    icon: "warning",
-                    showCancelButton: true,
-                }).then(result => {
-                    if (result.isConfirmed) {
-                        deleteEducation(educationId, row);
-                    }
-                });
-            });
-
-            function deleteEducation(educationId, row) {
-                $.ajax({
-                    url: '/ManageStudentProfile/DeleteEducation/' + educationId,
-                    type: 'POST',
-                    success: function (response) {
-                        if (response.success) {
-                            row.remove();
-                            Swal.fire("Deleted!", "The education record has been deleted.", "success");
-                        } else {
-                            Swal.fire("Error", "An error occurred while deleting the education record.", "error");
-                        }
-                    },
-                    error: function () {
-                        Swal.fire("Error", "An error occurred while deleting the education record.", "error");
-                    }
-                });
-            }
-        });
-    </script>*@
 }
 
