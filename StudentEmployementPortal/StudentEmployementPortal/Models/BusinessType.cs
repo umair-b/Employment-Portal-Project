@@ -3,6 +3,6 @@
     public class BusinessType
     {
         public int BusinessTypeId { get; set; }
-        public string Name { get; set; }
+        public string BusinessName { get; set; }
     }
 }

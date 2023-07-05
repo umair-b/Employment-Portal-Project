@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BaPGs6KxQ7aRqeWpNazQtD4ZEO1hJX49FfoRtnjwbn2+fDUuuvEYqAwzR4A0Mop5FQd+Gxlkr5N8leK6WivFPQ==",
+  "dgSpecHash": "3Mu6GxLzvZaQzHW2ThA8Su8CXjveufJSfxFlKOtwQM7Vbm4JlpzvLcbR9gOzLgAYkFSAEzid/TN3N0WRPqnrOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\StudentEmployementPortal.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\A0075303\\.nuget\\packages\\aspnetcorehero.toastnotification\\1.1.0\\aspnetcorehero.toastnotification.1.1.0.nupkg.sha512",
     "C:\\Users\\A0075303\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\A0075303\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\A0075303\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
@@ -283,5 +284,12 @@
     "C:\\Users\\A0075303\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\A0075303\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\A0075303\\OneDrive - University of Witwatersrand\\Documents\\GitHub\\Empoyment-Portal-Project\\StudentEmployementPortal\\StudentEmployementPortal\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

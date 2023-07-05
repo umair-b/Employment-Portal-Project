@@ -1,4 +1,5 @@
-﻿using LinqKit;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using LinqKit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +18,13 @@ namespace StudentEmployementPortal.Controllers
     {
         private readonly AppDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ApplicationController(AppDbContext db, UserManager<IdentityUser> userManager)
+        public ApplicationController(AppDbContext db, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _db = db;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
 
         
@@ -133,6 +136,13 @@ namespace StudentEmployementPortal.Controllers
             return View(application);
         }
 
+        [HttpPost]
+        public IActionResult ConfirmApply()
+        {
+            _toastNotification.Success("Application made successfully!");
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Upload(int id)
         {
             var application = _db.Application.Find(id);
@@ -186,6 +196,7 @@ namespace StudentEmployementPortal.Controllers
             _db.Documents.Add(document);
             _db.SaveChanges();
 
+            _toastNotification.Success("Document uploaded successfully!");
             return RedirectToAction("Upload");
         }
 
@@ -202,6 +213,7 @@ namespace StudentEmployementPortal.Controllers
             _db.Application.Remove(application);
             _db.SaveChanges();
 
+            _toastNotification.Error("Application cancelled");
             return RedirectToAction("Index");
         }
 
@@ -227,6 +239,8 @@ namespace StudentEmployementPortal.Controllers
             _db.Documents.Remove(document);
 
             _db.SaveChanges();
+
+            _toastNotification.Error("Document deleted");
             return RedirectToAction("Upload", new {id = appId});
         }
 

@@ -37,15 +37,6 @@ namespace StudentEmployementPortal.Utils
             Queried
         }
 
-        public enum Title
-        {
-            Mr,
-            Mrs,
-            Miss,
-            Dr,
-            Prof,
-            Other
-        }
 
         public enum BusniessType
         {
@@ -65,36 +56,7 @@ namespace StudentEmployementPortal.Utils
             Other
         }
 
-        /*public enum Gender
-        {
-            [Display(Name ="Male")]
-            Male,
-            [Display(Name ="Female")]
-            Female,
-            [Display(Name ="Non-binary")]
-            NonBinary,
-            [Display(Name ="Other")]
-            Other,
-            [Display(Name ="Prefer Not to Say")]
-            PreferNotToSay
-        }*/
-
-        /*public enum YearOfStudy
-        {
-            [Display(Name ="First Year")]
-            FirstYear,
-            [Display(Name = "Second Year")]
-            SecondYear,
-            [Display(Name = "Third Year")]
-            ThirdYear,
-            [Display(Name = "Honours")]
-            Honours,
-            [Display(Name = "Masters")]
-            Masters,
-            [Display(Name = "PhD")]
-            PhD
-        }*/
-
+        
 
         public enum ApplicationStatus
         {
@@ -108,7 +70,6 @@ namespace StudentEmployementPortal.Utils
             Rejected,
             [Display(Name = "Appointed")]
             Appointed,
-            [Display(Name = "Withdrawn")]
             Withdrawn
         }
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentEmployementPortal.Data;
@@ -13,11 +14,14 @@ namespace StudentEmployementPortal.Controllers
     [Authorize(Roles = Utils.DefineRole.Role_Approver)]
     public class ApproverPostController : Controller
     {
-        private AppDbContext _db;
+        private readonly AppDbContext _db;
+        private readonly INotyfService _toastNotification;
 
-        public ApproverPostController(AppDbContext db)
+
+        public ApproverPostController(AppDbContext db, INotyfService toastNotification)
         {
             _db = db;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -107,6 +111,8 @@ namespace StudentEmployementPortal.Controllers
                     JobPost.PostStatus = ReviewPostVm.SelectedStatus;
 
                     _db.SaveChanges();
+
+                    _toastNotification.Success("Post status updated successfully.");
                     return RedirectToAction("Index");
                 }
                 return View(ReviewPostVm);

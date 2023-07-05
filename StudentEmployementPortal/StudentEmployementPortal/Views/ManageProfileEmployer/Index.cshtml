@@ -21,15 +21,20 @@
 </div>
 <hr />
 
-<form method="post">
+<form method="post" id="employerForm" onsubmit="">
     <div class="form-control">
         <div class="=border pt-2 mt-2">
             <div class="row">
                 <div class="col">
                     <label asp-for="EmployerTitle"></label>
-                    <select asp-for="EmployerTitle" asp-items="@Model.EmployerTitles" class="form-select">
-                        <option selected disabled>Select title</option>
+                    <select asp-for="@Model.TitleId" class="form-select">
+                        <option value="" selected disabled>Select Title</option>
+                        @foreach (var title in Model.TitleList)
+                        {
+                            <option value="@title.TitleId">@title.TitleName</option>
+                        }
                     </select>
+                    <span asp-validation-for="TitleId"></span>
                 </div>
                 <div class="col">
                     <label asp-for="EmployerFirstName"></label>
@@ -87,9 +92,14 @@
                 </div>
                 <div class="col">
                     <label asp-for="EmployerBusinessType"></label>
-                    <select asp-for="EmployerBusinessType" asp-items="Model.EmployerBusinessTypes" class="form-select">
-                        <option selected disabled>Select Business Type</option>
+                    <select asp-for="@Model.BusinessTypeId" class="form-select">
+                        <option value="" selected disabled>Select Business Type</option>
+                        @foreach (var business in Model.BusinessTypeList)
+                        {
+                            <option value="@business.BusinessTypeId">@business.BusinessName</option>
+                        }
                     </select>
+                    <span asp-validation-for="BusinessTypeId"></span>
                 </div>
             </div>
             <br />
@@ -112,6 +122,10 @@
 </form>
 
 @section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {

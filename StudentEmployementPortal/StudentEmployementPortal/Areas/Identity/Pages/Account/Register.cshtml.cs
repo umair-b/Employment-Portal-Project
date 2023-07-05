@@ -107,19 +107,17 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "First Name")]
             public string FirstName { get; set; }
             [Required]
-            [Display(Name = "Last Name")]
             public string LastName { get; set; }
-            [Required]
-            [Display(Name = "Cellphone Number")]
+            [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a valid Number.")]
+            [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African cell number.")]
             public string CellNumber { get; set; }
-            [Display(Name = "Telephone Number")]
+            [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African telephone number.")]
             public string TelNumber { get; set; }
 
+
             [Required]
-            [Display(Name = "Select Role")]
             public string Role { get; set; }
 
             [ValidateNever]
@@ -135,10 +133,9 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                 _roleManager.CreateAsync(new IdentityRole(DefineRole.Role_Employer)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(DefineRole.Role_Student)).GetAwaiter().GetResult();
             }
-            
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
             Input = new InputModel()
             {
                 Roles = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
@@ -148,13 +145,13 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                 })
             };
 
-
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
@@ -163,7 +160,7 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                 user.LastName = Input.LastName;
                 user.CellNumber = Input.CellNumber;
                 user.TelNumber = Input.TelNumber;
-                
+
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -200,7 +197,6 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-
                 Input = new InputModel()
                 {
                     Roles = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
@@ -209,7 +205,6 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
                         Value = i
                     })
                 };
-
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
