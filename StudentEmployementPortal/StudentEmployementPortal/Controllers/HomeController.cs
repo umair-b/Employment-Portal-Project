@@ -6,6 +6,7 @@ using StudentEmployementPortal.ViewModels;
 using System.Data.Entity;
 using StudentEmployementPortal.Utils;
 using System.Diagnostics;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace StudentEmployementPortal.Controllers
 {
@@ -14,17 +15,21 @@ namespace StudentEmployementPortal.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AppDbContext _appDbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext, UserManager<IdentityUser> userManager)
+        public HomeController(ILogger<HomeController> logger, AppDbContext appDbContext, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _logger = logger;
             _appDbContext = appDbContext;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
+
             if (User != null && User.Identity != null && User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.GetUserAsync(User);
@@ -69,7 +74,7 @@ namespace StudentEmployementPortal.Controllers
                         return View();
                     }
                 }
-                
+
             }
 
             return View();

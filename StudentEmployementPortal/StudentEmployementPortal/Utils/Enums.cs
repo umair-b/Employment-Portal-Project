@@ -33,7 +33,8 @@ namespace StudentEmployementPortal.Utils
         {
             Approved,
             Rejected,
-            Pending
+            Pending,
+            Queried
         }
 
 

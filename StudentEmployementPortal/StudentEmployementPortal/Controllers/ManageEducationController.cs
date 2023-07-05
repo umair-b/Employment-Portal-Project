@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration.UserSecrets;
@@ -18,11 +19,13 @@ namespace StudentEmployementPortal.Controllers
 
         private readonly AppDbContext _appDbContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ManageEducationController(AppDbContext appDbContext, UserManager<IdentityUser> userManager)
+        public ManageEducationController(AppDbContext appDbContext, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _appDbContext = appDbContext;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -58,6 +61,7 @@ namespace StudentEmployementPortal.Controllers
             _appDbContext.Educations.Add(NewEducation);
             _appDbContext.SaveChanges();
 
+            _toastNotification.Success("Education added successfully!");
             return RedirectToAction("Index", "ManageStudentProfile");
         }
 
@@ -122,6 +126,7 @@ namespace StudentEmployementPortal.Controllers
 
                     _appDbContext.SaveChanges();
 
+                    _toastNotification.Success("Education changes saved successfully!");
                     return RedirectToAction("Index", "ManageStudentProfile");
                 }
                 else
@@ -187,6 +192,7 @@ namespace StudentEmployementPortal.Controllers
                     _appDbContext.Educations.Remove(EducationRecord);
                     _appDbContext.SaveChanges();
 
+                    _toastNotification.Error("Education deleted!");
                     return RedirectToAction("Index", "ManageStudentProfile");
                 }
                 else

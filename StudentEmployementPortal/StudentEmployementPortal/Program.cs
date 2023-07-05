@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using StudentEmployementPortal.Utils;
 using StudentEmployementPortal.TestData;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
     .AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddScoped<UserManager<IdentityUser>>();
@@ -24,6 +26,13 @@ builder.Services.AddScoped<EmployerProfileAttribute>();
 builder.Services.AddScoped<EmployerStatusAttribute>();
 
 builder.Services.AddSingleton<Fakers>();
+
+builder.Services.AddNotyf(config =>
+{
+    config.DurationInSeconds = 5;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopRight;
+});
 
 var app = builder.Build();
 
@@ -39,9 +48,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
+
+app.UseNotyf();
 
 app.MapRazorPages();
 app.MapControllerRoute(

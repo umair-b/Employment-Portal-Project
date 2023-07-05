@@ -187,7 +187,8 @@
     </div>
     <br/>
     <div class="d-flex p-2 justify-content-between">
-        <button type="submit" class="d-inline-block btn btn-success mb-3" id="updateButton" style="width:150px">Update</button>
+        <button type="submit" class="d-inline-block btn btn-success mb-3" id="updateButton" style="width:150px"
+        disabled="@(Model.PostStatus == StudentEmployementPortal.Utils.Enums.JobPostStatus.Closed)">Update</button>
     </div>
 </form>
 

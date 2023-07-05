@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,11 +20,13 @@ namespace StudentEmployementPortal.Controllers
     {
         private readonly AppDbContext _db;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly INotyfService _toastNotification;
 
-        public ManagePostController(AppDbContext db, UserManager<IdentityUser> userManager)
+        public ManagePostController(AppDbContext db, UserManager<IdentityUser> userManager, INotyfService toastNotification)
         {
             _db = db;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
 
         public IActionResult Index()
@@ -115,6 +118,9 @@ namespace StudentEmployementPortal.Controllers
 
                 _db.JobPosts.Add(jobPost);
                 _db.SaveChanges();
+
+                _toastNotification.Success("Post created successfully!");
+                _toastNotification.Warning("Post is under review");
                 return RedirectToAction(nameof(Index));
             }
 
@@ -169,6 +175,7 @@ namespace StudentEmployementPortal.Controllers
                 limitedToMasters = obj.limitedToMasters,
                 limitedToPhD = obj.limitedToPhD,
                 limitedToPostDoc = obj.limitedToPostDoc,
+                PostStatus = obj.PostStatus,
                 FacultyList = _db.Faculties.ToList(),
                 DepartmentList = _db.Departments.ToList(),
             };
@@ -221,6 +228,9 @@ namespace StudentEmployementPortal.Controllers
 
                     _db.Update(jobPost);
                     _db.SaveChanges();
+
+                    _toastNotification.Success("Post updated successfully!");
+                    _toastNotification.Warning("Post is under review");
                     return RedirectToAction(nameof(Index));
                 }
             }
