@@ -1,6 +1,40 @@
 ﻿@namespace StudentEmployementPortal.ViewModels
 @model ReviewPostViewModel
 
+
+@{
+    string limitedTo = "";
+
+    if(Model.limitedToFirst)
+    {
+        limitedTo = limitedTo + ", " + "1st Years";
+    }
+    else if (Model.limitedToSecond)
+    {
+        limitedTo = limitedTo + ", " + "2nd Years";
+    }
+    else if (Model.limitedToThird)
+    {
+        limitedTo = limitedTo + ", " + "3rd Years";
+    }
+    else if (Model.limitedToHonours)
+    {
+        limitedTo = limitedTo + ", " + "Honours";
+    }
+    else if (Model.limitedToMasters)
+    {
+        limitedTo = limitedTo + ", " + "Masters";
+    }
+    else if (Model.limitedToPhD)
+    {
+        limitedTo = limitedTo + ", " + "PhD";
+    }
+    else if (Model.limitedToPostDoc)
+    {
+        limitedTo = limitedTo + ", " + "PostDoc";
+    }
+
+}
 <style>
     .right-align {
         float: right;
@@ -21,190 +55,204 @@
 </div>
 <hr />
 
-<form method="post" asp-action="ReviewPost">
-    <div class="=border pt-2 mt-2">
-        <div class="form-control">
-            @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
-            @Html.HiddenFor(Model => Model.EmployerId, new { @readonly = "readonly" })
-            <div>
-                <label asp-for="Internal" class="mb-2"></label>
-                <input type="radio" asp-for="Internal" value="true" name="internal" id="internalTrue" class="m-2" readonly/>Yes
-                <input type="radio" asp-for="Internal" value="false" name="internal" id="internalFalse" class="m-2" readonly/>No
-           </div>
-            <div id="facultyContainer">
-                <select asp-for="@Model.FacultyId" id="facultyId" class="form-select mb-3" readonly>
-                    <option value="" selected disabled>Select Faculty</option>
-                    @foreach (var f in @Model.FacultyList)
-                    {
-                        <option value="@f.FacultyId">@f.FacultyName</option>
-                    }
-                </select>
-            </div>
-            <div id="departmentContainer">
-                <select asp-for="@Model.DepartmentId" id="departmentId" class="form-select mb-3" readonly>
-                    <option value="" selected disabled>Select Department</option>
-                    @foreach (var d in @Model.DepartmentList)
-                    {
-                        <option value="@d.DepartmentId" >@d.DepartmentName</option>
-                    }
-                </select>
-            </div>
-            <div>
-                <label asp-for="JobTitle"></label>
-                <input asp-for="JobTitle" placeholder="Job Title" class="form-control mb-3" style="cursor:default" readonly />
-            </div>
-            <div>
-                <label asp-for="JobLocation"></label>
-                <input asp-for="JobLocation" placeholder="Job Location" class="form-control mb-3" style="cursor:default" readonly />
-            </div>
-            <div>
-                <label asp-for="JobDescription"></label>
-                <textarea asp-for="JobDescription" placeholder="Job Description" class="form-control mb-3" style="cursor:default" readonly></textarea>
-            </div>
-            <div>
-                <label asp-for="KeyResponsibilities"></label>
-                <textarea asp-for="KeyResponsibilities" placeholder="Key Responsibilities" class="form-control mb-3" style="cursor:default" readonly></textarea>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label asp-for="FullTime" class="mb-2"></label>
-                    <input type="radio" asp-for="FullTime" value="true" id="yesRadioButton" class="m-2" readonly/>Yes
-                    <input type="radio" asp-for="FullTime" value="false" id="noRadioButton" class="m-2" readonly/>No
-                </div>
-                <div id="partTimeHoursContainer" style="display: none;" class="col">
-                    <label asp-for="PartTimeHours" class="mb-2"></label>
-                    <select asp-for="PartTimeHours" name="partTimeHours" class="form-select mb-3" id="partTimeHours" readonly>
-                        <option value="" selected disabled>Select Part-Time Hours</option>
-                        <option value="< 2">&lt; 2</option>
-                        <option value="2 - 4">2 - 4</option>
-                        <option value="4 - 6">4 - 6</option>
-                        <option value="6 - 8">6 - 8</option>
-                        <option value="8 - 12">8 - 12</option>
-                        <option value="> 12">&gt; 12</option>
-                    </select>
-                </div>
-                <div class="col">
-                    <label asp-for="HourlyRate" class="mb-2"></label>
-                    <input asp-for="HourlyRate" class="form-control" style="cursor:default" readonly />
-                </div>
-            </div>
+<div class="row">
+    <div class="form-control col">
+        <br />
+        <dl class="row">
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.Internal)
+            </dt>
+            @if (Model.Internal == true)
+            {
+                <dd class="col-sm-7">
+                    Yes
+                </dd>
+            }
+            else
+            {
+                <dd class="col-sm-7">
+                    No
+                </dd>
+            }
 
-            <div class="row mb-3">
-                <div class="col">
-                    <label asp-for="StartDate"></label>
-                    <input type="date" asp-for="StartDate" class="form-control" style="cursor:default" readonly />
-                </div>
-                <div class="col">
-                    <label asp-for="EndDate"></label>
-                    <input type="date" asp-for="EndDate" class="form-control" style="cursor:default" readonly />
-                </div>
-                <div class="col">
-                    <label asp-for="ClosingDate"></label>
-                    <input asp-for="ClosingDate" type="date" class="form-control" style="cursor:default" readonly />
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label asp-for="CitizensOnly" class="mb-2"></label>
-                    <input type="radio" asp-for="CitizensOnly" value="true" class="m-2" readonly/>Yes
-                    <input type="radio" asp-for="CitizensOnly" value="false" class="m-2" readonly/>No
-                </div>
-                <div class="col">
-                    <label> Limited To: </label><br />
-                    <div>
-                        @Html.CheckBoxFor(m => m.limitedToFirst)
-                        <label>@Html.DisplayNameFor(m => m.limitedToFirst)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.FacultyId)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.FacultyId)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToSecond)
-                        <label>@Html.DisplayNameFor(m => m.limitedToSecond)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.DepartmentId)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.DepartmentId)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToThird)
-                        <label>@Html.DisplayNameFor(m => m.limitedToThird)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.JobTitle)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToHonours)
-                        <label>@Html.DisplayNameFor(m => m.limitedToHonours)</label>
-                        <br />
-                        @Html.CheckBoxFor(m => m.limitedToMasters)
-                        <label>@Html.DisplayNameFor(m => m.limitedToMasters)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.JobLocation)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.JobLocation)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToPhD)
-                        <label>@Html.DisplayNameFor(m => m.limitedToPhD)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.JobDescription)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.JobDescription)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToPostDoc)
-                        <label>@Html.DisplayNameFor(m => m.limitedToPostDoc)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.KeyResponsibilities)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.KeyResponsibilities)
+            </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToDepartment)
-                        <label>@Html.DisplayNameFor(m => m.limitedToDepartment)</label>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.FullTime)
+            </dt>
+            @if (Model.FullTime == true)
+            {
+                <dd class="col-sm-7">
+                    Yes
+                </dd>
+            }
+            else
+            {
+                <dd class="col-sm-7">
+                    No
+                </dd>
 
-                        @Html.CheckBoxFor(m => m.limitedToFaculty)
-                        <label>@Html.DisplayNameFor(m => m.limitedToFaculty)</label>
-                    </div>
-                </div>
-            </div>
-            <div class="mb-3">
-                <label asp-for="MinRequirements"></label>
-                <textarea asp-for="MinRequirements" placeholder="Minimum Requirements" class="form-control" style="cursor:default" readonly></textarea>
-            </div>
-            <div class="mb-4">
-                <label asp-for="ApplicationInstructions"></label>
-                <textarea asp-for="ApplicationInstructions" placeholder="Application Instructions" class="form-control" style="cursor:default" readonly></textarea>
-            </div>
-            <div class="row mb-4">
-                <div class="col">
-                    <label asp-for="ContactPerson"></label>
-                    <input asp-for="ContactPerson" placeholder="Contact Person" class="form-control" style="cursor:default" readonly />
-                </div>
-                <div class="col">
-                    <label asp-for="ContactEmail"></label>
-                    <input asp-for="ContactEmail" placeholder="Contact Email" class="form-control" style="cursor:default" readonly />
-                </div>
-                <div class="col">
-                    <label asp-for="ContactNumber"></label>
-                    <input asp-for="ContactNumber" placeholder="Contact Number" class="form-control" style="cursor:default" readonly />
-                </div>
-            </div>
-        </div>
+                <dt class="col-sm-5">
+                    @Html.DisplayNameFor(model => model.PartTimeHours)
+                </dt>
+                <dd class="col-sm-7">
+                    @Html.DisplayFor(model => model.PartTimeHours)
+                </dd>
+            }
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-7">
+                @String.Format("{0:dd MMMM yyyy}", Model.StartDate)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-7">
+                @String.Format("{0:dd MMMM yyyy}", Model.EndDate)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ClosingDate)
+            </dt>
+            <dd class="col-sm-7">
+                @String.Format("{0:dd MMMM yyyy}", Model.ClosingDate)
+            </dd>
+
+            <dt class="col-sm-5">
+                Limited to Citizens
+            </dt>
+            @if (Model.CitizensOnly == true)
+            {
+                <dd class="col-sm-7">
+                    Yes
+                </dd>
+            }
+            else
+            {
+                <dd class="col-sm-7">
+                    No
+                </dd>
+            }
+
+            <dt class="col-sm-5">
+                Limited to YOS
+            </dt>
+            @if (!string.IsNullOrEmpty(limitedTo) && limitedTo.Length > 1)
+            {
+                <dd class="col-sm-7">@limitedTo.Substring(1)</dd>
+            }
+            else
+            {
+                <dd class="col-sm-7"> - </dd>
+            }
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.MinRequirements)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.MinRequirements)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ApplicationInstructions)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ApplicationInstructions)
+            </dd>
+
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ContactPerson)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ContactPerson)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ContactEmail)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ContactEmail)
+            </dd>
+            <dt class="col-sm-5">
+                @Html.DisplayNameFor(model => model.ContactNumber)
+            </dt>
+            <dd class="col-sm-7">
+                @Html.DisplayFor(model => model.ContactNumber)
+            </dd>
+        </dl>
     </div>
     <br />
-    <div class="form-control">
-        <div>
-            <label asp-for="ApproverNote"></label>
-            <textarea asp-for="ApproverNote" class="form-control"></textarea>
-        </div>
-        <br />
-        <div>
-            <label asp-for="SelectedStatus"></label>
-            @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status")
-                
-        </div>
-    </div>
-    <br/>
-    <div class="pb-2">
-        <button type="submit" class="btn btn-primary" style="width:150px">Update Outcome</button>
-    </div>
+    <div class="col">
+        <form method="post" asp-action="ReviewPost">
+            <br />
+            <div>
+                @Html.HiddenFor(Model => Model.PostId, new { @readonly = "readonly" })
+                @Html.HiddenFor(Model => Model.EmployerId, new { @readonly = "readonly" })
+                <div>
+                    <label asp-for="ApproverNote"></label>
+                    <textarea asp-for="ApproverNote" class="form-control"></textarea>
+                </div>
+                <br />
+                <div>
+                    <label asp-for="SelectedStatus"></label>
+                    @Html.DropDownListFor(model => model.SelectedStatus, Model.StatusNames, "Select Status", new { @class = "form-select"})
 
-</form>
+                </div>
+            </div>
+            <br />
+            <div class="pb-2">
+                <button type="submit" class="btn btn-primary right-align" style="width:150px">Update Outcome</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<br />
 
 @section Scripts{
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#noRadioButton').change(function () {
-                $('#partTimeHoursContainer').show();
-            });
-
-            $('#yesRadioButton').change(function () {
-                $('#partTimeHoursContainer').hide();
-            });
-
-            $('input[name="FullTime"]:checked').trigger('change');
-
-            // Check if a radio button is already selected
-            if ($('input[name="FullTime"]:checked').length > 0) {
-                $('input[name="FullTime"]:checked').trigger('change');
-            }
-        });
-    </script>
+    
     @{
         <partial name="_ValidationScriptsPartial" />
     }

@@ -1,5 +1,10 @@
-﻿.btn-sunny {
-    background-color: #F9E79F;
-    color: #333;
-    border: 1px solid #ccc;
+﻿@media (max-width: 600px) {
+    .navbar-brand {
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .navbar-brand img {
+            margin-bottom: 10px;
+        }
 }

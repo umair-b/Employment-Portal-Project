@@ -107,17 +107,24 @@ namespace StudentEmployementPortal.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [Display(Name = "First Name")]
             public string FirstName { get; set; }
             [Required]
+            [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+            [Display(Name = "Cellphone Number")]
             [System.ComponentModel.DataAnnotations.Required(ErrorMessage = "Please enter a valid Number.")]
             [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African cell number.")]
             public string CellNumber { get; set; }
+
+            [Display(Name = "Telephone Number")]
             [RegularExpression(@"^((\+27|0)[1-9]\d{8})$", ErrorMessage = "Invalid South African telephone number.")]
             public string TelNumber { get; set; }
 
 
             [Required]
+            [Display(Name = "Profile Type")]
             public string Role { get; set; }
 
             [ValidateNever]

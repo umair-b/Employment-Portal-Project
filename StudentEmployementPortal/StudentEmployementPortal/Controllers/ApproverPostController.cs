@@ -49,7 +49,10 @@ namespace StudentEmployementPortal.Controllers
             {
                 return NotFound();
             }
-            var JobPost = _db.JobPosts.Find(id);
+            var JobPost = _db.JobPosts
+                .Include(j => j.Faculty)
+                .Include(j => j.Department)
+                .FirstOrDefault(j => j.PostId == id);
 
             if (JobPost == null)
             {
@@ -65,8 +68,8 @@ namespace StudentEmployementPortal.Controllers
                 ContactEmail = JobPost.ContactEmail,
                 ContactNumber = JobPost.ContactNumber,
                 ContactPerson = JobPost.ContactPerson,
-                DepartmentId = JobPost.DepartmentId,
-                FacultyId = JobPost.FacultyId,
+                DepartmentId = JobPost.Department.DepartmentName,
+                FacultyId = JobPost.Faculty.FacultyName,
                 EndDate = JobPost.EndDate,
                 FullTime = JobPost.FullTime,
                 PartTimeHours = JobPost.PartTimeHours,
@@ -90,8 +93,6 @@ namespace StudentEmployementPortal.Controllers
                 EmployerId = JobPost.EmployerId,
             };
 
-            ReviewJobPostVm.FacultyList = _db.Faculties.ToList();
-            ReviewJobPostVm.DepartmentList = _db.Departments.ToList();
 
             return View(ReviewJobPostVm);
         }
@@ -100,28 +101,20 @@ namespace StudentEmployementPortal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult ReviewPost(ReviewPostViewModel ReviewPostVm)
         {
+            var JobPost = _db.JobPosts.Find(ReviewPostVm.PostId);
 
-            if (ModelState.IsValid)
+            if (JobPost == null)
             {
-                var JobPost = _db.JobPosts.Find(ReviewPostVm.PostId);
-
-                if (JobPost != null)
-                {
-                    JobPost.ApproverNote = ReviewPostVm.ApproverNote;
-                    JobPost.PostStatus = ReviewPostVm.SelectedStatus;
-
-                    _db.SaveChanges();
-
-                    _toastNotification.Success("Post status updated successfully.");
-                    return RedirectToAction("Index");
-                }
-                return View(ReviewPostVm);
+                return NotFound();
             }
 
-            ReviewPostVm.FacultyList = _db.Faculties.ToList();
-            ReviewPostVm.DepartmentList = _db.Departments.ToList();
+            JobPost.ApproverNote = ReviewPostVm.ApproverNote;
+            JobPost.PostStatus = ReviewPostVm.SelectedStatus;
 
-            return View(ReviewPostVm);
+            _db.SaveChanges();
+
+            _toastNotification.Success("Post status updated successfully.");
+            return RedirectToAction("Index");
         }
     }
 }

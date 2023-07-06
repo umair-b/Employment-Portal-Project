@@ -23,7 +23,7 @@ namespace StudentEmployementPortal.Models
 
         [DisplayName("Cellphone Number")]
         [Required]
-        public int CellNumber { get; set; }
+        public string CellNumber { get; set; }
 
         [DisplayName("Email Address")]
         [Required]
