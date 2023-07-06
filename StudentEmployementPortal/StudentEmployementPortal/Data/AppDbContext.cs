@@ -169,10 +169,10 @@ namespace StudentEmployementPortal.Data
                 new Department { DepartmentId = 34, DepartmentName = "Statistics and Actuarial Science", FacultyId = 5 }
             );
 
-            var posts = _fakers.GetPostGenerator().Generate(50);
+            /*var posts = _fakers.GetPostGenerator().Generate(50);
 
             modelBuilder.Entity<JobPost>()
-                .HasData(posts);
+                .HasData(posts);*/
         }
     }
 }

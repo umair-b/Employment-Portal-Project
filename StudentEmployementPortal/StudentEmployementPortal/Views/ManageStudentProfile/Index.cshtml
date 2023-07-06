@@ -25,12 +25,12 @@
     <div class="form-control">
         <div class="row">
             <div class="col">
-                <label asp-for="FirstName">First Name <span class="text-success">*</span></label>
+                <label asp-for="FirstName"></label>
                 <input asp-for="FirstName" class="form-control" id="firstName" />
                 <span asp-validation-for="FirstName"></span>
             </div>
             <div class="col">
-                <label asp-for="LastName">Last Name <span class="text-success">*</span></label>
+                <label asp-for="LastName"></label>
                 <input asp-for="LastName" class="form-control" id="lastName" />
                 <span asp-validation-for="LastName"></span>
             </div>
@@ -57,14 +57,14 @@
         <div class="row">
             <div id="citizenContainer" class="col">
                 <div>
-                    <label asp-for="Citizen" class="mb-2">Are you a South African Citizen? <span class="text-success">*</span></label>
+                    <label asp-for="Citizen" class="mb-2">Are you a South African Citizen?</label>
                     <input type="radio" asp-for="Citizen" value="true" class="m-2" id="citizenYes"/>Yes
                     <input type="radio" asp-for="Citizen" value="false" class="m-2" id="citizenNo"/>No
                 </div>
                 <span asp-validation-for="Citizen" class="text-danger" id="citizenError"></span>
             </div>
             <div class="col">
-                <label asp-for="StudentIdNumber">ID/Passport Number <span class="text-success">*</span></label>
+                <label asp-for="StudentIdNumber">ID/Passport Number</label>
                 <input asp-for="StudentIdNumber" class="form-control" id="studentIdNumber" />
                 <span asp-validation-for="StudentIdNumber" id="idNumberValidation"></span>
             </div>
@@ -83,7 +83,6 @@
         <br />
         <div class="row">
             <div class="col">
-                <label asp-for="GenderId" class="mb-2">Gender <span class="text-success">*</span></label>
                 <select asp-for="@Model.GenderId" class="form-select" id="genderId">
                     <option value="" selected disabled>Select Gender</option>
                     @foreach (var gender in Model.GenderList)
@@ -94,7 +93,6 @@
                 <span asp-validation-for="GenderId" class="text-danger" id="genderValidation"></span>
             </div>
             <div class="col">
-                <label asp-for="RaceId" class="mb-2">Race <span class="text-success">*</span></label>
                 <select asp-for="@Model.RaceId" class="form-select" id="raceId">
                     <option value="" selected disabled>Select Race</option>
                     @foreach (var race in Model.RaceList)
@@ -163,12 +161,6 @@
             <span asp-validation-for="Skills"></span>
         </div>
         <br />
-        <div class="row">
-            <div class="col">
-                <p class="text-success">* These fields cannot be changed once submitted. If you wish to change them, please contact the admin.</p>
-            </div>
-        </div>
-        <br />
         <button type="submit" class="btn btn-primary p-1" style="width:150px" id="submitButton">Save Changes</button>
         <br />
     </div>
@@ -195,10 +187,11 @@
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:75%">
                     <thead>
                         <tr>
                             <th>Qualification</th>
+                            <th>Institution</th>
                             <th></th>
                         </tr>
 
@@ -208,6 +201,7 @@
                         {
                             <tr>
                                 <td>@edu.Qualification</td>
+                                <td>@edu.Institution</td>
                                 <td>
                                     <div class="float-end">
                                         <a asp-controller="ManageEducation" asp-action="Edit" asp-route-id="@edu.EducationId"
@@ -239,10 +233,11 @@
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:75%">
                     <thead>
                         <tr>
                             <th>Job Title</th>
+                            <th>Institution</th>
                             <th></th>
                         </tr>
 
@@ -252,6 +247,7 @@
                         {
                             <tr>
                                 <td>@we.JobTitle</td>
+                                <td>@we.EmployerName</td>
                                 <td>
                                     <div class="float-end">
                                         <a asp-controller="ManageWorkExperience" asp-action="Edit" asp-route-id="@we.WorkExperienceId"
@@ -287,10 +283,11 @@
             }
             else
             {
-                <table id="dataTable" class="table table-bordered table-striped" style="width:50%">
+                <table id="dataTable" class="table table-bordered table-striped" style="width:75%">
                     <thead>
                         <tr>
-                            <th>Job Title</th>
+                            <th>Name</th>
+                            <th>Institution</th>
                             <th></th>
                         </tr>
 
@@ -299,7 +296,8 @@
                         @foreach (var referee in Model.Referee)
                         {
                             <tr>
-                                <td>@referee.JobTitle</td>
+                                <td>@referee.Name</td>
+                                <td>@referee.Institution</td>
                                 <td>
                                     <div class="float-end">
                                         <a asp-controller="ManageReferee" asp-action="Edit" asp-route-id="@referee.RefereeId"

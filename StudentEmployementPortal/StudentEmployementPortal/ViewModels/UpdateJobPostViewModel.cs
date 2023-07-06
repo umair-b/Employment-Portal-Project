@@ -83,6 +83,7 @@ namespace StudentEmployementPortal.ViewModels
         [Display(Name = "PostDoc")]
         public bool limitedToPostDoc { get; set; }
 
+
         [Required]
         [Display(Name = "Limited to Citizens")]
         public bool? CitizensOnly { get; set; }

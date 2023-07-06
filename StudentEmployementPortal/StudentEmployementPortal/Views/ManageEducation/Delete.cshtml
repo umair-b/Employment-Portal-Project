@@ -33,17 +33,17 @@
         <br />
         <dl class="row">
             <dt class="col-sm-2">
-                Institution
+                @Html.DisplayNameFor(model => model.Institution)
             </dt>
             <dd class="col-sm-10">
                 @Model.Institution
             </dd>
 
             <dt class="col-sm-2">
-                Start Date
+                @Html.DisplayNameFor(model => model.StartDate)
             </dt>
             <dd class="col-sm-10">
-                @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @Model.StartDate.Year
+                @String.Format("{0:dd MMMM yyyy}", Model.StartDate)
             </dd>
 
             <dt class="col-sm-2">
@@ -52,46 +52,39 @@
             @if (Model.EndDate == null)
             {
                 <dd class="col-sm-10">
-                    -
+                    - current
                 </dd>
             }
             else
             {
                 <dd class="col-sm-10">
-                    @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @Model.EndDate.Value.Year
+                    @String.Format("{0:dd MMMM yyyy}", Model.EndDate)
                 </dd>
             }
 
             <dt class="col-sm-2">
-                Qualification
+                @Html.DisplayNameFor(model => model.Qualification)
             </dt>
             <dd class="col-sm-10">
                 @Model.Qualification
             </dd>
 
             <dt class="col-sm-2">
-                Subjects
-            </dt>
-            <dd class="col-sm-10">
-                @Model.Subjects
-            </dd>
-
-            <dt class="col-sm-2">
-                Majors
+                @Html.DisplayNameFor(model => model.Majors)
             </dt>
             <dd class="col-sm-10">
                 @Model.Majors
             </dd>
 
             <dt class="col-sm-2">
-                Sub-Majors
+                @Html.DisplayNameFor(model => model.SubMajors)
             </dt>
             <dd class="col-sm-10">
                 @Model.SubMajors
             </dd>
 
             <dt class="col-sm-2">
-                Research
+                @Html.DisplayNameFor(model => model.Research)
             </dt>
             <dd class="col-sm-10">
                 @Model.Research

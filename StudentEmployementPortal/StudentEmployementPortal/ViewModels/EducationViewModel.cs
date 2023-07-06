@@ -19,10 +19,10 @@ namespace StudentEmployementPortal.ViewModels
         [DisplayName("Qualification")]
         [Required]
         public string Qualification { get; set; }
-        [DisplayName("Subjects")]
-        public string? Subjects { get; set; }
-        [DisplayName("Majors")]
-        public string? Majors { get; set; }
+        /*[DisplayName("Subjects")]
+        public string? Subjects { get; set; }*/
+        [DisplayName("Majors/Subjects")]
+        public string Majors { get; set; }
         [DisplayName("Sub-majors")]
         public string? SubMajors { get; set; }
         [DisplayName("Research")]

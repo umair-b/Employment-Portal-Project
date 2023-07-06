@@ -81,6 +81,7 @@ namespace StudentEmployementPortal.ViewModels
         public bool limitedToPhD { get; set; }
         [Display(Name = "PostDoc")]
         public bool limitedToPostDoc { get; set; }
+        
 
         [Required]
         [Display(Name = "Limited to Citizens")]

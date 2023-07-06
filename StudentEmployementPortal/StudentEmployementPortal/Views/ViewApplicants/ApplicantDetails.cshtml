@@ -218,13 +218,13 @@
                                 @if (job.EndDate == null)
                                 {
                                     <td>
-                                        @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @job.StartDate.Year - current
+                                        @String.Format("{0:MMMM yyyy}", job.StartDate) - current
                                     </td>
                                 }
                                 else if (job.EndDate != null)
                                 {
                                     <td>
-                                        @dateStart.ToString("MMMM", CultureInfo.InvariantCulture) @job.StartDate.Year - @dateEnd.ToString("MMMM", CultureInfo.InvariantCulture) @job.EndDate.Value.Year
+                                        @String.Format("{0:MMMM yyyy}", job.StartDate) - @String.Format("{0:MMMM yyyy}", job.EndDate)
                                     </td>
                                 }
                                 <td class="m-2">

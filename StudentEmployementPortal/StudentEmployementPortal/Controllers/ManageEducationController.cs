@@ -51,7 +51,6 @@ namespace StudentEmployementPortal.Controllers
                 EndDate       = Education.EndDate,
                 Majors        = Education.Majors,
                 SubMajors     = Education.SubMajors,
-                Subjects      = Education.Subjects,
                 Qualification = Education.Qualification,
                 Research      = Education.Research,
                 UserId        = Student.UserId,
@@ -89,7 +88,6 @@ namespace StudentEmployementPortal.Controllers
                 StartDate    = EducationRecord.StartDate,
                 EndDate      = EducationRecord.EndDate,
                 Majors       = EducationRecord.Majors,
-                Subjects     = EducationRecord.Subjects,
                 SubMajors    = EducationRecord.SubMajors,
                 Qualification= EducationRecord.Qualification,
                 Research     = EducationRecord.Research
@@ -116,7 +114,6 @@ namespace StudentEmployementPortal.Controllers
                     }
 
                     EducationRecord.SubMajors = Education.SubMajors;
-                    EducationRecord.Subjects = Education.Subjects;
                     EducationRecord.StartDate = Education.StartDate;
                     EducationRecord.EndDate = Education.EndDate;
                     EducationRecord.Majors = Education.Majors;
@@ -162,7 +159,6 @@ namespace StudentEmployementPortal.Controllers
                 StartDate = EducationRecord.StartDate,
                 EndDate = EducationRecord.EndDate,
                 Majors = EducationRecord.Majors,
-                Subjects = EducationRecord.Subjects,
                 SubMajors = EducationRecord.SubMajors,
                 Qualification = EducationRecord.Qualification,
                 Research = EducationRecord.Research
